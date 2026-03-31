@@ -163,6 +163,14 @@ export default function Home() {
               </div>
             ))}
           </div>
+          <div className="mt-12">
+            <Link
+              href="/why-us"
+              className="inline-block text-sm tracking-wide uppercase text-gold hover:text-gold-dark transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
+            >
+              Learn what makes us different &rarr;
+            </Link>
+          </div>
         </div>
       </section>
 

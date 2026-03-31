@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" fill="none">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d4b87a" />
+      <stop offset="100%" stop-color="#c9a96e" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="20" result="blur" />
+      <feComposite in="blur" operator="out" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="600" fill="#1a1a1a" />
+
+  <!-- Subtle grid -->
+  <line x1="0" y1="150" x2="960" y2="150" stroke="#2d2d2d" stroke-width="0.5" stroke-dasharray="4 8" />
+  <line x1="0" y1="300" x2="960" y2="300" stroke="#2d2d2d" stroke-width="0.5" stroke-dasharray="4 8" />
+  <line x1="0" y1="450" x2="960" y2="450" stroke="#2d2d2d" stroke-width="0.5" stroke-dasharray="4 8" />
+  <line x1="240" y1="0" x2="240" y2="600" stroke="#2d2d2d" stroke-width="0.5" stroke-dasharray="4 8" />
+  <line x1="480" y1="0" x2="480" y2="600" stroke="#2d2d2d" stroke-width="0.5" stroke-dasharray="4 8" />
+  <line x1="720" y1="0" x2="720" y2="600" stroke="#2d2d2d" stroke-width="0.5" stroke-dasharray="4 8" />
+
+  <!-- Connecting arcs between states -->
+  <path d="M 390 220 Q 560 160 700 195" stroke="#c9a96e" stroke-width="1" opacity="0.12" fill="none" />
+  <path d="M 700 195 Q 740 210 760 250" stroke="#c9a96e" stroke-width="1" opacity="0.12" fill="none" />
+
+  <!-- Michigan — Lower Peninsula (simplified) -->
+  <g opacity="0.08">
+    <path d="M 340 140 L 360 130 L 385 125 L 410 130 L 420 150 L 425 175 L 430 200 L 425 230 L 415 260 L 400 280 L 380 290 L 355 285 L 340 270 L 330 250 L 325 225 L 328 195 L 335 165 Z" fill="#c9a96e" />
+  </g>
+  <!-- Michigan — Upper Peninsula -->
+  <g opacity="0.08">
+    <path d="M 290 130 L 310 120 L 340 115 L 360 118 L 370 125 L 355 128 L 340 130 L 320 128 L 300 130 Z" fill="#c9a96e" />
+  </g>
+  <!-- Michigan state outline -->
+  <path d="M 340 140 L 360 130 L 385 125 L 410 130 L 420 150 L 425 175 L 430 200 L 425 230 L 415 260 L 400 280 L 380 290 L 355 285 L 340 270 L 330 250 L 325 225 L 328 195 L 335 165 Z" stroke="#c9a96e" stroke-width="1.5" fill="none" opacity="0.4" />
+  <path d="M 290 130 L 310 120 L 340 115 L 360 118 L 370 125 L 355 128 L 340 130 L 320 128 L 300 130 Z" stroke="#c9a96e" stroke-width="1.5" fill="none" opacity="0.4" />
+
+  <!-- Michigan marker -->
+  <circle cx="375" cy="210" r="40" fill="#c9a96e" opacity="0.04" />
+  <circle cx="375" cy="210" r="20" fill="#c9a96e" opacity="0.08" />
+  <circle cx="375" cy="210" r="7" fill="#c9a96e" filter="url(#glow)" opacity="0.9" />
+
+  <!-- New York (simplified) -->
+  <g opacity="0.08">
+    <path d="M 650 140 L 680 130 L 710 125 L 740 130 L 755 140 L 760 160 L 755 180 L 745 195 L 735 210 L 720 220 L 700 225 L 690 230 L 680 240 L 672 248 L 665 240 L 660 225 L 650 210 L 640 195 L 635 175 L 640 155 Z" fill="#c9a96e" />
+  </g>
+  <path d="M 650 140 L 680 130 L 710 125 L 740 130 L 755 140 L 760 160 L 755 180 L 745 195 L 735 210 L 720 220 L 700 225 L 690 230 L 680 240 L 672 248 L 665 240 L 660 225 L 650 210 L 640 195 L 635 175 L 640 155 Z" stroke="#c9a96e" stroke-width="1.5" fill="none" opacity="0.4" />
+
+  <!-- New York marker (primary — largest) -->
+  <circle cx="700" cy="185" r="52" fill="#c9a96e" opacity="0.04" />
+  <circle cx="700" cy="185" r="28" fill="#c9a96e" opacity="0.08" />
+  <circle cx="700" cy="185" r="10" fill="#c9a96e" filter="url(#glow)" opacity="0.9" />
+
+  <!-- Connecticut (simplified) -->
+  <g opacity="0.08">
+    <path d="M 755 230 L 775 225 L 790 228 L 792 240 L 788 255 L 775 260 L 760 258 L 752 248 Z" fill="#c9a96e" />
+  </g>
+  <path d="M 755 230 L 775 225 L 790 228 L 792 240 L 788 255 L 775 260 L 760 258 L 752 248 Z" stroke="#c9a96e" stroke-width="1.5" fill="none" opacity="0.4" />
+
+  <!-- Connecticut marker -->
+  <circle cx="772" cy="243" r="30" fill="#c9a96e" opacity="0.04" />
+  <circle cx="772" cy="243" r="15" fill="#c9a96e" opacity="0.08" />
+  <circle cx="772" cy="243" r="5.5" fill="#c9a96e" filter="url(#glow)" opacity="0.9" />
+
+  <!-- State labels -->
+  <text x="375" y="275" text-anchor="middle" fill="#c9a96e" font-family="system-ui, -apple-system, sans-serif" font-size="14" letter-spacing="0.15em">MI</text>
+  <text x="375" y="295" text-anchor="middle" fill="#555555" font-family="system-ui, -apple-system, sans-serif" font-size="10">Michigan</text>
+  <text x="375" y="310" text-anchor="middle" fill="#444444" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-style="italic">Telehealth</text>
+
+  <text x="700" y="130" text-anchor="middle" fill="#c9a96e" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="500" letter-spacing="0.15em">NY</text>
+  <text x="700" y="150" text-anchor="middle" fill="#555555" font-family="system-ui, -apple-system, sans-serif" font-size="10">New York</text>
+  <text x="700" y="165" text-anchor="middle" fill="#444444" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-style="italic">In-Person + Telehealth</text>
+
+  <text x="830" y="238" text-anchor="start" fill="#c9a96e" font-family="system-ui, -apple-system, sans-serif" font-size="14" letter-spacing="0.15em">CT</text>
+  <text x="830" y="256" text-anchor="start" fill="#555555" font-family="system-ui, -apple-system, sans-serif" font-size="10">Connecticut</text>
+  <text x="830" y="271" text-anchor="start" fill="#444444" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-style="italic">Telehealth</text>
+
+  <!-- Faint US outline context (very simplified, just enough to orient) -->
+  <g opacity="0.06" stroke="#555" stroke-width="0.5" fill="none">
+    <!-- Great Lakes suggestion -->
+    <path d="M 350 120 Q 380 100 420 110 Q 440 115 430 135" />
+    <path d="M 300 140 Q 280 125 290 110 Q 310 100 340 115" />
+    <!-- Atlantic coast suggestion -->
+    <path d="M 760 160 Q 780 180 785 220 Q 788 260 775 280 Q 760 300 740 320" />
+  </g>
+</svg>
