@@ -103,7 +103,7 @@ export default function Home() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/dr-rhee.jpg"
-                alt="Dr. Libby Rhee — board-certified physician at Precision Weight & Wellness"
+                alt="GLP-1 injection pen, fresh apple, and water — precision medical weight loss"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-soft-black/20 via-transparent to-transparent" />

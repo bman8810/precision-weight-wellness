@@ -84,7 +84,7 @@ export default function AboutPage() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/dr-rhee.jpg"
-                alt="Dr. Libby Rhee, DO, MS, FAAD — board-certified dermatologist and founder of Precision Weight & Wellness"
+                alt="GLP-1 injection pen, fresh apple, and water — precision medical weight loss"
                 className="w-full h-full object-cover"
                 loading="eager"
               />
