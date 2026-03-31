@@ -9,56 +9,43 @@ export const metadata: Metadata = {
 
 const tiers = [
   {
-    name: "Initial Consultation",
-    price: "[TBD]",
-    period: "one-time",
+    name: "Essential",
+    price: "$199",
+    period: "per month",
     features: [
-      "Comprehensive health assessment",
-      "BMI and body composition analysis",
-      "Lab review and medication evaluation",
-      "Personalized treatment plan",
-      "Insurance coverage guidance",
+      "1 follow-up visit per month (in-person or virtual, 15–20 min)",
+      "Medication management and prescriptions",
+      "Prior authorization support",
+      "Secure messaging (48-hour response)",
+      "Baseline + quarterly labs",
+      "Body composition tracking",
     ],
     highlighted: false,
   },
   {
-    name: "Monthly Membership",
-    price: "[TBD]",
+    name: "Premium",
+    price: "$349",
     period: "per month",
     features: [
-      "Monthly physician check-in",
-      "Prescription management",
-      "Dose adjustments as needed",
-      "Nutritional guidance",
-      "Direct access to care team",
-      "Lab monitoring",
+      "2 follow-up visits per month",
+      "Monthly B12 injection (in-office)",
+      "Nutritional counseling resources",
+      "Same-day secure messaging (24-hour response)",
+      "Quarterly body composition analysis",
     ],
     highlighted: true,
   },
   {
-    name: "3-Month Package",
-    price: "[TBD]",
-    period: "3 months",
+    name: "Concierge",
+    price: "$599",
+    period: "per month",
     features: [
-      "Everything in Monthly Membership",
-      "Discounted rate",
-      "Priority scheduling",
-      "Extended consultations",
-      "Progress tracking & reporting",
-    ],
-    highlighted: false,
-  },
-  {
-    name: "6-Month Package",
-    price: "[TBD]",
-    period: "6 months",
-    features: [
-      "Everything in Monthly Membership",
-      "Best value — significant savings",
-      "Priority scheduling",
-      "Extended consultations",
-      "Comprehensive progress reports",
-      "Maintenance planning included",
+      "Unlimited virtual check-ins",
+      "Weekly B12 or lipotropic injection",
+      "Priority scheduling (same-week guaranteed)",
+      "Direct access to Dr. Rhee (within business hours)",
+      "Quarterly comprehensive lab panel included",
+      "20% discount on all add-on services",
     ],
     highlighted: false,
   },
@@ -169,7 +156,10 @@ export default function PricingPage() {
               </div>
             ))}
           </div>
-          <p className="text-center mt-10 text-sm text-neutral-400">
+          <p className="text-center mt-8 text-sm text-gold font-medium">
+            Founding member rate: First 20 patients receive 20% off for life.
+          </p>
+          <p className="text-center mt-3 text-sm text-neutral-400">
             Prices are subject to change. Contact us for the most current
             pricing information.
           </p>

@@ -78,7 +78,7 @@ export default function Footer() {
 
         <div className="border-t border-neutral-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-neutral-500">
-            &copy; {new Date().getFullYear()} Precision Weight & Wellness at
+            &copy; {new Date().getFullYear()} Precision Weight + Wellness at
             Liora. All rights reserved.
           </p>
           <div className="flex gap-6">

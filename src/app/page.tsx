@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title:
-    "Precision Weight & Wellness | Medical Weight Loss NYC | Dr. Libby Rhee",
+    "Precision Weight + Wellness | Medical Weight Loss NYC | Dr. Libby Rhee",
 };
 
 const steps = [
@@ -71,8 +71,9 @@ export default function Home() {
               className="animate-fade-up mt-8 text-lg text-neutral-500 max-w-lg leading-relaxed"
               style={{ animationDelay: "0.35s" }}
             >
-              Board-certified physician Dr. Libby Rhee offers personalized GLP-1
-              weight management programs — including Semaglutide and Tirzepatide
+              Board-certified physician Dr. Libby Rhee offers personalized medical
+              weight management — GLP-1s, dual agonists, metabolic agents, and
+              behavioral support
               — in a premium Upper East Side setting.
             </p>
             <div
@@ -225,7 +226,7 @@ export default function Home() {
             </h2>
             <p className="mt-6 text-neutral-500 leading-relaxed">
               Our patients are achieving life-changing results with medically
-              supervised GLP-1 therapy. Clinical studies show average weight loss
+              supervised medical weight management. Clinical studies show average weight loss
               of 15-20% of body weight.
             </p>
           </div>
@@ -309,11 +310,11 @@ export default function Home() {
             className="font-serif text-3xl md:text-4xl tracking-tight text-soft-black"
             style={{ textWrap: "balance" }}
           >
-            See if your insurance covers GLP-1 medications
+            Check Your Insurance Coverage
           </h2>
           <p className="mt-6 text-neutral-500 leading-relaxed max-w-2xl mx-auto">
             While our program is cash-pay, many patients qualify for insurance
-            coverage of GLP-1 medications. Use our free eligibility tool to
+            coverage of weight management medications. Use our free eligibility tool to
             check your coverage and estimate your potential results.
           </p>
           <Link

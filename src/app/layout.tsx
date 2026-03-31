@@ -20,11 +20,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.precisionweightwellness.com"),
   title: {
     default:
-      "Precision Weight & Wellness | Medical Weight Loss NYC | Dr. Libby Rhee",
-    template: "%s | Precision Weight & Wellness",
+      "Precision Weight + Wellness | Medical Weight Loss NYC | Dr. Libby Rhee",
+    template: "%s | Precision Weight + Wellness",
   },
   description:
-    "Medically supervised GLP-1 weight management in NYC. Board-certified physician Dr. Libby Rhee offers personalized Semaglutide and Tirzepatide programs at Liora.",
+    "Medically supervised weight managements and beyond weight management in NYC. Board-certified physician Dr. Libby Rhee offers personalized Semaglutide and Tirzepatide programs at Liora.",
   keywords: [
     "medical weight loss",
     "GLP-1",
@@ -38,11 +38,11 @@ export const metadata: Metadata = {
     "obesity medicine",
   ],
   openGraph: {
-    title: "Precision Weight & Wellness",
+    title: "Precision Weight + Wellness",
     description:
-      "Medically supervised GLP-1 weight management in NYC with Dr. Libby Rhee.",
+      "Medically supervised weight managements and beyond weight management in NYC with Dr. Libby Rhee.",
     url: "https://www.precisionweightwellness.com",
-    siteName: "Precision Weight & Wellness",
+    siteName: "Precision Weight + Wellness",
     locale: "en_US",
     type: "website",
   },
@@ -66,9 +66,9 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "MedicalBusiness",
               "@id": "https://www.precisionweightwellness.com",
-              name: "Precision Weight & Wellness at Liora",
+              name: "Precision Weight + Wellness at Liora",
               description:
-                "Medically supervised GLP-1 weight management program led by Dr. Libby Rhee, DO, MS, FAAD in New York City.",
+                "Medically supervised weight managements and beyond weight management program led by Dr. Libby Rhee, DO, MS, FAAD in New York City.",
               url: "https://www.precisionweightwellness.com",
               telephone: "+1-212-433-4569",
               email: "hello@lioradermatology.com",

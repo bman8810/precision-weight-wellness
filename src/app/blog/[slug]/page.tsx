@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { blogPosts, getPost } from "../data";
@@ -54,6 +55,15 @@ export default async function BlogPostPage({
             {post.title}
           </h1>
           <p className="mt-4 text-sm text-neutral-400">{post.date}</p>
+          <div className="mt-8 aspect-video relative rounded-xl overflow-hidden">
+            <Image
+              src={post.image}
+              alt={post.title}
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
         </div>
       </section>
 
