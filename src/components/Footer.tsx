@@ -9,7 +9,7 @@ export default function Footer() {
           <div>
             <p className="font-serif text-2xl tracking-wide">PRECISION</p>
             <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mt-1">
-              Weight & Wellness
+              Weight + Wellness
             </p>
             <p className="text-sm text-neutral-400 mt-4 leading-relaxed">
               Medically supervised weight management at Liora. Science-based
@@ -81,7 +81,7 @@ export default function Footer() {
 
         <div className="border-t border-neutral-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-neutral-500">
-            &copy; {new Date().getFullYear()} Precision Weight & Wellness at
+            &copy; {new Date().getFullYear()} Precision Weight + Wellness at
             Liora. All rights reserved.
           </p>
           <div className="flex gap-6">

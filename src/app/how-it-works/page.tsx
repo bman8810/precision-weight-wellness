@@ -101,7 +101,7 @@ export default function HowItWorksPage() {
           </h1>
           <p className="mt-8 text-lg text-neutral-500 max-w-2xl mx-auto leading-relaxed">
             From your first consultation to lasting results — here&apos;s what to
-            expect when you join Precision Weight & Wellness.
+            expect when you join Precision Weight + Wellness.
           </p>
         </div>
       </section>

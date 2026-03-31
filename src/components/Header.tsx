@@ -24,7 +24,7 @@ export default function Header() {
               LIORA
             </span>
             <span className="text-[10px] tracking-[0.3em] uppercase text-neutral-400">
-              Precision Weight & Wellness
+              Precision Weight + Wellness
             </span>
           </Link>
 

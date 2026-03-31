@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Patient Testimonials",
   description:
-    "Read what our patients are saying about their weight loss journey with Precision Weight & Wellness and Dr. Libby Rhee.",
+    "Read what our patients are saying about their weight loss journey with Precision Weight + Wellness and Dr. Libby Rhee.",
 };
 
 const testimonials = [

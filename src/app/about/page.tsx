@@ -106,7 +106,7 @@ export default function AboutPage() {
               <p>
                 With her deep understanding of the body&apos;s physiology and
                 her commitment to evidence-based medicine, Dr. Rhee launched
-                Precision Weight & Wellness to help patients achieve sustainable
+                Precision Weight + Wellness to help patients achieve sustainable
                 weight loss through FDA-approved GLP-1 medications. Her approach
                 combines medical expertise with genuine compassion — treating
                 each patient as a whole person, not just a number on a scale.
@@ -154,7 +154,7 @@ export default function AboutPage() {
           </h2>
           <div className="mt-10 space-y-6 text-neutral-500 leading-relaxed text-left max-w-3xl mx-auto">
             <p>
-              At Precision Weight & Wellness, we believe that obesity is a
+              At Precision Weight + Wellness, we believe that obesity is a
               chronic medical condition — not a failure of willpower. The latest
               science shows that biology, genetics, and hormones play a central
               role in weight regulation, and that effective treatment requires

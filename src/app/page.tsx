@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title:
-    "Precision Weight & Wellness | Medical Weight Loss NYC | Dr. Libby Rhee",
+    "Precision Weight + Wellness | Medical Weight Loss NYC | Dr. Libby Rhee",
 };
 
 const steps = [
@@ -60,8 +60,7 @@ export default function Home() {
               <span className="text-gold">Guided by Science</span>
             </h1>
             <p className="mt-6 text-lg text-neutral-500 max-w-lg leading-relaxed">
-              Board-certified physician Dr. Libby Rhee offers personalized GLP-1
-              weight management programs — including Semaglutide and Tirzepatide
+              Board-certified physician Dr. Libby Rhee offers personalized medical weight management — GLP-1s, dual agonists, metabolic agents, and behavioral support
               — in a premium Upper East Side setting.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
@@ -84,7 +83,7 @@ export default function Home() {
               <div className="text-center p-8">
                 <p className="font-serif text-6xl text-gold mb-4">PWW</p>
                 <p className="text-sm tracking-[0.2em] uppercase text-neutral-400">
-                  Precision Weight & Wellness
+                  Precision Weight + Wellness
                 </p>
               </div>
             </div>
@@ -187,7 +186,7 @@ export default function Home() {
             </h2>
             <p className="mt-4 text-neutral-500 max-w-2xl mx-auto">
               Our patients are achieving life-changing results with medically
-              supervised GLP-1 therapy. Clinical studies show average weight loss
+              supervised medical weight management. Clinical studies show average weight loss
               of 15-20% of body weight.
             </p>
           </div>
@@ -249,11 +248,11 @@ export default function Home() {
             Insurance & Eligibility
           </p>
           <h2 className="font-serif text-3xl text-soft-black">
-            See If Your Insurance Covers GLP-1 Medications
+            Check Your Insurance Coverage
           </h2>
           <p className="mt-4 text-neutral-500 leading-relaxed">
             While our program is cash-pay, many patients qualify for insurance
-            coverage of GLP-1 medications. Use our free eligibility tool to
+            coverage of weight management medications. Use our free eligibility tool to
             check your coverage and estimate your potential results.
           </p>
           <Link

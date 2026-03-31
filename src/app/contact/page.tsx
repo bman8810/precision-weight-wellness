@@ -175,7 +175,7 @@ export default function ContactPage() {
               </p>
               <div className="space-y-3 text-neutral-500">
                 <p className="font-medium text-soft-black">
-                  Precision Weight & Wellness
+                  Precision Weight + Wellness
                 </p>
                 <p className="text-sm">at Liora</p>
                 <p className="text-sm">110 E 60th Street, Suite 800</p>
