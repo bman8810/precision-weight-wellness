@@ -14,22 +14,24 @@ export default function ContactPage() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // Placeholder — no backend yet
     setSubmitted(true);
   }
 
   return (
     <>
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-cream">
+      <section className="pt-36 pb-24 bg-cream">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-xs tracking-[0.3em] uppercase text-gold mb-4">
+          <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-6">
             Get in Touch
           </p>
-          <h1 className="font-serif text-5xl md:text-6xl leading-tight text-soft-black">
-            Contact & <span className="text-gold">Book</span>
+          <h1
+            className="font-serif text-5xl md:text-6xl leading-[1.08] tracking-tight text-soft-black"
+            style={{ textWrap: "balance" }}
+          >
+            Contact & <span className="text-gold">book</span>
           </h1>
-          <p className="mt-6 text-lg text-neutral-500 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-8 text-lg text-neutral-500 max-w-2xl mx-auto leading-relaxed">
             Ready to start your weight loss journey? Schedule a consultation or
             send us a message — we&apos;re here to help.
           </p>
@@ -41,17 +43,17 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Contact Form */}
           <div>
-            <p className="text-xs tracking-[0.3em] uppercase text-gold mb-4">
+            <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
               Send a Message
             </p>
             <h2 className="font-serif text-3xl text-soft-black mb-8">
-              We&apos;d Love to Hear From You
+              We&apos;d love to hear from you
             </h2>
 
             {submitted ? (
-              <div className="bg-cream p-8 rounded-xl text-center">
+              <div className="bg-cream p-10 rounded-2xl text-center">
                 <p className="font-serif text-2xl text-soft-black">
-                  Thank You!
+                  Thank you
                 </p>
                 <p className="mt-4 text-neutral-500">
                   We&apos;ve received your message and will be in touch shortly.
@@ -64,7 +66,7 @@ export default function ContactPage() {
                     htmlFor="name"
                     className="block text-sm text-neutral-600 mb-2"
                   >
-                    Full Name
+                    Full name
                   </label>
                   <input
                     type="text"
@@ -74,7 +76,7 @@ export default function ContactPage() {
                     onChange={(e) =>
                       setForm({ ...form, name: e.target.value })
                     }
-                    className="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:border-gold transition-colors text-sm"
+                    className="w-full px-5 py-4 border border-neutral-200 rounded-xl focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] text-sm bg-white"
                     placeholder="Your full name"
                   />
                 </div>
@@ -83,7 +85,7 @@ export default function ContactPage() {
                     htmlFor="email"
                     className="block text-sm text-neutral-600 mb-2"
                   >
-                    Email Address
+                    Email address
                   </label>
                   <input
                     type="email"
@@ -93,7 +95,7 @@ export default function ContactPage() {
                     onChange={(e) =>
                       setForm({ ...form, email: e.target.value })
                     }
-                    className="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:border-gold transition-colors text-sm"
+                    className="w-full px-5 py-4 border border-neutral-200 rounded-xl focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] text-sm bg-white"
                     placeholder="you@example.com"
                   />
                 </div>
@@ -102,7 +104,7 @@ export default function ContactPage() {
                     htmlFor="phone"
                     className="block text-sm text-neutral-600 mb-2"
                   >
-                    Phone Number
+                    Phone number
                   </label>
                   <input
                     type="tel"
@@ -111,7 +113,7 @@ export default function ContactPage() {
                     onChange={(e) =>
                       setForm({ ...form, phone: e.target.value })
                     }
-                    className="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:border-gold transition-colors text-sm"
+                    className="w-full px-5 py-4 border border-neutral-200 rounded-xl focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] text-sm bg-white"
                     placeholder="(212) 555-0000"
                   />
                 </div>
@@ -130,13 +132,13 @@ export default function ContactPage() {
                     onChange={(e) =>
                       setForm({ ...form, message: e.target.value })
                     }
-                    className="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:border-gold transition-colors text-sm resize-none"
+                    className="w-full px-5 py-4 border border-neutral-200 rounded-xl focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] text-sm bg-white resize-none"
                     placeholder="Tell us about your goals or ask any questions..."
                   />
                 </div>
                 <button
                   type="submit"
-                  className="bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-colors w-full"
+                  className="bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] w-full hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
                 >
                   Send Message
                 </button>
@@ -148,11 +150,11 @@ export default function ContactPage() {
           <div className="space-y-12">
             {/* Schedule */}
             <div>
-              <p className="text-xs tracking-[0.3em] uppercase text-gold mb-4">
+              <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
                 Schedule Online
               </p>
               <h2 className="font-serif text-3xl text-soft-black mb-4">
-                Book Your Consultation
+                Book your consultation
               </h2>
               <p className="text-neutral-500 leading-relaxed mb-6">
                 Use our online scheduling portal to book your initial
@@ -162,7 +164,7 @@ export default function ContactPage() {
                 href="https://app.gethealthie.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-colors"
+                className="inline-block bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
               >
                 Schedule Now
               </a>
@@ -170,10 +172,10 @@ export default function ContactPage() {
 
             {/* Contact Details */}
             <div>
-              <p className="text-xs tracking-[0.3em] uppercase text-gold mb-4">
+              <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
                 Contact Details
               </p>
-              <div className="space-y-3 text-neutral-500">
+              <address className="space-y-3 text-neutral-500 not-italic">
                 <p className="font-medium text-soft-black">
                   Precision Weight & Wellness
                 </p>
@@ -182,31 +184,32 @@ export default function ContactPage() {
                 <p className="text-sm">New York, NY 10022</p>
                 <a
                   href="tel:+12124334569"
-                  className="block text-sm text-gold hover:text-gold-dark transition-colors"
+                  className="block text-sm text-gold hover:text-gold-dark transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
                 >
                   212.433.4569
                 </a>
                 <a
                   href="mailto:hello@lioradermatology.com"
-                  className="block text-sm text-gold hover:text-gold-dark transition-colors"
+                  className="block text-sm text-gold hover:text-gold-dark transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
                 >
                   hello@lioradermatology.com
                 </a>
-              </div>
+              </address>
             </div>
 
-            {/* Map Placeholder */}
+            {/* Map */}
             <div>
-              <p className="text-xs tracking-[0.3em] uppercase text-gold mb-4">
+              <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
                 Find Us
               </p>
-              <div className="aspect-video rounded-xl overflow-hidden bg-warm flex items-center justify-center">
-                <div className="text-center">
-                  <p className="text-neutral-400 text-sm">Map placeholder</p>
-                  <p className="text-xs text-neutral-300 mt-2">
-                    110 E 60th St, Suite 800, New York, NY 10022
-                  </p>
-                </div>
+              <div className="aspect-video rounded-2xl overflow-hidden shadow-[0_16px_40px_-12px_rgba(0,0,0,0.06)]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/about-office.png"
+                  alt="Liora — 110 E 60th St, Suite 800, New York, NY 10022"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
               </div>
             </div>
           </div>

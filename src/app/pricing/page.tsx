@@ -87,13 +87,25 @@ export default function PricingPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-36 pb-24 bg-cream">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      <section className="relative pt-36 pb-24 bg-cream overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/hero-wellness.png"
+            alt=""
+            className="w-full h-full object-cover"
+            aria-hidden="true"
+          />
+        </div>
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
           <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-6">
-            Investment in Your Health
+            Investment in your health
           </p>
-          <h1 className="font-serif text-5xl md:text-6xl leading-[1.08] tracking-tight text-soft-black">
-            Pricing & <span className="text-gold">Packages</span>
+          <h1
+            className="font-serif text-5xl md:text-6xl leading-[1.08] tracking-tight text-soft-black"
+            style={{ textWrap: "balance" }}
+          >
+            Pricing & <span className="text-gold">packages</span>
           </h1>
           <p className="mt-8 text-lg text-neutral-500 max-w-2xl mx-auto leading-relaxed">
             Transparent, straightforward pricing for medically supervised weight
@@ -103,16 +115,17 @@ export default function PricingPage() {
       </section>
 
       {/* Pricing Tiers */}
+
       <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {tiers.map((tier) => (
               <div
                 key={tier.name}
-                className={`p-10 rounded-2xl transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-2px] ${
+                className={`flex flex-col p-10 rounded-2xl transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-2px] ${
                   tier.highlighted
                     ? "bg-soft-black text-white ring-2 ring-gold shadow-[0_24px_48px_-16px_rgba(0,0,0,0.2)]"
-                    : "bg-cream hover:shadow-[0_16px_40px_-12px_rgba(0,0,0,0.06)]"
+                    : "bg-cream hover:shadow-[0_16px_40px_-12px_rgba(201,169,110,0.08)]"
                 }`}
               >
                 <p className="text-[11px] tracking-[0.2em] uppercase text-gold mb-3">
@@ -128,7 +141,7 @@ export default function PricingPage() {
                 <p className="text-sm mt-1 text-neutral-400">
                   {tier.period}
                 </p>
-                <ul className="mt-8 space-y-3">
+                <ul className="mt-8 space-y-3 flex-1">
                   {tier.features.map((feature) => (
                     <li
                       key={feature}
@@ -138,7 +151,7 @@ export default function PricingPage() {
                           : "text-neutral-500"
                       }`}
                     >
-                      <span className="text-gold mt-0.5">&#10003;</span>
+                      <span className="text-gold mt-0.5 shrink-0">&#10003;</span>
                       {feature}
                     </li>
                   ))}
@@ -164,10 +177,11 @@ export default function PricingPage() {
       </section>
 
       {/* Healthie Note */}
-      <section className="py-24 bg-cream">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      <section className="relative py-24 bg-cream overflow-hidden">
+        <div className="absolute top-1/2 right-0 translate-x-1/3 -translate-y-1/2 w-[400px] h-[400px] bg-gold/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
           <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
-            Easy Scheduling & Payments
+            Easy scheduling & payments
           </p>
           <h2 className="font-serif text-3xl md:text-4xl tracking-tight text-soft-black">
             Powered by Healthie
@@ -188,37 +202,43 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* FAQs */}
+      {/* FAQs — side-by-side layout */}
       <section className="py-32 bg-white">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="text-center mb-20">
-            <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
-              Common Questions
-            </p>
-            <h2 className="font-serif text-4xl md:text-5xl tracking-tight text-soft-black">
-              Pricing FAQs
-            </h2>
-          </div>
-          <div className="space-y-10">
-            {faqs.map((faq) => (
-              <div key={faq.q}>
-                <h3 className="font-serif text-lg text-soft-black">
-                  {faq.q}
-                </h3>
-                <p className="mt-3 text-sm text-neutral-500 leading-relaxed">
-                  {faq.a}
-                </p>
-              </div>
-            ))}
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16 items-start">
+            <div className="lg:sticky lg:top-32">
+              <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
+                Common questions
+              </p>
+              <h2 className="font-serif text-4xl md:text-5xl tracking-tight text-soft-black">
+                Pricing FAQs
+              </h2>
+            </div>
+            <div className="space-y-10">
+              {faqs.map((faq) => (
+                <div key={faq.q} className="border-b border-neutral-100 pb-10 last:border-0">
+                  <h3 className="font-serif text-lg text-soft-black">
+                    {faq.q}
+                  </h3>
+                  <p className="mt-3 text-sm text-neutral-500 leading-relaxed">
+                    {faq.a}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-32 bg-soft-black text-center">
-        <div className="max-w-2xl mx-auto px-6">
-          <h2 className="font-serif text-4xl md:text-5xl tracking-tight text-white">
-            Invest in Your Health Today
+      <section className="relative py-32 bg-soft-black text-center overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="relative max-w-2xl mx-auto px-6">
+          <h2
+            className="font-serif text-4xl md:text-5xl tracking-tight text-white"
+            style={{ textWrap: "balance" }}
+          >
+            Invest in your health today
           </h2>
           <p className="mt-6 text-neutral-400 leading-relaxed">
             Schedule a consultation to discuss which plan is right for you.

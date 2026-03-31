@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 
 const navLinks = [
   { label: "About", href: "/about" },
@@ -13,6 +14,15 @@ const navLinks = [
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  function isActive(href: string) {
+    return pathname === href || pathname.startsWith(href + "/");
+  }
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40">
@@ -21,10 +31,10 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex flex-col">
             <span className="font-serif text-xl tracking-wide text-soft-black">
-              PRECISION
+              LIORA
             </span>
             <span className="text-[10px] tracking-[0.3em] uppercase text-neutral-400">
-              Weight & Wellness
+              Precision Weight + Wellness
             </span>
           </Link>
 
@@ -34,7 +44,11 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm tracking-wide uppercase text-neutral-500 hover:text-soft-black transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                className={`text-sm tracking-wide uppercase transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  isActive(link.href)
+                    ? "text-gold"
+                    : "text-neutral-500 hover:text-soft-black"
+                }`}
               >
                 {link.label}
               </Link>
@@ -62,6 +76,7 @@ export default function Header() {
             className="lg:hidden p-2"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
           >
             <div className="space-y-1.5">
               <span
@@ -77,15 +92,24 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
-        {mobileOpen && (
-          <div className="lg:hidden bg-white border-t border-neutral-100 px-6 py-8 space-y-4">
+        {/* Mobile Menu — animated slide */}
+        <div
+          className={`lg:hidden overflow-hidden transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            mobileOpen
+              ? "max-h-[28rem] opacity-100"
+              : "max-h-0 opacity-0"
+          }`}
+        >
+          <div className="bg-white border-t border-neutral-100 px-6 py-8 space-y-4">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="block text-sm text-neutral-600 py-1.5 hover:text-soft-black transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
-                onClick={() => setMobileOpen(false)}
+                className={`block text-sm py-1.5 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  isActive(link.href)
+                    ? "text-gold"
+                    : "text-neutral-600 hover:text-soft-black"
+                }`}
               >
                 {link.label}
               </Link>
@@ -100,12 +124,11 @@ export default function Header() {
             <Link
               href="/contact"
               className="block text-center bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-6 py-3 rounded-full mt-4 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
-              onClick={() => setMobileOpen(false)}
             >
               Book Now
             </Link>
           </div>
-        )}
+        </div>
       </div>
     </header>
   );

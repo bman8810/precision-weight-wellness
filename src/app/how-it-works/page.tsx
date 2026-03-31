@@ -59,7 +59,7 @@ const journey = [
 
 const expectations = [
   {
-    title: "What to Bring",
+    title: "What to bring",
     items: [
       "Photo ID and insurance card",
       "List of current medications",
@@ -68,7 +68,7 @@ const expectations = [
     ],
   },
   {
-    title: "First Visit Duration",
+    title: "First visit duration",
     items: [
       "Plan for approximately 45-60 minutes",
       "Thorough health assessment",
@@ -77,7 +77,7 @@ const expectations = [
     ],
   },
   {
-    title: "After Your Visit",
+    title: "After your visit",
     items: [
       "Prescription sent to your pharmacy (if appropriate)",
       "Written treatment plan provided",
@@ -91,13 +91,25 @@ export default function HowItWorksPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-36 pb-24 bg-cream">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      <section className="relative pt-36 pb-24 bg-cream overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/hero-wellness.png"
+            alt=""
+            className="w-full h-full object-cover"
+            aria-hidden="true"
+          />
+        </div>
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
           <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-6">
             Your Journey
           </p>
-          <h1 className="font-serif text-5xl md:text-6xl leading-[1.08] tracking-tight text-soft-black">
-            How It <span className="text-gold">Works</span>
+          <h1
+            className="font-serif text-5xl md:text-6xl leading-[1.08] tracking-tight text-soft-black"
+            style={{ textWrap: "balance" }}
+          >
+            How it <span className="text-gold">works</span>
           </h1>
           <p className="mt-8 text-lg text-neutral-500 max-w-2xl mx-auto leading-relaxed">
             From your first consultation to lasting results — here&apos;s what to
@@ -109,13 +121,15 @@ export default function HowItWorksPage() {
       {/* Journey Steps */}
       <section className="py-32 bg-white">
         <div className="max-w-5xl mx-auto px-6 space-y-20">
-          {journey.map((step) => (
+          {journey.map((step, i) => (
             <div
               key={step.num}
-              className="grid grid-cols-1 lg:grid-cols-[100px_1fr] gap-10 items-start"
+              className={`grid grid-cols-1 lg:grid-cols-[100px_1fr] gap-10 items-start ${
+                i % 2 === 1 ? "lg:ml-12" : ""
+              }`}
             >
-              <p className="font-serif text-5xl text-gold">{step.num}</p>
-              <div>
+              <p className="font-serif text-5xl text-gold/30 leading-none tabular-nums">{step.num}</p>
+              <div className="border-l border-neutral-200 pl-10">
                 <h2 className="font-serif text-3xl tracking-tight text-soft-black">
                   {step.title}
                 </h2>
@@ -128,7 +142,7 @@ export default function HowItWorksPage() {
                       key={detail}
                       className="flex items-start gap-3 text-sm text-neutral-500"
                     >
-                      <span className="text-gold mt-0.5">&#10003;</span>
+                      <span className="text-gold mt-0.5 shrink-0">&#10003;</span>
                       {detail}
                     </li>
                   ))}
@@ -142,19 +156,22 @@ export default function HowItWorksPage() {
       {/* What to Expect */}
       <section className="py-32 bg-cream">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
+          <div className="max-w-xl mb-20">
             <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
               First Visit
             </p>
-            <h2 className="font-serif text-4xl md:text-5xl tracking-tight text-soft-black">
-              What to Expect at Your Consultation
+            <h2
+              className="font-serif text-4xl md:text-5xl tracking-tight text-soft-black"
+              style={{ textWrap: "balance" }}
+            >
+              What to expect at your consultation
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {expectations.map((exp) => (
               <div
                 key={exp.title}
-                className="bg-white p-10 rounded-2xl transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-2px] hover:shadow-[0_16px_40px_-12px_rgba(0,0,0,0.06)]"
+                className="bg-white p-10 rounded-2xl transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-2px] hover:shadow-[0_16px_40px_-12px_rgba(201,169,110,0.08)]"
               >
                 <h3 className="font-serif text-xl text-soft-black mb-5">
                   {exp.title}
@@ -165,7 +182,7 @@ export default function HowItWorksPage() {
                       key={item}
                       className="flex items-start gap-3 text-sm text-neutral-500"
                     >
-                      <span className="text-gold mt-0.5">&#10003;</span>
+                      <span className="text-gold mt-0.5 shrink-0">&#10003;</span>
                       {item}
                     </li>
                   ))}
@@ -177,13 +194,17 @@ export default function HowItWorksPage() {
       </section>
 
       {/* Ongoing Care */}
-      <section className="py-32 bg-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      <section className="relative py-32 bg-white overflow-hidden">
+        <div className="absolute top-1/2 left-0 -translate-x-1/3 -translate-y-1/2 w-[500px] h-[500px] bg-gold/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
           <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-6">
             Ongoing Care
           </p>
-          <h2 className="font-serif text-4xl md:text-5xl tracking-tight text-soft-black">
-            You&apos;re Never On Your Own
+          <h2
+            className="font-serif text-4xl md:text-5xl tracking-tight text-soft-black"
+            style={{ textWrap: "balance" }}
+          >
+            You&apos;re never on your own
           </h2>
           <div className="mt-10 space-y-6 text-neutral-500 leading-relaxed text-left max-w-3xl mx-auto">
             <p>
@@ -210,7 +231,7 @@ export default function HowItWorksPage() {
             Investment
           </p>
           <h2 className="font-serif text-3xl md:text-4xl tracking-tight text-soft-black">
-            Pricing & Packages
+            Pricing & packages
           </h2>
           <p className="mt-6 text-neutral-500 leading-relaxed">
             We offer flexible pricing options to make medically supervised
@@ -227,10 +248,14 @@ export default function HowItWorksPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-32 bg-soft-black text-center">
-        <div className="max-w-2xl mx-auto px-6">
-          <h2 className="font-serif text-4xl md:text-5xl tracking-tight text-white">
-            Ready to Get Started?
+      <section className="relative py-32 bg-soft-black text-center overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="relative max-w-2xl mx-auto px-6">
+          <h2
+            className="font-serif text-4xl md:text-5xl tracking-tight text-white"
+            style={{ textWrap: "balance" }}
+          >
+            Ready to get started?
           </h2>
           <p className="mt-6 text-neutral-400 leading-relaxed">
             Take the first step. Schedule your consultation with Dr. Rhee today.

@@ -114,13 +114,25 @@ export default function EligibilityPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-36 pb-16 bg-cream">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      <section className="relative pt-36 pb-16 bg-cream overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/hero-wellness.png"
+            alt=""
+            className="w-full h-full object-cover"
+            aria-hidden="true"
+          />
+        </div>
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
           <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-6">
             Eligibility & Insurance Check
           </p>
-          <h1 className="font-serif text-5xl md:text-6xl leading-[1.08] tracking-tight text-soft-black">
-            Check Your <span className="text-gold">Eligibility</span>
+          <h1
+            className="font-serif text-5xl md:text-6xl leading-[1.08] tracking-tight text-soft-black"
+            style={{ textWrap: "balance" }}
+          >
+            Check your <span className="text-gold">eligibility</span>
           </h1>
           <p className="mt-8 text-lg text-neutral-500 max-w-2xl mx-auto leading-relaxed">
             Answer a few quick questions to see if you may be a candidate for

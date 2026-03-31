@@ -33,19 +33,19 @@ const credentials = [
 
 const glp1Facts = [
   {
-    title: "What Are GLP-1 Medications?",
+    title: "What are GLP-1 medications?",
     desc: "GLP-1 receptor agonists (like Semaglutide and Tirzepatide) are FDA-approved medications that mimic a natural hormone to regulate appetite, slow gastric emptying, and improve metabolic function.",
   },
   {
-    title: "Proven Clinical Results",
+    title: "Proven clinical results",
     desc: "In landmark clinical trials, patients on Semaglutide lost an average of 15% of their body weight, while Tirzepatide showed up to 22.5% weight reduction — results previously achievable only through surgery.",
   },
   {
-    title: "Beyond Weight Loss",
+    title: "Beyond weight loss",
     desc: "GLP-1 medications have demonstrated significant cardiovascular benefits, improved blood sugar control, reduced inflammation, and may lower the risk of certain obesity-related conditions.",
   },
   {
-    title: "Safe Under Medical Supervision",
+    title: "Safe under medical supervision",
     desc: "When prescribed and monitored by a qualified physician, GLP-1 therapies have an excellent safety profile. Dr. Rhee carefully manages dosing, monitors for side effects, and adjusts treatment as needed.",
   },
 ];
@@ -59,7 +59,10 @@ export default function AboutPage() {
           <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-6">
             About Us
           </p>
-          <h1 className="font-serif text-5xl md:text-6xl leading-[1.08] tracking-tight text-soft-black">
+          <h1
+            className="font-serif text-5xl md:text-6xl leading-[1.08] tracking-tight text-soft-black"
+            style={{ textWrap: "balance" }}
+          >
             Meet <span className="text-gold">Dr. Libby Rhee</span>
           </h1>
           <p className="mt-8 text-lg text-neutral-500 max-w-2xl mx-auto leading-relaxed">
@@ -73,13 +76,18 @@ export default function AboutPage() {
       {/* Bio */}
       <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
-          {/* Photo placeholder */}
-          <div className="aspect-[3/4] rounded-[2rem] overflow-hidden bg-warm flex items-center justify-center shadow-[0_24px_48px_-16px_rgba(0,0,0,0.08)]">
-            <div className="text-center p-8">
-              <p className="font-serif text-5xl text-gold mb-4">Dr. Rhee</p>
-              <p className="text-sm tracking-[0.2em] uppercase text-neutral-400">
-                DO, MS, FAAD
-              </p>
+          {/* Photo */}
+          <div className="relative">
+            <div className="absolute -inset-4 bg-gradient-to-br from-gold/8 via-transparent to-gold/5 rounded-[3rem] blur-2xl" />
+            <div className="relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-[0_32px_64px_-16px_rgba(201,169,110,0.18)]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/dr-rhee.jpg"
+                alt="Dr. Libby Rhee, DO, MS, FAAD — board-certified dermatologist and founder of Precision Weight & Wellness"
+                className="w-full h-full object-cover"
+                loading="eager"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-soft-black/15 via-transparent to-transparent" />
             </div>
           </div>
 
@@ -142,13 +150,17 @@ export default function AboutPage() {
       </section>
 
       {/* Philosophy */}
-      <section className="py-32 bg-cream">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      <section className="relative py-32 bg-cream overflow-hidden">
+        <div className="absolute top-1/2 left-0 -translate-x-1/3 -translate-y-1/2 w-[500px] h-[500px] bg-gold/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
           <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-6">
             Our Philosophy
           </p>
-          <h2 className="font-serif text-4xl md:text-5xl tracking-tight text-soft-black">
-            Medicine-First Weight Management
+          <h2
+            className="font-serif text-4xl md:text-5xl tracking-tight text-soft-black"
+            style={{ textWrap: "balance" }}
+          >
+            Medicine-first weight management
           </h2>
           <div className="mt-10 space-y-6 text-neutral-500 leading-relaxed text-left max-w-3xl mx-auto">
             <p>
@@ -172,24 +184,26 @@ export default function AboutPage() {
       {/* Science of GLP-1 */}
       <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
+          <div className="max-w-xl mb-20">
             <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
               The Science
             </p>
             <h2 className="font-serif text-4xl md:text-5xl tracking-tight text-soft-black">
-              Understanding GLP-1 Medications
+              Understanding GLP-1 medications
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {glp1Facts.map((fact) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {glp1Facts.map((fact, i) => (
               <div
                 key={fact.title}
-                className="bg-cream p-10 rounded-2xl transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-2px] hover:shadow-[0_16px_40px_-12px_rgba(0,0,0,0.06)]"
+                className={`bg-cream p-10 rounded-2xl transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-2px] hover:shadow-[0_16px_40px_-12px_rgba(201,169,110,0.08)] ${
+                  i === 0 ? "md:col-span-2" : ""
+                }`}
               >
-                <h3 className="font-serif text-xl text-soft-black">
+                <h3 className={`font-serif text-soft-black ${i === 0 ? "text-2xl" : "text-xl"}`}>
                   {fact.title}
                 </h3>
-                <p className="mt-4 text-sm text-neutral-500 leading-relaxed">
+                <p className={`mt-4 text-neutral-500 leading-relaxed ${i === 0 ? "text-base max-w-3xl" : "text-sm"}`}>
                   {fact.desc}
                 </p>
               </div>
@@ -207,7 +221,7 @@ export default function AboutPage() {
           <h2 className="font-serif text-3xl md:text-4xl tracking-tight text-soft-black">
             Upper East Side, Manhattan
           </h2>
-          <div className="mt-10 space-y-2 text-neutral-500">
+          <address className="mt-10 space-y-2 text-neutral-500 not-italic">
             <p>110 E 60th Street, Suite 800</p>
             <p>New York, NY 10022</p>
             <a
@@ -216,18 +230,28 @@ export default function AboutPage() {
             >
               212.433.4569
             </a>
-          </div>
-          <div className="mt-10 aspect-video rounded-2xl overflow-hidden bg-warm flex items-center justify-center shadow-[0_24px_48px_-16px_rgba(0,0,0,0.08)]">
-            <p className="text-neutral-400 text-sm">Map placeholder</p>
+          </address>
+          <div className="mt-10 aspect-video rounded-2xl overflow-hidden shadow-[0_24px_48px_-16px_rgba(0,0,0,0.08)]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/about-office.png"
+              alt="Liora — Upper East Side, Manhattan office"
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-32 bg-soft-black text-center">
-        <div className="max-w-2xl mx-auto px-6">
-          <h2 className="font-serif text-4xl md:text-5xl tracking-tight text-white">
-            Start Your Weight Loss Journey
+      <section className="relative py-32 bg-soft-black text-center overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="relative max-w-2xl mx-auto px-6">
+          <h2
+            className="font-serif text-4xl md:text-5xl tracking-tight text-white"
+            style={{ textWrap: "balance" }}
+          >
+            Start your weight loss journey
           </h2>
           <p className="mt-6 text-neutral-400 leading-relaxed">
             Schedule a consultation with Dr. Rhee to learn how our medically

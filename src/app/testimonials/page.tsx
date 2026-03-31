@@ -58,7 +58,7 @@ const testimonials = [
   },
   {
     quote:
-      "The convenience of the Upper East Side location and the seamless scheduling make it easy to stay on track. I look forward to my monthly check-ins.",
+      "The convenience of the Upper East Side location and the scheduling make it easy to stay on track. I look forward to my monthly check-ins.",
     name: "Lisa W.",
     city: "Gramercy, NY",
     stars: 5,
@@ -86,15 +86,27 @@ export default function TestimonialsPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-cream">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-xs tracking-[0.3em] uppercase text-gold mb-4">
+      <section className="relative pt-36 pb-24 bg-cream overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/hero-wellness.png"
+            alt=""
+            className="w-full h-full object-cover"
+            aria-hidden="true"
+          />
+        </div>
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
+          <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-6">
             Patient Stories
           </p>
-          <h1 className="font-serif text-5xl md:text-6xl leading-tight text-soft-black">
-            Real Results, <span className="text-gold">Real People</span>
+          <h1
+            className="font-serif text-5xl md:text-6xl leading-[1.08] tracking-tight text-soft-black"
+            style={{ textWrap: "balance" }}
+          >
+            Real results, <span className="text-gold">real people</span>
           </h1>
-          <p className="mt-6 text-lg text-neutral-500 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-8 text-lg text-neutral-500 max-w-2xl mx-auto leading-relaxed">
             Hear from patients who have transformed their health with our
             medically supervised weight management program.
           </p>
@@ -111,18 +123,21 @@ export default function TestimonialsPage() {
         </div>
       </section>
 
-      {/* Testimonials Grid */}
+      {/* Testimonials — masonry-style layout */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
             {testimonials.map((t, i) => (
-              <div key={i} className="bg-cream p-8 rounded-xl">
+              <article
+                key={i}
+                className="break-inside-avoid bg-cream p-8 rounded-2xl transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_16px_40px_-12px_rgba(201,169,110,0.08)]"
+              >
                 <div className="flex gap-1 text-gold mb-4">
                   {[...Array(t.stars)].map((_, j) => (
                     <span key={j}>&#9733;</span>
                   ))}
                 </div>
-                <p className="text-sm text-neutral-600 leading-relaxed italic">
+                <p className={`text-neutral-600 leading-relaxed italic ${i === 0 || i === 3 ? "text-base" : "text-sm"}`}>
                   &ldquo;{t.quote}&rdquo;
                 </p>
                 <div className="mt-6 flex items-center justify-between">
@@ -132,23 +147,25 @@ export default function TestimonialsPage() {
                     </p>
                     <p className="text-xs text-neutral-400">{t.city}</p>
                   </div>
-                  <div className="text-right">
-                    <p className="font-serif text-xl text-gold">
-                      -{t.lostLbs} lbs
-                    </p>
-                  </div>
+                  <p className="font-serif text-xl text-gold tabular-nums">
+                    -{t.lostLbs} lbs
+                  </p>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-soft-black text-center">
-        <div className="max-w-2xl mx-auto px-6">
-          <h2 className="font-serif text-4xl text-white">
-            Start Your Success Story
+      <section className="relative py-24 bg-soft-black text-center overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="relative max-w-2xl mx-auto px-6">
+          <h2
+            className="font-serif text-4xl md:text-5xl tracking-tight text-white"
+            style={{ textWrap: "balance" }}
+          >
+            Start your success story
           </h2>
           <p className="mt-4 text-neutral-400 leading-relaxed">
             Join the growing number of patients achieving real, lasting results
@@ -156,7 +173,7 @@ export default function TestimonialsPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-block mt-8 bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-10 py-4 rounded-full transition-colors"
+            className="inline-block mt-8 bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-10 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
           >
             Book Your Consultation
           </Link>
