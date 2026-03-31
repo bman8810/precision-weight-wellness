@@ -87,15 +87,15 @@ export default function PricingPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-cream">
+      <section className="pt-36 pb-24 bg-cream">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-xs tracking-[0.3em] uppercase text-gold mb-4">
+          <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-6">
             Investment in Your Health
           </p>
-          <h1 className="font-serif text-5xl md:text-6xl leading-tight text-soft-black">
+          <h1 className="font-serif text-5xl md:text-6xl leading-[1.08] tracking-tight text-soft-black">
             Pricing & <span className="text-gold">Packages</span>
           </h1>
-          <p className="mt-6 text-lg text-neutral-500 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-8 text-lg text-neutral-500 max-w-2xl mx-auto leading-relaxed">
             Transparent, straightforward pricing for medically supervised weight
             management. No hidden fees, no surprises.
           </p>
@@ -103,23 +103,19 @@ export default function PricingPage() {
       </section>
 
       {/* Pricing Tiers */}
-      <section className="py-24 bg-white">
+      <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {tiers.map((tier) => (
               <div
                 key={tier.name}
-                className={`p-8 rounded-xl ${
+                className={`p-10 rounded-2xl transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-2px] ${
                   tier.highlighted
-                    ? "bg-soft-black text-white ring-2 ring-gold"
-                    : "bg-cream"
+                    ? "bg-soft-black text-white ring-2 ring-gold shadow-[0_24px_48px_-16px_rgba(0,0,0,0.2)]"
+                    : "bg-cream hover:shadow-[0_16px_40px_-12px_rgba(0,0,0,0.06)]"
                 }`}
               >
-                <p
-                  className={`text-xs tracking-[0.2em] uppercase mb-2 ${
-                    tier.highlighted ? "text-gold" : "text-gold"
-                  }`}
-                >
+                <p className="text-[11px] tracking-[0.2em] uppercase text-gold mb-3">
                   {tier.name}
                 </p>
                 <p
@@ -129,14 +125,10 @@ export default function PricingPage() {
                 >
                   {tier.price}
                 </p>
-                <p
-                  className={`text-sm mt-1 ${
-                    tier.highlighted ? "text-neutral-400" : "text-neutral-400"
-                  }`}
-                >
+                <p className="text-sm mt-1 text-neutral-400">
                   {tier.period}
                 </p>
-                <ul className="mt-6 space-y-3">
+                <ul className="mt-8 space-y-3">
                   {tier.features.map((feature) => (
                     <li
                       key={feature}
@@ -153,9 +145,9 @@ export default function PricingPage() {
                 </ul>
                 <Link
                   href="/contact"
-                  className={`block text-center mt-8 text-sm tracking-wide uppercase px-6 py-3 rounded-full transition-colors ${
+                  className={`block text-center mt-10 text-sm tracking-wide uppercase px-6 py-3 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     tier.highlighted
-                      ? "bg-gold hover:bg-gold-dark text-white"
+                      ? "bg-gold hover:bg-gold-dark text-white hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
                       : "border border-neutral-300 text-neutral-600 hover:border-gold hover:text-gold"
                   }`}
                 >
@@ -164,7 +156,7 @@ export default function PricingPage() {
               </div>
             ))}
           </div>
-          <p className="text-center mt-8 text-sm text-neutral-400">
+          <p className="text-center mt-10 text-sm text-neutral-400">
             Prices are subject to change. Contact us for the most current
             pricing information.
           </p>
@@ -172,15 +164,15 @@ export default function PricingPage() {
       </section>
 
       {/* Healthie Note */}
-      <section className="py-16 bg-cream">
+      <section className="py-24 bg-cream">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-xs tracking-[0.3em] uppercase text-gold mb-4">
+          <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
             Easy Scheduling & Payments
           </p>
-          <h2 className="font-serif text-3xl text-soft-black">
+          <h2 className="font-serif text-3xl md:text-4xl tracking-tight text-soft-black">
             Powered by Healthie
           </h2>
-          <p className="mt-4 text-neutral-500 leading-relaxed">
+          <p className="mt-6 text-neutral-500 leading-relaxed">
             Scheduling appointments and managing payments is simple and secure
             through our Healthie patient portal. You&apos;ll receive access
             after your initial consultation.
@@ -189,7 +181,7 @@ export default function PricingPage() {
             href="https://app.gethealthie.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block mt-8 border border-neutral-300 text-neutral-600 hover:border-gold hover:text-gold text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-colors"
+            className="inline-block mt-10 border border-neutral-300 text-neutral-600 hover:border-gold hover:text-gold text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px]"
           >
             Visit Patient Portal
           </a>
@@ -197,23 +189,23 @@ export default function PricingPage() {
       </section>
 
       {/* FAQs */}
-      <section className="py-24 bg-white">
+      <section className="py-32 bg-white">
         <div className="max-w-4xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <p className="text-xs tracking-[0.3em] uppercase text-gold mb-4">
+          <div className="text-center mb-20">
+            <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
               Common Questions
             </p>
-            <h2 className="font-serif text-4xl text-soft-black">
+            <h2 className="font-serif text-4xl md:text-5xl tracking-tight text-soft-black">
               Pricing FAQs
             </h2>
           </div>
-          <div className="space-y-8">
+          <div className="space-y-10">
             {faqs.map((faq) => (
               <div key={faq.q}>
                 <h3 className="font-serif text-lg text-soft-black">
                   {faq.q}
                 </h3>
-                <p className="mt-2 text-sm text-neutral-500 leading-relaxed">
+                <p className="mt-3 text-sm text-neutral-500 leading-relaxed">
                   {faq.a}
                 </p>
               </div>
@@ -223,17 +215,17 @@ export default function PricingPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-soft-black text-center">
+      <section className="py-32 bg-soft-black text-center">
         <div className="max-w-2xl mx-auto px-6">
-          <h2 className="font-serif text-4xl text-white">
+          <h2 className="font-serif text-4xl md:text-5xl tracking-tight text-white">
             Invest in Your Health Today
           </h2>
-          <p className="mt-4 text-neutral-400 leading-relaxed">
+          <p className="mt-6 text-neutral-400 leading-relaxed">
             Schedule a consultation to discuss which plan is right for you.
           </p>
           <Link
             href="/contact"
-            className="inline-block mt-8 bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-10 py-4 rounded-full transition-colors"
+            className="inline-block mt-10 bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-10 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
           >
             Book Your Consultation
           </Link>

@@ -6,7 +6,7 @@ import { useState } from "react";
 const insurers: Record<string, { covered: boolean; note: string }> = {
   Aetna: {
     covered: true,
-    note: "Aetna typically covers GLP-1 medications with prior authorization for BMI ≥30 or BMI ≥27 with comorbidities.",
+    note: "Aetna typically covers GLP-1 medications with prior authorization for BMI \u226530 or BMI \u226527 with comorbidities.",
   },
   "Blue Cross Blue Shield": {
     covered: true,
@@ -26,7 +26,7 @@ const insurers: Record<string, { covered: boolean; note: string }> = {
   },
   Medicare: {
     covered: false,
-    note: "Medicare currently does not cover GLP-1 medications for weight loss. Coverage may change — check with us for the latest updates.",
+    note: "Medicare currently does not cover GLP-1 medications for weight loss. Coverage may change \u2014 check with us for the latest updates.",
   },
   Medicaid: {
     covered: false,
@@ -83,7 +83,6 @@ export default function EligibilityPage() {
   const estimatedLoss = (() => {
     if (bmi === 0) return { low: 0, high: 0 };
     const currentWeight = parseFloat(weight);
-    // Based on clinical trial data: 15-22% body weight loss
     const lowPercent = 0.15;
     const highPercent = hasComorbidity ? 0.2 : 0.22;
     return {
@@ -115,15 +114,15 @@ export default function EligibilityPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-32 pb-12 bg-cream">
+      <section className="pt-36 pb-16 bg-cream">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-xs tracking-[0.3em] uppercase text-gold mb-4">
+          <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-6">
             Eligibility & Insurance Check
           </p>
-          <h1 className="font-serif text-5xl md:text-6xl leading-tight text-soft-black">
+          <h1 className="font-serif text-5xl md:text-6xl leading-[1.08] tracking-tight text-soft-black">
             Check Your <span className="text-gold">Eligibility</span>
           </h1>
-          <p className="mt-6 text-lg text-neutral-500 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-8 text-lg text-neutral-500 max-w-2xl mx-auto leading-relaxed">
             Answer a few quick questions to see if you may be a candidate for
             GLP-1 weight management and check your insurance coverage.
           </p>
@@ -131,43 +130,43 @@ export default function EligibilityPage() {
       </section>
 
       {/* Progress Bar */}
-      <section className="bg-cream pb-12">
+      <section className="bg-cream pb-16">
         <div className="max-w-2xl mx-auto px-6">
           <div className="flex items-center gap-2">
             {[1, 2, 3, 4, 5].map((s) => (
               <div
                 key={s}
-                className={`h-1.5 flex-1 rounded-full transition-colors ${
+                className={`h-1 flex-1 rounded-full transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                   s <= step ? "bg-gold" : "bg-neutral-200"
                 }`}
               />
             ))}
           </div>
-          <p className="text-xs text-neutral-400 mt-2 text-center">
+          <p className="text-[11px] text-neutral-400 mt-3 text-center tracking-wide">
             Step {step} of 5
           </p>
         </div>
       </section>
 
       {/* Form Steps */}
-      <section className="py-16 bg-white">
+      <section className="py-24 bg-white">
         <div className="max-w-2xl mx-auto px-6">
           {/* Step 1: BMI Calculator */}
           {step === 1 && (
             <div>
-              <p className="text-xs tracking-[0.3em] uppercase text-gold mb-4">
+              <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
                 Step 1
               </p>
-              <h2 className="font-serif text-3xl text-soft-black mb-2">
+              <h2 className="font-serif text-3xl tracking-tight text-soft-black mb-3">
                 Calculate Your BMI
               </h2>
-              <p className="text-sm text-neutral-500 mb-8">
+              <p className="text-sm text-neutral-500 mb-10">
                 Enter your height and weight to calculate your Body Mass Index.
               </p>
 
-              <div className="space-y-6">
+              <div className="space-y-8">
                 <div>
-                  <label className="block text-sm text-neutral-600 mb-2">
+                  <label className="block text-sm text-neutral-600 mb-3">
                     Height
                   </label>
                   <div className="flex gap-4">
@@ -178,7 +177,7 @@ export default function EligibilityPage() {
                         max="8"
                         value={heightFt}
                         onChange={(e) => setHeightFt(e.target.value)}
-                        className="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:border-gold transition-colors text-sm"
+                        className="w-full px-5 py-4 border border-neutral-200 rounded-xl focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] text-sm bg-white"
                         placeholder="Feet"
                       />
                     </div>
@@ -189,7 +188,7 @@ export default function EligibilityPage() {
                         max="11"
                         value={heightIn}
                         onChange={(e) => setHeightIn(e.target.value)}
-                        className="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:border-gold transition-colors text-sm"
+                        className="w-full px-5 py-4 border border-neutral-200 rounded-xl focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] text-sm bg-white"
                         placeholder="Inches"
                       />
                     </div>
@@ -197,7 +196,7 @@ export default function EligibilityPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm text-neutral-600 mb-2">
+                  <label className="block text-sm text-neutral-600 mb-3">
                     Weight (lbs)
                   </label>
                   <input
@@ -206,20 +205,20 @@ export default function EligibilityPage() {
                     max="800"
                     value={weight}
                     onChange={(e) => setWeight(e.target.value)}
-                    className="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:border-gold transition-colors text-sm"
+                    className="w-full px-5 py-4 border border-neutral-200 rounded-xl focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] text-sm bg-white"
                     placeholder="Weight in pounds"
                   />
                 </div>
 
                 {bmi > 0 && (
-                  <div className="bg-cream p-6 rounded-xl text-center">
-                    <p className="text-xs tracking-[0.2em] uppercase text-neutral-400 mb-1">
+                  <div className="bg-cream p-8 rounded-2xl text-center">
+                    <p className="text-[11px] tracking-[0.2em] uppercase text-neutral-400 mb-2">
                       Your BMI
                     </p>
-                    <p className="font-serif text-4xl text-gold">
+                    <p className="font-serif text-5xl text-gold tabular-nums">
                       {bmi.toFixed(1)}
                     </p>
-                    <p className="text-sm text-neutral-500 mt-2">
+                    <p className="text-sm text-neutral-500 mt-3">
                       {bmi < 18.5
                         ? "Underweight"
                         : bmi < 25
@@ -239,7 +238,7 @@ export default function EligibilityPage() {
               <button
                 onClick={() => setStep(2)}
                 disabled={!canProceedStep1}
-                className="mt-8 w-full bg-gold hover:bg-gold-dark disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-colors"
+                className="mt-10 w-full bg-gold hover:bg-gold-dark disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
               >
                 Continue
               </button>
@@ -249,13 +248,13 @@ export default function EligibilityPage() {
           {/* Step 2: Medical History */}
           {step === 2 && (
             <div>
-              <p className="text-xs tracking-[0.3em] uppercase text-gold mb-4">
+              <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
                 Step 2
               </p>
-              <h2 className="font-serif text-3xl text-soft-black mb-2">
+              <h2 className="font-serif text-3xl tracking-tight text-soft-black mb-3">
                 Medical History
               </h2>
-              <p className="text-sm text-neutral-500 mb-8">
+              <p className="text-sm text-neutral-500 mb-10">
                 Select any conditions that apply to you. This helps determine
                 your eligibility for GLP-1 medications.
               </p>
@@ -265,21 +264,21 @@ export default function EligibilityPage() {
                   <button
                     key={condition}
                     onClick={() => toggleCondition(condition)}
-                    className={`w-full text-left px-4 py-3 rounded-lg border text-sm transition-colors ${
+                    className={`w-full text-left px-5 py-4 rounded-xl border text-sm transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                       selectedConditions.includes(condition)
-                        ? "border-gold bg-gold/10 text-soft-black"
-                        : "border-neutral-200 text-neutral-600 hover:border-gold"
+                        ? "border-gold bg-gold/8 text-soft-black"
+                        : "border-neutral-200 text-neutral-600 hover:border-gold/50"
                     }`}
                   >
                     <span className="flex items-center gap-3">
                       <span
-                        className={`w-5 h-5 rounded border flex items-center justify-center text-xs ${
+                        className={`w-5 h-5 rounded border flex items-center justify-center text-xs transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                           selectedConditions.includes(condition)
                             ? "bg-gold border-gold text-white"
                             : "border-neutral-300"
                         }`}
                       >
-                        {selectedConditions.includes(condition) && "✓"}
+                        {selectedConditions.includes(condition) && "\u2713"}
                       </span>
                       {condition}
                     </span>
@@ -287,17 +286,17 @@ export default function EligibilityPage() {
                 ))}
               </div>
 
-              <div className="flex gap-4 mt-8">
+              <div className="flex gap-4 mt-10">
                 <button
                   onClick={() => setStep(1)}
-                  className="flex-1 border border-neutral-300 text-neutral-600 hover:border-gold hover:text-gold text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-colors"
+                  className="flex-1 border border-neutral-300 text-neutral-600 hover:border-gold hover:text-gold text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px]"
                 >
                   Back
                 </button>
                 <button
                   onClick={() => setStep(3)}
                   disabled={!canProceedStep2}
-                  className="flex-1 bg-gold hover:bg-gold-dark disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-colors"
+                  className="flex-1 bg-gold hover:bg-gold-dark disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
                 >
                   Continue
                 </button>
@@ -308,13 +307,13 @@ export default function EligibilityPage() {
           {/* Step 3: Insurance Check */}
           {step === 3 && (
             <div>
-              <p className="text-xs tracking-[0.3em] uppercase text-gold mb-4">
+              <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
                 Step 3
               </p>
-              <h2 className="font-serif text-3xl text-soft-black mb-2">
+              <h2 className="font-serif text-3xl tracking-tight text-soft-black mb-3">
                 Insurance Check
               </h2>
-              <p className="text-sm text-neutral-500 mb-8">
+              <p className="text-sm text-neutral-500 mb-10">
                 Select your insurance provider to check typical GLP-1
                 medication coverage.
               </p>
@@ -324,15 +323,15 @@ export default function EligibilityPage() {
                   <button
                     key={insurer}
                     onClick={() => setSelectedInsurer(insurer)}
-                    className={`w-full text-left px-4 py-3 rounded-lg border text-sm transition-colors ${
+                    className={`w-full text-left px-5 py-4 rounded-xl border text-sm transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                       selectedInsurer === insurer
-                        ? "border-gold bg-gold/10 text-soft-black"
-                        : "border-neutral-200 text-neutral-600 hover:border-gold"
+                        ? "border-gold bg-gold/8 text-soft-black"
+                        : "border-neutral-200 text-neutral-600 hover:border-gold/50"
                     }`}
                   >
                     <span className="flex items-center gap-3">
                       <span
-                        className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
+                        className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                           selectedInsurer === insurer
                             ? "border-gold"
                             : "border-neutral-300"
@@ -350,7 +349,7 @@ export default function EligibilityPage() {
 
               {insurerInfo && (
                 <div
-                  className={`mt-6 p-6 rounded-xl ${insurerInfo.covered ? "bg-green-50 border border-green-200" : "bg-amber-50 border border-amber-200"}`}
+                  className={`mt-8 p-8 rounded-2xl ${insurerInfo.covered ? "bg-green-50 border border-green-200" : "bg-amber-50 border border-amber-200"}`}
                 >
                   <p
                     className={`text-sm font-medium ${insurerInfo.covered ? "text-green-800" : "text-amber-800"}`}
@@ -360,24 +359,24 @@ export default function EligibilityPage() {
                       : "Limited or No Coverage"}
                   </p>
                   <p
-                    className={`text-sm mt-2 ${insurerInfo.covered ? "text-green-700" : "text-amber-700"}`}
+                    className={`text-sm mt-3 leading-relaxed ${insurerInfo.covered ? "text-green-700" : "text-amber-700"}`}
                   >
                     {insurerInfo.note}
                   </p>
                 </div>
               )}
 
-              <div className="flex gap-4 mt-8">
+              <div className="flex gap-4 mt-10">
                 <button
                   onClick={() => setStep(2)}
-                  className="flex-1 border border-neutral-300 text-neutral-600 hover:border-gold hover:text-gold text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-colors"
+                  className="flex-1 border border-neutral-300 text-neutral-600 hover:border-gold hover:text-gold text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px]"
                 >
                   Back
                 </button>
                 <button
                   onClick={() => setStep(4)}
                   disabled={!canProceedStep3}
-                  className="flex-1 bg-gold hover:bg-gold-dark disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-colors"
+                  className="flex-1 bg-gold hover:bg-gold-dark disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
                 >
                   Continue
                 </button>
@@ -388,47 +387,47 @@ export default function EligibilityPage() {
           {/* Step 4: Estimated Weight Loss */}
           {step === 4 && (
             <div>
-              <p className="text-xs tracking-[0.3em] uppercase text-gold mb-4">
+              <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
                 Step 4
               </p>
-              <h2 className="font-serif text-3xl text-soft-black mb-2">
+              <h2 className="font-serif text-3xl tracking-tight text-soft-black mb-3">
                 Your Estimated Results
               </h2>
-              <p className="text-sm text-neutral-500 mb-8">
+              <p className="text-sm text-neutral-500 mb-10">
                 Based on your profile and clinical trial data, here&apos;s what
                 you might expect with GLP-1 therapy.
               </p>
 
-              <div className="bg-cream p-8 rounded-xl text-center space-y-6">
+              <div className="bg-cream p-10 rounded-2xl text-center space-y-8">
                 <div>
-                  <p className="text-xs tracking-[0.2em] uppercase text-neutral-400 mb-1">
+                  <p className="text-[11px] tracking-[0.2em] uppercase text-neutral-400 mb-2">
                     Your Current BMI
                   </p>
-                  <p className="font-serif text-3xl text-soft-black">
+                  <p className="font-serif text-3xl text-soft-black tabular-nums">
                     {bmi.toFixed(1)}
                   </p>
                 </div>
 
                 <div>
-                  <p className="text-xs tracking-[0.2em] uppercase text-neutral-400 mb-1">
+                  <p className="text-[11px] tracking-[0.2em] uppercase text-neutral-400 mb-2">
                     Estimated Weight Loss in 12 Months
                   </p>
-                  <p className="font-serif text-5xl text-gold">
-                    {estimatedLoss.low} – {estimatedLoss.high} lbs
+                  <p className="font-serif text-5xl text-gold tabular-nums">
+                    {estimatedLoss.low} \u2013 {estimatedLoss.high} lbs
                   </p>
                 </div>
 
                 <div>
-                  <p className="text-xs tracking-[0.2em] uppercase text-neutral-400 mb-1">
+                  <p className="text-[11px] tracking-[0.2em] uppercase text-neutral-400 mb-2">
                     Projected Weight
                   </p>
-                  <p className="font-serif text-3xl text-soft-black">
-                    {Math.round(parseFloat(weight) - estimatedLoss.low)} –{" "}
+                  <p className="font-serif text-3xl text-soft-black tabular-nums">
+                    {Math.round(parseFloat(weight) - estimatedLoss.low)} \u2013{" "}
                     {Math.round(parseFloat(weight) - estimatedLoss.high)} lbs
                   </p>
                 </div>
 
-                <p className="text-xs text-neutral-400 leading-relaxed">
+                <p className="text-xs text-neutral-400 leading-relaxed pt-2">
                   Based on published clinical trial data for Semaglutide and
                   Tirzepatide. Individual results may vary. These projections
                   are for informational purposes only and are not a guarantee.
@@ -436,11 +435,11 @@ export default function EligibilityPage() {
               </div>
 
               {qualifiesByBMI && (
-                <div className="mt-6 p-6 rounded-xl bg-green-50 border border-green-200">
+                <div className="mt-8 p-8 rounded-2xl bg-green-50 border border-green-200">
                   <p className="text-sm font-medium text-green-800">
                     You may be a great candidate for GLP-1 therapy
                   </p>
-                  <p className="text-sm mt-2 text-green-700">
+                  <p className="text-sm mt-3 text-green-700 leading-relaxed">
                     Based on your BMI
                     {hasComorbidity ? " and health history" : ""}, you meet the
                     general criteria for GLP-1 medication therapy. A
@@ -450,11 +449,11 @@ export default function EligibilityPage() {
               )}
 
               {!qualifiesByBMI && bmi > 0 && (
-                <div className="mt-6 p-6 rounded-xl bg-amber-50 border border-amber-200">
+                <div className="mt-8 p-8 rounded-2xl bg-amber-50 border border-amber-200">
                   <p className="text-sm font-medium text-amber-800">
                     Let&apos;s discuss your options
                   </p>
-                  <p className="text-sm mt-2 text-amber-700">
+                  <p className="text-sm mt-3 text-amber-700 leading-relaxed">
                     Based on your current BMI, standard GLP-1 eligibility
                     criteria may not apply. However, Dr. Rhee can evaluate your
                     individual situation during a consultation.
@@ -462,16 +461,16 @@ export default function EligibilityPage() {
                 </div>
               )}
 
-              <div className="flex gap-4 mt-8">
+              <div className="flex gap-4 mt-10">
                 <button
                   onClick={() => setStep(3)}
-                  className="flex-1 border border-neutral-300 text-neutral-600 hover:border-gold hover:text-gold text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-colors"
+                  className="flex-1 border border-neutral-300 text-neutral-600 hover:border-gold hover:text-gold text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px]"
                 >
                   Back
                 </button>
                 <button
                   onClick={() => setStep(5)}
-                  className="flex-1 bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-colors"
+                  className="flex-1 bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
                 >
                   Continue
                 </button>
@@ -482,10 +481,10 @@ export default function EligibilityPage() {
           {/* Step 5: CTA */}
           {step === 5 && (
             <div className="text-center">
-              <p className="text-xs tracking-[0.3em] uppercase text-gold mb-4">
+              <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-6">
                 You&apos;re Ready
               </p>
-              <h2 className="font-serif text-4xl text-soft-black mb-4">
+              <h2 className="font-serif text-4xl tracking-tight text-soft-black mb-5">
                 Take the Next Step
               </h2>
               <p className="text-neutral-500 leading-relaxed max-w-lg mx-auto">
@@ -494,20 +493,20 @@ export default function EligibilityPage() {
                   : "Schedule a consultation with Dr. Rhee to discuss your weight management goals and explore your options."}
               </p>
 
-              <div className="mt-8 bg-cream p-8 rounded-xl space-y-4">
-                <div className="grid grid-cols-2 gap-4 text-left text-sm">
+              <div className="mt-10 bg-cream p-10 rounded-2xl space-y-6">
+                <div className="grid grid-cols-2 gap-6 text-left text-sm">
                   <div>
-                    <p className="text-neutral-400">BMI</p>
-                    <p className="text-soft-black font-medium">
+                    <p className="text-neutral-400 text-[11px] tracking-wide uppercase mb-1">BMI</p>
+                    <p className="text-soft-black font-medium tabular-nums">
                       {bmi.toFixed(1)}
                     </p>
                   </div>
                   <div>
-                    <p className="text-neutral-400">Current Weight</p>
-                    <p className="text-soft-black font-medium">{weight} lbs</p>
+                    <p className="text-neutral-400 text-[11px] tracking-wide uppercase mb-1">Current Weight</p>
+                    <p className="text-soft-black font-medium tabular-nums">{weight} lbs</p>
                   </div>
                   <div>
-                    <p className="text-neutral-400">Health Conditions</p>
+                    <p className="text-neutral-400 text-[11px] tracking-wide uppercase mb-1">Health Conditions</p>
                     <p className="text-soft-black font-medium">
                       {hasComorbidity
                         ? selectedConditions.join(", ")
@@ -515,32 +514,32 @@ export default function EligibilityPage() {
                     </p>
                   </div>
                   <div>
-                    <p className="text-neutral-400">Insurance</p>
+                    <p className="text-neutral-400 text-[11px] tracking-wide uppercase mb-1">Insurance</p>
                     <p className="text-soft-black font-medium">
                       {selectedInsurer}
                     </p>
                   </div>
                 </div>
-                <div>
-                  <p className="text-neutral-400 text-sm">
+                <div className="pt-2">
+                  <p className="text-neutral-400 text-[11px] tracking-wide uppercase mb-2">
                     Estimated 12-Month Loss
                   </p>
-                  <p className="font-serif text-2xl text-gold">
-                    {estimatedLoss.low} – {estimatedLoss.high} lbs
+                  <p className="font-serif text-3xl text-gold tabular-nums">
+                    {estimatedLoss.low} \u2013 {estimatedLoss.high} lbs
                   </p>
                 </div>
               </div>
 
-              <div className="mt-8 space-y-4">
+              <div className="mt-10 space-y-4">
                 <Link
                   href="/contact"
-                  className="block bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-colors"
+                  className="block bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
                 >
                   Book Your Consultation
                 </Link>
                 <button
                   onClick={() => setStep(1)}
-                  className="block w-full text-sm text-neutral-400 hover:text-gold transition-colors"
+                  className="block w-full text-sm text-neutral-400 hover:text-gold transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
                 >
                   Start Over
                 </button>

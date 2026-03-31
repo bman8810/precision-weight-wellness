@@ -15,8 +15,8 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
-      <div className="bg-white/95 backdrop-blur-sm border-b border-neutral-100">
+    <header className="fixed top-0 left-0 right-0 z-40">
+      <div className="bg-white/90 backdrop-blur-md border-b border-neutral-100/80">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex flex-col">
@@ -34,7 +34,7 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm tracking-wide uppercase text-neutral-600 hover:text-soft-black transition-colors"
+                className="text-sm tracking-wide uppercase text-neutral-500 hover:text-soft-black transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
               >
                 {link.label}
               </Link>
@@ -45,13 +45,13 @@ export default function Header() {
           <div className="hidden lg:flex items-center gap-6">
             <a
               href="tel:+12124334569"
-              className="text-sm text-neutral-500 hover:text-soft-black transition-colors"
+              className="text-sm text-neutral-500 hover:text-soft-black transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
             >
               212.433.4569
             </a>
             <Link
               href="/contact"
-              className="bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-6 py-3 rounded-full transition-colors"
+              className="bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-6 py-3 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_4px_16px_-4px_rgba(201,169,110,0.4)]"
             >
               Book Now
             </Link>
@@ -65,13 +65,13 @@ export default function Header() {
           >
             <div className="space-y-1.5">
               <span
-                className={`block w-6 h-0.5 bg-neutral-800 transition-transform ${mobileOpen ? "rotate-45 translate-y-2" : ""}`}
+                className={`block w-6 h-0.5 bg-neutral-800 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${mobileOpen ? "rotate-45 translate-y-2" : ""}`}
               />
               <span
-                className={`block w-6 h-0.5 bg-neutral-800 transition-opacity ${mobileOpen ? "opacity-0" : ""}`}
+                className={`block w-6 h-0.5 bg-neutral-800 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${mobileOpen ? "opacity-0" : ""}`}
               />
               <span
-                className={`block w-6 h-0.5 bg-neutral-800 transition-transform ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`}
+                className={`block w-6 h-0.5 bg-neutral-800 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`}
               />
             </div>
           </button>
@@ -79,12 +79,12 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {mobileOpen && (
-          <div className="lg:hidden bg-white border-t border-neutral-100 px-6 py-6 space-y-4">
+          <div className="lg:hidden bg-white border-t border-neutral-100 px-6 py-8 space-y-4">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="block text-sm text-neutral-600 py-1"
+                className="block text-sm text-neutral-600 py-1.5 hover:text-soft-black transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
@@ -93,13 +93,13 @@ export default function Header() {
             <hr className="border-neutral-100" />
             <a
               href="tel:+12124334569"
-              className="block text-sm text-neutral-500 py-1"
+              className="block text-sm text-neutral-500 py-1.5"
             >
               212.433.4569
             </a>
             <Link
               href="/contact"
-              className="block text-center bg-gold text-white text-sm tracking-wide uppercase px-6 py-3 rounded-full mt-4"
+              className="block text-center bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-6 py-3 rounded-full mt-4 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
               onClick={() => setMobileOpen(false)}
             >
               Book Now

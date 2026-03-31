@@ -47,40 +47,40 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center bg-cream pt-32">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section className="relative min-h-[100dvh] flex items-center bg-cream pt-32 pb-16">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
-            <p className="text-xs tracking-[0.3em] uppercase text-gold mb-4">
+            <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-6">
               Medically Supervised Weight Loss
             </p>
-            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl leading-tight text-soft-black">
+            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.08] tracking-tight text-soft-black">
               Your Weight Loss
               <br />
               Journey,{" "}
               <span className="text-gold">Guided by Science</span>
             </h1>
-            <p className="mt-6 text-lg text-neutral-500 max-w-lg leading-relaxed">
+            <p className="mt-8 text-lg text-neutral-500 max-w-lg leading-relaxed">
               Board-certified physician Dr. Libby Rhee offers personalized GLP-1
               weight management programs — including Semaglutide and Tirzepatide
               — in a premium Upper East Side setting.
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 href="/contact"
-                className="bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-colors"
+                className="bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
               >
                 Start Your Journey
               </Link>
               <Link
                 href="/eligibility"
-                className="border border-neutral-300 text-neutral-600 hover:border-gold hover:text-gold text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-colors"
+                className="border border-neutral-300 text-neutral-600 hover:border-gold hover:text-gold text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px]"
               >
                 Check Eligibility
               </Link>
             </div>
           </div>
           <div className="relative">
-            <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-warm flex items-center justify-center">
+            <div className="aspect-[3/4] rounded-[2rem] overflow-hidden bg-warm flex items-center justify-center shadow-[0_24px_48px_-16px_rgba(0,0,0,0.08)]">
               <div className="text-center p-8">
                 <p className="font-serif text-6xl text-gold mb-4">PWW</p>
                 <p className="text-sm tracking-[0.2em] uppercase text-neutral-400">
@@ -93,18 +93,18 @@ export default function Home() {
       </section>
 
       {/* Stats Bar */}
-      <section className="bg-soft-black py-12">
-        <div className="max-w-5xl mx-auto px-6 grid grid-cols-3 gap-8 text-center">
+      <section className="bg-soft-black py-16">
+        <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-3 gap-10 text-center">
           {[
             { value: "15%+", label: "Average Body Weight Lost" },
             { value: "FDA", label: "Approved Medications" },
             { value: "1:1", label: "Physician-Led Care" },
           ].map((s) => (
             <div key={s.label}>
-              <p className="font-serif text-3xl md:text-4xl text-gold">
+              <p className="font-serif text-3xl md:text-4xl text-gold tabular-nums">
                 {s.value}
               </p>
-              <p className="text-xs tracking-[0.2em] uppercase text-neutral-400 mt-2">
+              <p className="text-[11px] tracking-[0.2em] uppercase text-neutral-400 mt-3">
                 {s.label}
               </p>
             </div>
@@ -113,23 +113,26 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-24 bg-white">
+      <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <p className="text-xs tracking-[0.3em] uppercase text-gold mb-4">
+          <div className="text-center mb-20">
+            <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
               Why Choose Us
             </p>
-            <h2 className="font-serif text-4xl text-soft-black">
+            <h2 className="font-serif text-4xl md:text-5xl tracking-tight text-soft-black">
               Expert Care You Can Trust
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {reasons.map((r) => (
-              <div key={r.title} className="bg-cream p-8 rounded-xl">
+              <div
+                key={r.title}
+                className="bg-cream p-10 rounded-2xl transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-2px] hover:shadow-[0_16px_40px_-12px_rgba(0,0,0,0.06)]"
+              >
                 <h3 className="font-serif text-xl text-soft-black">
                   {r.title}
                 </h3>
-                <p className="mt-3 text-sm text-neutral-500 leading-relaxed">
+                <p className="mt-4 text-sm text-neutral-500 leading-relaxed">
                   {r.desc}
                 </p>
               </div>
@@ -139,35 +142,38 @@ export default function Home() {
       </section>
 
       {/* How It Works */}
-      <section className="py-24 bg-cream">
+      <section className="py-32 bg-cream">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <p className="text-xs tracking-[0.3em] uppercase text-gold mb-4">
+          <div className="text-center mb-20">
+            <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
               How It Works
             </p>
-            <h2 className="font-serif text-4xl text-soft-black">
+            <h2 className="font-serif text-4xl md:text-5xl tracking-tight text-soft-black">
               Three Simple Steps
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {steps.map((step) => (
-              <div key={step.num} className="bg-white p-8 rounded-xl">
+              <div
+                key={step.num}
+                className="bg-white p-10 rounded-2xl transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-2px] hover:shadow-[0_16px_40px_-12px_rgba(0,0,0,0.06)]"
+              >
                 <p className="font-serif text-3xl text-gold mb-4">
                   {step.num}
                 </p>
                 <h3 className="font-serif text-xl text-soft-black">
                   {step.title}
                 </h3>
-                <p className="mt-3 text-sm text-neutral-500 leading-relaxed">
+                <p className="mt-4 text-sm text-neutral-500 leading-relaxed">
                   {step.desc}
                 </p>
               </div>
             ))}
           </div>
-          <div className="text-center mt-12">
+          <div className="text-center mt-16">
             <Link
               href="/how-it-works"
-              className="inline-block text-sm tracking-wide uppercase text-gold hover:text-gold-dark transition-colors"
+              className="inline-block text-sm tracking-wide uppercase text-gold hover:text-gold-dark transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
             >
               Learn More About Our Process &rarr;
             </Link>
@@ -176,16 +182,16 @@ export default function Home() {
       </section>
 
       {/* Results / Testimonials Teaser */}
-      <section className="py-24 bg-white">
+      <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <p className="text-xs tracking-[0.3em] uppercase text-gold mb-4">
+          <div className="text-center mb-20">
+            <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
               Patient Results
             </p>
-            <h2 className="font-serif text-4xl text-soft-black">
+            <h2 className="font-serif text-4xl md:text-5xl tracking-tight text-soft-black">
               Real People, Real Results
             </h2>
-            <p className="mt-4 text-neutral-500 max-w-2xl mx-auto">
+            <p className="mt-6 text-neutral-500 max-w-2xl mx-auto leading-relaxed">
               Our patients are achieving life-changing results with medically
               supervised GLP-1 therapy. Clinical studies show average weight loss
               of 15-20% of body weight.
@@ -212,8 +218,11 @@ export default function Home() {
                 city: "New York, NY",
               },
             ].map((t, i) => (
-              <div key={i} className="bg-cream p-8 rounded-xl">
-                <div className="flex gap-1 text-gold mb-4">
+              <div
+                key={i}
+                className="bg-cream p-10 rounded-2xl transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-2px] hover:shadow-[0_16px_40px_-12px_rgba(0,0,0,0.06)]"
+              >
+                <div className="flex gap-1 text-gold mb-5">
                   {[...Array(5)].map((_, j) => (
                     <span key={j}>&#9733;</span>
                   ))}
@@ -221,7 +230,7 @@ export default function Home() {
                 <p className="text-sm text-neutral-600 leading-relaxed italic">
                   &ldquo;{t.quote}&rdquo;
                 </p>
-                <p className="mt-4 text-sm font-medium text-soft-black">
+                <p className="mt-5 text-sm font-medium text-soft-black">
                   {t.name}
                 </p>
                 <p className="text-xs text-neutral-400">{t.city}</p>
@@ -231,10 +240,10 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <div className="text-center mt-12">
+          <div className="text-center mt-16">
             <Link
               href="/testimonials"
-              className="inline-block text-sm tracking-wide uppercase text-gold hover:text-gold-dark transition-colors"
+              className="inline-block text-sm tracking-wide uppercase text-gold hover:text-gold-dark transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
             >
               See All Testimonials &rarr;
             </Link>
@@ -243,22 +252,22 @@ export default function Home() {
       </section>
 
       {/* Insurance Check Teaser */}
-      <section className="py-20 bg-cream">
+      <section className="py-28 bg-cream">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-xs tracking-[0.3em] uppercase text-gold mb-4">
+          <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
             Insurance & Eligibility
           </p>
-          <h2 className="font-serif text-3xl text-soft-black">
+          <h2 className="font-serif text-3xl md:text-4xl tracking-tight text-soft-black">
             See If Your Insurance Covers GLP-1 Medications
           </h2>
-          <p className="mt-4 text-neutral-500 leading-relaxed">
+          <p className="mt-6 text-neutral-500 leading-relaxed max-w-2xl mx-auto">
             While our program is cash-pay, many patients qualify for insurance
             coverage of GLP-1 medications. Use our free eligibility tool to
             check your coverage and estimate your potential results.
           </p>
           <Link
             href="/eligibility"
-            className="inline-block mt-8 bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-colors"
+            className="inline-block mt-10 bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
           >
             Check Your Eligibility
           </Link>
@@ -266,18 +275,18 @@ export default function Home() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 bg-soft-black text-center">
+      <section className="py-32 bg-soft-black text-center">
         <div className="max-w-2xl mx-auto px-6">
-          <h2 className="font-serif text-4xl text-white">
+          <h2 className="font-serif text-4xl md:text-5xl tracking-tight text-white">
             Ready to Transform Your Health?
           </h2>
-          <p className="mt-4 text-neutral-400 leading-relaxed">
+          <p className="mt-6 text-neutral-400 leading-relaxed">
             Schedule a consultation with Dr. Rhee and take the first step toward
             lasting, medically supported weight loss.
           </p>
           <Link
             href="/contact"
-            className="inline-block mt-8 bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-10 py-4 rounded-full transition-colors"
+            className="inline-block mt-10 bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-10 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
           >
             Book Your Consultation
           </Link>
