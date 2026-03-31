@@ -9,56 +9,43 @@ export const metadata: Metadata = {
 
 const tiers = [
   {
-    name: "Initial Consultation",
-    price: "[TBD]",
-    period: "one-time",
+    name: "Essential",
+    price: "$199",
+    period: "per month",
     features: [
-      "Comprehensive health assessment",
-      "BMI and body composition analysis",
-      "Lab review and medication evaluation",
-      "Personalized treatment plan",
-      "Insurance coverage guidance",
+      "1 follow-up visit per month (in-person or virtual, 15–20 min)",
+      "Medication management and prescriptions",
+      "Prior authorization support",
+      "Secure messaging (48-hour response)",
+      "Baseline + quarterly labs",
+      "Body composition tracking",
     ],
     highlighted: false,
   },
   {
-    name: "Monthly Membership",
-    price: "[TBD]",
+    name: "Premium",
+    price: "$349",
     period: "per month",
     features: [
-      "Monthly physician check-in",
-      "Prescription management",
-      "Dose adjustments as needed",
-      "Nutritional guidance",
-      "Direct access to care team",
-      "Lab monitoring",
+      "2 follow-up visits per month",
+      "Monthly B12 injection (in-office)",
+      "Nutritional counseling resources",
+      "Same-day secure messaging (24-hour response)",
+      "Quarterly body composition analysis",
     ],
     highlighted: true,
   },
   {
-    name: "3-Month Package",
-    price: "[TBD]",
-    period: "3 months",
+    name: "Concierge",
+    price: "$599",
+    period: "per month",
     features: [
-      "Everything in Monthly Membership",
-      "Discounted rate",
-      "Priority scheduling",
-      "Extended consultations",
-      "Progress tracking & reporting",
-    ],
-    highlighted: false,
-  },
-  {
-    name: "6-Month Package",
-    price: "[TBD]",
-    period: "6 months",
-    features: [
-      "Everything in Monthly Membership",
-      "Best value — significant savings",
-      "Priority scheduling",
-      "Extended consultations",
-      "Comprehensive progress reports",
-      "Maintenance planning included",
+      "Unlimited virtual check-ins",
+      "Weekly B12 or lipotropic injection",
+      "Priority scheduling (same-week guaranteed)",
+      "Direct access to Dr. Rhee (within business hours)",
+      "Quarterly comprehensive lab panel included",
+      "20% discount on all add-on services",
     ],
     highlighted: false,
   },
@@ -105,21 +92,17 @@ export default function PricingPage() {
       {/* Pricing Tiers */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {tiers.map((tier) => (
               <div
                 key={tier.name}
-                className={`p-8 rounded-xl ${
+                className={`flex flex-col h-full p-8 rounded-xl ${
                   tier.highlighted
                     ? "bg-soft-black text-white ring-2 ring-gold"
                     : "bg-cream"
                 }`}
               >
-                <p
-                  className={`text-xs tracking-[0.2em] uppercase mb-2 ${
-                    tier.highlighted ? "text-gold" : "text-gold"
-                  }`}
-                >
+                <p className="text-xs tracking-[0.2em] uppercase mb-2 text-gold">
                   {tier.name}
                 </p>
                 <p
@@ -129,11 +112,7 @@ export default function PricingPage() {
                 >
                   {tier.price}
                 </p>
-                <p
-                  className={`text-sm mt-1 ${
-                    tier.highlighted ? "text-neutral-400" : "text-neutral-400"
-                  }`}
-                >
+                <p className="text-sm mt-1 text-neutral-400">
                   {tier.period}
                 </p>
                 <ul className="mt-6 space-y-3">
@@ -151,20 +130,25 @@ export default function PricingPage() {
                     </li>
                   ))}
                 </ul>
-                <Link
-                  href="/contact"
-                  className={`block text-center mt-8 text-sm tracking-wide uppercase px-6 py-3 rounded-full transition-colors ${
-                    tier.highlighted
-                      ? "bg-gold hover:bg-gold-dark text-white"
-                      : "border border-neutral-300 text-neutral-600 hover:border-gold hover:text-gold"
-                  }`}
-                >
-                  Get Started
-                </Link>
+                <div className="mt-auto pt-8">
+                  <Link
+                    href="/contact"
+                    className={`block text-center text-sm tracking-wide uppercase px-6 py-3 rounded-full transition-colors ${
+                      tier.highlighted
+                        ? "bg-gold hover:bg-gold-dark text-white"
+                        : "border border-neutral-300 text-neutral-600 hover:border-gold hover:text-gold"
+                    }`}
+                  >
+                    Get Started
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
-          <p className="text-center mt-8 text-sm text-neutral-400">
+          <p className="text-center mt-8 text-sm text-gold font-medium">
+            Founding member rate: First 20 patients receive 20% off for life.
+          </p>
+          <p className="text-center mt-3 text-sm text-neutral-400">
             Prices are subject to change. Contact us for the most current
             pricing information.
           </p>

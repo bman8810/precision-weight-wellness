@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -73,14 +74,15 @@ export default function AboutPage() {
       {/* Bio */}
       <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
-          {/* Photo placeholder */}
-          <div className="aspect-[3/4] rounded-[2rem] overflow-hidden bg-warm flex items-center justify-center shadow-[0_24px_48px_-16px_rgba(0,0,0,0.08)]">
-            <div className="text-center p-8">
-              <p className="font-serif text-5xl text-gold mb-4">Dr. Rhee</p>
-              <p className="text-sm tracking-[0.2em] uppercase text-neutral-400">
-                DO, MS, FAAD
-              </p>
-            </div>
+          {/* Photo */}
+          <div className="aspect-[3/4] rounded-[2rem] overflow-hidden bg-warm shadow-[0_24px_48px_-16px_rgba(0,0,0,0.08)] relative">
+            <Image
+              src="/images/dr-rhee.jpg"
+              alt="Dr. Libby Rhee, DO, MS, FAAD"
+              fill
+              className="object-cover"
+              priority
+            />
           </div>
 
           <div>

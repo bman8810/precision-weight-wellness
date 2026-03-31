@@ -21,10 +21,10 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex flex-col">
             <span className="font-serif text-xl tracking-wide text-soft-black">
-              PRECISION
+              LIORA
             </span>
             <span className="text-[10px] tracking-[0.3em] uppercase text-neutral-400">
-              Weight & Wellness
+              Precision Weight & Wellness
             </span>
           </Link>
 

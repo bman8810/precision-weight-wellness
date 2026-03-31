@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { blogPosts } from "./data";
 
@@ -37,10 +38,13 @@ export default function BlogPage() {
                 href={`/blog/${post.slug}`}
                 className="group bg-cream rounded-xl overflow-hidden hover:shadow-lg transition-shadow"
               >
-                <div className="aspect-video bg-warm flex items-center justify-center">
-                  <p className="text-neutral-400 text-xs tracking-wide uppercase">
-                    {post.category}
-                  </p>
+                <div className="aspect-video bg-warm relative overflow-hidden">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 <div className="p-8">
                   <p className="text-xs text-gold mb-2">{post.date}</p>
