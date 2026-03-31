@@ -451,7 +451,7 @@ export default function Home() {
             lasting, medically supported weight loss.
           </p>
           <Link
-            href="/contact"
+            href="/book"
             className="inline-block mt-10 bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-10 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
           >
             Book Your Consultation

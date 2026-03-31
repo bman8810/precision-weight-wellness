@@ -64,7 +64,7 @@ export default function Header() {
               212.433.4569
             </a>
             <Link
-              href="/contact"
+              href="/book"
               className="bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-6 py-3 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_4px_16px_-4px_rgba(201,169,110,0.4)]"
             >
               Book Now
@@ -122,7 +122,7 @@ export default function Header() {
               212.433.4569
             </a>
             <Link
-              href="/contact"
+              href="/book"
               className="block text-center bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-6 py-3 rounded-full mt-4 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
             >
               Book Now

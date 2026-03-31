@@ -181,14 +181,12 @@ export default function PricingPage() {
             through our Healthie patient portal. You&apos;ll receive access
             after your initial consultation.
           </p>
-          <a
-            href="https://app.gethealthie.com"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/book"
             className="inline-block mt-10 border border-neutral-300 text-neutral-600 hover:border-gold hover:text-gold text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px]"
           >
-            Visit Patient Portal
-          </a>
+            Book an Appointment
+          </Link>
         </div>
       </section>
 
@@ -234,7 +232,7 @@ export default function PricingPage() {
             Schedule a consultation to discuss which plan is right for you.
           </p>
           <Link
-            href="/contact"
+            href="/book"
             className="inline-block mt-10 bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-10 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
           >
             Book Your Consultation
