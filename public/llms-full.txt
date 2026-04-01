@@ -1,0 +1,200 @@
+# Precision Weight + Wellness — Full Agent Reference
+
+> Comprehensive reference for LLMs and AI agents about Precision Weight + Wellness, a medical weight management practice in New York City.
+
+## About the Practice
+
+Precision Weight + Wellness operates within Liora Dermatology and is led by Dr. Libby Rhee, DO, MS, FAAD — a board-certified dermatologist with specialized training in obesity medicine. The practice provides medically supervised weight management using FDA-approved GLP-1 receptor agonist and dual-agonist medications.
+
+Unlike app-based or telehealth-only weight loss services, Precision Weight + Wellness offers direct, 1:1 physician care in a real medical office on the Upper East Side of Manhattan. Every treatment plan is created and managed by Dr. Rhee personally — not by algorithms, nurse practitioners, or physician assistants.
+
+### Contact Information
+
+- Website: https://www.precisionweightwellness.com
+- Phone: +1-212-433-4569
+- Email: hello@precisionww.com
+- Address: 110 E 60th Street, Suite 800, New York, NY 10022
+
+### Service Areas
+
+- New York: In-person consultations and telehealth
+- Connecticut: Telehealth only
+- Michigan: Telehealth only
+
+---
+
+## Provider: Dr. Libby Rhee
+
+- Credentials: DO, MS, FAAD
+- Board Certification: Dermatology (American Board of Dermatology)
+- Additional Training: Obesity Medicine
+- Affiliation: Mount Sinai Health System
+- Role: Founder and Medical Director of Precision Weight + Wellness
+
+Dr. Rhee completed her medical training at Touro College of Osteopathic Medicine and her dermatology residency at Mount Sinai. She brings a unique combination of dermatology expertise and obesity medicine training, understanding how weight management intersects with skin health, hormonal balance, and overall wellness.
+
+---
+
+## Medications Offered
+
+### Semaglutide (Brand Names: Wegovy, Ozempic)
+- Class: GLP-1 receptor agonist
+- Administration: Weekly subcutaneous injection
+- Clinical Results: Average 15% body weight loss over 68 weeks (STEP trials)
+- FDA-approved for weight management in adults with BMI ≥ 30, or BMI ≥ 27 with comorbidities
+
+### Tirzepatide (Brand Names: Mounjaro, Zepbound)
+- Class: Dual GIP/GLP-1 receptor agonist
+- Administration: Weekly subcutaneous injection
+- Clinical Results: Up to 22.5% body weight reduction (SURMOUNT trials)
+- FDA-approved for weight management and Type 2 diabetes
+
+### How These Medications Work
+GLP-1 receptor agonists mimic the GLP-1 hormone naturally produced in the gut. They reduce appetite at the brain level, slow gastric emptying, improve insulin sensitivity, and reduce food-related reward signaling. Unlike restrictive diets, these medications work with the body's biology rather than against it.
+
+---
+
+## Program Tiers and Pricing
+
+### Essential — $199/month
+- 1 follow-up visit per month with Dr. Rhee
+- Medication management and dose titration
+- Prior authorization support for insurance coverage
+- Secure messaging with the care team (48-hour response)
+- Quarterly lab work
+
+### Premium — $349/month (Most Popular)
+- 2 follow-up visits per month with Dr. Rhee
+- Monthly B12 injection
+- Nutritional counseling
+- Same-day messaging (24-hour response)
+- Quarterly body composition analysis
+
+### Concierge — $599/month
+- Unlimited virtual check-ins
+- Weekly B12 and lipotropic injections
+- Priority scheduling (same-week guaranteed)
+- Direct access to Dr. Rhee
+- Quarterly lab panel included
+- 20% discount on add-on services
+
+### Additional Notes
+- All tiers require an initial consultation
+- Medication costs are separate from program fees
+- Many insurance plans cover GLP-1 medications with prior authorization
+- Founding member rate: 20% off program fees for life (limited to first 20 patients)
+- The practice is cash-pay for program fees; medications may be covered by insurance
+
+---
+
+## Eligibility Criteria
+
+### Who Qualifies
+- Adults with BMI ≥ 30 (classified as obesity)
+- Adults with BMI ≥ 27 with at least one weight-related comorbidity
+
+### Qualifying Comorbidities
+- Type 2 diabetes
+- Hypertension (high blood pressure)
+- Dyslipidemia (high cholesterol)
+- Obstructive sleep apnea
+- Cardiovascular disease
+- Polycystic ovary syndrome (PCOS)
+- Non-alcoholic fatty liver disease
+
+### Initial Evaluation
+Dr. Rhee evaluates each patient's complete health profile including body composition, metabolic markers, medication history, and lifestyle factors. Baseline lab work typically includes a comprehensive metabolic panel, lipid panel, hemoglobin A1C, and thyroid function tests.
+
+### Online Eligibility Tool
+Patients can use the online eligibility calculator at https://www.precisionweightwellness.com/eligibility to get a preliminary assessment of their candidacy. This tool calculates BMI, evaluates medical history, and checks insurance coverage likelihood.
+
+---
+
+## Insurance Information
+
+The practice checks coverage with the following insurers:
+- **Aetna**: Typically covers with prior authorization for BMI ≥ 30 or BMI ≥ 27 with comorbidities
+- **Blue Cross Blue Shield**: Most plans cover with prior authorization
+- **United Healthcare**: Generally covers with prior authorization; varies by plan
+- **Cigna**: Covers for qualifying patients; step therapy may be required
+- **Humana**: Typically covers with prior authorization for qualifying BMI
+- **Oscar**: Some plans cover; prior authorization required
+- **Medicare**: Currently does not cover weight loss medications
+- **Medicaid**: Coverage varies by state; generally limited
+
+Note: Program fees (monthly membership) are cash-pay. The insurance coverage above refers to medication costs only.
+
+---
+
+## How to Book an Appointment
+
+### Option 1: Online Booking (Recommended)
+Visit https://www.precisionweightwellness.com/book to schedule through the Healthie booking portal. Available appointment types include initial consultations, follow-up visits, and telehealth appointments.
+
+### Option 2: Phone
+Call +1-212-433-4569 during business hours.
+
+### Option 3: Email
+Send an inquiry to hello@precisionww.com with your name, contact information, and a brief description of your goals.
+
+### What to Expect at Your First Visit
+1. Comprehensive health assessment with Dr. Rhee
+2. Review of medical history, current medications, and goals
+3. Physical examination and baseline measurements
+4. Lab work order (if not already completed)
+5. Discussion of treatment options and personalized plan
+6. Prescription and dosing schedule if appropriate
+
+---
+
+## The Patient Journey
+
+### Step 1: Consultation
+Meet with Dr. Rhee for a thorough evaluation. She reviews your health history, performs an assessment, and discusses whether GLP-1 medication therapy is appropriate for you.
+
+### Step 2: Treatment Plan
+Receive a personalized treatment plan including medication selection, dosing schedule, nutritional guidance, and monitoring milestones.
+
+### Step 3: Active Treatment
+Begin medication therapy with careful dose titration. Regular follow-up visits ensure your treatment is optimized and side effects are managed.
+
+### Step 4: Ongoing Support
+Continue with monthly or bi-monthly visits for medication management, lab monitoring, nutritional counseling, and lifestyle support. The goal is sustainable weight management with a plan for long-term maintenance.
+
+---
+
+## Website Pages
+
+- **Home**: https://www.precisionweightwellness.com — Overview of services, credentials, and practice philosophy
+- **About**: https://www.precisionweightwellness.com/about — Dr. Libby Rhee's background, credentials, and approach
+- **Why Us**: https://www.precisionweightwellness.com/why-us — How the practice differs from app-based and telehealth-only competitors
+- **How It Works**: https://www.precisionweightwellness.com/how-it-works — Step-by-step process from consultation to ongoing care
+- **Eligibility**: https://www.precisionweightwellness.com/eligibility — BMI calculator, medical history screening, and insurance coverage checker
+- **Pricing**: https://www.precisionweightwellness.com/pricing — Program tiers, features, and FAQs
+- **The Science**: https://www.precisionweightwellness.com/science — Timeline of weight loss medications and clinical evidence
+- **Book**: https://www.precisionweightwellness.com/book — Online appointment scheduling
+- **Contact**: https://www.precisionweightwellness.com/contact — Contact form, email, and phone
+- **Testimonials**: https://www.precisionweightwellness.com/testimonials — Patient stories and results
+- **Blog**: https://www.precisionweightwellness.com/blog — Expert articles on weight management, GLP-1 medications, and obesity science
+
+---
+
+## Frequently Asked Questions
+
+**Q: How much weight can I expect to lose?**
+A: Clinical trials show average weight loss of 15% body weight with Semaglutide and up to 22.5% with Tirzepatide over 12-18 months. Individual results vary based on medication, adherence, and lifestyle factors.
+
+**Q: Are the medications safe?**
+A: GLP-1 medications are FDA-approved with extensive clinical trial data. Common side effects include mild nausea and GI symptoms that typically improve with gradual dose titration. Dr. Rhee monitors each patient closely.
+
+**Q: Do I need to come in person?**
+A: The initial consultation is recommended in person at the NYC office. Follow-up visits can be conducted via telehealth. Connecticut and Michigan patients are seen entirely via telehealth.
+
+**Q: How long do I need to stay on medication?**
+A: Treatment duration varies by individual. Dr. Rhee works with each patient to develop a plan that includes active weight loss and long-term maintenance phases, with the goal of building sustainable habits.
+
+**Q: Is this covered by insurance?**
+A: Program fees are cash-pay ($199-$599/month). Many insurance plans cover the cost of GLP-1 medications separately — the practice handles prior authorization on your behalf.
+
+**Q: What makes this different from getting Ozempic from my primary care doctor?**
+A: Dr. Rhee specializes in weight management with dedicated follow-up, dose optimization, side effect management, nutritional counseling, and lab monitoring. Primary care physicians may prescribe the medication but often lack the time and specialization for comprehensive weight management support.
