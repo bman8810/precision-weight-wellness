@@ -107,12 +107,12 @@ export default async function BlogPostPage({
             Ready to learn more?
           </h2>
           <p className="mt-4 text-neutral-500 leading-relaxed">
-            Schedule a consultation with Dr. Rhee to discuss how GLP-1 therapy
-            can help you achieve your weight management goals.
+            Schedule a consultation with Dr. Rhee to discuss how our medical
+            weight management program can help you achieve your goals.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link
-              href="/contact"
+              href="/book"
               className="bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
             >
               Book a Consultation

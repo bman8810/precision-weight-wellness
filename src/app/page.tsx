@@ -9,18 +9,18 @@ export const metadata: Metadata = {
 const steps = [
   {
     num: "01",
-    title: "Book a Consultation",
-    desc: "Meet with Dr. Rhee to discuss your health history, weight loss goals, and determine if GLP-1 therapy is right for you.",
+    title: "Initial Consultation",
+    desc: "Meet with Dr. Rhee for a comprehensive health assessment, lab review, and discussion of your weight loss goals and medication options.",
   },
   {
     num: "02",
     title: "Your Personalized Plan",
-    desc: "Receive a customized treatment protocol including medication selection, dosing schedule, nutrition guidance, and lifestyle support.",
+    desc: "Receive a customized treatment protocol — medication selection, dosing schedule, nutritional guidance, and lifestyle support — all designed for your unique biology.",
   },
   {
     num: "03",
-    title: "Ongoing Support",
-    desc: "Regular check-ins, dose adjustments, and continuous monitoring to ensure safe, effective, and lasting results.",
+    title: "Treatment & Ongoing Support",
+    desc: "Begin your medication with careful dose titration, regular physician check-ins, lab monitoring, and continuous support throughout your journey.",
   },
 ];
 
@@ -31,11 +31,11 @@ const reasons = [
   },
   {
     title: "Science-Based Approach",
-    desc: "We use FDA-approved GLP-1 medications — Semaglutide and Tirzepatide — backed by robust clinical evidence for safe, significant weight loss.",
+    desc: "We use FDA-approved weight loss medications — including GLP-1 receptor agonists and dual agonists — backed by robust clinical evidence for safe, significant weight loss.",
   },
   {
-    title: "Premium NYC Location",
-    desc: "Located on the Upper East Side at 110 E 60th Street, our practice offers a comfortable, private setting for your care.",
+    title: "Multiple Locations",
+    desc: "We practice in New York, Connecticut, and Michigan — in-person and via telehealth.",
   },
   {
     title: "Personalized Care",
@@ -146,18 +146,16 @@ export default function Home() {
               Expert Care You Can Trust
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {reasons.map((r, i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {reasons.map((r) => (
               <div
                 key={r.title}
-                className={`bg-cream p-10 rounded-2xl transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-2px] hover:shadow-[0_16px_40px_-12px_rgba(201,169,110,0.08)] ${
-                  i === 0 ? "md:row-span-2 flex flex-col justify-center" : ""
-                }`}
+                className="bg-cream p-10 rounded-2xl transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-2px] hover:shadow-[0_16px_40px_-12px_rgba(201,169,110,0.08)]"
               >
-                <h3 className={`font-serif text-soft-black ${i === 0 ? "text-2xl" : "text-xl"}`}>
+                <h3 className="font-serif text-xl text-soft-black">
                   {r.title}
                 </h3>
-                <p className={`mt-4 text-neutral-500 leading-relaxed ${i === 0 ? "text-base" : "text-sm"}`}>
+                <p className="mt-4 text-sm text-neutral-500 leading-relaxed">
                   {r.desc}
                 </p>
               </div>
@@ -219,6 +217,111 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Where We Practice — map */}
+      <section className="py-32 bg-soft-black overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div>
+              <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-6">
+                Multi-state practice
+              </p>
+              <h2
+                className="font-serif text-4xl md:text-5xl tracking-tight text-white"
+                style={{ textWrap: "balance" }}
+              >
+                Where we practice
+              </h2>
+              <p className="mt-6 text-neutral-400 leading-relaxed max-w-lg">
+                Dr. Rhee is licensed to provide medical weight management
+                across three states — with in-person visits and telehealth
+                available for qualifying patients.
+              </p>
+            </div>
+
+            {/* Minimal geographic map */}
+            <div className="relative">
+              <svg
+                viewBox="0 0 480 340"
+                fill="none"
+                className="w-full max-w-md mx-auto"
+                role="img"
+                aria-label="Map showing practice locations in New York, Connecticut, and Michigan"
+              >
+                {/* Grid lines */}
+                <line x1="0" y1="85" x2="480" y2="85" stroke="#2d2d2d" strokeWidth="0.5" strokeDasharray="4 8" />
+                <line x1="0" y1="170" x2="480" y2="170" stroke="#2d2d2d" strokeWidth="0.5" strokeDasharray="4 8" />
+                <line x1="0" y1="255" x2="480" y2="255" stroke="#2d2d2d" strokeWidth="0.5" strokeDasharray="4 8" />
+                <line x1="120" y1="0" x2="120" y2="340" stroke="#2d2d2d" strokeWidth="0.5" strokeDasharray="4 8" />
+                <line x1="240" y1="0" x2="240" y2="340" stroke="#2d2d2d" strokeWidth="0.5" strokeDasharray="4 8" />
+                <line x1="360" y1="0" x2="360" y2="340" stroke="#2d2d2d" strokeWidth="0.5" strokeDasharray="4 8" />
+
+                {/* Connecting arcs */}
+                <path d="M 145 140 Q 270 80 370 155" stroke="#c9a96e" strokeWidth="1" opacity="0.15" />
+                <path d="M 370 155 L 395 105" stroke="#c9a96e" strokeWidth="1" opacity="0.15" />
+
+                {/* Michigan */}
+                <circle cx="145" cy="140" r="28" fill="#c9a96e" opacity="0.06" />
+                <circle cx="145" cy="140" r="14" fill="#c9a96e" opacity="0.12" />
+                <circle cx="145" cy="140" r="5.5" fill="#c9a96e" />
+                <text x="145" y="188" textAnchor="middle" fill="#c9a96e" fontSize="12" letterSpacing="0.12em" className="font-sans">MI</text>
+                <text x="145" y="206" textAnchor="middle" fill="#555" fontSize="9" className="font-sans">Michigan</text>
+
+                {/* Connecticut — above New York */}
+                <circle cx="395" cy="105" r="22" fill="#c9a96e" opacity="0.06" />
+                <circle cx="395" cy="105" r="11" fill="#c9a96e" opacity="0.12" />
+                <circle cx="395" cy="105" r="4.5" fill="#c9a96e" />
+                <text x="430" y="100" textAnchor="start" fill="#c9a96e" fontSize="12" letterSpacing="0.12em" className="font-sans">CT</text>
+                <text x="430" y="116" textAnchor="start" fill="#555" fontSize="9" className="font-sans">Connecticut</text>
+
+                {/* New York — primary, largest marker */}
+                <circle cx="370" cy="155" r="38" fill="#c9a96e" opacity="0.06" />
+                <circle cx="370" cy="155" r="20" fill="#c9a96e" opacity="0.12" />
+                <circle cx="370" cy="155" r="8" fill="#c9a96e" />
+                <text x="370" y="210" textAnchor="middle" fill="#c9a96e" fontSize="14" fontWeight="500" letterSpacing="0.12em" className="font-sans">NY</text>
+                <text x="370" y="227" textAnchor="middle" fill="#555" fontSize="9" className="font-sans">New York</text>
+              </svg>
+            </div>
+          </div>
+
+          {/* Location detail cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20">
+            <div className="border border-neutral-800 rounded-2xl p-8 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-gold/30">
+              <p className="text-[11px] tracking-[0.2em] uppercase text-gold mb-3">
+                New York
+              </p>
+              <p className="font-serif text-xl text-white">
+                In-person + telehealth
+              </p>
+              <p className="mt-4 text-sm text-neutral-400">
+                New York City &amp; Middletown, NY
+              </p>
+            </div>
+            <div className="border border-neutral-800 rounded-2xl p-8 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-gold/30">
+              <p className="text-[11px] tracking-[0.2em] uppercase text-gold mb-3">
+                Connecticut
+              </p>
+              <p className="font-serif text-xl text-white">Telehealth</p>
+              <p className="mt-2 text-sm text-neutral-500">In-person coming soon</p>
+              <p className="mt-4 text-sm text-neutral-400">
+                Virtual consultations available for qualifying patients
+                statewide.
+              </p>
+            </div>
+            <div className="border border-neutral-800 rounded-2xl p-8 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-gold/30">
+              <p className="text-[11px] tracking-[0.2em] uppercase text-gold mb-3">
+                Michigan
+              </p>
+              <p className="font-serif text-xl text-white">Telehealth</p>
+              <p className="mt-2 text-sm text-neutral-500">In-person coming soon</p>
+              <p className="mt-4 text-sm text-neutral-400">
+                Virtual consultations available for qualifying patients
+                statewide.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Results / Testimonials Teaser — featured layout */}
       <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
@@ -251,11 +354,8 @@ export default function Home() {
               </p>
               <div className="mt-8">
                 <p className="font-medium text-soft-black">Sarah M.</p>
-                <p className="text-xs text-neutral-400 mt-1">New York, NY</p>
+                <p className="text-xs text-neutral-400 mt-1">Middletown, NY</p>
               </div>
-              <p className="mt-3 text-[10px] tracking-wide uppercase text-neutral-300">
-                Placeholder testimonial
-              </p>
             </div>
             {/* Supporting testimonials */}
             {[
@@ -263,13 +363,13 @@ export default function Home() {
                 quote:
                   "Dr. Rhee took the time to understand my health history and created a plan that actually works. The support has been incredible.",
                 name: "James R.",
-                city: "New York, NY",
+                city: "New Milford, CT",
               },
               {
                 quote:
                   "I was skeptical about weight loss medications, but the science-based approach here convinced me. Down 30 pounds in 4 months.",
                 name: "Michelle K.",
-                city: "New York, NY",
+                city: "Grand Rapids, MI",
               },
             ].map((t, i) => (
               <div
@@ -290,9 +390,6 @@ export default function Home() {
                   </p>
                   <p className="text-xs text-neutral-400">{t.city}</p>
                 </div>
-                <p className="mt-2 text-[10px] tracking-wide uppercase text-neutral-300">
-                  Placeholder testimonial
-                </p>
               </div>
             ))}
           </div>
@@ -312,7 +409,7 @@ export default function Home() {
         <div className="absolute top-1/2 right-0 translate-x-1/3 -translate-y-1/2 w-[500px] h-[500px] bg-gold/5 rounded-full blur-3xl pointer-events-none" />
         <div className="relative max-w-4xl mx-auto px-6 text-center">
           <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
-            Insurance & eligibility
+            Insurance &amp; eligibility
           </p>
           <h2
             className="font-serif text-3xl md:text-4xl tracking-tight text-soft-black"
@@ -334,118 +431,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Where We Practice — map */}
-      <section className="py-32 bg-soft-black overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div>
-              <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-6">
-                Multi-state practice
-              </p>
-              <h2
-                className="font-serif text-4xl md:text-5xl tracking-tight text-white"
-                style={{ textWrap: "balance" }}
-              >
-                Where we practice
-              </h2>
-              <p className="mt-6 text-neutral-400 leading-relaxed max-w-lg">
-                Dr. Rhee is licensed to provide medical weight management
-                across three states — with in-person visits at our Upper East
-                Side office and telehealth available for qualifying patients.
-              </p>
-            </div>
-
-            {/* Minimal geographic map */}
-            <div className="relative">
-              <svg
-                viewBox="0 0 480 340"
-                fill="none"
-                className="w-full max-w-md mx-auto"
-                role="img"
-                aria-label="Map showing practice locations in New York, Connecticut, and Michigan"
-              >
-                {/* Grid lines */}
-                <line x1="0" y1="85" x2="480" y2="85" stroke="#2d2d2d" strokeWidth="0.5" strokeDasharray="4 8" />
-                <line x1="0" y1="170" x2="480" y2="170" stroke="#2d2d2d" strokeWidth="0.5" strokeDasharray="4 8" />
-                <line x1="0" y1="255" x2="480" y2="255" stroke="#2d2d2d" strokeWidth="0.5" strokeDasharray="4 8" />
-                <line x1="120" y1="0" x2="120" y2="340" stroke="#2d2d2d" strokeWidth="0.5" strokeDasharray="4 8" />
-                <line x1="240" y1="0" x2="240" y2="340" stroke="#2d2d2d" strokeWidth="0.5" strokeDasharray="4 8" />
-                <line x1="360" y1="0" x2="360" y2="340" stroke="#2d2d2d" strokeWidth="0.5" strokeDasharray="4 8" />
-
-                {/* Connecting arcs */}
-                <path d="M 145 140 Q 270 90 370 115" stroke="#c9a96e" strokeWidth="1" opacity="0.15" />
-                <path d="M 370 115 L 395 160" stroke="#c9a96e" strokeWidth="1" opacity="0.15" />
-
-                {/* Michigan */}
-                <circle cx="145" cy="140" r="28" fill="#c9a96e" opacity="0.06" />
-                <circle cx="145" cy="140" r="14" fill="#c9a96e" opacity="0.12" />
-                <circle cx="145" cy="140" r="5.5" fill="#c9a96e" />
-                <text x="145" y="188" textAnchor="middle" fill="#c9a96e" fontSize="12" letterSpacing="0.12em" className="font-sans">MI</text>
-                <text x="145" y="206" textAnchor="middle" fill="#555" fontSize="9" className="font-sans">Michigan</text>
-
-                {/* New York — primary, largest marker */}
-                <circle cx="370" cy="115" r="38" fill="#c9a96e" opacity="0.06" />
-                <circle cx="370" cy="115" r="20" fill="#c9a96e" opacity="0.12" />
-                <circle cx="370" cy="115" r="8" fill="#c9a96e" />
-                <text x="370" y="78" textAnchor="middle" fill="#c9a96e" fontSize="14" fontWeight="500" letterSpacing="0.12em" className="font-sans">NY</text>
-                <text x="370" y="95" textAnchor="middle" fill="#555" fontSize="9" className="font-sans">New York</text>
-
-                {/* Connecticut */}
-                <circle cx="395" cy="162" r="22" fill="#c9a96e" opacity="0.06" />
-                <circle cx="395" cy="162" r="11" fill="#c9a96e" opacity="0.12" />
-                <circle cx="395" cy="162" r="4.5" fill="#c9a96e" />
-                <text x="430" y="157" textAnchor="start" fill="#c9a96e" fontSize="12" letterSpacing="0.12em" className="font-sans">CT</text>
-                <text x="430" y="173" textAnchor="start" fill="#555" fontSize="9" className="font-sans">Connecticut</text>
-              </svg>
-            </div>
-          </div>
-
-          {/* Location detail cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20">
-            <div className="border border-neutral-800 rounded-2xl p-8 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-gold/30">
-              <p className="text-[11px] tracking-[0.2em] uppercase text-gold mb-3">
-                New York
-              </p>
-              <p className="font-serif text-xl text-white">
-                In-person + telehealth
-              </p>
-              <address className="mt-4 space-y-1.5 text-sm text-neutral-400 not-italic">
-                <p>110 E 60th Street, Suite 800</p>
-                <p>New York, NY 10022</p>
-                <a
-                  href="tel:+12124334569"
-                  className="block mt-2 text-gold hover:text-gold-dark transition-colors"
-                >
-                  212.433.4569
-                </a>
-              </address>
-            </div>
-            <div className="border border-neutral-800 rounded-2xl p-8 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-gold/30">
-              <p className="text-[11px] tracking-[0.2em] uppercase text-gold mb-3">
-                Connecticut
-              </p>
-              <p className="font-serif text-xl text-white">Telehealth</p>
-              <p className="mt-4 text-sm text-neutral-400">
-                Virtual consultations available for qualifying patients
-                statewide.
-              </p>
-            </div>
-            <div className="border border-neutral-800 rounded-2xl p-8 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-gold/30">
-              <p className="text-[11px] tracking-[0.2em] uppercase text-gold mb-3">
-                Michigan
-              </p>
-              <p className="font-serif text-xl text-white">Telehealth</p>
-              <p className="mt-4 text-sm text-neutral-400">
-                Virtual consultations available for qualifying patients
-                statewide.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Final CTA */}
-      <section className="relative py-32 bg-cream text-center overflow-hidden">
+      <section className="relative py-32 bg-white text-center overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/5 rounded-full blur-3xl pointer-events-none" />
         <div className="relative max-w-2xl mx-auto px-6">
           <h2

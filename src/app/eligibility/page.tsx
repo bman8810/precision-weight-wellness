@@ -136,7 +136,7 @@ export default function EligibilityPage() {
           </h1>
           <p className="mt-8 text-lg text-neutral-500 max-w-2xl mx-auto leading-relaxed">
             Answer a few quick questions to see if you may be a candidate for
-            GLP-1 weight management and check your insurance coverage.
+            medical weight management and check your insurance coverage.
           </p>
         </div>
       </section>
@@ -268,7 +268,7 @@ export default function EligibilityPage() {
               </h2>
               <p className="text-sm text-neutral-500 mb-10">
                 Select any conditions that apply to you. This helps determine
-                your eligibility for GLP-1 medications.
+                your eligibility for weight loss medications.
               </p>
 
               <div className="space-y-3">
@@ -326,7 +326,7 @@ export default function EligibilityPage() {
                 Insurance Check
               </h2>
               <p className="text-sm text-neutral-500 mb-10">
-                Select your insurance provider to check typical GLP-1
+                Select your insurance provider to check typical weight loss
                 medication coverage.
               </p>
 
@@ -407,7 +407,7 @@ export default function EligibilityPage() {
               </h2>
               <p className="text-sm text-neutral-500 mb-10">
                 Based on your profile and clinical trial data, here&apos;s what
-                you might expect with GLP-1 therapy.
+                you might expect with our weight loss medication program.
               </p>
 
               <div className="bg-cream p-10 rounded-2xl text-center space-y-8">
@@ -425,7 +425,7 @@ export default function EligibilityPage() {
                     Estimated Weight Loss in 12 Months
                   </p>
                   <p className="font-serif text-5xl text-gold tabular-nums">
-                    {estimatedLoss.low} \u2013 {estimatedLoss.high} lbs
+                    {estimatedLoss.low} – {estimatedLoss.high} lbs
                   </p>
                 </div>
 
@@ -434,7 +434,7 @@ export default function EligibilityPage() {
                     Projected Weight
                   </p>
                   <p className="font-serif text-3xl text-soft-black tabular-nums">
-                    {Math.round(parseFloat(weight) - estimatedLoss.low)} \u2013{" "}
+                    {Math.round(parseFloat(weight) - estimatedLoss.low)} –{" "}
                     {Math.round(parseFloat(weight) - estimatedLoss.high)} lbs
                   </p>
                 </div>
@@ -449,12 +449,12 @@ export default function EligibilityPage() {
               {qualifiesByBMI && (
                 <div className="mt-8 p-8 rounded-2xl bg-green-50 border border-green-200">
                   <p className="text-sm font-medium text-green-800">
-                    You may be a great candidate for GLP-1 therapy
+                    You may be a great candidate for our weight loss medication program
                   </p>
                   <p className="text-sm mt-3 text-green-700 leading-relaxed">
                     Based on your BMI
                     {hasComorbidity ? " and health history" : ""}, you meet the
-                    general criteria for GLP-1 medication therapy. A
+                    general criteria for weight loss medication therapy. A
                     consultation with Dr. Rhee will confirm your eligibility.
                   </p>
                 </div>
@@ -466,9 +466,11 @@ export default function EligibilityPage() {
                     Let&apos;s discuss your options
                   </p>
                   <p className="text-sm mt-3 text-amber-700 leading-relaxed">
-                    Based on your current BMI, standard GLP-1 eligibility
-                    criteria may not apply. However, Dr. Rhee can evaluate your
-                    individual situation during a consultation.
+                    Based on your current BMI, standard medication eligibility
+                    criteria may not apply. However, we can still work with you
+                    to find affordable medication options and create a wellness
+                    plan. Book a consultation with Dr. Rhee to explore your
+                    options.
                   </p>
                 </div>
               )}
@@ -501,7 +503,7 @@ export default function EligibilityPage() {
               </h2>
               <p className="text-neutral-500 leading-relaxed max-w-lg mx-auto">
                 {qualifiesByBMI
-                  ? "Based on your responses, you may be an excellent candidate for our GLP-1 weight management program. Book a consultation with Dr. Rhee to get started."
+                  ? "Based on your responses, you may be an excellent candidate for our weight management program. Book a consultation with Dr. Rhee to get started."
                   : "Schedule a consultation with Dr. Rhee to discuss your weight management goals and explore your options."}
               </p>
 
@@ -537,14 +539,14 @@ export default function EligibilityPage() {
                     Estimated 12-Month Loss
                   </p>
                   <p className="font-serif text-3xl text-gold tabular-nums">
-                    {estimatedLoss.low} \u2013 {estimatedLoss.high} lbs
+                    {estimatedLoss.low} – {estimatedLoss.high} lbs
                   </p>
                 </div>
               </div>
 
               <div className="mt-10 space-y-4">
                 <Link
-                  href="/contact"
+                  href="/book"
                   className="block bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
                 >
                   Book Your Consultation

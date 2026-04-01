@@ -10,6 +10,8 @@ const navLinks = [
   { label: "How It Works", href: "/how-it-works" },
   { label: "Eligibility Check", href: "/eligibility" },
   { label: "Pricing", href: "/pricing" },
+  { label: "The Science", href: "/science" },
+  { label: "The Science", href: "/science" },
   { label: "Blog", href: "/blog" },
 ];
 
@@ -56,14 +58,8 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* CTA + Phone */}
+          {/* CTA */}
           <div className="hidden lg:flex items-center gap-6">
-            <a
-              href="tel:+12124334569"
-              className="text-sm text-neutral-500 hover:text-soft-black transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
-            >
-              212.433.4569
-            </a>
             <Link
               href="/book"
               className="bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-6 py-3 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_4px_16px_-4px_rgba(201,169,110,0.4)]"
@@ -116,12 +112,6 @@ export default function Header() {
               </Link>
             ))}
             <hr className="border-neutral-100" />
-            <a
-              href="tel:+12124334569"
-              className="block text-sm text-neutral-500 py-1.5"
-            >
-              212.433.4569
-            </a>
             <Link
               href="/book"
               className="block text-center bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-6 py-3 rounded-full mt-4 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"

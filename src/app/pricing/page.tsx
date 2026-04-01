@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Pricing & Packages",
   description:
-    "Explore our medical weight management pricing and packages. Cash-pay programs with flexible options for GLP-1 therapy.",
+    "Explore our medical weight management pricing and packages. Cash-pay programs with flexible options for weight loss medication therapy.",
 };
 
 const tiers = [
@@ -13,7 +13,8 @@ const tiers = [
     price: "$199",
     period: "per month",
     features: [
-      "1 follow-up visit per month (in-person or virtual, 15–20 min)",
+      "Initial consultation included",
+      "1 follow-up visit per month (in-person or virtual, 15\u201320 min)",
       "Medication management and prescriptions",
       "Prior authorization support",
       "Secure messaging (48-hour response)",
@@ -27,6 +28,7 @@ const tiers = [
     price: "$349",
     period: "per month",
     features: [
+      "Initial consultation included",
       "2 follow-up visits per month",
       "Monthly B12 injection (in-office)",
       "Nutritional counseling resources",
@@ -40,6 +42,7 @@ const tiers = [
     price: "$599",
     period: "per month",
     features: [
+      "Initial consultation included",
       "Unlimited virtual check-ins",
       "Weekly B12 or lipotropic injection",
       "Priority scheduling (same-week guaranteed)",
@@ -105,7 +108,7 @@ export default function PricingPage() {
 
       <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {tiers.map((tier) => (
               <div
                 key={tier.name}
@@ -144,7 +147,7 @@ export default function PricingPage() {
                   ))}
                 </ul>
                 <Link
-                  href="/contact"
+                  href="/book"
                   className={`block text-center mt-10 text-sm tracking-wide uppercase px-6 py-3 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     tier.highlighted
                       ? "bg-gold hover:bg-gold-dark text-white hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"

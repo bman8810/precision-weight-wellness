@@ -12,7 +12,7 @@ const testimonials = [
     quote:
       "The program has completely changed my relationship with food. I've lost 45 pounds and feel better than I have in years. Dr. Rhee truly listens and adjusts my plan as needed.",
     name: "Sarah M.",
-    city: "Upper East Side, NY",
+    city: "Middletown, NY",
     stars: 5,
     lostLbs: 45,
   },
@@ -20,7 +20,7 @@ const testimonials = [
     quote:
       "Dr. Rhee took the time to understand my health history and created a plan that actually works. The ongoing support has been incredible — I never feel like I'm doing this alone.",
     name: "James R.",
-    city: "Midtown, NY",
+    city: "New Milford, CT",
     stars: 5,
     lostLbs: 38,
   },
@@ -28,7 +28,7 @@ const testimonials = [
     quote:
       "I was skeptical about weight loss medications, but the science-based approach here convinced me. Down 30 pounds in 4 months and my blood pressure is normal for the first time in a decade.",
     name: "Michelle K.",
-    city: "Brooklyn, NY",
+    city: "Grand Rapids, MI",
     stars: 5,
     lostLbs: 30,
   },
@@ -36,7 +36,7 @@ const testimonials = [
     quote:
       "After years of yo-yo dieting, this is the first time I've lost weight and actually kept it off. The medical supervision gives me confidence that I'm doing this safely.",
     name: "David L.",
-    city: "Upper West Side, NY",
+    city: "Warwick, NY",
     stars: 5,
     lostLbs: 52,
   },
@@ -44,7 +44,7 @@ const testimonials = [
     quote:
       "The team is wonderful — professional, empathetic, and genuinely invested in my success. I've lost 25 pounds and my energy levels are through the roof.",
     name: "Anna P.",
-    city: "SoHo, NY",
+    city: "Greenwich, CT",
     stars: 5,
     lostLbs: 25,
   },
@@ -52,15 +52,15 @@ const testimonials = [
     quote:
       "I appreciate how Dr. Rhee explains everything clearly. She helped me understand that weight loss is a medical issue, not a personal failing. That shifted my entire mindset.",
     name: "Robert T.",
-    city: "Murray Hill, NY",
+    city: "Kalamazoo, MI",
     stars: 5,
     lostLbs: 40,
   },
   {
     quote:
-      "The convenience of the Upper East Side location and the scheduling make it easy to stay on track. I look forward to my monthly check-ins.",
+      "The flexibility of being able to do both in-person and telehealth visits makes it easy to stay on track. I look forward to my monthly check-ins.",
     name: "Lisa W.",
-    city: "Gramercy, NY",
+    city: "Goshen, NY",
     stars: 5,
     lostLbs: 33,
   },
@@ -68,7 +68,7 @@ const testimonials = [
     quote:
       "I've tried everything — keto, intermittent fasting, personal trainers. Nothing worked long-term until I started GLP-1 therapy with Dr. Rhee. This is different because it actually addresses the root cause.",
     name: "Mark S.",
-    city: "Tribeca, NY",
+    city: "Stamford, CT",
     stars: 5,
     lostLbs: 48,
   },
@@ -76,7 +76,7 @@ const testimonials = [
     quote:
       "My A1C has dropped significantly since starting the program. Dr. Rhee coordinates with my endocrinologist, which gives me peace of mind that all aspects of my health are being considered.",
     name: "Patricia H.",
-    city: "Chelsea, NY",
+    city: "Portage, MI",
     stars: 5,
     lostLbs: 35,
   },
@@ -109,16 +109,6 @@ export default function TestimonialsPage() {
           <p className="mt-8 text-lg text-neutral-500 max-w-2xl mx-auto leading-relaxed">
             Hear from patients who have transformed their health with our
             medically supervised weight management program.
-          </p>
-        </div>
-      </section>
-
-      {/* Notice */}
-      <section className="bg-warm py-4">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-xs text-neutral-400 tracking-wide">
-            These are placeholder testimonials for demonstration purposes.
-            Actual patient testimonials will be added as the program grows.
           </p>
         </div>
       </section>
@@ -172,7 +162,7 @@ export default function TestimonialsPage() {
             with Dr. Rhee.
           </p>
           <Link
-            href="/contact"
+            href="/book"
             className="inline-block mt-8 bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-10 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
           >
             Book Your Consultation

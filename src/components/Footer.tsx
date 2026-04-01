@@ -12,8 +12,8 @@ export default function Footer() {
               Precision Weight + Wellness
             </p>
             <p className="text-sm text-neutral-400 mt-6 leading-relaxed max-w-xs">
-              Medically supervised weight management at Liora. Science-based
-              GLP-1 programs led by Dr. Libby Rhee.
+              Medically supervised weight management at Liora. Science-based,
+              medication-enabled programs led by Dr. Libby Rhee.
             </p>
           </div>
 
@@ -29,6 +29,7 @@ export default function Footer() {
                 { label: "How It Works", href: "/how-it-works" },
                 { label: "Eligibility Check", href: "/eligibility" },
                 { label: "Pricing", href: "/pricing" },
+                { label: "The Science", href: "/science" },
                 { label: "Blog", href: "/blog" },
                 { label: "Testimonials", href: "/testimonials" },
               ].map((s) => (
@@ -48,60 +49,28 @@ export default function Footer() {
             <p className="text-[11px] tracking-[0.2em] uppercase text-gold mb-5">
               Contact
             </p>
-            <address className="space-y-3 text-sm text-neutral-400 not-italic">
-              <p>110 E 60th Street, Suite 800</p>
-              <p>New York, NY 10022</p>
+            <div className="space-y-3 text-sm text-neutral-400">
               <a
-                href="tel:+12124334569"
+                href="mailto:hello@precisionww.com"
                 className="block hover:text-white transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
               >
-                212.433.4569
+                hello@precisionww.com
               </a>
-              <a
-                href="mailto:hello@lioradermatology.com"
-                className="block hover:text-white transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
-              >
-                hello@lioradermatology.com
-              </a>
-            </address>
+            </div>
           </div>
         </div>
 
-        {/* Disclaimer */}
-        <div className="border-t border-neutral-800 mt-16 pt-10">
-          <p className="text-xs text-neutral-500 leading-relaxed max-w-3xl">
-            This program is not a substitute for emergency medical care.
-            Results vary by individual. GLP-1 medications require a
-            prescription and medical supervision. All treatments are provided
-            under the care of a licensed physician.
-          </p>
-        </div>
-
-        <div className="border-t border-neutral-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        {/* Bottom bar */}
+        <div className="border-t border-neutral-800 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-neutral-500">
             &copy; {new Date().getFullYear()} Precision Weight + Wellness at
             Liora. All rights reserved.
           </p>
-          <div className="flex gap-6">
-            <Link
-              href="/contact"
-              className="text-xs text-neutral-500 hover:text-white transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
-            >
-              Contact
-            </Link>
-            <Link
-              href="/privacy"
-              className="text-xs text-neutral-500 hover:text-white transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
-            >
-              Privacy policy
-            </Link>
-            <Link
-              href="/terms"
-              className="text-xs text-neutral-500 hover:text-white transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
-            >
-              Terms of service
-            </Link>
-          </div>
+          <p className="text-xs text-neutral-500 max-w-2xl text-center md:text-right leading-relaxed">
+            This program is not a substitute for emergency medical care.
+            Results vary by individual. All treatments are provided under the
+            care of a licensed physician.
+          </p>
         </div>
       </div>
     </footer>
