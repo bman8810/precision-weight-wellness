@@ -65,7 +65,7 @@ const faqs = [
   },
   {
     q: "Do you accept insurance?",
-    a: "Our program is cash-pay, but many insurers cover GLP-1 medications with prior authorization. We'll help you check your coverage and navigate the approval process.",
+    a: "Our program is cash-pay, but many insurers cover weight loss medications with prior authorization. We'll help you check your coverage and navigate the approval process.",
   },
   {
     q: "Can I cancel or switch plans?",

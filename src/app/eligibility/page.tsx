@@ -6,35 +6,35 @@ import { useState } from "react";
 const insurers: Record<string, { covered: boolean; note: string }> = {
   Aetna: {
     covered: true,
-    note: "Aetna typically covers GLP-1 medications with prior authorization for BMI \u226530 or BMI \u226527 with comorbidities.",
+    note: "Aetna typically covers weight loss medications with prior authorization for BMI \u226530 or BMI \u226527 with comorbidities.",
   },
   "Blue Cross Blue Shield": {
     covered: true,
-    note: "Most BCBS plans cover GLP-1 medications with prior authorization for qualifying BMI and comorbidity criteria.",
+    note: "Most BCBS plans cover weight loss medications with prior authorization for qualifying BMI and comorbidity criteria.",
   },
   "United Healthcare": {
     covered: true,
-    note: "United Healthcare generally covers GLP-1 medications with prior authorization. Coverage varies by specific plan.",
+    note: "United Healthcare generally covers weight loss medications with prior authorization. Coverage varies by specific plan.",
   },
   Cigna: {
     covered: true,
-    note: "Cigna covers GLP-1 medications for qualifying patients with prior authorization. Step therapy may be required.",
+    note: "Cigna covers weight loss medications for qualifying patients with prior authorization. Step therapy may be required.",
   },
   Humana: {
     covered: true,
-    note: "Humana plans typically cover GLP-1 medications with prior authorization for patients meeting BMI criteria.",
+    note: "Humana plans typically cover weight loss medications with prior authorization for patients meeting BMI criteria.",
   },
   Medicare: {
     covered: false,
-    note: "Medicare currently does not cover GLP-1 medications for weight loss. Coverage may change \u2014 check with us for the latest updates.",
+    note: "Medicare currently does not cover weight loss medications. Coverage may change \u2014 check with us for the latest updates.",
   },
   Medicaid: {
     covered: false,
-    note: "Medicaid coverage for GLP-1 weight loss medications varies by state. New York Medicaid has limited coverage.",
+    note: "Medicaid coverage for weight loss medications varies by state. New York Medicaid has limited coverage.",
   },
   Oscar: {
     covered: true,
-    note: "Oscar Health plans may cover GLP-1 medications with prior authorization. Coverage depends on your specific plan.",
+    note: "Oscar Health plans may cover weight loss medications with prior authorization. Coverage depends on your specific plan.",
   },
   Other: {
     covered: false,
@@ -42,7 +42,7 @@ const insurers: Record<string, { covered: boolean; note: string }> = {
   },
   "I don't have insurance": {
     covered: false,
-    note: "Our cash-pay program makes GLP-1 therapy accessible without insurance. We'll discuss pricing options during your consultation.",
+    note: "Our cash-pay program makes weight loss therapy accessible without insurance. We'll discuss pricing options during your consultation.",
   },
 };
 

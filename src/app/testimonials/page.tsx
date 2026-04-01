@@ -66,7 +66,7 @@ const testimonials = [
   },
   {
     quote:
-      "I've tried everything — keto, intermittent fasting, personal trainers. Nothing worked long-term until I started GLP-1 therapy with Dr. Rhee. This is different because it actually addresses the root cause.",
+      "I've tried everything — keto, intermittent fasting, personal trainers. Nothing worked long-term until I started working with Dr. Rhee. This is different because it actually addresses the root cause.",
     name: "Mark S.",
     city: "Stamford, CT",
     stars: 5,
@@ -79,6 +79,30 @@ const testimonials = [
     city: "Portage, MI",
     stars: 5,
     lostLbs: 35,
+  },
+  {
+    quote:
+      "I only had about 15 pounds to lose, and every other program told me I didn't need help. Dr. Rhee understood that those last pounds were the hardest — and the most important to me. I'm finally at a weight I feel great at.",
+    name: "Jenna C.",
+    city: "Upper East Side, NY",
+    stars: 5,
+    lostLbs: 15,
+  },
+  {
+    quote:
+      "I was so close to my goal but completely stuck. Dr. Rhee helped me lose the last 12 pounds I'd been fighting for years. It sounds small, but it changed everything — my confidence, my energy, how my clothes fit.",
+    name: "Megan T.",
+    city: "Danbury, CT",
+    stars: 5,
+    lostLbs: 12,
+  },
+  {
+    quote:
+      "Everyone thinks weight loss programs are only for people with a lot to lose. I had 10 stubborn pounds that wouldn't budge no matter what I tried. Dr. Rhee's approach finally got me there, and I've kept it off.",
+    name: "Christine L.",
+    city: "Ann Arbor, MI",
+    stars: 5,
+    lostLbs: 10,
   },
 ];
 

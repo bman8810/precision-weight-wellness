@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "How It Works",
   description:
-    "Learn about our step-by-step medical weight management process — from initial consultation to ongoing GLP-1 therapy support with Dr. Libby Rhee.",
+    "Learn about our step-by-step medical weight management process — from initial consultation to ongoing therapy support with Dr. Libby Rhee.",
 };
 
 const journey = [
@@ -15,7 +15,7 @@ const journey = [
     details: [
       "Full health assessment and lab review",
       "BMI and body composition analysis",
-      "Discussion of GLP-1 medication options",
+      "Discussion of medication options",
       "Personalized goal setting",
       "Insurance coverage review for medications",
     ],
@@ -35,7 +35,7 @@ const journey = [
   {
     num: "03",
     title: "Starting Treatment",
-    desc: "Once your plan is in place, you'll begin your GLP-1 medication at a carefully calibrated starting dose. Dr. Rhee uses a gradual titration approach to minimize side effects and optimize your body's response.",
+    desc: "Once your plan is in place, you'll begin your medication at a carefully calibrated starting dose. Dr. Rhee uses a gradual titration approach to minimize side effects and optimize your body's response.",
     details: [
       "First injection guidance and training",
       "What to expect in the first weeks",
@@ -45,10 +45,10 @@ const journey = [
   },
   {
     num: "04",
-    title: "Ongoing Monitoring & Support",
+    title: "Check-ins to Set & Evaluate Goals",
     desc: "Regular check-ins ensure your treatment is working effectively and safely. Dr. Rhee monitors your progress, adjusts dosing as needed, and provides continuous support throughout your journey.",
     details: [
-      "Monthly physician check-ins",
+      "Monthly provider check-ins",
       "Dose adjustments based on progress and tolerance",
       "Lab monitoring as needed",
       "Nutritional coaching and accountability",

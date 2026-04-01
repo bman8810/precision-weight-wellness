@@ -6,7 +6,7 @@ import { blogPosts } from "./data";
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Expert insights on GLP-1 medications, medical weight management, and sustainable weight loss from Dr. Libby Rhee.",
+    "Expert insights on weight loss medications, medical weight management, and sustainable weight loss from Dr. Libby Rhee.",
 };
 
 export default function BlogPage() {
@@ -27,7 +27,7 @@ export default function BlogPage() {
             The <span className="text-gold">blog</span>
           </h1>
           <p className="mt-8 text-lg text-neutral-500 max-w-2xl mx-auto leading-relaxed">
-            Expert insights on GLP-1 medications, weight management science,
+            Expert insights on weight loss medications, weight management science,
             and living your healthiest life.
           </p>
         </div>

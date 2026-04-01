@@ -31,7 +31,7 @@ const reasons = [
   },
   {
     title: "Science-Based Approach",
-    desc: "We use FDA-approved weight loss medications — including GLP-1 receptor agonists and dual agonists — backed by robust clinical evidence for safe, significant weight loss.",
+    desc: "We use FDA-approved weight loss medications — including GLP-1 receptor agonists, dual agonists, and emerging therapies — backed by robust clinical evidence for safe, significant weight loss.",
   },
   {
     title: "Multiple Locations",
@@ -72,8 +72,8 @@ export default function Home() {
               style={{ animationDelay: "0.35s" }}
             >
               Board-certified physician Dr. Libby Rhee offers personalized medical
-              weight management — GLP-1s, dual agonists, metabolic agents, and
-              behavioral support
+              weight management — FDA-approved medications, metabolic agents,
+              and behavioral support
               — in a premium Upper East Side setting.
             </p>
             <div
@@ -367,9 +367,9 @@ export default function Home() {
               },
               {
                 quote:
-                  "I was skeptical about weight loss medications, but the science-based approach here convinced me. Down 30 pounds in 4 months.",
-                name: "Michelle K.",
-                city: "Grand Rapids, MI",
+                  "I appreciate how Dr. Rhee explains everything clearly. She helped me understand that weight loss is a medical issue, not a personal failing. That shifted my entire mindset.",
+                name: "Robert T.",
+                city: "Kalamazoo, MI",
               },
             ].map((t, i) => (
               <div

@@ -63,7 +63,7 @@ export default function AboutPage() {
             <div className="relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-[0_32px_64px_-16px_rgba(201,169,110,0.18)]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/dr-rhee-about.jpg"
+                src="/images/libby-photo-1.jpeg"
                 alt="Dr. Libby Rhee, DO, MS, FAAD — board-certified dermatologist and founder of Precision Weight & Wellness"
                 className="w-full h-full object-cover"
                 loading="eager"
@@ -95,7 +95,7 @@ export default function AboutPage() {
                 her commitment to evidence-based medicine, Dr. Rhee launched
                 Precision Weight + Wellness to help patients achieve sustainable
                 weight loss through FDA-approved weight loss medications,
-                including GLP-1 receptor agonists and dual agonists. Her approach
+                including GLP-1 receptor agonists, dual agonists, and emerging therapies. Her approach
                 combines medical expertise with genuine compassion — treating
                 each patient as a whole person, not just a number on a scale.
               </p>

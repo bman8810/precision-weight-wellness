@@ -34,7 +34,7 @@ export default function BookPage() {
           <div className="rounded-2xl overflow-hidden shadow-[0_16px_40px_-12px_rgba(0,0,0,0.06)] bg-white">
             <iframe
               src="https://secure.gethealthie.com/appointments/embed_appt?dietitian_id=14666692&provider_ids=%5B14666692%5D&appt_type_ids=%5B520045,520046,520047%5D&primary_color=c7a96f"
-              style={{ width: "100%", height: "100%", minHeight: "600px", border: "0px" }}
+              style={{ width: "100%", height: "100%", minHeight: "900px", border: "0px" }}
               title="Book an appointment with Dr. Rhee"
             />
           </div>

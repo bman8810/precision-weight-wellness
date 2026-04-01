@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "The Science",
   description:
-    "Explore the evolution of weight loss medicine — from GLP-1 receptor agonists to dual and triple agonists. Learn the science behind modern medical weight management.",
+    "Explore the evolution of weight loss medicine — from early receptor agonists to dual and triple agonists. Learn the science behind modern medical weight management.",
 };
 
 const timeline = [

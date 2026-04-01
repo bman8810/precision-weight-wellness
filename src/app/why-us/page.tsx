@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ComparisonTable } from "./ComparisonTable";
 
 export const metadata: Metadata = {
   title: "Why Choose Us | Medical Weight Loss That's Actually Medical",
@@ -26,7 +27,7 @@ const differentiators = [
   },
   {
     title: "The whole person, not just the prescription",
-    desc: "GLP-1 medication is the foundation, but your plan includes nutritional guidance, lifestyle modification, metabolic monitoring, and behavioral support. We treat the person, not just the number on the scale.",
+    desc: "Medication is the foundation, but your plan includes nutritional guidance, lifestyle modification, metabolic monitoring, and behavioral support. We treat the person, not just the number on the scale.",
   },
   {
     title: "AI-powered, physician-led",
@@ -40,36 +41,74 @@ const contrasts = [
     elsewhere:
       "Assigned provider you have never met, or algorithm-generated care plan",
     here: "Dr. Libby Rhee — your physician from day one through maintenance, board-certified with Mount Sinai affiliation",
+    expanded: [
+      "Dr. Rhee personally reviews every patient chart before each visit",
+      "Board-certified (DO, MS, FAAD) with thousands of five-star reviews",
+      "Clinical Instructor at Mount Sinai Icahn School of Medicine",
+      "Direct communication — not a chatbot or assistant",
+    ],
   },
   {
     label: "Your care plan",
     elsewhere:
       "Templated protocol based on a short online questionnaire",
     here: "Individually designed treatment plan based on comprehensive health assessment, lab review, and in-person evaluation",
+    expanded: [
+      "Full health assessment including lab work and body composition analysis",
+      "Medication selection tailored to your biology and health history",
+      "Custom dosing schedule with gradual titration to minimize side effects",
+      "Nutritional guidance and lifestyle recommendations built around your routine",
+      "Regular plan adjustments based on your response and progress",
+    ],
   },
   {
     label: "Medication management",
     elsewhere:
       "Auto-refill prescriptions with periodic check-in surveys",
     here: "Physician-monitored dosing with regular adjustments based on your response, labs, and side effect profile",
+    expanded: [
+      "Dr. Rhee evaluates multiple FDA-approved medication options for your situation",
+      "Dosing is calibrated to your tolerance — not a one-size-fits-all schedule",
+      "Side effect management strategies discussed proactively",
+      "Lab monitoring to ensure safety and track metabolic improvements",
+      "Medication changes made based on clinical data, not automated protocols",
+    ],
   },
   {
     label: "Support model",
     elsewhere:
       "Chat-based coaching, community forums, or AI-generated responses",
     here: "Direct access to your physician and care team, secure messaging with human response, priority scheduling",
+    expanded: [
+      "Secure messaging with a real human response — never an AI chatbot",
+      "Priority scheduling for follow-ups and urgent questions",
+      "Coordination with your other physicians (endocrinologist, PCP, etc.)",
+      "Nutritional coaching and accountability built into every check-in",
+    ],
   },
   {
     label: "Setting",
     elsewhere:
       "App-only or telehealth-only — no option to be seen in person",
     here: "Private medical office with in-person and telehealth flexibility across multiple locations",
+    expanded: [
+      "In-person visits available in New York City and Middletown, NY",
+      "Telehealth available across New York, Connecticut, and Michigan",
+      "You choose the format that works best for each visit",
+      "Same quality of care whether in-office or virtual",
+    ],
   },
   {
     label: "Continuity",
     elsewhere:
       "Different provider each visit, or no provider at all",
     here: "Same physician, every visit — Dr. Rhee personally monitors your entire journey",
+    expanded: [
+      "Dr. Rhee sees you at every visit — no hand-offs to other providers",
+      "She knows your history, your progress, and your goals",
+      "Long-term maintenance planning so you keep the weight off",
+      "Relationship-based care that builds trust over time",
+    ],
   },
 ];
 
@@ -203,34 +242,7 @@ export default function WhyUsPage() {
               What most programs offer vs. what we believe you deserve
             </h2>
           </div>
-          <div className="space-y-0 divide-y divide-neutral-100">
-            {contrasts.map((c) => (
-              <div
-                key={c.label}
-                className="grid grid-cols-1 md:grid-cols-[200px_1fr_1fr] gap-6 md:gap-10 py-8 first:pt-0 last:pb-0"
-              >
-                <p className="font-serif text-lg text-soft-black md:pt-1">
-                  {c.label}
-                </p>
-                <div>
-                  <p className="text-xs tracking-[0.15em] uppercase text-neutral-300 mb-2">
-                    Elsewhere
-                  </p>
-                  <p className="text-sm text-neutral-400 leading-relaxed">
-                    {c.elsewhere}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs tracking-[0.15em] uppercase text-gold mb-2">
-                    At Precision Weight + Wellness
-                  </p>
-                  <p className="text-sm text-soft-black leading-relaxed">
-                    {c.here}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <ComparisonTable contrasts={contrasts} />
         </div>
       </section>
 
@@ -281,13 +293,13 @@ export default function WhyUsPage() {
               </div>
               <p className="text-lg text-neutral-600 leading-relaxed italic">
                 &ldquo;I&apos;ve tried everything — keto, intermittent fasting,
-                personal trainers. Nothing worked long-term until I started GLP-1
-                therapy with Dr. Rhee. This is different because it actually
+                personal trainers. Nothing worked long-term until I started
+                working with Dr. Rhee. This is different because it actually
                 addresses the root cause.&rdquo;
               </p>
               <div className="mt-8">
                 <p className="font-medium text-soft-black">Mark S.</p>
-                <p className="text-xs text-neutral-400 mt-1">Kalamazoo, MI</p>
+                <p className="text-xs text-neutral-400 mt-1">Stamford, CT</p>
               </div>
             </div>
             {/* Supporting testimonials */}
