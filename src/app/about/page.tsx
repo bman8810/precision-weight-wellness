@@ -163,6 +163,34 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Office Gallery */}
+      <section className="py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-6">
+              Our Space
+            </p>
+            <h2 className="font-serif text-3xl md:text-4xl tracking-tight text-soft-black">
+              A Calm, Private Setting for Your Care
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="col-span-2 aspect-[16/9] rounded-2xl overflow-hidden bg-warm relative">
+              <Image src="/images/office-1.jpg" alt="Liora Dermatology office" fill className="object-cover" />
+            </div>
+            <div className="aspect-square rounded-2xl overflow-hidden bg-warm relative">
+              <Image src="/images/office-3.jpg" alt="Liora Dermatology office" fill className="object-cover" />
+            </div>
+            <div className="aspect-square rounded-2xl overflow-hidden bg-warm relative">
+              <Image src="/images/office-4.jpg" alt="Liora Dermatology office" fill className="object-cover" />
+            </div>
+            <div className="col-span-2 aspect-[16/9] rounded-2xl overflow-hidden bg-warm relative">
+              <Image src="/images/office-2.jpg" alt="Liora Dermatology office" fill className="object-cover" />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Where We Practice */}
       <section className="py-32 bg-cream">
         <div className="max-w-7xl mx-auto px-6">
