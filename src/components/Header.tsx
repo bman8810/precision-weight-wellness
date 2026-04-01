@@ -11,7 +11,6 @@ const navLinks = [
   { label: "Eligibility Check", href: "/eligibility" },
   { label: "Pricing", href: "/pricing" },
   { label: "The Science", href: "/science" },
-  { label: "The Science", href: "/science" },
   { label: "Blog", href: "/blog" },
 ];
 
