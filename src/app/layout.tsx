@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | Precision Weight + Wellness",
   },
   description:
-    "Medically supervised weight managements and beyond weight management in NYC. Board-certified physician Dr. Libby Rhee offers personalized Semaglutide and Tirzepatide programs at Liora.",
+    "Medically supervised weight management in NYC. Board-certified physician Dr. Libby Rhee offers personalized Semaglutide and Tirzepatide programs at Liora.",
   keywords: [
     "medical weight loss",
     "GLP-1",
@@ -40,11 +40,17 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Precision Weight + Wellness",
     description:
-      "Medically supervised weight managements and beyond weight management in NYC with Dr. Libby Rhee.",
+      "Medically supervised weight management in NYC with Dr. Libby Rhee.",
     url: "https://www.precisionweightwellness.com",
     siteName: "Precision Weight + Wellness",
     locale: "en_US",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Precision Weight + Wellness | Medical Weight Loss NYC",
+    description:
+      "Medically supervised weight management in NYC with Dr. Libby Rhee. Personalized GLP-1 medication programs.",
   },
 };
 
@@ -68,10 +74,10 @@ export default function RootLayout({
               "@id": "https://www.precisionweightwellness.com",
               name: "Precision Weight + Wellness at Liora",
               description:
-                "Medically supervised weight managements and beyond weight management program led by Dr. Libby Rhee, DO, MS, FAAD in New York City.",
+                "Medically supervised weight management program led by Dr. Libby Rhee, DO, MS, FAAD in New York City.",
               url: "https://www.precisionweightwellness.com",
               telephone: "+1-212-433-4569",
-              email: "hello@lioradermatology.com",
+              email: "hello@precisionww.com",
               priceRange: "$$-$$$",
               address: {
                 "@type": "PostalAddress",
