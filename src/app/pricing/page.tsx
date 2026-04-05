@@ -7,9 +7,6 @@ export const metadata: Metadata = {
     "Explore our medical weight management pricing and packages. Cash-pay programs with flexible options for weight loss medication therapy.",
 };
 
-const HEALTHIE_DIETITIAN_ID = "14666692";
-const HEALTHIE_COLOR = "c7a96f";
-
 const tiers = [
   {
     name: "Essential",
@@ -162,10 +159,8 @@ export default function PricingPage() {
                       </li>
                     ))}
                   </ul>
-                  <a
-                    href={`https://secure.gethealthie.com/appointments/embed_appt?offering_id=${tier.offeringId}&dietitian_id=${HEALTHIE_DIETITIAN_ID}&primary_color=${HEALTHIE_COLOR}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Link
+                    href={`/book?tier=${tier.name.toLowerCase()}`}
                     className={`block text-center mt-10 text-sm tracking-wide uppercase px-6 py-3 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                       tier.highlighted
                         ? "bg-gold hover:bg-gold-dark text-white hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
@@ -173,7 +168,7 @@ export default function PricingPage() {
                     }`}
                   >
                     Get Started
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}
