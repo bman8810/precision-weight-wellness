@@ -36,25 +36,32 @@ const credentials = [
 export default function AboutPage() {
   return (
     <>
-      {/* Hero — navy with cutout portrait */}
+      {/* Hero — navy with name + cutout */}
       <section className="bg-navy relative overflow-hidden">
         <div className="max-w-[1200px] mx-auto px-5 md:px-6 pt-28 pb-14 md:pt-40 md:pb-0 md:min-h-[520px] relative">
           <div className="md:max-w-[55%]">
             <p
-              className="animate-fade-up text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-5"
+              className="animate-fade-up flex items-center gap-2 text-sage text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-5"
               style={{ animationDelay: "0.1s" }}
             >
-              About Us
+              <span className="w-1.5 h-1.5 rounded-full bg-sage" />
+              Your Physician
             </p>
             <h1
               className="animate-fade-up font-serif text-[clamp(2.5rem,5.5vw,4.25rem)] leading-[1.08] tracking-[-0.02em] text-white"
               style={{ animationDelay: "0.2s" }}
             >
-              Meet <em className="text-gold">Dr. Libby Rhee</em>
+              Dr. Libby <em className="text-gold">Rhee</em>
             </h1>
             <p
+              className="animate-fade-up text-[13px] text-white/50 mt-3"
+              style={{ animationDelay: "0.3s" }}
+            >
+              DO, MS, FAAD
+            </p>
+            <p
               className="animate-fade-up mt-6 text-[16px] text-white/65 leading-[1.7] max-w-lg"
-              style={{ animationDelay: "0.35s" }}
+              style={{ animationDelay: "0.4s" }}
             >
               Board-certified dermatologist, clinical educator, and founder of
               Liora — now bringing the same evidence-based approach to medical
@@ -96,7 +103,7 @@ export default function AboutPage() {
               <div className="relative aspect-[3/4] rounded-[16px] overflow-hidden">
                 <Image
                   src="/images/doctor/libby-photo-1.jpeg"
-                  alt="Dr. Libby Rhee, DO, MS, FAAD — board-certified dermatologist and founder of Precision Weight & Wellness"
+                  alt="Dr. Libby Rhee"
                   fill
                   className="object-cover"
                   priority
@@ -108,37 +115,29 @@ export default function AboutPage() {
 
           <ScrollReveal delay={150}>
             <div>
-              <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-4">
-                Your Physician
-              </p>
-              <h2 className="font-serif text-[clamp(2rem,4vw,2.75rem)] tracking-[-0.02em] text-navy">
-                Dr. Libby Rhee
-              </h2>
-              <p className="text-[13px] text-light mt-2">DO, MS, FAAD</p>
-
-              <div className="mt-8 space-y-5 text-[15px] text-body leading-[1.65]">
+              <div className="space-y-5 text-[15px] text-body leading-[1.65]">
                 <p>
                   Dr. Libby Rhee is a board-certified dermatologist and the
-                  founder of Liora on Manhattan&apos;s
-                  Upper East Side. A Clinical Instructor at Mount Sinai&apos;s
-                  Icahn School of Medicine, she is recognized as one of New
-                  York&apos;s leading physicians with thousands of five-star
-                  patient reviews.
+                  founder of Liora on Manhattan&apos;s Upper East Side. A
+                  Clinical Instructor at Mount Sinai&apos;s Icahn School of
+                  Medicine, she is recognized as one of New York&apos;s leading
+                  physicians with thousands of five-star patient reviews.
                 </p>
                 <p>
                   With her deep understanding of the body&apos;s physiology and
                   her commitment to evidence-based medicine, Dr. Rhee launched
-                  Precision Weight + Wellness to help patients achieve sustainable
-                  weight loss through FDA-approved weight loss medications,
-                  including GLP-1 receptor agonists, dual agonists, and emerging therapies. Her approach
-                  combines medical expertise with genuine compassion — treating
-                  each patient as a whole person, not just a number on a scale.
+                  Precision Weight + Wellness to help patients achieve
+                  sustainable weight loss through FDA-approved medications,
+                  including GLP-1 receptor agonists, dual agonists, and emerging
+                  therapies. Her approach combines medical expertise with genuine
+                  compassion — treating each patient as a whole person, not just
+                  a number on a scale.
                 </p>
                 <p>
                   Dr. Rhee believes that weight management is healthcare, not
                   vanity. She works closely with every patient to develop a
-                  personalized plan that accounts for their unique biology, health
-                  history, and lifestyle goals.
+                  personalized plan that accounts for their unique biology,
+                  health history, and lifestyle goals.
                 </p>
               </div>
 
