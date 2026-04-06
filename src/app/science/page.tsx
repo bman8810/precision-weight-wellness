@@ -11,18 +11,24 @@ export const metadata: Metadata = {
 const timeline = [
   {
     num: "01",
+    name: "Liraglutide (Saxenda)",
+    desc: "The first GLP-1 approved for weight management. Clinical trials showed ~8% average body weight loss. A breakthrough that proved hormonal therapy could meaningfully treat obesity.",
+    pct: 8,
+  },
+  {
+    num: "02",
     name: "Semaglutide (Wegovy)",
     desc: "A GLP-1 receptor agonist that changed the landscape. Clinical trials demonstrated ~15% average body weight loss. Available as a weekly injection or daily oral pill, it became the gold standard for medical weight management.",
     pct: 15,
   },
   {
-    num: "02",
+    num: "03",
     name: "Tirzepatide (Zepbound)",
     desc: "A dual GIP/GLP-1 receptor agonist. Clinical trials showed up to 22.5% body weight loss — the most effective weight loss medication approved to date.",
     pct: 22.5,
   },
   {
-    num: "03",
+    num: "04",
     name: "Retatrutide & Beyond",
     desc: "Triple agonists targeting GLP-1, GIP, and glucagon receptors are in late-stage trials showing up to 24% weight loss. The future of obesity medicine is accelerating.",
     pct: 24,
@@ -30,6 +36,7 @@ const timeline = [
 ];
 
 const chartData = [
+  { label: "Liraglutide", pct: 8, note: null },
   { label: "Semaglutide", pct: 15, note: null },
   { label: "Tirzepatide", pct: 22.5, note: null },
   { label: "Retatrutide", pct: 24, note: "in trials" },

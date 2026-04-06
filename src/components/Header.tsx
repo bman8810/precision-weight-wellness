@@ -55,6 +55,16 @@ export default function Header() {
             >
               Precision <span className={transparent ? "text-gold-light" : "text-gold"}>W+W</span>
             </span>
+            <span
+              className={`font-serif text-[10px] uppercase tracking-[0.1em] transition-all duration-500 overflow-hidden leading-none ${
+                transparent
+                  ? "text-white max-h-4 opacity-100 -mt-0.5"
+                  : "max-h-0 opacity-0 -mt-1"
+              }`}
+              style={{ transitionTimingFunction: "cubic-bezier(0.32, 0.72, 0, 1)" }}
+            >
+              BY LIORA
+            </span>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-7">
@@ -76,6 +86,19 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
+            <a
+              href="https://secure.gethealthie.com/go/precisionww"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`text-[13px] tracking-[-0.01em] transition-colors duration-500 ${
+                transparent
+                  ? "text-white/70 hover:text-white"
+                  : "text-[#4A5568] hover:text-navy"
+              }`}
+              style={{ transitionTimingFunction: "cubic-bezier(0.32, 0.72, 0, 1)" }}
+            >
+              Patient Login
+            </a>
             <Link
               href="/book"
               className={`!text-[13px] !py-2 !px-5 !min-h-0 inline-flex items-center justify-center font-medium rounded-full transition-all duration-500 active:scale-[0.98] ${
@@ -114,6 +137,14 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
+            <a
+              href="https://secure.gethealthie.com/go/precisionww"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block text-[15px] py-1 text-gold font-medium"
+            >
+              Patient Login
+            </a>
             <Link href="/book" className="block text-center btn-primary mt-4 w-full text-[15px]">
               Book Now
             </Link>

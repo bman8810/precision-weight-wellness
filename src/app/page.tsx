@@ -148,13 +148,20 @@ export default function Home() {
           <ScrollReveal delay={200}>
             <div className="space-y-6 mb-16 max-w-xl">
               {[
-                { name: "Semaglutide", pct: 15, width: "67%" },
-                { name: "Tirzepatide", pct: 22.5, width: "100%" },
+                { name: "Liraglutide", pct: 8, width: "33%" },
+                { name: "Semaglutide", pct: 15, width: "63%" },
+                { name: "Tirzepatide", pct: 22.5, width: "94%" },
+                { name: "Retatrutide", pct: 24, width: "100%", note: "in trials" },
               ].map((med) => (
                 <div key={med.name}>
                   <div className="flex justify-between text-[14px] mb-2">
                     <span className="text-white/80 font-medium">{med.name}</span>
-                    <span className="text-gold font-semibold">{med.pct}%</span>
+                    <span className="text-gold font-semibold">
+                      {med.pct}%
+                      {"note" in med && med.note && (
+                        <span className="text-[11px] text-white/35 font-normal ml-1">{med.note}</span>
+                      )}
+                    </span>
                   </div>
                   <div className="h-4 bg-white/10 rounded-full overflow-hidden">
                     <div className="h-full rounded-full" style={{ width: med.width, background: "linear-gradient(90deg, #7BAE8E, #C9A96E)" }} />
