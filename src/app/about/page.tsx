@@ -36,9 +36,9 @@ const credentials = [
 export default function AboutPage() {
   return (
     <>
-      {/* Hero — navy with name + cutout */}
+      {/* Hero — full navy section with cutout + bio */}
       <section className="bg-navy relative overflow-hidden">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6 pt-28 pb-14 md:pt-40 md:pb-0 md:min-h-[520px] relative">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6 pt-28 pb-14 md:pt-40 md:pb-20 relative">
           <div className="md:max-w-[55%]">
             <p
               className="animate-fade-up flex items-center gap-2 text-sage text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-5"
@@ -60,28 +60,74 @@ export default function AboutPage() {
               DO, MS, FAAD
             </p>
             <p
-              className="animate-fade-up mt-6 text-[16px] text-white/65 leading-[1.7] max-w-lg"
+              className="animate-fade-up mt-6 text-[16px] text-white/55 leading-[1.7] max-w-lg"
               style={{ animationDelay: "0.4s" }}
             >
               Board-certified dermatologist, clinical educator, and founder of
               Liora — now bringing the same evidence-based approach to medical
               weight management.
             </p>
+
+            <div className="mt-8 space-y-5 text-[15px] text-white/50 leading-[1.7] max-w-lg">
+              <p>
+                Dr. Libby Rhee is a board-certified dermatologist and the
+                founder of Liora on Manhattan&apos;s Upper East Side. A
+                Clinical Instructor at Mount Sinai&apos;s Icahn School of
+                Medicine, she is recognized as one of New York&apos;s leading
+                physicians with thousands of five-star patient reviews.
+              </p>
+              <p>
+                With her deep understanding of the body&apos;s physiology and
+                her commitment to evidence-based medicine, Dr. Rhee launched
+                Precision Weight + Wellness to help patients achieve
+                sustainable weight loss through FDA-approved medications,
+                including GLP-1 receptor agonists, dual agonists, and emerging
+                therapies. Her approach combines medical expertise with genuine
+                compassion — treating each patient as a whole person, not just
+                a number on a scale.
+              </p>
+              <p>
+                Dr. Rhee believes that weight management is healthcare, not
+                vanity. She works closely with every patient to develop a
+                personalized plan that accounts for their unique biology,
+                health history, and lifestyle goals.
+              </p>
+            </div>
+
+            {/* Credentials */}
+            <div className="mt-12 space-y-8">
+              {credentials.map((c) => (
+                <div key={c.label}>
+                  <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-3">
+                    {c.label}
+                  </p>
+                  <ul className="space-y-1.5">
+                    {c.items.map((item) => (
+                      <li
+                        key={item}
+                        className="text-[15px] text-white/50 leading-[1.65]"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Cutout portrait — anchored to bottom right */}
-          <div className="hidden md:block absolute bottom-0 right-4 w-[38%] max-w-[420px]">
+          {/* Cutout portrait — anchored to top right, full height */}
+          <div className="hidden md:block absolute top-28 right-4 w-[40%] max-w-[480px] bottom-0">
             <Image
               src="/images/doctor/libby-pink-dress-no-background.png"
               alt="Dr. Libby Rhee"
-              width={600}
-              height={800}
-              className="w-full h-auto object-contain object-bottom"
+              fill
+              className="object-contain object-right-top"
               priority
             />
           </div>
-          {/* Mobile: centered below text */}
-          <div className="md:hidden flex justify-center -mb-1 mt-8">
+          {/* Mobile: centered below heading */}
+          <div className="md:hidden flex justify-center mt-8 mb-6">
             <Image
               src="/images/doctor/libby-pink-dress-no-background.png"
               alt="Dr. Libby Rhee"
@@ -91,78 +137,6 @@ export default function AboutPage() {
               priority
             />
           </div>
-        </div>
-      </section>
-
-      {/* Bio — white */}
-      <section className="py-14 md:py-24 bg-white">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-[72px] items-start">
-          {/* Photo */}
-          <ScrollReveal>
-            <div className="doppelrand doppelrand-light">
-              <div className="relative aspect-[3/4] rounded-[16px] overflow-hidden">
-                <Image
-                  src="/images/doctor/libby-photo-1.jpeg"
-                  alt="Dr. Libby Rhee"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/15 via-transparent to-transparent" />
-              </div>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal delay={150}>
-            <div>
-              <div className="space-y-5 text-[15px] text-body leading-[1.65]">
-                <p>
-                  Dr. Libby Rhee is a board-certified dermatologist and the
-                  founder of Liora on Manhattan&apos;s Upper East Side. A
-                  Clinical Instructor at Mount Sinai&apos;s Icahn School of
-                  Medicine, she is recognized as one of New York&apos;s leading
-                  physicians with thousands of five-star patient reviews.
-                </p>
-                <p>
-                  With her deep understanding of the body&apos;s physiology and
-                  her commitment to evidence-based medicine, Dr. Rhee launched
-                  Precision Weight + Wellness to help patients achieve
-                  sustainable weight loss through FDA-approved medications,
-                  including GLP-1 receptor agonists, dual agonists, and emerging
-                  therapies. Her approach combines medical expertise with genuine
-                  compassion — treating each patient as a whole person, not just
-                  a number on a scale.
-                </p>
-                <p>
-                  Dr. Rhee believes that weight management is healthcare, not
-                  vanity. She works closely with every patient to develop a
-                  personalized plan that accounts for their unique biology,
-                  health history, and lifestyle goals.
-                </p>
-              </div>
-
-              {/* Credentials */}
-              <div className="mt-12 space-y-8">
-                {credentials.map((c) => (
-                  <div key={c.label}>
-                    <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-3">
-                      {c.label}
-                    </p>
-                    <ul className="space-y-1.5">
-                      {c.items.map((item) => (
-                        <li
-                          key={item}
-                          className="text-[15px] text-body leading-[1.65]"
-                        >
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </ScrollReveal>
         </div>
       </section>
 
