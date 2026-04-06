@@ -41,7 +41,7 @@ export default function Header() {
         className={`mx-auto transition-all duration-700 ${
           transparent
             ? "bg-transparent max-w-[1200px] mt-0 rounded-none"
-            : "bg-white/90 backdrop-blur-[20px] backdrop-saturate-[180%] shadow-[0_2px_20px_rgba(27,42,74,0.06)] max-w-[900px] mt-4 rounded-full ring-1 ring-[rgba(27,42,74,0.04)]"
+            : `bg-white/90 backdrop-blur-[20px] backdrop-saturate-[180%] shadow-[0_2px_20px_rgba(27,42,74,0.06)] max-w-[900px] mt-4 ring-1 ring-[rgba(27,42,74,0.04)] ${mobileOpen ? "rounded-[24px]" : "rounded-full"}`
         }`}
         style={{ transitionTimingFunction: "cubic-bezier(0.32, 0.72, 0, 1)" }}
       >
