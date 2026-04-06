@@ -38,7 +38,7 @@ export default function AboutPage() {
     <>
       {/* Hero — navy with cutout portrait */}
       <section className="bg-navy relative overflow-hidden">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6 pt-28 pb-14 md:pt-40 md:pb-0 relative">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6 pt-28 pb-14 md:pt-40 md:pb-0 md:min-h-[520px] relative">
           <div className="md:max-w-[55%]">
             <p
               className="animate-fade-up text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-5"
@@ -60,11 +60,10 @@ export default function AboutPage() {
               Liora — now bringing the same evidence-based approach to medical
               weight management.
             </p>
-            <div className="h-16 md:h-24" />
           </div>
 
           {/* Cutout portrait — anchored to bottom right */}
-          <div className="hidden md:block absolute bottom-0 right-0 w-[42%] max-w-[500px]">
+          <div className="hidden md:block absolute bottom-0 right-4 w-[38%] max-w-[420px]">
             <Image
               src="/images/doctor/libby-pink-dress-no-background.png"
               alt="Dr. Libby Rhee"
@@ -75,7 +74,7 @@ export default function AboutPage() {
             />
           </div>
           {/* Mobile: centered below text */}
-          <div className="md:hidden flex justify-center -mb-1">
+          <div className="md:hidden flex justify-center -mb-1 mt-8">
             <Image
               src="/images/doctor/libby-pink-dress-no-background.png"
               alt="Dr. Libby Rhee"
