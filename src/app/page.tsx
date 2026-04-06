@@ -22,107 +22,81 @@ function ArrowIcon({ className = "text-current" }: { className?: string }) {
 export default function Home() {
   return (
     <>
-      {/* ── Hero — navy ── */}
-      <section className="bg-navy pt-20">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6 pt-14 pb-14 md:pt-28 md:pb-28">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-[72px] items-center">
-            <div>
-              <p
-                className="animate-fade-up flex items-center gap-2 text-sage text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-5"
-                style={{ animationDelay: "0.1s" }}
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-sage" />
-                Precision Weight + Wellness
-              </p>
-              <h1
-                className="animate-fade-up font-serif text-[clamp(2.75rem,5.5vw,4.25rem)] leading-[1.08] tracking-[-0.02em] text-white"
-                style={{ animationDelay: "0.2s" }}
-              >
-                Your journey,
-                <br />
-                <em className="text-gold">refined.</em>
-              </h1>
-              <p
-                className="animate-fade-up text-[16px] text-white/65 leading-[1.7] mt-6 max-w-md"
-                style={{ animationDelay: "0.35s" }}
-              >
-                A clinical-grade, doctor-led GLP-1 weight management program
-                that bridges the gap between metabolic science and personal
-                wellness.
-              </p>
-              <div
-                className="animate-fade-up mt-8 flex flex-col sm:flex-row gap-3"
-                style={{ animationDelay: "0.5s" }}
-              >
-                <Link href="/book" className="btn-gold w-full sm:w-auto justify-center group">
-                  Start your journey
-                  <ArrowIcon className="text-navy-deep transition-transform duration-500 group-hover:translate-x-0.5" />
-                </Link>
-                <Link
-                  href="/science"
-                  className="inline-flex items-center justify-center text-[15px] font-medium text-white/70 border border-white/25 rounded-full px-8 py-[15px] min-h-[48px] hover:bg-white/10 hover:text-white active:scale-[0.98] w-full sm:w-auto"
-                >
-                  View science
-                </Link>
-              </div>
-            </div>
+      {/* ── Hero — full-bleed image ── */}
+      <section className="relative min-h-[100dvh] flex flex-col">
+        {/* Background image */}
+        <Image
+          src="/images/doctor/libby-nyc-skyline.jpeg"
+          alt="Dr. Libby Rhee with NYC skyline"
+          fill
+          className="object-cover object-top"
+          priority
+        />
+        {/* Dark overlay for text legibility */}
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-deep/85 via-navy-deep/60 to-navy-deep/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/80 via-transparent to-navy-deep/40" />
 
-            {/* Hero images — Doppelrand shells */}
-            <div
-              className="animate-fade-up grid grid-cols-2 gap-4"
-              style={{ animationDelay: "0.4s" }}
+        {/* Content */}
+        <div className="relative flex-1 flex flex-col justify-center max-w-[1200px] mx-auto w-full px-5 md:px-6 pt-28 pb-20">
+          <p
+            className="animate-fade-up flex items-center gap-2 text-sage text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-6"
+            style={{ animationDelay: "0.1s" }}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-sage" />
+            Doctor-Led GLP-1 Program
+          </p>
+          <h1
+            className="animate-fade-up font-serif text-[clamp(2.75rem,6vw,4.5rem)] leading-[1.08] tracking-[-0.02em] text-white max-w-2xl"
+            style={{ animationDelay: "0.2s" }}
+          >
+            Medical weight loss,
+            <br />
+            <em className="text-gold">done right.</em>
+          </h1>
+          <p
+            className="animate-fade-up text-[16px] text-white/65 leading-[1.7] mt-6 max-w-lg"
+            style={{ animationDelay: "0.35s" }}
+          >
+            A clinical-grade GLP-1 program led by board-certified physicians
+            — built around you, not a subscription model.
+          </p>
+          <div
+            className="animate-fade-up mt-8 flex flex-col sm:flex-row gap-3"
+            style={{ animationDelay: "0.5s" }}
+          >
+            <Link href="/book" className="btn-gold w-full sm:w-auto justify-center group">
+              Start your consult
+              <ArrowIcon className="text-navy-deep transition-transform duration-500 group-hover:translate-x-0.5" />
+            </Link>
+            <Link
+              href="/how-it-works"
+              className="inline-flex items-center justify-center text-[15px] font-medium text-white/70 border border-white/25 rounded-full px-8 py-[15px] min-h-[48px] hover:bg-white/10 hover:text-white active:scale-[0.98] w-full sm:w-auto"
             >
-              <div className="doppelrand doppelrand-dark">
-                <div className="rounded-[16px] overflow-hidden aspect-[3/4]">
-                  <Image
-                    src="/images/apple/warm-products.jpg"
-                    alt="GLP-1 weight loss medications"
-                    width={400}
-                    height={533}
-                    className="w-full h-full object-cover"
-                    priority
-                  />
-                </div>
+              How it works
+            </Link>
+          </div>
+
+          {/* Stats bar */}
+          <div
+            className="animate-fade-up mt-auto pt-16 flex flex-wrap gap-8 md:gap-12"
+            style={{ animationDelay: "0.65s" }}
+          >
+            {[
+              { value: "94%", label: "Patient satisfaction" },
+              { value: "15%+", label: "Avg. weight loss" },
+              { value: "100%", label: "Physician-managed" },
+            ].map((s, i) => (
+              <div key={s.label} className={`${i > 0 ? "border-l border-white/15 pl-8 md:pl-12" : ""}`}>
+                <p className="font-serif text-[clamp(28px,4vw,40px)] font-semibold tracking-[-0.03em] text-gold leading-[1]">
+                  {s.value}
+                </p>
+                <p className="text-[11px] uppercase tracking-[0.12em] text-white/45 mt-2">
+                  {s.label}
+                </p>
               </div>
-              <div className="doppelrand doppelrand-dark">
-                <div className="rounded-[16px] overflow-hidden aspect-[3/4]">
-                  <Image
-                    src="/images/apple/doctor-portrait.jpg"
-                    alt="Dr. Libby Rhee"
-                    width={400}
-                    height={533}
-                    className="w-full h-full object-cover"
-                    priority
-                  />
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
-      </section>
-
-      {/* ── Trust Stats — cream ── */}
-      <section className="bg-cream py-14 md:py-20">
-        <ScrollReveal>
-          <div className="max-w-[1200px] mx-auto px-5 md:px-6">
-            <div className="grid grid-cols-3 gap-6 md:gap-10 text-center">
-              {[
-                { value: "15–22%", label: "Average body weight lost" },
-                { value: "FDA", label: "Approved medications" },
-                { value: "1:1", label: "Physician-led care" },
-              ].map((s, i) => (
-                <div key={s.label} className={`${i > 0 ? "border-l border-[rgba(27,42,74,0.08)]" : ""} px-2`}>
-                  <p className="font-serif text-[clamp(28px,4vw,44px)] font-semibold tracking-[-0.03em] text-gold leading-[1]">
-                    {s.value}
-                  </p>
-                  <p className="text-[10.5px] uppercase tracking-[0.14em] font-semibold text-light mt-3">
-                    {s.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </ScrollReveal>
       </section>
 
       {/* ── The Science of Satiety — teal to navy gradient ── */}
