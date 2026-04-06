@@ -136,7 +136,9 @@ export default function EligibilityPage() {
           </h1>
           <p className="mt-8 text-lg text-neutral-500 max-w-2xl mx-auto leading-relaxed">
             Answer a few quick questions to see if you may be a candidate for
-            medical weight management and check your insurance coverage.
+            medical weight management and check your insurance coverage for
+            medications. Affordable out-of-pocket options may be available for
+            those who don&apos;t qualify through insurance.
           </p>
         </div>
       </section>

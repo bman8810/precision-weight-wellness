@@ -81,10 +81,11 @@ const contrasts = [
       "Chat-based coaching, community forums, or AI-generated responses",
     here: "Direct access to your physician and care team, secure messaging with human response, priority scheduling",
     expanded: [
-      "Secure messaging with a real human response — never an AI chatbot",
+      "Secure messaging with a real human response",
       "Priority scheduling for follow-ups and urgent questions",
-      "Coordination with your other physicians (endocrinologist, PCP, etc.)",
-      "Nutritional coaching and accountability built into every check-in",
+      "Coordination with your other physicians (endocrinologist, PCP, etc.)*",
+      "Nutritional coaching and accountability built into every check-in*",
+      "* Premium and Concierge package members",
     ],
   },
   {
@@ -186,7 +187,7 @@ export default function WhyUsPage() {
                 entirely.
               </p>
               <p className="text-navy font-medium">
-                That is what Precision Weight + Wellness was built to be.
+                That is why Precision Weight + Wellness exists.
               </p>
             </div>
           </ScrollReveal>

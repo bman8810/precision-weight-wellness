@@ -13,7 +13,7 @@ const packages = [
     name: "Essential",
     price: "$199",
     period: "/mo",
-    image: "/images/package-essential.jpg",
+    image: "/images/packages/package-essential.jpg",
     offeringId: "244715",
     description: "Monthly check-in, medication management, and baseline labs.",
   },
@@ -22,7 +22,7 @@ const packages = [
     name: "Premium",
     price: "$349",
     period: "/mo",
-    image: "/images/package-premium.jpg",
+    image: "/images/packages/package-premium.jpg",
     offeringId: "244716",
     description:
       "Twice-monthly visits, B12 injections, and nutritional counseling.",
@@ -32,7 +32,7 @@ const packages = [
     name: "Concierge",
     price: "$599",
     period: "/mo",
-    image: "/images/package-concierge.jpg",
+    image: "/images/packages/package-concierge.jpg",
     offeringId: "244717",
     description:
       "Unlimited check-ins, priority scheduling, and direct access to Dr. Rhee.",

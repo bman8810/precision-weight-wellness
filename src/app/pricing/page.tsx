@@ -14,8 +14,9 @@ const tiers = [
     name: "Essential",
     price: "$199",
     period: "per month",
-    image: "/images/package-essential.jpg",
+    image: "/images/packages/package-essential.jpg",
     offeringId: "244715",
+    includes: null,
     features: [
       "Initial consultation included",
       "1 follow-up visit per month (in-person or virtual, 15\u201320 min)",
@@ -31,10 +32,10 @@ const tiers = [
     name: "Premium",
     price: "$349",
     period: "per month",
-    image: "/images/package-premium.jpg",
+    image: "/images/packages/package-premium.jpg",
     offeringId: "244716",
+    includes: "Everything in Essential, plus:",
     features: [
-      "Initial consultation included",
       "2 follow-up visits per month",
       "Monthly B12 injection (in-office)",
       "Nutritional counseling resources",
@@ -47,10 +48,10 @@ const tiers = [
     name: "Concierge",
     price: "$599",
     period: "per month",
-    image: "/images/package-concierge.jpg",
+    image: "/images/packages/package-concierge.jpg",
     offeringId: "244717",
+    includes: "Everything in Premium, plus:",
     features: [
-      "Initial consultation included",
       "Unlimited virtual check-ins",
       "Weekly B12 or lipotropic injection",
       "Priority scheduling (same-week guaranteed)",
@@ -148,7 +149,12 @@ export default function PricingPage() {
                       <p className="text-[13px] mt-1 text-light">
                         {tier.period}
                       </p>
-                      <ul className="mt-8 space-y-3 flex-1">
+                      {tier.includes && (
+                        <p className={`mt-8 mb-4 text-[13px] font-medium ${tier.highlighted ? "text-gold" : "text-gold"}`}>
+                          {tier.includes}
+                        </p>
+                      )}
+                      <ul className={`${tier.includes ? "" : "mt-8 "}space-y-3 flex-1`}>
                         {tier.features.map((feature) => (
                           <li
                             key={feature}
@@ -192,7 +198,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* Healthie Note — cream */}
+      {/* Scheduling — cream */}
       <section className="py-14 md:py-24 bg-cream">
         <ScrollReveal>
           <div className="max-w-[1200px] mx-auto px-5 md:px-6 text-center">
@@ -200,11 +206,11 @@ export default function PricingPage() {
               Easy scheduling &amp; payments
             </p>
             <h2 className="font-serif text-[clamp(2rem,4vw,2.75rem)] leading-[1.1] tracking-[-0.02em] text-navy">
-              Powered by <em className="text-gold">Healthie</em>
+              Seamless <em className="text-gold">scheduling</em>
             </h2>
             <p className="mt-4 text-[16px] text-body leading-[1.7] max-w-2xl mx-auto">
               Scheduling appointments and managing payments is simple and secure
-              through our Healthie patient portal. You&apos;ll receive access
+              through our patient portal. You&apos;ll receive access
               after your initial consultation.
             </p>
             <div className="mt-8">

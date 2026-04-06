@@ -66,7 +66,7 @@ export default function AboutPage() {
           {/* Cutout portrait — anchored to bottom right */}
           <div className="hidden md:block absolute bottom-0 right-0 w-[42%] max-w-[500px]">
             <Image
-              src="/images/libby-pink-dress-no-background.png"
+              src="/images/doctor/libby-pink-dress-no-background.png"
               alt="Dr. Libby Rhee"
               width={600}
               height={800}
@@ -77,7 +77,7 @@ export default function AboutPage() {
           {/* Mobile: centered below text */}
           <div className="md:hidden flex justify-center -mb-1">
             <Image
-              src="/images/libby-pink-dress-no-background.png"
+              src="/images/doctor/libby-pink-dress-no-background.png"
               alt="Dr. Libby Rhee"
               width={300}
               height={400}
@@ -96,7 +96,7 @@ export default function AboutPage() {
             <div className="doppelrand doppelrand-light">
               <div className="relative aspect-[3/4] rounded-[16px] overflow-hidden">
                 <Image
-                  src="/images/libby-photo-1.jpeg"
+                  src="/images/doctor/libby-photo-1.jpeg"
                   alt="Dr. Libby Rhee, DO, MS, FAAD — board-certified dermatologist and founder of Precision Weight & Wellness"
                   fill
                   className="object-cover"
@@ -187,11 +187,11 @@ export default function AboutPage() {
                 patient&apos;s journey is unique. For some, FDA-approved
                 medications are the foundation of treatment. For others, a
                 combination of nutritional guidance, lifestyle modification, and
-                behavioral support is the right path. We meet you where you are.
+                behavioral support is the right path. <em className="not-italic text-navy font-medium">We meet you where you are.</em>
               </p>
               <p>
                 Our program is built on the science of weight management — but
-                it&apos;s driven by your goals, your preferences, and your life.
+                it&apos;s driven by your goals, your metabolism, your preferences, and your life.
                 Whether you&apos;re exploring medication options or looking for a
                 physician-guided wellness plan without them, Dr. Rhee will work
                 with you to create an approach that fits.
@@ -218,22 +218,22 @@ export default function AboutPage() {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               <div className="col-span-2 doppelrand doppelrand-light">
                 <div className="relative aspect-[16/9] rounded-[16px] overflow-hidden">
-                  <Image src="/images/office-1.jpg" alt="Liora Dermatology office" fill className="object-cover" />
+                  <Image src="/images/office/office-1.jpg" alt="Liora Dermatology office" fill className="object-cover" />
                 </div>
               </div>
               <div className="doppelrand doppelrand-light">
                 <div className="relative aspect-square rounded-[16px] overflow-hidden">
-                  <Image src="/images/office-3.jpg" alt="Liora Dermatology office" fill className="object-cover" />
+                  <Image src="/images/office/office-3.jpg" alt="Liora Dermatology office" fill className="object-cover" />
                 </div>
               </div>
               <div className="doppelrand doppelrand-light">
                 <div className="relative aspect-square rounded-[16px] overflow-hidden">
-                  <Image src="/images/office-4.jpg" alt="Liora Dermatology office" fill className="object-cover" />
+                  <Image src="/images/office/office-4.jpg" alt="Liora Dermatology office" fill className="object-cover" />
                 </div>
               </div>
               <div className="col-span-2 doppelrand doppelrand-light">
                 <div className="relative aspect-[16/9] rounded-[16px] overflow-hidden">
-                  <Image src="/images/office-2.jpg" alt="Liora Dermatology office" fill className="object-cover" />
+                  <Image src="/images/office/office-2.jpg" alt="Liora Dermatology office" fill className="object-cover" />
                 </div>
               </div>
             </div>
