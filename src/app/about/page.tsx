@@ -214,42 +214,77 @@ export default function AboutPage() {
 
           <ScrollReveal delay={200} stagger={100}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="doppelrand doppelrand-dark h-full">
-                <div className="bg-white/8 border border-white/10 rounded-[18px] p-8 card-hover h-full">
-                  <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-3">
-                    New York
-                  </p>
-                  <p className="font-serif text-[20px] tracking-[-0.01em] text-white">
-                    In-person + telehealth
-                  </p>
-                  <p className="mt-4 text-[15px] text-white/55 leading-[1.65]">
-                    New York City &amp; Middletown, NY
-                  </p>
-                </div>
+              {/* New York */}
+              <div className="flex flex-col items-center text-center card-hover">
+                <svg
+                  viewBox="0 0 136 104"
+                  className="w-24 h-auto mb-5 transition-transform duration-500 hover:scale-[1.06]"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="m 91.4,4.2 -.6,1.9 1.4,.9 -.4,1.5 .5,3.2 2.2,2.3 -.4,2.2 .6,2 -.4,1 -.3,3.8 3.1,6.7 -.8,1.8 .9,2.2 .9,-1.6 1.9,1.5 3,14.2 -.5,2 1.1,1 -.5,15 .7,1 2.8,16.3 1.8,1.5 -3.5,3.4 1.7,2.2 -1.3,3.3 -1.5,1.7 -1.5,2.3 -.2,-.7 .4,-5.9 -14.6,-4.9 -1.6,-1.1 -1.9,.3 -3,-2.2 -3,-5.8 h -2 l -.4,-1.5 -1.7,-1.1 -70.5,13.9 -.8,-6 4.3,-3.9 .6,-1.7 3.9,-2.5 .6,-2.4 2.3,-2 .8,-1.1 -1.7,-3.3 -1.7,-.5 -1.8,-3 -.2,-3.2 7.6,-3.9 8.2,-1.6 h 4.4 l 3.2,1.6 .9,-.1 1.8,-1.6 3.4,-.7 h 3 l 2.6,-1.3 2.5,-2.6 2.4,-3.1 1.9,-.4 1.1,-.5 .4,-3.2 -1.4,-2.7 -1.2,-.7 2,-1.3 -.1,-1.8 h -1.5 l -2.3,-1.4 -.1,-3.1 6.2,-6.1 .7,-2.4 3.7,-6.3 5.9,-6.4 2.1,-1.7 2.5,.1 20.6,-5.2 z"
+                    fill="rgba(90,26,43,0.55)"
+                    stroke="rgba(255,255,255,0.15)"
+                    strokeWidth="0.5"
+                  />
+                </svg>
+                <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-3">
+                  New York
+                </p>
+                <p className="font-serif text-[20px] tracking-[-0.01em] text-white">
+                  In-person + telehealth
+                </p>
+                <p className="mt-4 text-[15px] text-white/55 leading-[1.65]">
+                  New York City &amp; Middletown, NY
+                </p>
               </div>
-              <div className="doppelrand doppelrand-dark h-full">
-                <div className="bg-white/8 border border-white/10 rounded-[18px] p-8 card-hover h-full">
-                  <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-3">
-                    Connecticut
-                  </p>
-                  <p className="font-serif text-[20px] tracking-[-0.01em] text-white">Telehealth</p>
-                  <p className="mt-2 text-[13px] text-white/35">In-person coming soon</p>
-                  <p className="mt-4 text-[15px] text-white/55 leading-[1.65]">
-                    Virtual consultations available statewide.
-                  </p>
-                </div>
+
+              {/* Connecticut */}
+              <div className="flex flex-col items-center text-center card-hover">
+                <svg
+                  viewBox="0 0 34 34"
+                  className="w-24 h-auto mb-5 transition-transform duration-500 hover:scale-[1.06]"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="m 31.7,15.7 .4,-1.1 -3.2,-12.3 -.1,-.3 -14.9,3.4 v .7 l -.9,.3 -.5,-.7 -10.5,2.4 2.8,16.3 1.8,1.5 -3.5,3.4 1.7,2.2 5.4,-4.5 1.7,-1.3 h .8 l 2.4,-3.1 1.4,.1 2.9,-1.1 h 2.1 l 5.3,-2.7 2.8,-.9 1,-1 1.5,.5 z"
+                    fill="rgba(90,26,43,0.55)"
+                    stroke="rgba(255,255,255,0.15)"
+                    strokeWidth="0.15"
+                  />
+                </svg>
+                <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-3">
+                  Connecticut
+                </p>
+                <p className="font-serif text-[20px] tracking-[-0.01em] text-white">Telehealth</p>
+                <p className="mt-2 text-[13px] text-white/35">In-person coming soon</p>
+                <p className="mt-4 text-[15px] text-white/55 leading-[1.65]">
+                  Virtual consultations available statewide.
+                </p>
               </div>
-              <div className="doppelrand doppelrand-dark h-full">
-                <div className="bg-white/8 border border-white/10 rounded-[18px] p-8 card-hover h-full">
-                  <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-3">
-                    Michigan
-                  </p>
-                  <p className="font-serif text-[20px] tracking-[-0.01em] text-white">Telehealth</p>
-                  <p className="mt-2 text-[13px] text-white/35">In-person coming soon</p>
-                  <p className="mt-4 text-[15px] text-white/55 leading-[1.65]">
-                    Virtual consultations available statewide.
-                  </p>
-                </div>
+
+              {/* Michigan */}
+              <div className="flex flex-col items-center text-center card-hover">
+                <svg
+                  viewBox="0 0 169 141"
+                  className="w-24 h-auto mb-5 transition-transform duration-500 hover:scale-[1.06]"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="m 132.1,135.4 .1,1.4 21.4,-3.5 .5,-1.2 3.9,-5.9 v -4.3 l .8,-2.1 2.2,-.8 2,-7.8 1,-.5 1,.6 -.2,.6 -1.1,.8 .3,.9 .8,.4 1.9,-1.4 .4,-9.8 -1.6,-2.3 -1.2,-3.7 v -2.5 l -2.3,-4.4 v -1.8 l -1.2,-3.3 -2.3,-3 -2.9,-1 -4.8,3 -2.5,4.6 -.2,.9 -3,3.5 -1.5,-.2 -2.9,-2.8 -.1,-3.4 1.5,-1.9 2,-.2 1.2,-1.7 .2,-4 .8,-.8 1.1,-.1 .9,-1.7 -.2,-9.6 -.3,-1.3 -1.2,-1.2 -1.7,-1 -.1,-1.8 .7,-.6 1.8,.8 -.3,-1.7 -1.9,-2.7 -.7,-1.6 -1.1,-1.1 h -2.2 l -8.1,-2.9 -1.4,-1.7 -3.1,-.3 -1.2,.3 -4.4,-2.3 h -1.4 l .5,1 -2.7,-.1 .1,.6 .6,.6 -2.5,2.1 .1,1.8 1.5,2.3 1.5,.2 v .6 l -1.5,.5 -2.1,-.1 -2.8,2.5 .1,2.5 .4,5.8 -2.2,3.4 .8,-4.5 -.8,-.6 -.9,5.3 -1,-2.3 .5,-2.3 -.5,-1 .6,-1.3 -.6,-1.1 1,-1 v -1.2 l -1.3,.6 -1.3,3.1 -.7,.7 -1.3,2.4 -1.7,-.2 -.1,1.2 h -1.6 l .2,1.5 .2,2 -3,1.2 .1,1.3 1,1.7 -.1,5.2 -1.3,4.4 -1.7,2.5 1.2,1.4 .8,3.5 -1,2.5 -.2,2.1 1.7,3.4 2.5,4.9 1.2,1.9 1.6,6.9 -.1,8.8 -.9,3.9 -2,3.2 -.9,3.7 -2,3 -1.2,1 z m -95.8,-96.8 3,3.8 17,3.8 1.4,1 4,.8 .7,.5 2.8,-.2 4.9,.8 1.4,1.5 -1,1 .8,.8 3.8,.7 1.2,1.2 .1,4.4 -1.3,2.8 2,.1 1,-.8 .9,.8 -1.1,3.1 1,1.6 1.2,.3 .8,-1.8 2.9,-4.6 1.6,-6 2.3,-2 -.5,-1.6 .5,-.9 1,1.6 -.3,2.2 2.9,-2.2 .2,-2.3 2.1,.6 .8,-1.6 .7,.6 -.7,1.5 -1,.5 -1,2 1.4,1.8 1.1,-.5 -.5,-.7 1,-1.5 1.9,-1.7 h .8 l .2,-2.6 2,-1.8 7.9,-.5 1.9,-3.1 3.8,-.3 3.8,1.2 4.2,2.7 .7,-.2 -.2,-3.5 .7,-.2 4.5,1.1 1.5,-.2 2.9,-.7 1.7,.4 1.8,.1 v -1.1 l -.7,-.9 -1.5,-.2 -1.1,-.8 .5,-1.4 -.8,-.3 -2.6,.1 -.1,-1 1.1,-.8 .6,.8 .5,-1.8 -.7,-.7 .7,-.2 -1.4,-1.3 .3,-1.3 .1,-1.9 h -1.3 l -1.5,1 -1.9,.1 -.5,1.8 -1.9,.2 -.3,-1.2 -2.2,.1 -1,1.2 -.7,-.1 -.2,-.8 -2.6,.4 -.1,-4.8 1,-2 -.7,-.1 -1.8,1.1 h -2.2 l -3.8,2.7 -6.2,.3 -4.1,.8 -1.9,1.5 -1.4,1.3 -2.5,1.7 -.3,.8 -.6,-1.7 -1.3,-.6 v .6 l .7,.7 v 1.3 l -1.5,-.6 h -.6 l -.3,1.2 -2,-1.9 -1.3,-.2 -1.3,1.5 -3.2,-.1 -.5,-1.4 -2,-1.9 -1.3,-1.6 v -.7 l -1.1,-1.4 -2.6,-1.2 -3.3,-.1 -1.1,-.9 h -1.4 l -.7,.4 -2.2,2.2 -.7,1.1 -1,-.7 .2,-1 .8,-2.1 3.2,-5 .8,-.2 1.7,-1.9 .7,-1.6 3,-.6 .8,-.6 -.1,-1 -.5,-.5 -4.5,.2 -2,.5 -2.6,1.2 -1.2,1.2 -1.7,2.2 -1.8,1 -3.3,3.4 -.4,1.6 -7.4,4.6 -4,.5 -1.8,.4 -2.3,3 -1.8,.7 -4.4,2.3 z"
+                    fill="rgba(90,26,43,0.55)"
+                    stroke="rgba(255,255,255,0.15)"
+                    strokeWidth="0.5"
+                  />
+                </svg>
+                <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-3">
+                  Michigan
+                </p>
+                <p className="font-serif text-[20px] tracking-[-0.01em] text-white">Telehealth</p>
+                <p className="mt-2 text-[13px] text-white/35">In-person coming soon</p>
+                <p className="mt-4 text-[15px] text-white/55 leading-[1.65]">
+                  Virtual consultations available statewide.
+                </p>
               </div>
             </div>
           </ScrollReveal>
