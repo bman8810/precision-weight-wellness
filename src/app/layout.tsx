@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Precision Weight + Wellness | Medical Weight Loss NYC",
     description:
-      "Medically supervised weight management in NYC with Dr. Libby Rhee. Personalized GLP-1 medication programs.",
+      "Medically supervised weight management in NYC with Dr. Libby Rhee. FDA-approved medication programs.",
   },
 };
 
@@ -98,7 +98,7 @@ export default function RootLayout({
                 jobTitle: "Board-Certified Dermatologist",
                 medicalSpecialty: ["Dermatology", "Obesity Medicine"],
                 description:
-                  "DO, MS, FAAD — Board-certified dermatologist specializing in medical weight management with GLP-1 medications.",
+                  "DO, MS, FAAD — Board-certified dermatologist specializing in medical weight management with FDA-approved medications.",
               },
             }),
           }}

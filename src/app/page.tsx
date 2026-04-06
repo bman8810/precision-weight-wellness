@@ -29,11 +29,11 @@ export default function Home() {
           src="/images/doctor/libby-nyc-skyline.jpeg"
           alt="Dr. Libby Rhee with NYC skyline"
           fill
-          className="object-cover object-top"
+          className="object-cover object-[25%_top]"
           priority
         />
         {/* Dark overlay for text legibility */}
-        <div className="absolute inset-0 bg-gradient-to-r from-navy-deep/85 via-navy-deep/60 to-navy-deep/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-deep/85 via-navy-deep/50 to-navy-deep/15" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/80 via-transparent to-navy-deep/40" />
 
         {/* Content */}
@@ -43,7 +43,7 @@ export default function Home() {
             style={{ animationDelay: "0.1s" }}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-sage" />
-            Doctor-Led GLP-1 Program
+            Doctor-Led Weight Management
           </p>
           <h1
             className="animate-fade-up font-serif text-[clamp(2.75rem,6vw,4.5rem)] leading-[1.08] tracking-[-0.02em] text-white max-w-2xl"
@@ -57,8 +57,8 @@ export default function Home() {
             className="animate-fade-up text-[16px] text-white/65 leading-[1.7] mt-6 max-w-lg"
             style={{ animationDelay: "0.35s" }}
           >
-            A clinical-grade GLP-1 program led by board-certified physicians
-            — built around you, not a subscription model.
+            A clinical-grade program using FDA-approved weight loss medications,
+            led by board-certified physicians — built around you, not a subscription model.
           </p>
           <div
             className="animate-fade-up mt-8 flex flex-col sm:flex-row gap-3"
@@ -78,19 +78,19 @@ export default function Home() {
 
           {/* Stats bar */}
           <div
-            className="animate-fade-up mt-auto pt-16 flex flex-wrap gap-8 md:gap-12"
+            className="animate-fade-up mt-auto pt-16 flex flex-wrap gap-4 sm:gap-8 md:gap-12"
             style={{ animationDelay: "0.65s" }}
           >
             {[
-              { value: "94%", label: "Patient satisfaction" },
               { value: "15%+", label: "Avg. weight loss" },
-              { value: "100%", label: "Physician-managed" },
+              { value: "1:1", label: "Physician care" },
+              { value: "100%", label: "Focused on you" },
             ].map((s, i) => (
-              <div key={s.label} className={`${i > 0 ? "border-l border-white/15 pl-8 md:pl-12" : ""}`}>
-                <p className="font-serif text-[clamp(28px,4vw,40px)] font-semibold tracking-[-0.03em] text-gold leading-[1]">
+              <div key={s.label} className={`${i > 0 ? "border-l border-white/15 pl-4 sm:pl-8 md:pl-12" : ""}`}>
+                <p className="font-serif text-[clamp(18px,3.5vw,40px)] font-semibold tracking-[-0.03em] text-gold leading-[1]">
                   {s.value}
                 </p>
-                <p className="text-[11px] uppercase tracking-[0.12em] text-white/45 mt-2">
+                <p className="text-[9px] sm:text-[11px] uppercase tracking-[0.12em] text-white/45 mt-1.5 sm:mt-2">
                   {s.label}
                 </p>
               </div>
@@ -112,7 +112,7 @@ export default function Home() {
                 The Science of{" "}<em className="text-gold">Satiety</em>
               </h2>
               <p className="text-[16px] text-white/60 leading-[1.7] mt-4 max-w-2xl">
-                GLP-1 is a hormone naturally produced in your gut. Our program
+                Your body naturally produces hormones that regulate hunger and metabolism. Our program uses FDA-approved medications that
                 enhances this signal to help you feel fuller, longer — while
                 optimizing insulin sensitivity and metabolic function.
               </p>
@@ -150,7 +150,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 { title: "Appetite Regulation", desc: "Communicates directly with the hypothalamus to quiet food noise.", iconPath: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" },
-                { title: "Insulin Sensitivity", desc: "Maintains blood sugar and regulates appetite through GLP-1 receptor activation.", iconPath: "M12 6a6 6 0 100 12 6 6 0 000-12zm0-4a10 10 0 110 20 10 10 0 010-20z" },
+                { title: "Insulin Sensitivity", desc: "Maintains blood sugar and regulates appetite through targeted receptor activation.", iconPath: "M12 6a6 6 0 100 12 6 6 0 000-12zm0-4a10 10 0 110 20 10 10 0 010-20z" },
                 { title: "Gastric Emptying", desc: "Slows digestion to ensure a sustained release of nutrients and energy.", iconPath: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" },
               ].map((card) => (
                 <div key={card.title} className="doppelrand doppelrand-dark">
@@ -313,7 +313,7 @@ export default function Home() {
                 <div className="bg-sage rounded-[18px] p-7 flex-1 card-hover border border-transparent">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="mb-4"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-8.038 0l-2.387.477a2 2 0 00-1.022.547L2 18h20l-2.572-2.572z" fill="white"/><circle cx="12" cy="7" r="4" fill="white"/></svg>
                   <h3 className="text-[16px] font-semibold tracking-[-0.01em] text-white">Science-First</h3>
-                  <p className="text-[14px] text-white/80 leading-[1.65] mt-2">FDA-approved GLP-1 agonists backed by robust clinical evidence.</p>
+                  <p className="text-[14px] text-white/80 leading-[1.65] mt-2">FDA-approved medications backed by robust clinical evidence.</p>
                 </div>
                 <div className="bg-teal rounded-[18px] p-7 flex-1 card-hover border border-transparent">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="mb-4"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z" fill="white"/></svg>

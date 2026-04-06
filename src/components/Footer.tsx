@@ -8,9 +8,9 @@ const programLinks = [
 ];
 
 const companyLinks = [
-  { label: "Our Physicians", href: "/about" },
   { label: "About", href: "/about" },
   { label: "Blog", href: "/blog" },
+  { label: "Testimonials", href: "/testimonials" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -103,7 +103,7 @@ export default function Footer() {
         <div className="mt-14 pt-6 border-t border-white/10">
           <p className="text-[12px] text-white/35 leading-relaxed max-w-3xl">
             &copy; {new Date().getFullYear()} Precision Weight + Wellness. All rights reserved.
-            Results may vary. GLP-1 medications prescribed only when medically appropriate.
+            Results may vary. Medications prescribed only when medically appropriate.
             This site does not provide medical advice.
           </p>
         </div>

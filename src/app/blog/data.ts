@@ -16,7 +16,7 @@ export const blogPosts: BlogPost[] = [
       "A comprehensive guide to GLP-1 receptor agonists — how they work, what to expect, and why they represent a breakthrough in medical weight management.",
     date: "March 15, 2026",
     category: "Medications",
-    image: "/images/blog/glp1-medications.png",
+    image: "/images/blog/glp1-medications-new.jpg",
     content: [
       "GLP-1 receptor agonists have transformed the landscape of medical weight management. Originally developed for Type 2 diabetes, medications like Semaglutide (Wegovy/Ozempic) and Tirzepatide (Mounjaro) have shown remarkable efficacy for weight loss in landmark clinical trials.",
       "GLP-1 stands for Glucagon-Like Peptide-1, a hormone naturally produced in your gut. When you eat, GLP-1 is released to signal your brain that you're full, slow gastric emptying, and regulate blood sugar. GLP-1 medications mimic this hormone, but at higher, more sustained levels than your body produces naturally.",
@@ -36,7 +36,7 @@ export const blogPosts: BlogPost[] = [
       "Not sure if you're a candidate for GLP-1 therapy? Here's a clear breakdown of eligibility criteria and what to expect from the qualification process.",
     date: "March 1, 2026",
     category: "Eligibility",
-    image: "/images/blog/eligibility-consultation.png",
+    image: "/images/blog/eligibility-consultation-new.jpg",
     content: [
       "One of the most common questions we hear at Precision Weight + Wellness is: 'Do I qualify for medical weight management?' The answer depends on several factors, but the criteria are clearer than you might think.",
       "The FDA has approved GLP-1 medications for weight management in adults who meet specific criteria. The primary measure is Body Mass Index (BMI), a calculation based on your height and weight.",
@@ -56,7 +56,7 @@ export const blogPosts: BlogPost[] = [
       "Why traditional diets fail and how modern obesity medicine — including GLP-1 therapy — addresses the biological roots of weight gain for lasting results.",
     date: "February 15, 2026",
     category: "Science",
-    image: "/images/blog/sustainable-weight-loss.png",
+    image: "/images/blog/sustainable-weight-loss-new.jpg",
     content: [
       "If you've ever lost weight only to gain it back, you're not alone — and it's not your fault. The science of obesity has advanced dramatically in recent years, revealing that weight regain after dieting is a biological response, not a failure of willpower.",
       "When you lose weight through calorie restriction alone, your body fights back. Levels of hunger hormones (like ghrelin) increase, while satiety hormones (like leptin) decrease. Your metabolic rate drops. Your brain literally rewires to make food more appealing and satisfying. This phenomenon, known as metabolic adaptation, can persist for years after weight loss.",
