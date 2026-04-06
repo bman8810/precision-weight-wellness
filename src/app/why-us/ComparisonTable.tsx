@@ -13,7 +13,7 @@ export function ComparisonTable({ contrasts }: { contrasts: Contrast[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <div className="space-y-0 divide-y divide-neutral-100">
+    <div className="space-y-0 divide-y divide-[rgba(27,42,74,0.06)]">
       {contrasts.map((c, i) => {
         const isOpen = openIndex === i;
         return (
@@ -23,7 +23,7 @@ export function ComparisonTable({ contrasts }: { contrasts: Contrast[] }) {
               className="w-full text-left grid grid-cols-1 md:grid-cols-[200px_1fr_1fr] gap-6 md:gap-10 py-8 first:pt-0 last:pb-0 group cursor-pointer"
             >
               <div className="flex items-center gap-2 md:pt-1">
-                <p className="font-serif text-lg text-soft-black">
+                <p className="font-serif text-lg text-navy">
                   {c.label}
                 </p>
                 <svg
@@ -37,10 +37,10 @@ export function ComparisonTable({ contrasts }: { contrasts: Contrast[] }) {
                 </svg>
               </div>
               <div>
-                <p className="text-xs tracking-[0.15em] uppercase text-neutral-300 mb-2">
+                <p className="text-xs tracking-[0.15em] uppercase text-light mb-2">
                   Elsewhere
                 </p>
-                <p className="text-sm text-neutral-400 leading-relaxed">
+                <p className="text-sm text-light leading-relaxed">
                   {c.elsewhere}
                 </p>
               </div>
@@ -48,7 +48,7 @@ export function ComparisonTable({ contrasts }: { contrasts: Contrast[] }) {
                 <p className="text-xs tracking-[0.15em] uppercase text-gold mb-2">
                   At Precision Weight + Wellness
                 </p>
-                <p className="text-sm text-soft-black leading-relaxed">
+                <p className="text-sm text-navy leading-relaxed">
                   {c.here}
                 </p>
               </div>
@@ -67,7 +67,7 @@ export function ComparisonTable({ contrasts }: { contrasts: Contrast[] }) {
                     {c.expanded.map((item) => (
                       <li
                         key={item}
-                        className="flex items-start gap-3 text-sm text-neutral-600 leading-relaxed"
+                        className="flex items-start gap-3 text-sm text-body leading-relaxed"
                       >
                         <span className="text-gold mt-0.5 shrink-0">&#10003;</span>
                         {item}

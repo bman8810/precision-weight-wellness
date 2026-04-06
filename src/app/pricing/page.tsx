@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "Pricing & Packages",
@@ -82,176 +84,190 @@ const faqs = [
 export default function PricingPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative pt-36 pb-24 bg-cream overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.04]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/hero-wellness.png"
-            alt=""
-            className="w-full h-full object-cover"
-            aria-hidden="true"
-          />
-        </div>
-        <div className="relative max-w-4xl mx-auto px-6 text-center">
-          <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-6">
-            Investment in your health
-          </p>
-          <h1
-            className="font-serif text-5xl md:text-6xl leading-[1.08] tracking-tight text-soft-black"
-            style={{ textWrap: "balance" }}
-          >
-            Pricing & <span className="text-gold">packages</span>
-          </h1>
-          <p className="mt-8 text-lg text-neutral-500 max-w-2xl mx-auto leading-relaxed">
-            Transparent, straightforward pricing for medically supervised weight
-            management. No hidden fees, no surprises.
-          </p>
-        </div>
+      {/* Hero — cream */}
+      <section className="bg-cream pt-28 pb-14 md:pt-36 md:pb-20">
+        <ScrollReveal>
+          <div className="max-w-[1200px] mx-auto px-5 md:px-6 text-center">
+            <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-5">
+              Investment in your health
+            </p>
+            <h1
+              className="font-serif text-[clamp(2.5rem,5vw,3.75rem)] leading-[1.08] tracking-[-0.02em] text-navy"
+              style={{ textWrap: "balance" }}
+            >
+              Pricing &amp; <em className="text-gold">packages</em>
+            </h1>
+            <p className="mt-6 text-[16px] text-body leading-[1.7] max-w-2xl mx-auto">
+              Transparent, straightforward pricing for medically supervised weight
+              management. No hidden fees, no surprises.
+            </p>
+          </div>
+        </ScrollReveal>
       </section>
 
-      {/* Pricing Tiers */}
-
-      <section className="py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {tiers.map((tier) => (
-              <div
-                key={tier.name}
-                className={`flex flex-col rounded-2xl overflow-hidden transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-2px] ${
-                  tier.highlighted
-                    ? "bg-soft-black text-white ring-2 ring-gold shadow-[0_24px_48px_-16px_rgba(0,0,0,0.2)]"
-                    : "bg-cream hover:shadow-[0_16px_40px_-12px_rgba(201,169,110,0.08)]"
-                }`}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={tier.image}
-                  alt={`${tier.name} package`}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="flex flex-col flex-1 p-10">
-                  <p className="text-[11px] tracking-[0.2em] uppercase text-gold mb-3">
-                    {tier.name}
-                  </p>
-                  <p
-                    className={`font-serif text-4xl ${
-                      tier.highlighted ? "text-white" : "text-soft-black"
+      {/* Pricing Tiers — white */}
+      <section className="py-14 md:py-24 bg-white">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
+          <ScrollReveal stagger={120}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {tiers.map((tier) => (
+                <div
+                  key={tier.name}
+                  className={
+                    tier.highlighted
+                      ? "rounded-2xl overflow-hidden"
+                      : "doppelrand doppelrand-light"
+                  }
+                >
+                  <div
+                    className={`flex flex-col overflow-hidden h-full ${
+                      tier.highlighted
+                        ? "bg-navy text-white rounded-2xl ring-2 ring-gold shadow-[0_24px_48px_-16px_rgba(27,42,74,0.25)]"
+                        : "bg-white rounded-[18px] border border-[rgba(27,42,74,0.04)] card-hover"
                     }`}
                   >
-                    {tier.price}
-                  </p>
-                  <p className="text-sm mt-1 text-neutral-400">
-                    {tier.period}
-                  </p>
-                  <ul className="mt-8 space-y-3 flex-1">
-                    {tier.features.map((feature) => (
-                      <li
-                        key={feature}
-                        className={`flex items-start gap-3 text-sm ${
-                          tier.highlighted
-                            ? "text-neutral-300"
-                            : "text-neutral-500"
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src={tier.image}
+                        alt={`${tier.name} package`}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="flex flex-col flex-1 p-10">
+                      <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-3">
+                        {tier.name}
+                      </p>
+                      <p
+                        className={`font-serif text-[clamp(2rem,4vw,2.5rem)] tracking-[-0.02em] ${
+                          tier.highlighted ? "text-white" : "text-navy"
                         }`}
                       >
-                        <span className="text-gold mt-0.5 shrink-0">&#10003;</span>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <Link
-                    href={`/book?tier=${tier.name.toLowerCase()}`}
-                    className={`block text-center mt-10 text-sm tracking-wide uppercase px-6 py-3 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                      tier.highlighted
-                        ? "bg-gold hover:bg-gold-dark text-white hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
-                        : "border border-neutral-300 text-neutral-600 hover:border-gold hover:text-gold"
-                    }`}
-                  >
-                    Get Started
-                  </Link>
+                        {tier.price}
+                      </p>
+                      <p className="text-[13px] mt-1 text-light">
+                        {tier.period}
+                      </p>
+                      <ul className="mt-8 space-y-3 flex-1">
+                        {tier.features.map((feature) => (
+                          <li
+                            key={feature}
+                            className={`flex items-start gap-3 text-[15px] leading-[1.65] ${
+                              tier.highlighted
+                                ? "text-white/65"
+                                : "text-body"
+                            }`}
+                          >
+                            <span className="w-5 h-5 rounded-full bg-sage/12 flex items-center justify-center shrink-0 mt-0.5">
+                              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                <path d="M2.5 6L5 8.5L9.5 3.5" stroke="#7BAE8E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                              </svg>
+                            </span>
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="mt-10">
+                        <Link
+                          href={`/book?tier=${tier.name.toLowerCase()}`}
+                          className={`block text-center w-full ${
+                            tier.highlighted
+                              ? "btn-gold"
+                              : "btn-secondary"
+                          }`}
+                        >
+                          Get Started
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-          <p className="text-center mt-8 text-sm text-neutral-400">
+              ))}
+            </div>
+          </ScrollReveal>
+          <p className="text-center mt-8 text-[13px] text-light">
             Prices are subject to change. Contact us for the most current
             pricing information.
           </p>
         </div>
       </section>
 
-      {/* Healthie Note */}
-      <section className="relative py-24 bg-cream overflow-hidden">
-        <div className="absolute top-1/2 right-0 translate-x-1/3 -translate-y-1/2 w-[400px] h-[400px] bg-gold/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="relative max-w-4xl mx-auto px-6 text-center">
-          <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
-            Easy scheduling & payments
-          </p>
-          <h2 className="font-serif text-3xl md:text-4xl tracking-tight text-soft-black">
-            Powered by Healthie
-          </h2>
-          <p className="mt-6 text-neutral-500 leading-relaxed">
-            Scheduling appointments and managing payments is simple and secure
-            through our Healthie patient portal. You&apos;ll receive access
-            after your initial consultation.
-          </p>
-          <Link
-            href="/book"
-            className="inline-block mt-10 border border-neutral-300 text-neutral-600 hover:border-gold hover:text-gold text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px]"
-          >
-            Book an Appointment
-          </Link>
-        </div>
+      {/* Healthie Note — cream */}
+      <section className="py-14 md:py-24 bg-cream">
+        <ScrollReveal>
+          <div className="max-w-[1200px] mx-auto px-5 md:px-6 text-center">
+            <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-3">
+              Easy scheduling &amp; payments
+            </p>
+            <h2 className="font-serif text-[clamp(2rem,4vw,2.75rem)] leading-[1.1] tracking-[-0.02em] text-navy">
+              Powered by <em className="text-gold">Healthie</em>
+            </h2>
+            <p className="mt-4 text-[16px] text-body leading-[1.7] max-w-2xl mx-auto">
+              Scheduling appointments and managing payments is simple and secure
+              through our Healthie patient portal. You&apos;ll receive access
+              after your initial consultation.
+            </p>
+            <div className="mt-8">
+              <Link href="/book" className="btn-secondary">
+                Book an Appointment
+              </Link>
+            </div>
+          </div>
+        </ScrollReveal>
       </section>
 
-      {/* FAQs — side-by-side layout */}
-      <section className="py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
+      {/* FAQs — white */}
+      <section className="py-14 md:py-24 bg-white">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16 items-start">
-            <div className="lg:sticky lg:top-32">
-              <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
-                Common questions
-              </p>
-              <h2 className="font-serif text-4xl md:text-5xl tracking-tight text-soft-black">
-                Pricing FAQs
-              </h2>
-            </div>
-            <div className="space-y-10">
-              {faqs.map((faq) => (
-                <div key={faq.q} className="border-b border-neutral-100 pb-10 last:border-0">
-                  <h3 className="font-serif text-lg text-soft-black">
-                    {faq.q}
-                  </h3>
-                  <p className="mt-3 text-sm text-neutral-500 leading-relaxed">
-                    {faq.a}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <ScrollReveal>
+              <div className="lg:sticky lg:top-32">
+                <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-3">
+                  Common questions
+                </p>
+                <h2 className="font-serif text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.1] tracking-[-0.02em] text-navy">
+                  Pricing <em className="text-gold">FAQs</em>
+                </h2>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={150}>
+              <div className="space-y-10">
+                {faqs.map((faq) => (
+                  <div key={faq.q} className="border-b border-[rgba(27,42,74,0.04)] pb-10 last:border-0">
+                    <h3 className="font-serif text-[18px] tracking-[-0.01em] text-navy">
+                      {faq.q}
+                    </h3>
+                    <p className="mt-3 text-[15px] text-body leading-[1.65]">
+                      {faq.a}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="relative py-32 bg-soft-black text-center overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="relative max-w-2xl mx-auto px-6">
-          <h2
-            className="font-serif text-4xl md:text-5xl tracking-tight text-white"
-            style={{ textWrap: "balance" }}
-          >
-            Invest in your health today
-          </h2>
-          <p className="mt-6 text-neutral-400 leading-relaxed">
-            Schedule a consultation to discuss which plan is right for you.
-          </p>
-          <Link
-            href="/book"
-            className="inline-block mt-10 bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-10 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
-          >
-            Book Your Consultation
-          </Link>
-        </div>
+      {/* CTA — navy-deep */}
+      <section className="py-14 md:py-24 bg-navy-deep text-center">
+        <ScrollReveal>
+          <div className="max-w-[680px] mx-auto px-5 md:px-6">
+            <h2
+              className="font-serif text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.1] tracking-[-0.02em] text-white"
+              style={{ textWrap: "balance" }}
+            >
+              Invest in your <em className="text-gold">health</em> today
+            </h2>
+            <p className="mt-4 text-[16px] text-white/60 leading-[1.7]">
+              Schedule a consultation to discuss which plan is right for you.
+            </p>
+            <div className="mt-8">
+              <Link href="/book" className="btn-gold">
+                Book Your Consultation
+              </Link>
+            </div>
+          </div>
+        </ScrollReveal>
       </section>
     </>
   );

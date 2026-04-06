@@ -20,18 +20,18 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-36 pb-24 bg-cream">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-6">
+      <section className="pt-28 pb-14 md:pt-36 md:pb-20 bg-cream">
+        <div className="max-w-[1200px] mx-auto px-6 text-center">
+          <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-6">
             Contact Us
           </p>
           <h1
-            className="font-serif text-5xl md:text-6xl leading-[1.08] tracking-tight text-soft-black"
+            className="font-serif text-5xl md:text-6xl leading-[1.08] tracking-[-0.02em] text-navy"
             style={{ textWrap: "balance" }}
           >
-            Get in <span className="text-gold">touch</span>
+            Get in <em className="text-gold">touch</em>
           </h1>
-          <p className="mt-8 text-lg text-neutral-500 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-8 text-lg text-body max-w-2xl mx-auto leading-relaxed">
             Have a question or want to learn more? Send us a message and
             we&apos;ll get back to you shortly.
           </p>
@@ -39,12 +39,12 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Form */}
-      <section className="py-24 bg-white">
+      <section className="py-14 md:py-24 bg-white">
         <div className="max-w-2xl mx-auto px-6">
           {submitted ? (
-            <div className="bg-cream p-10 rounded-2xl text-center">
-              <p className="font-serif text-2xl text-soft-black">Thank you</p>
-              <p className="mt-4 text-neutral-500">
+            <div className="bg-cream p-10 rounded-[18px] text-center">
+              <p className="font-serif text-2xl text-navy">Thank you</p>
+              <p className="mt-4 text-body">
                 We&apos;ve received your message and will be in touch shortly.
               </p>
             </div>
@@ -53,7 +53,7 @@ export default function ContactPage() {
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm text-neutral-600 mb-2"
+                  className="block text-sm text-body mb-2"
                 >
                   Full name
                 </label>
@@ -65,14 +65,14 @@ export default function ContactPage() {
                   onChange={(e) =>
                     setForm({ ...form, name: e.target.value })
                   }
-                  className="w-full px-5 py-4 border border-neutral-200 rounded-xl focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] text-sm bg-white"
+                  className="w-full px-5 py-4 border border-[rgba(27,42,74,0.06)] rounded-xl focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] text-sm bg-white"
                   placeholder="Your full name"
                 />
               </div>
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm text-neutral-600 mb-2"
+                  className="block text-sm text-body mb-2"
                 >
                   Email address
                 </label>
@@ -84,14 +84,14 @@ export default function ContactPage() {
                   onChange={(e) =>
                     setForm({ ...form, email: e.target.value })
                   }
-                  className="w-full px-5 py-4 border border-neutral-200 rounded-xl focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] text-sm bg-white"
+                  className="w-full px-5 py-4 border border-[rgba(27,42,74,0.06)] rounded-xl focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] text-sm bg-white"
                   placeholder="you@example.com"
                 />
               </div>
               <div>
                 <label
                   htmlFor="phone"
-                  className="block text-sm text-neutral-600 mb-2"
+                  className="block text-sm text-body mb-2"
                 >
                   Phone number
                 </label>
@@ -102,14 +102,14 @@ export default function ContactPage() {
                   onChange={(e) =>
                     setForm({ ...form, phone: e.target.value })
                   }
-                  className="w-full px-5 py-4 border border-neutral-200 rounded-xl focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] text-sm bg-white"
+                  className="w-full px-5 py-4 border border-[rgba(27,42,74,0.06)] rounded-xl focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] text-sm bg-white"
                   placeholder="(212) 555-0000"
                 />
               </div>
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-sm text-neutral-600 mb-2"
+                  className="block text-sm text-body mb-2"
                 >
                   Message
                 </label>
@@ -121,20 +121,20 @@ export default function ContactPage() {
                   onChange={(e) =>
                     setForm({ ...form, message: e.target.value })
                   }
-                  className="w-full px-5 py-4 border border-neutral-200 rounded-xl focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] text-sm bg-white resize-none"
+                  className="w-full px-5 py-4 border border-[rgba(27,42,74,0.06)] rounded-xl focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] text-sm bg-white resize-none"
                   placeholder="Tell us about your goals or ask any questions..."
                 />
               </div>
               <button
                 type="submit"
-                className="bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] w-full hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
+                className="btn-gold w-full"
               >
                 Send Message
               </button>
             </form>
           )}
 
-          <p className="mt-8 text-center text-sm text-neutral-400">
+          <p className="mt-8 text-center text-sm text-light">
             Or email us directly at{" "}
             <a
               href="mailto:hello@precisionww.com"
@@ -147,21 +147,21 @@ export default function ContactPage() {
       </section>
 
       {/* Book CTA */}
-      <section className="relative py-32 bg-soft-black text-center overflow-hidden">
+      <section className="relative py-14 md:py-24 bg-navy-deep text-center overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/5 rounded-full blur-3xl pointer-events-none" />
         <div className="relative max-w-2xl mx-auto px-6">
           <h2
-            className="font-serif text-4xl md:text-5xl tracking-tight text-white"
+            className="font-serif text-4xl md:text-5xl tracking-[-0.02em] text-white"
             style={{ textWrap: "balance" }}
           >
             Prefer to book directly?
           </h2>
-          <p className="mt-6 text-neutral-400 leading-relaxed">
+          <p className="mt-6 text-light leading-relaxed">
             Schedule your consultation online.
           </p>
           <Link
             href="/book"
-            className="inline-block mt-10 bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-10 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
+            className="btn-gold inline-block mt-10"
           >
             Schedule Your Consultation
           </Link>

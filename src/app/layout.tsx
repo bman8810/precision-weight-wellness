@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Outfit } from "next/font/google";
+import { Playfair_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,9 +10,9 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-const outfit = Outfit({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-outfit",
+  variable: "--font-dm-sans",
   display: "swap",
 });
 
@@ -60,8 +60,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${outfit.variable}`}>
-      <body className="font-sans antialiased bg-white text-neutral-900">
+    <html lang="en" className={`${playfair.variable} ${dmSans.variable}`}>
+      <body className="font-sans antialiased bg-white text-[#4A5568]">
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>

@@ -1,75 +1,110 @@
 import Link from "next/link";
 
+const programLinks = [
+  { label: "How It Works", href: "/how-it-works" },
+  { label: "The Science", href: "/science" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Eligibility", href: "/eligibility" },
+];
+
+const companyLinks = [
+  { label: "Our Physicians", href: "/about" },
+  { label: "About", href: "/about" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact" },
+];
+
+const legalLinks = [
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms of Service", href: "/terms" },
+  { label: "HIPAA Notice", href: "/hipaa" },
+];
+
 export default function Footer() {
   return (
-    <footer className="bg-soft-black text-white">
-      <div className="max-w-7xl mx-auto px-6 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-14">
+    <footer className="bg-[#163D3A]">
+      <div className="max-w-[1200px] mx-auto px-5 md:px-6 py-14 md:py-24">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
           {/* Brand */}
-          <div>
-            <p className="font-serif text-2xl tracking-wide">LIORA</p>
-            <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mt-1">
-              Precision Weight + Wellness
+          <div className="md:col-span-4">
+            <p className="text-[20px] tracking-[-0.02em]">
+              <span className="font-serif text-white">Precision </span>
+              <span className="font-serif text-gold">W+W</span>
             </p>
-            <p className="text-sm text-neutral-400 mt-6 leading-relaxed max-w-xs">
-              Medically supervised weight management at Liora. Science-based,
-              medication-enabled programs led by Dr. Libby Rhee.
+            <p className="text-[15px] text-white/50 leading-[1.65] mt-3 max-w-xs">
+              Clinical-grade weight management, led by board-certified physicians.
             </p>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <p className="text-[11px] tracking-[0.2em] uppercase text-gold mb-5">
-              Quick links
-            </p>
-            <nav className="space-y-3">
-              {[
-                { label: "About", href: "/about" },
-                { label: "Why Us", href: "/why-us" },
-                { label: "How It Works", href: "/how-it-works" },
-                { label: "Eligibility Check", href: "/eligibility" },
-                { label: "Pricing", href: "/pricing" },
-                { label: "The Science", href: "/science" },
-                { label: "Blog", href: "/blog" },
-                { label: "Testimonials", href: "/testimonials" },
-              ].map((s) => (
-                <Link
-                  key={s.label}
-                  href={s.href}
-                  className="block text-sm text-neutral-400 hover:text-white transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
-                >
-                  {s.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <p className="text-[11px] tracking-[0.2em] uppercase text-gold mb-5">
-              Contact
-            </p>
-            <div className="space-y-3 text-sm text-neutral-400">
+            <p className="text-[15px] mt-4">
               <a
                 href="mailto:hello@precisionww.com"
-                className="block hover:text-white transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                className="text-white/50 hover:text-gold transition-colors"
               >
                 hello@precisionww.com
               </a>
+            </p>
+          </div>
+
+          {/* Program */}
+          <div className="md:col-span-2 md:col-start-6">
+            <p className="text-[10.5px] font-semibold uppercase tracking-[0.14em] text-gold mb-4">
+              Program
+            </p>
+            <div className="space-y-2.5">
+              {programLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="block text-[15px] text-white/50 hover:text-gold transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Company */}
+          <div className="md:col-span-2">
+            <p className="text-[10.5px] font-semibold uppercase tracking-[0.14em] text-gold mb-4">
+              Company
+            </p>
+            <div className="space-y-2.5">
+              {companyLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="block text-[15px] text-white/50 hover:text-gold transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Legal */}
+          <div className="md:col-span-2">
+            <p className="text-[10.5px] font-semibold uppercase tracking-[0.14em] text-gold mb-4">
+              Legal
+            </p>
+            <div className="space-y-2.5">
+              {legalLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="block text-[15px] text-white/50 hover:text-gold transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-neutral-800 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-neutral-500">
-            &copy; {new Date().getFullYear()} Precision Weight + Wellness at
-            Liora. All rights reserved.
-          </p>
-          <p className="text-xs text-neutral-500 max-w-2xl text-center md:text-right leading-relaxed">
-            This program is not a substitute for emergency medical care.
-            Results vary by individual. All treatments are provided under the
-            care of a licensed physician.
+        {/* Bottom */}
+        <div className="mt-14 pt-6 border-t border-white/10">
+          <p className="text-[12px] text-white/35 leading-relaxed max-w-3xl">
+            &copy; {new Date().getFullYear()} Precision Weight + Wellness. All rights reserved.
+            Results may vary. GLP-1 medications prescribed only when medically appropriate.
+            This site does not provide medical advice.
           </p>
         </div>
       </div>

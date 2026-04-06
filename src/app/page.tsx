@@ -1,457 +1,486 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
   title:
     "Precision Weight + Wellness | Medical Weight Loss NYC | Dr. Libby Rhee",
 };
 
-const steps = [
-  {
-    num: "01",
-    title: "Initial Consultation",
-    desc: "Meet with Dr. Rhee for a comprehensive health assessment, lab review, and discussion of your weight loss goals and medication options.",
-  },
-  {
-    num: "02",
-    title: "Your Personalized Plan",
-    desc: "Receive a customized treatment protocol — medication selection, dosing schedule, nutritional guidance, and lifestyle support — all designed for your unique biology.",
-  },
-  {
-    num: "03",
-    title: "Treatment & Ongoing Support",
-    desc: "Begin your medication with careful dose titration, regular physician check-ins, lab monitoring, and continuous support throughout your journey.",
-  },
-];
-
-const reasons = [
-  {
-    title: "Board-Certified Physician",
-    desc: "Dr. Libby Rhee, DO, MS, FAAD brings years of medical expertise and a holistic approach to every patient's weight management journey.",
-  },
-  {
-    title: "Science-Based Approach",
-    desc: "We use FDA-approved weight loss medications — including GLP-1 receptor agonists, dual agonists, and emerging therapies — backed by robust clinical evidence for safe, significant weight loss.",
-  },
-  {
-    title: "Multiple Locations",
-    desc: "We practice in New York, Connecticut, and Michigan — in-person and via telehealth.",
-  },
-  {
-    title: "Personalized Care",
-    desc: "No cookie-cutter programs. Every treatment plan is tailored to your unique biology, health conditions, and lifestyle goals.",
-  },
-];
+/* Reusable trailing arrow for CTAs */
+function ArrowIcon({ className = "text-current" }: { className?: string }) {
+  return (
+    <span className={`ml-2 w-7 h-7 rounded-full bg-current/15 flex items-center justify-center ${className}`}>
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <path d="M3.5 8h9M8.5 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </span>
+  );
+}
 
 export default function Home() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative min-h-[100dvh] flex items-center bg-cream pt-32 pb-16 overflow-hidden">
-        {/* Subtle radial glow behind content */}
-        <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <p
-              className="animate-fade-up text-[11px] tracking-[0.3em] uppercase text-gold mb-6"
-              style={{ animationDelay: "0.1s" }}
-            >
-              Medically Supervised Weight Loss
-            </p>
-            <h1
-              className="animate-fade-up font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.08] tracking-tight text-soft-black"
-              style={{ animationDelay: "0.2s", textWrap: "balance" }}
-            >
-              Your Weight Loss
-              <br />
-              Journey,{" "}
-              <span className="text-gold">Guided by Science</span>
-            </h1>
-            <p
-              className="animate-fade-up mt-8 text-lg text-neutral-500 max-w-lg leading-relaxed"
-              style={{ animationDelay: "0.35s" }}
-            >
-              Board-certified physician Dr. Libby Rhee offers personalized medical
-              weight management — FDA-approved medications, metabolic agents,
-              and behavioral support
-              — in a premium Upper East Side setting.
-            </p>
-            <div
-              className="animate-fade-up mt-10 flex flex-wrap gap-4"
-              style={{ animationDelay: "0.5s" }}
-            >
-              <Link
-                href="/contact"
-                className="bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
-              >
-                Start Your Journey
-              </Link>
-              <Link
-                href="/eligibility"
-                className="border border-neutral-300 text-neutral-600 hover:border-gold hover:text-gold text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px]"
-              >
-                Check Eligibility
-              </Link>
-            </div>
-          </div>
-          <div
-            className="animate-fade-up relative hidden lg:block"
-            style={{ animationDelay: "0.4s" }}
-          >
-            <div className="absolute -inset-6 bg-gradient-to-br from-gold/8 via-transparent to-gold/5 rounded-[3rem] blur-2xl" />
-            <div className="relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-[0_32px_64px_-16px_rgba(201,169,110,0.18)]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/dr-rhee.jpg"
-                alt="GLP-1 injection pen, fresh apple, and water — precision medical weight loss"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-soft-black/20 via-transparent to-transparent" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Bar */}
-      <section className="bg-soft-black py-16">
-        <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-3 gap-10 text-center">
-          {[
-            { value: "15%+", label: "Average Body Weight Lost" },
-            { value: "FDA", label: "Approved Medications" },
-            { value: "1:1", label: "Physician-Led Care" },
-          ].map((s) => (
-            <div key={s.label}>
-              <p className="font-serif text-3xl md:text-4xl text-gold tabular-nums">
-                {s.value}
-              </p>
-              <p className="text-[11px] tracking-[0.2em] uppercase text-neutral-400 mt-3">
-                {s.label}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section className="py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-xl mb-16">
-            <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
-              Why Choose Us
-            </p>
-            <h2
-              className="font-serif text-4xl md:text-5xl tracking-tight text-soft-black"
-              style={{ textWrap: "balance" }}
-            >
-              Expert Care You Can Trust
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {reasons.map((r) => (
-              <div
-                key={r.title}
-                className="bg-cream p-10 rounded-2xl transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-2px] hover:shadow-[0_16px_40px_-12px_rgba(201,169,110,0.08)]"
-              >
-                <h3 className="font-serif text-xl text-soft-black">
-                  {r.title}
-                </h3>
-                <p className="mt-4 text-sm text-neutral-500 leading-relaxed">
-                  {r.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-12">
-            <Link
-              href="/why-us"
-              className="inline-block text-sm tracking-wide uppercase text-gold hover:text-gold-dark transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
-            >
-              Learn what makes us different &rarr;
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works — editorial layout */}
-      <section className="py-32 bg-cream">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-xl mb-20">
-            <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
-              How It Works
-            </p>
-            <h2
-              className="font-serif text-4xl md:text-5xl tracking-tight text-soft-black"
-              style={{ textWrap: "balance" }}
-            >
-              Three simple steps to lasting results
-            </h2>
-          </div>
-          <div className="max-w-4xl space-y-16">
-            {steps.map((step) => (
-              <div
-                key={step.num}
-                className="flex gap-8 md:gap-12 items-start group"
-              >
-                <p className="font-serif text-5xl md:text-6xl text-gold/30 group-hover:text-gold transition-colors duration-500 shrink-0 w-16 md:w-24 tabular-nums leading-none pt-1">
-                  {step.num}
-                </p>
-                <div className="border-l border-neutral-200 pl-8 md:pl-12 group-hover:border-gold/40 transition-colors duration-500">
-                  <h3 className="font-serif text-2xl text-soft-black">
-                    {step.title}
-                  </h3>
-                  <p className="mt-4 text-neutral-500 leading-relaxed max-w-lg">
-                    {step.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-16">
-            <Link
-              href="/how-it-works"
-              className="inline-block text-sm tracking-wide uppercase text-gold hover:text-gold-dark transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
-            >
-              Learn more about our process &rarr;
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Where We Practice — map */}
-      <section className="py-32 bg-soft-black overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+      {/* ── Hero — navy ── */}
+      <section className="bg-navy pt-20">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6 pt-14 pb-14 md:pt-28 md:pb-28">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-[72px] items-center">
             <div>
-              <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-6">
-                Multi-state practice
-              </p>
-              <h2
-                className="font-serif text-4xl md:text-5xl tracking-tight text-white"
-                style={{ textWrap: "balance" }}
+              <p
+                className="animate-fade-up flex items-center gap-2 text-sage text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-5"
+                style={{ animationDelay: "0.1s" }}
               >
-                Where we practice
-              </h2>
-              <p className="mt-6 text-neutral-400 leading-relaxed max-w-lg">
-                Dr. Rhee is licensed to provide medical weight management
-                across three states — with in-person visits and telehealth
-                available for qualifying patients.
+                <span className="w-1.5 h-1.5 rounded-full bg-sage" />
+                Precision Weight + Wellness
               </p>
-            </div>
-
-            {/* Minimal geographic map */}
-            <div className="relative">
-              <svg
-                viewBox="0 0 480 340"
-                fill="none"
-                className="w-full max-w-md mx-auto"
-                role="img"
-                aria-label="Map showing practice locations in New York, Connecticut, and Michigan"
+              <h1
+                className="animate-fade-up font-serif text-[clamp(2.75rem,5.5vw,4.25rem)] leading-[1.08] tracking-[-0.02em] text-white"
+                style={{ animationDelay: "0.2s" }}
               >
-                {/* Grid lines */}
-                <line x1="0" y1="85" x2="480" y2="85" stroke="#2d2d2d" strokeWidth="0.5" strokeDasharray="4 8" />
-                <line x1="0" y1="170" x2="480" y2="170" stroke="#2d2d2d" strokeWidth="0.5" strokeDasharray="4 8" />
-                <line x1="0" y1="255" x2="480" y2="255" stroke="#2d2d2d" strokeWidth="0.5" strokeDasharray="4 8" />
-                <line x1="120" y1="0" x2="120" y2="340" stroke="#2d2d2d" strokeWidth="0.5" strokeDasharray="4 8" />
-                <line x1="240" y1="0" x2="240" y2="340" stroke="#2d2d2d" strokeWidth="0.5" strokeDasharray="4 8" />
-                <line x1="360" y1="0" x2="360" y2="340" stroke="#2d2d2d" strokeWidth="0.5" strokeDasharray="4 8" />
-
-                {/* Connecting arcs */}
-                <path d="M 145 140 Q 270 80 370 155" stroke="#c9a96e" strokeWidth="1" opacity="0.15" />
-                <path d="M 370 155 L 395 105" stroke="#c9a96e" strokeWidth="1" opacity="0.15" />
-
-                {/* Michigan */}
-                <circle cx="145" cy="140" r="28" fill="#c9a96e" opacity="0.06" />
-                <circle cx="145" cy="140" r="14" fill="#c9a96e" opacity="0.12" />
-                <circle cx="145" cy="140" r="5.5" fill="#c9a96e" />
-                <text x="145" y="188" textAnchor="middle" fill="#c9a96e" fontSize="12" letterSpacing="0.12em" className="font-sans">MI</text>
-                <text x="145" y="206" textAnchor="middle" fill="#555" fontSize="9" className="font-sans">Michigan</text>
-
-                {/* Connecticut — above New York */}
-                <circle cx="395" cy="105" r="22" fill="#c9a96e" opacity="0.06" />
-                <circle cx="395" cy="105" r="11" fill="#c9a96e" opacity="0.12" />
-                <circle cx="395" cy="105" r="4.5" fill="#c9a96e" />
-                <text x="430" y="100" textAnchor="start" fill="#c9a96e" fontSize="12" letterSpacing="0.12em" className="font-sans">CT</text>
-                <text x="430" y="116" textAnchor="start" fill="#555" fontSize="9" className="font-sans">Connecticut</text>
-
-                {/* New York — primary, largest marker */}
-                <circle cx="370" cy="155" r="38" fill="#c9a96e" opacity="0.06" />
-                <circle cx="370" cy="155" r="20" fill="#c9a96e" opacity="0.12" />
-                <circle cx="370" cy="155" r="8" fill="#c9a96e" />
-                <text x="370" y="210" textAnchor="middle" fill="#c9a96e" fontSize="14" fontWeight="500" letterSpacing="0.12em" className="font-sans">NY</text>
-                <text x="370" y="227" textAnchor="middle" fill="#555" fontSize="9" className="font-sans">New York</text>
-              </svg>
+                Your journey,
+                <br />
+                <em className="text-gold">refined.</em>
+              </h1>
+              <p
+                className="animate-fade-up text-[16px] text-white/65 leading-[1.7] mt-6 max-w-md"
+                style={{ animationDelay: "0.35s" }}
+              >
+                A clinical-grade, doctor-led GLP-1 weight management program
+                that bridges the gap between metabolic science and personal
+                wellness.
+              </p>
+              <div
+                className="animate-fade-up mt-8 flex flex-col sm:flex-row gap-3"
+                style={{ animationDelay: "0.5s" }}
+              >
+                <Link href="/book" className="btn-gold w-full sm:w-auto justify-center group">
+                  Start your journey
+                  <ArrowIcon className="text-navy-deep transition-transform duration-500 group-hover:translate-x-0.5" />
+                </Link>
+                <Link
+                  href="/science"
+                  className="inline-flex items-center justify-center text-[15px] font-medium text-white/70 border border-white/25 rounded-full px-8 py-[15px] min-h-[48px] hover:bg-white/10 hover:text-white active:scale-[0.98] w-full sm:w-auto"
+                >
+                  View science
+                </Link>
+              </div>
             </div>
-          </div>
 
-          {/* Location detail cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20">
-            <div className="border border-neutral-800 rounded-2xl p-8 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-gold/30">
-              <p className="text-[11px] tracking-[0.2em] uppercase text-gold mb-3">
-                New York
-              </p>
-              <p className="font-serif text-xl text-white">
-                In-person + telehealth
-              </p>
-              <p className="mt-4 text-sm text-neutral-400">
-                New York City &amp; Middletown, NY
-              </p>
-            </div>
-            <div className="border border-neutral-800 rounded-2xl p-8 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-gold/30">
-              <p className="text-[11px] tracking-[0.2em] uppercase text-gold mb-3">
-                Connecticut
-              </p>
-              <p className="font-serif text-xl text-white">Telehealth</p>
-              <p className="mt-2 text-sm text-neutral-500">In-person coming soon</p>
-              <p className="mt-4 text-sm text-neutral-400">
-                Virtual consultations available for qualifying patients
-                statewide.
-              </p>
-            </div>
-            <div className="border border-neutral-800 rounded-2xl p-8 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-gold/30">
-              <p className="text-[11px] tracking-[0.2em] uppercase text-gold mb-3">
-                Michigan
-              </p>
-              <p className="font-serif text-xl text-white">Telehealth</p>
-              <p className="mt-2 text-sm text-neutral-500">In-person coming soon</p>
-              <p className="mt-4 text-sm text-neutral-400">
-                Virtual consultations available for qualifying patients
-                statewide.
-              </p>
+            {/* Hero images — Doppelrand shells */}
+            <div
+              className="animate-fade-up grid grid-cols-2 gap-4"
+              style={{ animationDelay: "0.4s" }}
+            >
+              <div className="doppelrand doppelrand-dark">
+                <div className="rounded-[16px] overflow-hidden aspect-[3/4]">
+                  <Image
+                    src="/images/apple/warm-products.jpg"
+                    alt="GLP-1 weight loss medications"
+                    width={400}
+                    height={533}
+                    className="w-full h-full object-cover"
+                    priority
+                  />
+                </div>
+              </div>
+              <div className="doppelrand doppelrand-dark">
+                <div className="rounded-[16px] overflow-hidden aspect-[3/4]">
+                  <Image
+                    src="/images/apple/doctor-portrait.jpg"
+                    alt="Dr. Libby Rhee"
+                    width={400}
+                    height={533}
+                    className="w-full h-full object-cover"
+                    priority
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Results / Testimonials Teaser — featured layout */}
-      <section className="py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-xl mb-16">
-            <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
-              Patient Results
-            </p>
-            <h2
-              className="font-serif text-4xl md:text-5xl tracking-tight text-soft-black"
-              style={{ textWrap: "balance" }}
-            >
-              Real people, real results
-            </h2>
-            <p className="mt-6 text-neutral-500 leading-relaxed">
-              Our patients are achieving life-changing results with medically
-              supervised medical weight management. Clinical studies show average weight loss
-              of 15-20% of body weight.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Featured testimonial */}
-            <div className="bg-cream p-10 md:p-14 rounded-2xl md:row-span-2 flex flex-col justify-center transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_16px_40px_-12px_rgba(201,169,110,0.08)]">
-              <div className="flex gap-1 text-gold mb-6">
-                {[...Array(5)].map((_, j) => (
-                  <span key={j} className="text-lg">&#9733;</span>
-                ))}
-              </div>
-              <p className="text-lg text-neutral-600 leading-relaxed italic">
-                &ldquo;The program has completely changed my relationship with food. I&apos;ve lost 45 pounds and feel better than I have in years.&rdquo;
-              </p>
-              <div className="mt-8">
-                <p className="font-medium text-soft-black">Sarah M.</p>
-                <p className="text-xs text-neutral-400 mt-1">Middletown, NY</p>
-              </div>
-            </div>
-            {/* Supporting testimonials */}
-            {[
-              {
-                quote:
-                  "Dr. Rhee took the time to understand my health history and created a plan that actually works. The support has been incredible.",
-                name: "James R.",
-                city: "New Milford, CT",
-              },
-              {
-                quote:
-                  "I appreciate how Dr. Rhee explains everything clearly. She helped me understand that weight loss is a medical issue, not a personal failing. That shifted my entire mindset.",
-                name: "Robert T.",
-                city: "Kalamazoo, MI",
-              },
-            ].map((t, i) => (
-              <div
-                key={i}
-                className="bg-cream p-8 rounded-2xl transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_16px_40px_-12px_rgba(201,169,110,0.08)]"
-              >
-                <div className="flex gap-1 text-gold mb-4">
-                  {[...Array(5)].map((_, j) => (
-                    <span key={j}>&#9733;</span>
-                  ))}
-                </div>
-                <p className="text-sm text-neutral-600 leading-relaxed italic">
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-                <div className="mt-5">
-                  <p className="text-sm font-medium text-soft-black">
-                    {t.name}
+      {/* ── Trust Stats — cream ── */}
+      <section className="bg-cream py-14 md:py-20">
+        <ScrollReveal>
+          <div className="max-w-[1200px] mx-auto px-5 md:px-6">
+            <div className="grid grid-cols-3 gap-6 md:gap-10 text-center">
+              {[
+                { value: "15–22%", label: "Average body weight lost" },
+                { value: "FDA", label: "Approved medications" },
+                { value: "1:1", label: "Physician-led care" },
+              ].map((s, i) => (
+                <div key={s.label} className={`${i > 0 ? "border-l border-[rgba(27,42,74,0.08)]" : ""} px-2`}>
+                  <p className="font-serif text-[clamp(28px,4vw,44px)] font-semibold tracking-[-0.03em] text-gold leading-[1]">
+                    {s.value}
                   </p>
-                  <p className="text-xs text-neutral-400">{t.city}</p>
+                  <p className="text-[10.5px] uppercase tracking-[0.14em] font-semibold text-light mt-3">
+                    {s.label}
+                  </p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-          <div className="mt-12">
-            <Link
-              href="/testimonials"
-              className="inline-block text-sm tracking-wide uppercase text-gold hover:text-gold-dark transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]"
-            >
-              See all testimonials &rarr;
+        </ScrollReveal>
+      </section>
+
+      {/* ── The Science of Satiety — teal to navy gradient ── */}
+      <section
+        className="py-14 md:py-24"
+        style={{ background: "linear-gradient(180deg, #1D5C4D 0%, #0F1D35 100%)" }}
+      >
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
+          <ScrollReveal>
+            <div className="mb-16">
+              <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-3">Clinical science</p>
+              <h2 className="font-serif text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.1] tracking-[-0.02em] text-white max-w-xl">
+                The Science of{" "}<em className="text-gold">Satiety</em>
+              </h2>
+              <p className="text-[16px] text-white/60 leading-[1.7] mt-4 max-w-2xl">
+                GLP-1 is a hormone naturally produced in your gut. Our program
+                enhances this signal to help you feel fuller, longer — while
+                optimizing insulin sensitivity and metabolic function.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={200}>
+            <div className="space-y-6 mb-16 max-w-xl">
+              {[
+                { name: "Semaglutide", pct: 15, width: "67%" },
+                { name: "Tirzepatide", pct: 22.5, width: "100%" },
+              ].map((med) => (
+                <div key={med.name}>
+                  <div className="flex justify-between text-[14px] mb-2">
+                    <span className="text-white/80 font-medium">{med.name}</span>
+                    <span className="text-gold font-semibold">{med.pct}%</span>
+                  </div>
+                  <div className="h-4 bg-white/10 rounded-full overflow-hidden">
+                    <div className="h-full rounded-full" style={{ width: med.width, background: "linear-gradient(90deg, #7BAE8E, #C9A96E)" }} />
+                  </div>
+                </div>
+              ))}
+              <p className="text-[12px] text-white/35 mt-3">Average patient body weight reduction in clinical trials</p>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={400}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                { title: "Appetite Regulation", desc: "Communicates directly with the hypothalamus to quiet food noise.", iconPath: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" },
+                { title: "Insulin Sensitivity", desc: "Maintains blood sugar and regulates appetite through GLP-1 receptor activation.", iconPath: "M12 6a6 6 0 100 12 6 6 0 000-12zm0-4a10 10 0 110 20 10 10 0 010-20z" },
+                { title: "Gastric Emptying", desc: "Slows digestion to ensure a sustained release of nutrients and energy.", iconPath: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" },
+              ].map((card) => (
+                <div key={card.title} className="doppelrand doppelrand-dark">
+                  <div className="bg-white/8 rounded-[18px] p-7 border border-white/10 card-hover h-full">
+                    <div className="w-10 h-10 rounded-full bg-sage/12 flex items-center justify-center mb-4">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d={card.iconPath} fill="#7BAE8E" /></svg>
+                    </div>
+                    <h3 className="text-[16px] font-semibold tracking-[-0.01em] text-white">{card.title}</h3>
+                    <p className="text-[15px] text-white/55 leading-[1.65] mt-2">{card.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── Medications — white ── */}
+      <section className="bg-white py-14 md:py-24">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
+          <ScrollReveal>
+            <div className="text-center mb-14">
+              <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-3">
+                Your Medication
+              </p>
+              <h2 className="font-serif text-[clamp(2rem,4vw,2.75rem)] leading-[1.1] tracking-[-0.02em] text-navy">
+                The Right <em className="text-gold">Fit</em> for You
+              </h2>
+              <p className="mt-4 text-body text-[15px] max-w-xl mx-auto leading-relaxed">
+                Dr. Rhee will recommend the medication best suited to your
+                biology, health history, and goals.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={150} stagger={100}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {[
+                {
+                  name: "Wegovy",
+                  generic: "Semaglutide",
+                  form: "Weekly injection",
+                  mechanism: "GLP-1 receptor agonist",
+                  benefit: "Up to 15% body weight loss",
+                  badge: "FDA Approved",
+                  icon: (
+                    <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8">
+                      <rect x="10" y="2" width="4" height="16" rx="2" fill="currentColor" opacity="0.2" />
+                      <rect x="11" y="4" width="2" height="8" rx="1" fill="currentColor" />
+                      <path d="M12 18v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                  ),
+                },
+                {
+                  name: "Zepbound",
+                  generic: "Tirzepatide",
+                  form: "Weekly injection",
+                  mechanism: "Dual GLP-1 & GIP agonist",
+                  benefit: "Up to 22.5% body weight loss",
+                  badge: "FDA Approved",
+                  icon: (
+                    <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8">
+                      <rect x="10" y="2" width="4" height="16" rx="2" fill="currentColor" opacity="0.2" />
+                      <rect x="11" y="4" width="2" height="8" rx="1" fill="currentColor" />
+                      <path d="M12 18v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                  ),
+                },
+                {
+                  name: "Oral Semaglutide",
+                  generic: "Rybelsus",
+                  form: "Daily pill",
+                  mechanism: "GLP-1 receptor agonist",
+                  benefit: "Needle-free option",
+                  badge: "Oral",
+                  icon: (
+                    <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8">
+                      <rect x="4" y="9" width="16" height="6" rx="3" fill="currentColor" opacity="0.2" />
+                      <rect x="4" y="9" width="8" height="6" rx="3" fill="currentColor" opacity="0.5" />
+                    </svg>
+                  ),
+                },
+                {
+                  name: "Emerging Therapies",
+                  generic: "Retatrutide & more",
+                  form: "Weekly injection",
+                  mechanism: "Triple agonist (GLP-1, GIP, glucagon)",
+                  benefit: "Next-generation results",
+                  badge: "Coming Soon",
+                  icon: (
+                    <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8">
+                      <circle cx="12" cy="12" r="8" fill="currentColor" opacity="0.1" />
+                      <path d="M12 8v4l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                  ),
+                },
+              ].map((med) => (
+                <div
+                  key={med.name}
+                  className="relative bg-cream/60 border border-neutral-200 rounded-[18px] p-7 flex flex-col card-hover"
+                >
+                  <span className="absolute top-4 right-4 text-[10px] font-semibold uppercase tracking-[0.12em] bg-gold/10 text-gold px-2.5 py-1 rounded-full">
+                    {med.badge}
+                  </span>
+                  <div className="text-gold mb-5">{med.icon}</div>
+                  <h3 className="font-serif text-[22px] tracking-[-0.01em] text-navy leading-tight">
+                    {med.name}
+                  </h3>
+                  <p className="text-[13px] text-gold mt-0.5">{med.generic}</p>
+                  <div className="mt-4 space-y-2 flex-1">
+                    <p className="text-[13px] text-body flex items-center gap-2">
+                      <span className="w-1 h-1 rounded-full bg-gold shrink-0" />
+                      {med.form}
+                    </p>
+                    <p className="text-[13px] text-body flex items-center gap-2">
+                      <span className="w-1 h-1 rounded-full bg-gold shrink-0" />
+                      {med.mechanism}
+                    </p>
+                    <p className="text-[13px] text-body flex items-center gap-2">
+                      <span className="w-1 h-1 rounded-full bg-gold shrink-0" />
+                      {med.benefit}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          <div className="text-center mt-10">
+            <Link href="/science" className="text-gold text-[15px] font-medium hover:text-gold-light">
+              View clinical evidence &rsaquo;
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Insurance Check Teaser */}
-      <section className="relative py-28 bg-cream overflow-hidden">
-        <div className="absolute top-1/2 right-0 translate-x-1/3 -translate-y-1/2 w-[500px] h-[500px] bg-gold/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="relative max-w-4xl mx-auto px-6 text-center">
-          <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
-            Insurance &amp; eligibility
-          </p>
-          <h2
-            className="font-serif text-3xl md:text-4xl tracking-tight text-soft-black"
-            style={{ textWrap: "balance" }}
-          >
-            Check Your Insurance Coverage
-          </h2>
-          <p className="mt-6 text-neutral-500 leading-relaxed max-w-2xl mx-auto">
-            While our program is cash-pay, many patients qualify for insurance
-            coverage of weight management medications. Use our free eligibility tool to
-            check your coverage and estimate your potential results.
-          </p>
-          <Link
-            href="/eligibility"
-            className="inline-block mt-10 bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
-          >
-            Check Your Eligibility
-          </Link>
+      {/* ── Why Us — Bento Grid — navy-deep ── */}
+      <section className="bg-navy-deep py-14 md:py-24">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
+          <ScrollReveal>
+            <div className="text-center mb-14">
+              <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-3">Why us</p>
+              <h2 className="font-serif text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.1] tracking-[-0.02em] text-white">
+                Expert care you can{" "}<em className="text-gold">trust.</em>
+              </h2>
+            </div>
+          </ScrollReveal>
+          <ScrollReveal delay={200}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <div className="md:col-span-2 relative rounded-[18px] overflow-hidden min-h-[320px] card-hover border border-transparent">
+                <Image src="/images/apple/doctor-sage.jpg" alt="Dr. Libby Rhee providing care" fill className="object-cover" />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #1D5C4D 0%, rgba(29,92,77,0.4) 50%, transparent 100%)" }} />
+                <div className="absolute bottom-0 left-0 right-0 p-7">
+                  <p className="text-teal-bright text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-2">Physician-Led</p>
+                  <h3 className="font-serif text-[28px] md:text-[32px] leading-[1.1] tracking-[-0.02em] text-white">Board-Certified <em className="text-gold">Physician</em></h3>
+                  <p className="text-[15px] text-white/70 leading-[1.65] mt-3 max-w-md">Dr. Libby Rhee, DO, MS, FAAD — not an algorithm, not a chatbot.</p>
+                </div>
+              </div>
+              <div className="flex flex-col gap-5">
+                <div className="bg-sage rounded-[18px] p-7 flex-1 card-hover border border-transparent">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="mb-4"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-8.038 0l-2.387.477a2 2 0 00-1.022.547L2 18h20l-2.572-2.572z" fill="white"/><circle cx="12" cy="7" r="4" fill="white"/></svg>
+                  <h3 className="text-[16px] font-semibold tracking-[-0.01em] text-white">Science-First</h3>
+                  <p className="text-[14px] text-white/80 leading-[1.65] mt-2">FDA-approved GLP-1 agonists backed by robust clinical evidence.</p>
+                </div>
+                <div className="bg-teal rounded-[18px] p-7 flex-1 card-hover border border-transparent">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="mb-4"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z" fill="white"/></svg>
+                  <h3 className="text-[16px] font-semibold tracking-[-0.01em] text-white">Multi-State</h3>
+                  <p className="text-[14px] text-white/80 leading-[1.65] mt-2">In-person in NYC. Telehealth across NY, CT, and MI.</p>
+                </div>
+              </div>
+              <div className="bg-white/8 rounded-[18px] p-7 border border-white/10 card-hover">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="mb-4"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#C9A96E"/></svg>
+                <h3 className="text-[16px] font-semibold tracking-[-0.01em] text-white">Personalized Protocols</h3>
+                <p className="text-[14px] text-white/55 leading-[1.65] mt-2">Every plan tailored to your biology, conditions, and goals.</p>
+              </div>
+              <div className="md:col-span-2 bg-gold/12 border border-gold/20 rounded-[18px] p-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                <div>
+                  <h3 className="text-[18px] font-semibold tracking-[-0.01em] text-gold">See how we compare</h3>
+                  <p className="text-[15px] text-white/50 leading-[1.65] mt-1">Most programs are built on algorithms and chatbots.</p>
+                </div>
+                <Link href="/why-us" className="btn-gold shrink-0 w-full sm:w-auto justify-center group">
+                  Full comparison <ArrowIcon className="text-navy-deep" />
+                </Link>
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="relative py-32 bg-white text-center overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="relative max-w-2xl mx-auto px-6">
-          <h2
-            className="font-serif text-4xl md:text-5xl tracking-tight text-soft-black"
-            style={{ textWrap: "balance" }}
-          >
-            Ready to transform your health?
-          </h2>
-          <p className="mt-6 text-neutral-500 leading-relaxed">
-            Schedule a consultation with Dr. Rhee and take the first step toward
-            lasting, medically supported weight loss.
-          </p>
-          <Link
-            href="/book"
-            className="inline-block mt-10 bg-gold hover:bg-gold-dark text-white text-sm tracking-wide uppercase px-10 py-4 rounded-full transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-y-[-1px] hover:shadow-[0_8px_24px_-8px_rgba(201,169,110,0.4)]"
-          >
-            Book Your Consultation
-          </Link>
+      {/* ── How It Works — cream ── */}
+      <section className="bg-cream py-14 md:py-24">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
+          <ScrollReveal>
+            <div className="text-center mb-14">
+              <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-3">The process</p>
+              <h2 className="font-serif text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.1] tracking-[-0.02em] text-navy">
+                Three steps to{" "}<em className="text-gold">lasting results.</em>
+              </h2>
+            </div>
+          </ScrollReveal>
+          <ScrollReveal delay={200}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                { num: "01", title: "Get Assessed", desc: "Comprehensive health assessment, lab review, and goal setting with Dr. Rhee." },
+                { num: "02", title: "Get Your Protocol", desc: "Custom treatment plan — medication selection, dosing, nutritional guidance — designed for your biology." },
+                { num: "03", title: "Get Results", desc: "Careful dose titration, regular check-ins, lab monitoring, and continuous optimization." },
+              ].map((step) => (
+                <div key={step.num} className="doppelrand doppelrand-light">
+                  <div className="bg-white rounded-[18px] p-7 text-center border border-[rgba(27,42,74,0.04)] card-hover h-full">
+                    <div className="w-12 h-12 rounded-full bg-sage/12 flex items-center justify-center mx-auto mb-4">
+                      <p className="font-serif text-[18px] font-semibold text-gold">{step.num}</p>
+                    </div>
+                    <h3 className="text-[17px] font-semibold tracking-[-0.01em] text-navy mt-2">{step.title}</h3>
+                    <p className="text-[15px] text-body leading-[1.65] mt-3">{step.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="text-center mt-10">
+              <Link href="/how-it-works" className="text-gold text-[15px] font-medium hover:text-gold-light">Full breakdown &rsaquo;</Link>
+            </div>
+          </ScrollReveal>
         </div>
+      </section>
+
+      {/* ── Human-Centric Support — white ── */}
+      <section className="bg-white py-14 md:py-24">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
+          <ScrollReveal>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-[72px] items-center">
+              <div>
+                <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-3">Beyond the prescription</p>
+                <h2 className="font-serif text-[clamp(2rem,4vw,3rem)] leading-[1.1] tracking-[-0.02em] text-navy">
+                  Human-Centric<br /><em className="text-gold">Digital Support</em>
+                </h2>
+                <p className="text-[16px] text-body leading-[1.7] mt-5 max-w-md">
+                  Medication is the catalyst; coaching is the sustainer. Your
+                  dedicated physician coordinates your nutrition and movement as
+                  your metabolism shifts.
+                </p>
+                <ul className="mt-6 space-y-3">
+                  {["24/7 Access to Medical Experts", "Precision Nutrition Planning", "Bi-weekly Progress Consultations"].map((item) => (
+                    <li key={item} className="flex items-center gap-3">
+                      <span className="w-5 h-5 rounded-full bg-sage/12 flex items-center justify-center">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                          <path d="M2.5 6L5 8.5L9.5 3.5" stroke="#7BAE8E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </span>
+                      <span className="text-[15px] text-navy font-medium">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="doppelrand doppelrand-light">
+                <div className="rounded-[16px] overflow-hidden">
+                  <Image src="/images/apple/doctor-sage.jpg" alt="Dr. Rhee providing personalized care" width={600} height={500} className="w-full h-full object-cover" />
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── Testimonial — navy-deep ── */}
+      <section className="bg-navy-deep py-14 md:py-24">
+        <ScrollReveal>
+          <div className="max-w-[720px] mx-auto px-5 md:px-6 text-center">
+            <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-8">Patient results</p>
+            <div className="relative">
+              <span className="absolute -top-6 -left-4 text-gold/15 font-serif text-[120px] leading-[1] select-none">&ldquo;</span>
+              <blockquote>
+                <p className="font-serif text-[clamp(1.5rem,3.5vw,2.25rem)] leading-[1.3] tracking-[-0.02em] text-white italic">
+                  The program has completely changed my relationship with food.
+                  I&apos;ve lost 45 pounds and feel better than I have in years.
+                </p>
+              </blockquote>
+            </div>
+            <div className="mt-8 flex items-center justify-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-teal flex items-center justify-center text-white text-[14px] font-semibold ring-2 ring-teal-bright/30 ring-offset-2 ring-offset-navy-deep">S</div>
+              <div className="text-left">
+                <p className="text-[15px] text-white font-semibold">Sarah M.</p>
+                <p className="text-[13px] text-white/45">Middletown, NY</p>
+              </div>
+            </div>
+            <div className="mt-10">
+              <Link href="/testimonials" className="text-gold text-[15px] font-medium hover:text-gold-light">See all testimonials &rsaquo;</Link>
+            </div>
+          </div>
+        </ScrollReveal>
+      </section>
+
+      {/* ── Final CTA — cream ── */}
+      <section className="bg-cream py-14 md:py-[128px]">
+        <ScrollReveal>
+          <div className="max-w-[680px] mx-auto px-5 md:px-6 text-center">
+            <h2 className="font-serif text-[clamp(2.5rem,5.5vw,4rem)] leading-[1.08] tracking-[-0.02em] text-navy">
+              Ready to{" "}<em className="text-gold">start?</em>
+            </h2>
+            <p className="text-[16px] text-body leading-[1.7] mt-4">
+              Schedule a consultation with Dr. Rhee. Real medicine. Real results.
+              Many patients also qualify for insurance coverage of medications.
+            </p>
+            <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3">
+              <Link href="/book" className="btn-primary w-full sm:w-auto justify-center group">
+                Book your consultation
+                <ArrowIcon className="text-white" />
+              </Link>
+              <Link href="/eligibility" className="btn-secondary w-full sm:w-auto justify-center">Check eligibility</Link>
+            </div>
+          </div>
+        </ScrollReveal>
       </section>
     </>
   );
