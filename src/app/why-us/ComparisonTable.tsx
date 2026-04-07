@@ -37,7 +37,7 @@ export function ComparisonTable({ contrasts }: { contrasts: Contrast[] }) {
                 </svg>
               </div>
               <div>
-                <p className="text-xs tracking-[0.15em] uppercase text-light mb-2">
+                <p className="text-xs tracking-[0.15em] uppercase text-light mb-2 py-4">
                   Elsewhere
                 </p>
                 <p className="text-sm text-light leading-relaxed">
@@ -45,7 +45,7 @@ export function ComparisonTable({ contrasts }: { contrasts: Contrast[] }) {
                 </p>
               </div>
               <div>
-                <p className="text-xs tracking-[0.15em] uppercase text-gold mb-2">
+                <p className="text-xs tracking-[0.15em] uppercase text-gold mb-2 py-4">
                   At Precision Weight + Wellness
                 </p>
                 <p className="text-sm text-navy leading-relaxed">
