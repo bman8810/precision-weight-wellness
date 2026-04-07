@@ -341,7 +341,6 @@ export default function Home() {
                 </div>
               </div>
               <div className="bg-white/8 rounded-[18px] p-7 border border-white/10 card-hover">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="mb-4"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#C9A96E"/></svg>
                 <h3 className="text-[16px] font-semibold tracking-[-0.01em] text-white">Personalized Protocols</h3>
                 <p className="text-[14px] text-white/55 leading-[1.65] mt-2">Every plan tailored to your biology, conditions, and goals.</p>
               </div>
