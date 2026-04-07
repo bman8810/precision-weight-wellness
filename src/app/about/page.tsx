@@ -81,9 +81,9 @@ export default function AboutPage() {
             className="md:hidden absolute top-20 -right-6 w-[55%] h-[80%] pointer-events-none"
             style={{
               maskImage:
-                "linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0) 80%)",
+                "linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0.2) 70%, rgba(0,0,0,0) 90%)",
               WebkitMaskImage:
-                "linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0) 80%)",
+                "linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0.2) 70%, rgba(0,0,0,0) 90%)",
             }}
           >
             <Image
