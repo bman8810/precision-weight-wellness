@@ -425,7 +425,7 @@ export default function Home() {
               </div>
               <div className="doppelrand doppelrand-light">
                 <div className="rounded-[16px] overflow-hidden">
-                  <Image src="/images/doctor/dr-rhee-figs.jpg" alt="Dr. Rhee providing personalized care" width={600} height={750} className="w-full h-full object-cover" />
+                  <Image src="/images/doctor/dr-rhee-figs.jpg" alt="Dr. Rhee providing personalized care" width={440} height={550} className="w-full max-w-[440px] mx-auto h-auto object-cover" />
                 </div>
               </div>
             </div>
