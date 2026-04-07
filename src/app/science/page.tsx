@@ -73,14 +73,14 @@ const papers = [
     title: "SURMOUNT-1 Trial — Tirzepatide",
     journal: "New England Journal of Medicine",
     year: "2022",
-    finding: "Up to 22.5% body weight reduction at highest dose over 72 weeks — the largest weight loss seen with any anti-obesity medication.",
+    finding: "Up to 22.5% body weight reduction at highest dose over 72 weeks — the largest weight loss seen with any approved anti-obesity medication at time of publication.",
     doi: "10.1056/NEJMoa2206038",
   },
   {
     title: "SELECT Trial — Cardiovascular Outcomes",
     journal: "New England Journal of Medicine",
     year: "2023",
-    finding: "Semaglutide reduced major adverse cardiovascular events by 20% in patients with obesity and established cardiovascular disease.",
+    finding: "Semaglutide reduced major adverse cardiovascular events by 20% in patients with obesity and established cardiovascular disease, without diabetes — a key distinction proving cardiovascular benefit independent of glycemic control.",
     doi: "10.1056/NEJMoa2307563",
   },
   {
