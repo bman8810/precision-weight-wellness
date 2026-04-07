@@ -42,7 +42,7 @@ export default function AboutPage() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/headers/about-header.jpg" alt="" className="w-full h-full object-cover" aria-hidden="true" />
         </div>
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6 pt-32 pb-20 md:pt-48 md:pb-32 relative flex-1 flex flex-col justify-center">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6 pt-36 pb-20 md:pt-48 md:pb-32 relative flex-1 flex flex-col justify-center">
           <div className="md:max-w-[60%]">
             <p
               className="animate-fade-up text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-5"
