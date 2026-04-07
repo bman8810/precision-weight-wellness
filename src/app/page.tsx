@@ -336,12 +336,8 @@ export default function Home() {
                     <circle cx="55" cy="44" r="2.5" fill="#C9A96E" />
                     <circle cx="160" cy="57" r="2.5" fill="#C9A96E" />
                     <circle cx="265" cy="42" r="2.5" fill="#C9A96E" />
-                    {/* State labels */}
-                    <text x="40" y="112" fill="rgba(255,255,255,0.6)" fontSize="9" fontWeight="500" letterSpacing="0.08em">MI</text>
-                    <text x="145" y="112" fill="rgba(255,255,255,0.6)" fontSize="9" fontWeight="500" letterSpacing="0.08em">NYC</text>
-                    <text x="258" y="112" fill="rgba(255,255,255,0.6)" fontSize="9" fontWeight="500" letterSpacing="0.08em">CT</text>
                   </svg>
-                  <p className="text-[13px] text-white/70 font-medium mt-2 text-center">In-person NYC &middot; Telehealth NY, CT, MI</p>
+                  <p className="text-[13px] text-white/70 mt-2 text-center">In-person <span className="font-bold text-white">NYC</span> &middot; Telehealth <span className="font-bold text-white">NY</span>, <span className="font-bold text-white">CT</span>, <span className="font-bold text-white">MI</span></p>
                 </div>
               </div>
               <div className="bg-white/8 rounded-[18px] p-7 border border-white/10 card-hover">
