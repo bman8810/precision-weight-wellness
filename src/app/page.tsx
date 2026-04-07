@@ -29,7 +29,7 @@ export default function Home() {
           src="/images/doctor/libby-nyc-skyline.jpeg"
           alt="Dr. Libby Rhee with NYC skyline"
           fill
-          className="object-cover object-[5%_top]"
+          className="object-cover object-[25%_top] md:object-[5%_top] opacity-50 md:opacity-100"
           priority
         />
         {/* Dark overlay for text legibility */}
