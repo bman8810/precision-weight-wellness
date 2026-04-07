@@ -148,7 +148,7 @@ export default function EligibilityPage() {
         <div className="absolute inset-0 opacity-[0.06]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/images/hero-wellness.png"
+            src="/images/headers/eligibility-header.jpg"
             alt=""
             className="w-full h-full object-cover"
             aria-hidden="true"

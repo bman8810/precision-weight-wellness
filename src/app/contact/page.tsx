@@ -21,10 +21,14 @@ export default function ContactPage() {
     <>
       {/* ── Hero — teal-to-navy gradient ── */}
       <section
-        className="pt-28 pb-14 md:pt-40 md:pb-20"
+        className="relative pt-28 pb-14 md:pt-40 md:pb-20 overflow-hidden"
         style={{ background: "linear-gradient(180deg, #1D5C4D 0%, #0F1D35 100%)" }}
       >
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6 text-center">
+        <div className="absolute inset-0 opacity-[0.08]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/headers/contact-header.jpg" alt="" className="w-full h-full object-cover" aria-hidden="true" />
+        </div>
+        <div className="relative max-w-[1200px] mx-auto px-5 md:px-6 text-center">
           <p className="flex items-center justify-center gap-2 text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-gold" />
             Get in Touch

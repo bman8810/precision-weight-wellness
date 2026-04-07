@@ -37,8 +37,12 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero — centered text with cutout on right */}
-      <section className="bg-navy relative overflow-hidden">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6 pt-32 pb-20 md:pt-48 md:pb-32 relative">
+      <section className="bg-navy relative overflow-hidden min-h-[70dvh] md:min-h-[80dvh] flex flex-col">
+        <div className="absolute inset-0 opacity-[0.07]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/headers/about-header.jpg" alt="" className="w-full h-full object-cover" aria-hidden="true" />
+        </div>
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6 pt-32 pb-20 md:pt-48 md:pb-32 relative flex-1 flex flex-col justify-center">
           <div className="md:max-w-[60%]">
             <p
               className="animate-fade-up text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-5"

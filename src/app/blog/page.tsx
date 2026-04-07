@@ -27,8 +27,12 @@ export default function BlogPage() {
   return (
     <>
       {/* ── Hero — navy ── */}
-      <section className="bg-navy pt-20">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6 pt-14 pb-14 md:pt-28 md:pb-28">
+      <section className="relative bg-navy pt-20 overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.08]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/headers/blog-header.jpg" alt="" className="w-full h-full object-cover" aria-hidden="true" />
+        </div>
+        <div className="relative max-w-[1200px] mx-auto px-5 md:px-6 pt-14 pb-14 md:pt-28 md:pb-28">
           <div className="text-center max-w-2xl mx-auto">
             <p
               className="animate-fade-up flex items-center justify-center gap-2 text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-5"

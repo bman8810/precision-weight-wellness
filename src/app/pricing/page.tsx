@@ -171,13 +171,13 @@ export default function PricingPage() {
       <section className="py-14 md:py-28 bg-cream">
         <div className="max-w-[1200px] mx-auto px-5 md:px-6">
           <ScrollReveal stagger={120}>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-5 items-start lg:items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-5 items-stretch">
               {tiers.map((tier) => (
                 <div
                   key={tier.name}
                   className={
                     tier.highlighted
-                      ? "lg:scale-[1.04] lg:z-10 relative"
+                      ? "lg:z-10 relative"
                       : "doppelrand doppelrand-light"
                   }
                 >
@@ -324,10 +324,10 @@ export default function PricingPage() {
                       <td className="py-5 px-4 text-center font-serif text-[20px] text-white/70 font-semibold">$599</td>
                     </tr>
                     <tr>
-                      <td className="py-4 px-6 text-[14px] text-white/60">Quarterly price <span className="text-sage text-[11px] ml-1">save ~10%</span></td>
-                      <td className="py-4 px-4 text-center font-serif text-[18px] text-white/50 font-semibold">$539</td>
-                      <td className="py-4 px-4 text-center bg-gold/[0.06] font-serif text-[20px] text-gold/80 font-semibold">$939</td>
-                      <td className="py-4 px-4 text-center font-serif text-[18px] text-white/50 font-semibold">$1,619</td>
+                      <td className="py-4 px-6 text-[14px] text-white/60">Quarterly price</td>
+                      <td className="py-4 px-4 text-center"><span className="font-serif text-[18px] text-white/50 font-semibold">$539</span><br /><span className="text-sage text-[11px] font-semibold">Save $58</span></td>
+                      <td className="py-4 px-4 text-center bg-gold/[0.06]"><span className="font-serif text-[20px] text-gold/80 font-semibold">$939</span><br /><span className="text-sage text-[11px] font-semibold">Save $108</span></td>
+                      <td className="py-4 px-4 text-center"><span className="font-serif text-[18px] text-white/50 font-semibold">$1,619</span><br /><span className="text-sage text-[11px] font-semibold">Save $178</span></td>
                     </tr>
                   </tbody>
                 </table>

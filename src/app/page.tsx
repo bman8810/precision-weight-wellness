@@ -301,7 +301,7 @@ export default function Home() {
           <ScrollReveal delay={200}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               <div className="md:col-span-2 relative rounded-[18px] overflow-hidden min-h-[320px] card-hover border border-transparent">
-                <Image src="/images/doctor/libby-photo-1.jpeg" alt="Dr. Libby Rhee providing care" fill className="object-cover" />
+                <Image src="/images/doctor/libby-photo-1.jpeg" alt="Dr. Libby Rhee providing care" fill className="object-cover object-top" />
                 <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #1D5C4D 0%, rgba(29,92,77,0.4) 50%, transparent 100%)" }} />
                 <div className="absolute bottom-0 left-0 right-0 p-7">
                   <p className="text-teal-bright text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-2">Physician-Led</p>
@@ -311,14 +311,37 @@ export default function Home() {
               </div>
               <div className="flex flex-col gap-5">
                 <div className="bg-sage rounded-[18px] p-7 flex-1 card-hover border border-transparent">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="mb-4"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-8.038 0l-2.387.477a2 2 0 00-1.022.547L2 18h20l-2.572-2.572z" fill="white"/><circle cx="12" cy="7" r="4" fill="white"/></svg>
                   <h3 className="text-[16px] font-semibold tracking-[-0.01em] text-white">Science-First</h3>
                   <p className="text-[14px] text-white/80 leading-[1.65] mt-2">FDA-approved medications backed by robust clinical evidence.</p>
                 </div>
-                <div className="bg-teal rounded-[18px] p-7 flex-1 card-hover border border-transparent">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="mb-4"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z" fill="white"/></svg>
-                  <h3 className="text-[16px] font-semibold tracking-[-0.01em] text-white">Multi-State</h3>
-                  <p className="text-[14px] text-white/80 leading-[1.65] mt-2">In-person in NYC. Telehealth across NY, CT, and MI.</p>
+                {/* Multi-State — visual map with state outlines + flight arcs */}
+                <div className="bg-teal rounded-[18px] p-6 flex-1 card-hover border border-transparent flex flex-col items-center justify-center">
+                  <svg viewBox="0 0 320 120" className="w-full max-w-[280px] h-auto" fill="none" aria-hidden="true">
+                    {/* MI state outline (left) */}
+                    <g transform="translate(5,8) scale(0.42)">
+                      <path d="m 132.1,135.4 .1,1.4 21.4,-3.5 .5,-1.2 3.9,-5.9 v -4.3 l .8,-2.1 2.2,-.8 2,-7.8 1,-.5 1,.6 -.2,.6 -1.1,.8 .3,.9 .8,.4 1.9,-1.4 .4,-9.8 -1.6,-2.3 -1.2,-3.7 v -2.5 l -2.3,-4.4 v -1.8 l -1.2,-3.3 -2.3,-3 -2.9,-1 -4.8,3 -2.5,4.6 -.2,.9 -3,3.5 -1.5,-.2 -2.9,-2.8 -.1,-3.4 1.5,-1.9 2,-.2 1.2,-1.7 .2,-4 .8,-.8 1.1,-.1 .9,-1.7 -.2,-9.6 -.3,-1.3 -1.2,-1.2 -1.7,-1 -.1,-1.8 .7,-.6 1.8,.8 -.3,-1.7 -1.9,-2.7 -.7,-1.6 -1.1,-1.1 h -2.2 l -8.1,-2.9 -1.4,-1.7 -3.1,-.3 -1.2,.3 -4.4,-2.3 h -1.4 l .5,1 -2.7,-.1 .1,.6 .6,.6 -2.5,2.1 .1,1.8 1.5,2.3 1.5,.2 v .6 l -1.5,.5 -2.1,-.1 -2.8,2.5 .1,2.5 .4,5.8 -2.2,3.4 .8,-4.5 -.8,-.6 -.9,5.3 -1,-2.3 .5,-2.3 -.5,-1 .6,-1.3 -.6,-1.1 1,-1 v -1.2 l -1.3,.6 -1.3,3.1 -.7,.7 -1.3,2.4 -1.7,-.2 -.1,1.2 h -1.6 l .2,1.5 .2,2 -3,1.2 .1,1.3 1,1.7 -.1,5.2 -1.3,4.4 -1.7,2.5 1.2,1.4 .8,3.5 -1,2.5 -.2,2.1 1.7,3.4 2.5,4.9 1.2,1.9 1.6,6.9 -.1,8.8 -.9,3.9 -2,3.2 -.9,3.7 -2,3 -1.2,1 z m -95.8,-96.8 3,3.8 17,3.8 1.4,1 4,.8 .7,.5 2.8,-.2 4.9,.8 1.4,1.5 -1,1 .8,.8 3.8,.7 1.2,1.2 .1,4.4 -1.3,2.8 2,.1 1,-.8 .9,.8 -1.1,3.1 1,1.6 1.2,.3 .8,-1.8 2.9,-4.6 1.6,-6 2.3,-2 -.5,-1.6 .5,-.9 1,1.6 -.3,2.2 2.9,-2.2 .2,-2.3 2.1,.6 .8,-1.6 .7,.6 -.7,1.5 -1,.5 -1,2 1.4,1.8 1.1,-.5 -.5,-.7 1,-1.5 1.9,-1.7 h .8 l .2,-2.6 2,-1.8 7.9,-.5 1.9,-3.1 3.8,-.3 3.8,1.2 4.2,2.7 .7,-.2 -.2,-3.5 .7,-.2 4.5,1.1 1.5,-.2 2.9,-.7 1.7,.4 1.8,.1 v -1.1 l -.7,-.9 -1.5,-.2 -1.1,-.8 .5,-1.4 -.8,-.3 -2.6,.1 -.1,-1 1.1,-.8 .6,.8 .5,-1.8 -.7,-.7 .7,-.2 -1.4,-1.3 .3,-1.3 .1,-1.9 h -1.3 l -1.5,1 -1.9,.1 -.5,1.8 -1.9,.2 -.3,-1.2 -2.2,.1 -1,1.2 -.7,-.1 -.2,-.8 -2.6,.4 -.1,-4.8 1,-2 -.7,-.1 -1.8,1.1 h -2.2 l -3.8,2.7 -6.2,.3 -4.1,.8 -1.9,1.5 -1.4,1.3 -2.5,1.7 -.3,.8 -.6,-1.7 -1.3,-.6 v .6 l .7,.7 v 1.3 l -1.5,-.6 h -.6 l -.3,1.2 -2,-1.9 -1.3,-.2 -1.3,1.5 -3.2,-.1 -.5,-1.4 -2,-1.9 -1.3,-1.6 v -.7 l -1.1,-1.4 -2.6,-1.2 -3.3,-.1 -1.1,-.9 h -1.4 l -.7,.4 -2.2,2.2 -.7,1.1 -1,-.7 .2,-1 .8,-2.1 3.2,-5 .8,-.2 1.7,-1.9 .7,-1.6 3,-.6 .8,-.6 -.1,-1 -.5,-.5 -4.5,.2 -2,.5 -2.6,1.2 -1.2,1.2 -1.7,2.2 -1.8,1 -3.3,3.4 -.4,1.6 -7.4,4.6 -4,.5 -1.8,.4 -2.3,3 -1.8,.7 -4.4,2.3 z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" strokeWidth="0.8" />
+                    </g>
+                    {/* NY state outline (center) */}
+                    <g transform="translate(110,15) scale(0.55)">
+                      <path d="m 91.4,4.2 -.6,1.9 1.4,.9 -.4,1.5 .5,3.2 2.2,2.3 -.4,2.2 .6,2 -.4,1 -.3,3.8 3.1,6.7 -.8,1.8 .9,2.2 .9,-1.6 1.9,1.5 3,14.2 -.5,2 1.1,1 -.5,15 .7,1 2.8,16.3 1.8,1.5 -3.5,3.4 1.7,2.2 -1.3,3.3 -1.5,1.7 -1.5,2.3 -.2,-.7 .4,-5.9 -14.6,-4.9 -1.6,-1.1 -1.9,.3 -3,-2.2 -3,-5.8 h -2 l -.4,-1.5 -1.7,-1.1 -70.5,13.9 -.8,-6 4.3,-3.9 .6,-1.7 3.9,-2.5 .6,-2.4 2.3,-2 .8,-1.1 -1.7,-3.3 -1.7,-.5 -1.8,-3 -.2,-3.2 7.6,-3.9 8.2,-1.6 h 4.4 l 3.2,1.6 .9,-.1 1.8,-1.6 3.4,-.7 h 3 l 2.6,-1.3 2.5,-2.6 2.4,-3.1 1.9,-.4 1.1,-.5 .4,-3.2 -1.4,-2.7 -1.2,-.7 2,-1.3 -.1,-1.8 h -1.5 l -2.3,-1.4 -.1,-3.1 6.2,-6.1 .7,-2.4 3.7,-6.3 5.9,-6.4 2.1,-1.7 2.5,.1 20.6,-5.2 z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" strokeWidth="0.8" />
+                    </g>
+                    {/* CT state outline (right) */}
+                    <g transform="translate(228,35) scale(1.8)">
+                      <path d="m 31.7,15.7 .4,-1.1 -3.2,-12.3 -.1,-.3 -14.9,3.4 v .7 l -.9,.3 -.5,-.7 -10.5,2.4 2.8,16.3 1.8,1.5 -3.5,3.4 1.7,2.2 5.4,-4.5 1.7,-1.3 h .8 l 2.4,-3.1 1.4,.1 2.9,-1.1 h 2.1 l 5.3,-2.7 2.8,-.9 1,-1 1.5,.5 z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" strokeWidth="0.3" />
+                    </g>
+                    {/* Flight arc lines: MI → NY → CT */}
+                    <path d="M 55,50 Q 100,10 155,50" stroke="rgba(201,169,110,0.6)" strokeWidth="1" strokeDasharray="3,3" fill="none" />
+                    <path d="M 165,50 Q 210,15 265,50" stroke="rgba(201,169,110,0.6)" strokeWidth="1" strokeDasharray="3,3" fill="none" />
+                    {/* Dots at connection points */}
+                    <circle cx="55" cy="50" r="2.5" fill="#C9A96E" />
+                    <circle cx="160" cy="50" r="2.5" fill="#C9A96E" />
+                    <circle cx="265" cy="50" r="2.5" fill="#C9A96E" />
+                    {/* State labels */}
+                    <text x="40" y="112" fill="rgba(255,255,255,0.6)" fontSize="9" fontWeight="500" letterSpacing="0.08em">MI</text>
+                    <text x="145" y="112" fill="rgba(255,255,255,0.6)" fontSize="9" fontWeight="500" letterSpacing="0.08em">NYC</text>
+                    <text x="258" y="112" fill="rgba(255,255,255,0.6)" fontSize="9" fontWeight="500" letterSpacing="0.08em">CT</text>
+                  </svg>
+                  <p className="text-[13px] text-white/70 font-medium mt-2 text-center">In-person NYC &middot; Telehealth NY, CT, MI</p>
                 </div>
               </div>
               <div className="bg-white/8 rounded-[18px] p-7 border border-white/10 card-hover">
@@ -406,7 +429,7 @@ export default function Home() {
               </div>
               <div className="doppelrand doppelrand-light">
                 <div className="rounded-[16px] overflow-hidden">
-                  <Image src="/images/apple/doctor-portrait.jpg" alt="Dr. Rhee providing personalized care" width={600} height={500} className="w-full h-full object-cover" />
+                  <Image src="/images/doctor/dr-rhee-figs.jpg" alt="Dr. Rhee providing personalized care" width={600} height={750} className="w-full h-full object-cover" />
                 </div>
               </div>
             </div>

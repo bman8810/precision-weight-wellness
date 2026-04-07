@@ -134,8 +134,8 @@ export default function SciencePage() {
         </div>
       </section>
 
-      {/* ── Evolution Timeline — white, Doppelrand 2-col grid ── */}
-      <section className="py-14 md:py-28 bg-white">
+      {/* ── Evolution Timeline — horizontal journey ── */}
+      <section className="py-14 md:py-28 bg-white overflow-hidden">
         <div className="max-w-[1200px] mx-auto px-5 md:px-6">
           <ScrollReveal>
             <div className="text-center mb-14">
@@ -148,34 +148,46 @@ export default function SciencePage() {
             </div>
           </ScrollReveal>
 
-          <ScrollReveal delay={200} stagger={100}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {timeline.map((step) => (
-                <div key={step.num} className="doppelrand doppelrand-light">
-                  <div className="bg-white rounded-[18px] p-7 border border-[rgba(27,42,74,0.04)] card-hover h-full">
-                    <div className="flex items-start gap-5">
-                      <div className="w-14 h-14 rounded-full bg-sage/12 flex items-center justify-center shrink-0">
-                        <p className="font-serif text-[22px] font-semibold text-gold">{step.num}</p>
+          <ScrollReveal delay={200}>
+            {/* Horizontal scroll container */}
+            <div className="relative">
+              {/* Connecting line */}
+              <div className="hidden md:block absolute top-[52px] left-0 right-0 h-[2px] bg-gradient-to-r from-sage/30 via-gold/40 to-gold/60 z-0" />
+
+              <div className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-4 md:gap-6 md:overflow-visible md:pb-0">
+                {timeline.map((step, i) => (
+                  <div key={step.num} className="min-w-[280px] md:min-w-0 snap-start flex flex-col">
+                    {/* Timeline node */}
+                    <div className="flex flex-col items-center mb-5 relative z-10">
+                      <div className="w-10 h-10 rounded-full bg-white border-2 border-gold flex items-center justify-center shadow-[0_0_0_4px_rgba(201,169,110,0.1)]">
+                        <p className="font-serif text-[14px] font-semibold text-gold">{step.num}</p>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2.5 mb-2">
+                      <p className="text-[11px] text-light font-medium mt-2">{step.year}</p>
+                      {i < timeline.length - 1 && (
+                        <div className="md:hidden absolute top-5 left-[calc(50%+24px)] w-[calc(280px-48px)] h-[2px] bg-gradient-to-r from-gold/40 to-gold/20" />
+                      )}
+                    </div>
+
+                    {/* Card */}
+                    <div className="doppelrand doppelrand-light flex-1">
+                      <div className="bg-white rounded-[18px] p-6 border border-[rgba(27,42,74,0.04)] card-hover h-full">
+                        <div className="flex items-center gap-2 mb-3">
                           <span className="inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.12em] bg-sage/10 text-sage px-2.5 py-1 rounded-full">
                             {step.badge}
                           </span>
-                          <span className="text-[12px] text-light font-medium">{step.year}</span>
-                          <span className="text-[13px] text-gold font-semibold ml-auto">{step.pct}% avg loss</span>
+                          <span className="text-[13px] text-gold font-semibold ml-auto">{step.pct}%</span>
                         </div>
-                        <h3 className="font-serif text-[20px] tracking-[-0.01em] text-navy leading-tight">
+                        <h3 className="font-serif text-[18px] tracking-[-0.01em] text-navy leading-tight">
                           {step.name}
                         </h3>
-                        <p className="text-[15px] text-body leading-[1.65] mt-3">
+                        <p className="text-[14px] text-body leading-[1.6] mt-3">
                           {step.desc}
                         </p>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </ScrollReveal>
         </div>

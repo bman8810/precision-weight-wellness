@@ -11,9 +11,13 @@ export const metadata: Metadata = {
 export default function BookPage() {
   return (
     <>
-      {/* Hero — navy */}
-      <section className="pt-20" style={{ background: "linear-gradient(180deg, #1D5C4D 0%, #1B2A4A 100%)" }}>
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6 pt-14 pb-14 md:pt-24 md:pb-20">
+      {/* Hero — teal-to-navy */}
+      <section className="relative pt-20 overflow-hidden" style={{ background: "linear-gradient(180deg, #1D5C4D 0%, #1B2A4A 100%)" }}>
+        <div className="absolute inset-0 opacity-[0.08]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/headers/book-header.jpg" alt="" className="w-full h-full object-cover" aria-hidden="true" />
+        </div>
+        <div className="relative max-w-[1200px] mx-auto px-5 md:px-6 pt-14 pb-14 md:pt-24 md:pb-20">
           <ScrollReveal>
             <div className="text-center max-w-2xl mx-auto">
               <p
