@@ -152,7 +152,7 @@ export default function SciencePage() {
             {/* Horizontal scroll container */}
             <div className="relative">
               {/* Connecting line */}
-              <div className="hidden md:block absolute top-[52px] left-0 right-0 h-[2px] bg-gradient-to-r from-sage/30 via-gold/40 to-gold/60 z-0" />
+              <div className="hidden md:block absolute top-[19px] left-0 right-0 h-[2px] bg-gradient-to-r from-sage/30 via-gold/40 to-gold/60 z-0" />
 
               <div className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-4 md:gap-6 md:overflow-visible md:pb-0">
                 {timeline.map((step, i) => (
