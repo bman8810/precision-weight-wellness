@@ -67,7 +67,7 @@ export default function AboutPage() {
           </div>
 
           {/* Cutout portrait — right side, bigger & cropped */}
-          <div className="hidden md:block absolute top-20 -right-12 w-[44%] max-w-[520px] -bottom-16">
+          <div className="hidden md:block absolute top-[18vh] -right-12 w-[44%] max-w-[520px] -bottom-16">
             <Image
               src="/images/doctor/libby-pink-dress-no-background.png"
               alt="Dr. Libby Rhee"
