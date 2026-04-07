@@ -2,6 +2,7 @@ import Link from "next/link";
 
 const programLinks = [
   { label: "How It Works", href: "/how-it-works" },
+  { label: "Why Us", href: "/why-us" },
   { label: "The Science", href: "/science" },
   { label: "Pricing", href: "/pricing" },
   { label: "Eligibility", href: "/eligibility" },
