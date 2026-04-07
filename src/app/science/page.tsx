@@ -282,21 +282,34 @@ export default function SciencePage() {
           <ScrollReveal delay={200} stagger={100}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {papers.map((paper) => (
-                <div key={paper.doi} className="doppelrand doppelrand-light">
-                  <div className="bg-white rounded-[18px] p-7 border border-[rgba(27,42,74,0.04)] card-hover h-full">
-                    <div className="flex items-center gap-2.5 mb-3">
-                      <span className="text-[11px] font-semibold text-sage italic">{paper.journal}</span>
-                      <span className="text-[11px] text-light">({paper.year})</span>
+                <div key={paper.doi} className="group">
+                  <div className="bg-white rounded-[4px] shadow-[2px_3px_12px_rgba(27,42,74,0.08),0_1px_2px_rgba(27,42,74,0.04)] h-full flex flex-col overflow-hidden transition-shadow duration-500 hover:shadow-[2px_4px_20px_rgba(27,42,74,0.12)]">
+                    {/* Top rule — colored stripe like a journal header */}
+                    <div className="h-[3px] bg-gradient-to-r from-navy via-navy-light to-gold/60" />
+                    <div className="p-7 md:p-8 flex flex-col flex-1">
+                      {/* Journal + year — small caps style */}
+                      <p className="text-[10.5px] uppercase tracking-[0.12em] text-light mb-4">
+                        <span className="text-navy/60 font-semibold">{paper.journal}</span>
+                        <span className="mx-2 text-navy/20">|</span>
+                        {paper.year}
+                      </p>
+                      {/* Title — bold serif like a paper heading */}
+                      <h3 className="font-serif text-[20px] md:text-[22px] text-navy tracking-[-0.01em] leading-[1.2] font-semibold">
+                        {paper.title}
+                      </h3>
+                      {/* Divider rule */}
+                      <div className="w-10 h-[1.5px] bg-gold/40 mt-4 mb-4" />
+                      {/* Abstract / finding */}
+                      <p className="text-[14px] text-body leading-[1.7] flex-1">
+                        {paper.finding}
+                      </p>
+                      {/* DOI footer — mono, looks like a citation */}
+                      <div className="mt-5 pt-4 border-t border-[rgba(27,42,74,0.06)]">
+                        <p className="text-[11px] text-light/60 font-mono tracking-wide">
+                          doi: {paper.doi}
+                        </p>
+                      </div>
                     </div>
-                    <h3 className="font-serif text-[18px] text-navy tracking-[-0.01em] leading-tight">
-                      {paper.title}
-                    </h3>
-                    <p className="text-[15px] text-body leading-[1.65] mt-3">
-                      {paper.finding}
-                    </p>
-                    <p className="mt-4 text-[12px] text-light font-mono">
-                      DOI: {paper.doi}
-                    </p>
                   </div>
                 </div>
               ))}
