@@ -12,7 +12,7 @@ export default function BookPage() {
   return (
     <>
       {/* Hero — navy */}
-      <section className="bg-navy pt-20">
+      <section className="pt-20" style={{ background: "linear-gradient(180deg, #1D5C4D 0%, #1B2A4A 100%)" }}>
         <div className="max-w-[1200px] mx-auto px-5 md:px-6 pt-14 pb-14 md:pt-24 md:pb-20">
           <ScrollReveal>
             <div className="text-center max-w-2xl mx-auto">

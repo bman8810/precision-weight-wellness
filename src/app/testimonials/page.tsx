@@ -107,58 +107,134 @@ const testimonials = [
   },
 ];
 
+const totalLost = testimonials.reduce((sum, t) => sum + t.lostLbs, 0);
+const avgLost = Math.round(totalLost / testimonials.length);
+
 export default function TestimonialsPage() {
+  const [featured, ...rest] = testimonials;
+
   return (
     <>
-      {/* Hero */}
-      <section className="pt-28 pb-14 md:pt-36 md:pb-20 bg-cream">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6 text-center">
+      {/* ── Hero — teal-to-navy gradient ── */}
+      <section
+        className="pt-28 pb-14 md:pt-40 md:pb-24"
+        style={{ background: "linear-gradient(180deg, #1D5C4D 0%, #0F1D35 100%)" }}
+      >
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
           <ScrollReveal>
-            <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-5">
-              Patient Stories
-            </p>
-            <h1
-              className="font-serif text-[clamp(2.5rem,5vw,3.75rem)] leading-[1.08] tracking-[-0.02em] text-navy"
-              style={{ textWrap: "balance" }}
-            >
-              Real results, <em className="text-gold">real people</em>
-            </h1>
-            <p className="mt-6 text-[16px] text-body max-w-2xl mx-auto leading-[1.7]">
-              Hear from patients who have transformed their health with our
-              medically supervised weight management program.
-            </p>
+            <div className="text-center max-w-3xl mx-auto">
+              <p className="flex items-center justify-center gap-2 text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-5">
+                <span className="w-1.5 h-1.5 rounded-full bg-gold" />
+                Patient Stories
+              </p>
+              <h1
+                className="font-serif text-[clamp(2.75rem,5.5vw,4.25rem)] leading-[1.08] tracking-[-0.02em] text-white"
+                style={{ textWrap: "balance" }}
+              >
+                Real results, <em className="text-gold">real people</em>
+              </h1>
+              <p className="mt-6 text-[16px] text-white/60 max-w-2xl mx-auto leading-[1.7]">
+                Hear from patients who have transformed their health with our
+                medically supervised weight management program.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          {/* Stats bar */}
+          <ScrollReveal delay={200}>
+            <div className="mt-14 flex flex-wrap justify-center gap-8 md:gap-16">
+              {[
+                { value: `${testimonials.length}+`, label: "Patient stories" },
+                { value: `${avgLost} lbs`, label: "Avg. weight lost" },
+                { value: `${totalLost}+`, label: "Total lbs lost" },
+                { value: "3 States", label: "NY · CT · MI" },
+              ].map((s) => (
+                <div key={s.label} className="text-center">
+                  <p className="font-serif text-[clamp(24px,4vw,40px)] font-semibold tracking-[-0.03em] text-gold leading-[1]">
+                    {s.value}
+                  </p>
+                  <p className="text-[10px] uppercase tracking-[0.12em] text-white/40 mt-2">
+                    {s.label}
+                  </p>
+                </div>
+              ))}
+            </div>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* Testimonials — masonry-style layout */}
+      {/* ── Featured Testimonial — navy-deep ── */}
+      <section className="py-14 md:py-24 bg-navy-deep">
+        <ScrollReveal>
+          <div className="max-w-[800px] mx-auto px-5 md:px-6 text-center">
+            <div className="relative">
+              <span className="absolute -top-6 -left-4 text-gold/15 font-serif text-[120px] leading-[1] select-none">&ldquo;</span>
+              <blockquote>
+                <p className="font-serif text-[clamp(1.5rem,3.5vw,2.25rem)] leading-[1.3] tracking-[-0.02em] text-white italic">
+                  {featured.quote}
+                </p>
+              </blockquote>
+            </div>
+            <div className="mt-8 flex items-center justify-center gap-3">
+              <div className="w-11 h-11 rounded-full bg-teal flex items-center justify-center text-white text-[15px] font-semibold ring-2 ring-teal-bright/30 ring-offset-2 ring-offset-navy-deep">
+                {featured.name[0]}
+              </div>
+              <div className="text-left">
+                <p className="text-[15px] text-white font-semibold">{featured.name}</p>
+                <p className="text-[13px] text-white/45">{featured.city}</p>
+              </div>
+              <div className="ml-4 pl-4 border-l border-white/15">
+                <p className="font-serif text-[24px] text-gold font-semibold">-{featured.lostLbs} lbs</p>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+      </section>
+
+      {/* ── Testimonials Grid — cream ── */}
       <section className="py-14 md:py-24 bg-cream">
         <div className="max-w-[1200px] mx-auto px-5 md:px-6">
+          <ScrollReveal>
+            <div className="text-center mb-14">
+              <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-3">
+                More stories
+              </p>
+              <h2 className="font-serif text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.1] tracking-[-0.02em] text-navy">
+                Every journey is <em className="text-gold">unique</em>
+              </h2>
+            </div>
+          </ScrollReveal>
+
           <ScrollReveal stagger={80}>
             <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-              {testimonials.map((t, i) => (
+              {rest.map((t, i) => (
                 <article
                   key={i}
-                  className="break-inside-avoid bg-white p-8 rounded-[18px] border border-[rgba(27,42,74,0.04)] card-hover"
+                  className="break-inside-avoid doppelrand doppelrand-light"
                 >
-                  <div className="flex gap-1 text-gold mb-4">
-                    {[...Array(t.stars)].map((_, j) => (
-                      <span key={j}>&#9733;</span>
-                    ))}
-                  </div>
-                  <p className={`text-body leading-relaxed italic ${i === 0 || i === 3 ? "text-base" : "text-sm"}`}>
-                    &ldquo;{t.quote}&rdquo;
-                  </p>
-                  <div className="mt-6 flex items-center justify-between">
-                    <div>
-                      <p className="text-sm font-medium text-navy">
-                        {t.name}
-                      </p>
-                      <p className="text-xs text-light">{t.city}</p>
+                  <div className="bg-white p-8 rounded-[18px] border border-[rgba(27,42,74,0.04)] card-hover">
+                    <div className="flex gap-0.5 text-gold text-[14px] mb-4">
+                      {[...Array(t.stars)].map((_, j) => (
+                        <span key={j}>&#9733;</span>
+                      ))}
                     </div>
-                    <p className="font-serif text-xl text-gold tabular-nums">
-                      -{t.lostLbs} lbs
+                    <p className="text-[15px] text-body leading-[1.65] italic">
+                      &ldquo;{t.quote}&rdquo;
                     </p>
+                    <div className="mt-6 pt-5 border-t border-[rgba(27,42,74,0.06)] flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-full bg-navy flex items-center justify-center text-white text-[13px] font-semibold">
+                          {t.name[0]}
+                        </div>
+                        <div>
+                          <p className="text-[14px] font-medium text-navy">{t.name}</p>
+                          <p className="text-[12px] text-light">{t.city}</p>
+                        </div>
+                      </div>
+                      <p className="font-serif text-[20px] text-gold font-semibold tabular-nums">
+                        -{t.lostLbs} lbs
+                      </p>
+                    </div>
                   </div>
                 </article>
               ))}
@@ -167,24 +243,24 @@ export default function TestimonialsPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="relative py-14 md:py-24 bg-navy-deep text-center overflow-hidden">
+      {/* ── CTA — white with gold accent ── */}
+      <section className="relative py-14 md:py-28 bg-white text-center overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/5 rounded-full blur-3xl pointer-events-none" />
         <ScrollReveal>
-          <div className="relative max-w-2xl mx-auto px-5 md:px-6">
-            <h2
-              className="font-serif text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.1] tracking-[-0.02em] text-white"
-              style={{ textWrap: "balance" }}
-            >
-              Start your success <em className="text-gold">story</em>
+          <div className="relative max-w-[680px] mx-auto px-5 md:px-6">
+            <h2 className="font-serif text-[clamp(2.5rem,5.5vw,4rem)] leading-[1.08] tracking-[-0.02em] text-navy">
+              Write your own <em className="text-gold">success story</em>
             </h2>
-            <p className="mt-4 text-[16px] text-white/60 leading-[1.7]">
+            <p className="mt-4 text-[16px] text-body leading-[1.7]">
               Join the growing number of patients achieving real, lasting results
-              with Dr. Rhee.
+              with medically supervised weight management.
             </p>
-            <div className="mt-8">
-              <Link href="/book" className="btn-gold w-full sm:w-auto justify-center">
+            <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3">
+              <Link href="/book" className="btn-primary w-full sm:w-auto justify-center">
                 Book Your Consultation
+              </Link>
+              <Link href="/eligibility" className="btn-secondary w-full sm:w-auto justify-center">
+                Check Eligibility
               </Link>
             </div>
           </div>

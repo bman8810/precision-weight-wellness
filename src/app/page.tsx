@@ -82,9 +82,9 @@ export default function Home() {
             style={{ animationDelay: "0.65s" }}
           >
             {[
-              { value: "15%+", label: "Avg. weight loss" },
-              { value: "1:1", label: "Physician care" },
-              { value: "100%", label: "Focused on you" },
+              { value: "Board-Certified", label: "Physician-led" },
+              { value: "1:1", label: "Personalized care" },
+              { value: "3 States", label: "NY · CT · MI" },
             ].map((s, i) => (
               <div key={s.label} className={`${i > 0 ? "border-l border-white/15 pl-4 sm:pl-8 md:pl-12" : ""}`}>
                 <p className="font-serif text-[clamp(18px,3.5vw,40px)] font-semibold tracking-[-0.03em] text-gold leading-[1]">
@@ -301,7 +301,7 @@ export default function Home() {
           <ScrollReveal delay={200}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               <div className="md:col-span-2 relative rounded-[18px] overflow-hidden min-h-[320px] card-hover border border-transparent">
-                <Image src="/images/apple/doctor-sage.jpg" alt="Dr. Libby Rhee providing care" fill className="object-cover" />
+                <Image src="/images/doctor/libby-photo-1.jpeg" alt="Dr. Libby Rhee providing care" fill className="object-cover" />
                 <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #1D5C4D 0%, rgba(29,92,77,0.4) 50%, transparent 100%)" }} />
                 <div className="absolute bottom-0 left-0 right-0 p-7">
                   <p className="text-teal-bright text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-2">Physician-Led</p>
@@ -406,7 +406,7 @@ export default function Home() {
               </div>
               <div className="doppelrand doppelrand-light">
                 <div className="rounded-[16px] overflow-hidden">
-                  <Image src="/images/apple/doctor-sage.jpg" alt="Dr. Rhee providing personalized care" width={600} height={500} className="w-full h-full object-cover" />
+                  <Image src="/images/apple/doctor-portrait.jpg" alt="Dr. Rhee providing personalized care" width={600} height={500} className="w-full h-full object-cover" />
                 </div>
               </div>
             </div>

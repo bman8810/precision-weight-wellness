@@ -83,7 +83,7 @@ const expectations = [
   {
     title: "First visit duration",
     items: [
-      "Plan for approximately 45-60 minutes",
+      "Plan for approximately 30 minutes",
       "Thorough health assessment",
       "Time for all your questions",
       "Leave with a clear plan",
@@ -95,7 +95,7 @@ const expectations = [
       "Prescription sent to your pharmacy (if appropriate)",
       "Written treatment plan provided",
       "Follow-up appointment scheduled",
-      "Access to our patient support line",
+      "Labs ordered if specified by your provider",
     ],
   },
 ];
@@ -104,8 +104,12 @@ export default function HowItWorksPage() {
   return (
     <>
       {/* ── Hero — navy ── */}
-      <section className="bg-navy pt-20">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6 pt-14 pb-14 md:pt-28 md:pb-28">
+      <section className="relative pt-20 overflow-hidden" style={{ background: "linear-gradient(180deg, #1D5C4D 0%, #1B2A4A 100%)" }}>
+        <div className="absolute inset-0 opacity-[0.08]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/headers/how-it-works-header.jpg" alt="" className="w-full h-full object-cover" aria-hidden="true" />
+        </div>
+        <div className="relative max-w-[1200px] mx-auto px-5 md:px-6 pt-14 pb-14 md:pt-28 md:pb-28">
           <ScrollReveal>
             <div className="text-center max-w-3xl mx-auto">
               <p
@@ -226,7 +230,7 @@ export default function HowItWorksPage() {
                         </svg>
                       ),
                       title: "Continuous monitoring",
-                      desc: "Dr. Rhee personally monitors every patient\u2019s progress and adjusts treatment plans as needed.",
+                      desc: "Our medical team monitors every patient\u2019s progress and adjusts treatment plans as needed.",
                     },
                     {
                       icon: (

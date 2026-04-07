@@ -126,7 +126,7 @@ export default function Header() {
           </button>
         </div>
 
-        <div className={`lg:hidden overflow-hidden transition-all duration-500 ${mobileOpen ? "max-h-[28rem] opacity-100" : "max-h-0 opacity-0"}`} style={{ transitionTimingFunction: "cubic-bezier(0.32, 0.72, 0, 1)" }}>
+        <div className={`lg:hidden overflow-hidden transition-all duration-200 ${mobileOpen ? "max-h-[28rem] opacity-100" : "max-h-0 opacity-0"}`} style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}>
           <div className="bg-white rounded-b-[24px] px-5 py-6 space-y-3">
             {navLinks.map((link) => (
               <Link

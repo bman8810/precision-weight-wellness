@@ -207,7 +207,7 @@ function BookingFlowInner() {
                 href="https://secure.gethealthie.com/go/precisionww"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-gold"
+                className="btn-primary"
               >
                 Go to Patient Portal
               </a>

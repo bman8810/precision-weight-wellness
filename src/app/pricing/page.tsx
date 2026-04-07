@@ -38,7 +38,9 @@ function ArrowIcon({ className = "text-current" }: { className?: string }) {
 const tiers = [
   {
     name: "Essential",
-    price: "$199",
+    monthlyPrice: "$199",
+    quarterlyPrice: "$539",
+    quarterlySavings: "Save $58",
     period: "per month",
     image: "/images/packages/package-essential.jpg",
     offeringId: "244715",
@@ -56,7 +58,9 @@ const tiers = [
   },
   {
     name: "Premium",
-    price: "$349",
+    monthlyPrice: "$349",
+    quarterlyPrice: "$939",
+    quarterlySavings: "Save $108",
     period: "per month",
     image: "/images/packages/package-premium.jpg",
     offeringId: "244716",
@@ -72,7 +76,9 @@ const tiers = [
   },
   {
     name: "Concierge",
-    price: "$599",
+    monthlyPrice: "$599",
+    quarterlyPrice: "$1,619",
+    quarterlySavings: "Save $178",
     period: "per month",
     image: "/images/packages/package-concierge.jpg",
     offeringId: "244717",
@@ -121,14 +127,19 @@ const comparisonRows = [
   { feature: "Priority scheduling", essential: false, premium: false, concierge: "Same-week guaranteed" },
   { feature: "Direct physician access", essential: false, premium: false, concierge: "Business hours ($150+ value)" },
   { feature: "Add-on service discount", essential: false, premium: false, concierge: "20% off" },
+  { feature: "Estimated monthly value", essential: "$275+", premium: "$500+", concierge: "$900+" },
 ];
 
 export default function PricingPage() {
   return (
     <>
       {/* ── Hero — navy ── */}
-      <section className="bg-navy pt-20">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6 pt-14 pb-14 md:pt-28 md:pb-28">
+      <section className="relative pt-20 overflow-hidden" style={{ background: "linear-gradient(180deg, #163D3A 0%, #1B2A4A 100%)" }}>
+        <div className="absolute inset-0 opacity-[0.08]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/headers/pricing-header.jpg" alt="" className="w-full h-full object-cover" aria-hidden="true" />
+        </div>
+        <div className="relative max-w-[1200px] mx-auto px-5 md:px-6 pt-14 pb-14 md:pt-28 md:pb-28">
           <ScrollReveal>
             <div className="text-center max-w-2xl mx-auto">
               <p
@@ -204,11 +215,17 @@ export default function PricingPage() {
                           tier.highlighted ? "text-white" : "text-navy"
                         }`}
                       >
-                        {tier.price}
+                        {tier.monthlyPrice}
                       </p>
                       <p className={`text-[13px] mt-1.5 ${tier.highlighted ? "text-white/40" : "text-light"}`}>
                         {tier.period}
                       </p>
+                      <div className={`mt-3 px-3 py-2 rounded-xl ${tier.highlighted ? "bg-white/8" : "bg-cream/80"}`}>
+                        <p className={`text-[13px] font-medium ${tier.highlighted ? "text-gold" : "text-navy"}`}>
+                          {tier.quarterlyPrice}<span className={`text-[12px] font-normal ${tier.highlighted ? "text-white/40" : "text-light"}`}> / quarter</span>
+                        </p>
+                        <p className="text-[11px] text-sage font-semibold mt-0.5">{tier.quarterlySavings}</p>
+                      </div>
 
                       {tier.includes && (
                         <p className="mt-8 mb-4 text-[13px] font-semibold italic text-gold">
@@ -305,6 +322,12 @@ export default function PricingPage() {
                       <td className="py-5 px-4 text-center font-serif text-[20px] text-white/70 font-semibold">$199</td>
                       <td className="py-5 px-4 text-center bg-gold/[0.06] font-serif text-[22px] text-gold font-semibold">$349</td>
                       <td className="py-5 px-4 text-center font-serif text-[20px] text-white/70 font-semibold">$599</td>
+                    </tr>
+                    <tr>
+                      <td className="py-4 px-6 text-[14px] text-white/60">Quarterly price <span className="text-sage text-[11px] ml-1">save ~10%</span></td>
+                      <td className="py-4 px-4 text-center font-serif text-[18px] text-white/50 font-semibold">$539</td>
+                      <td className="py-4 px-4 text-center bg-gold/[0.06] font-serif text-[20px] text-gold/80 font-semibold">$939</td>
+                      <td className="py-4 px-4 text-center font-serif text-[18px] text-white/50 font-semibold">$1,619</td>
                     </tr>
                   </tbody>
                 </table>

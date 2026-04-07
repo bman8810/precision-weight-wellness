@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, Fragment } from "react";
+import { useState, useEffect, useRef, Fragment } from "react";
 
 const insurers: Record<string, { covered: boolean; note: string }> = {
   Aetna: {
@@ -67,6 +67,30 @@ export default function EligibilityPage() {
   const [selectedConditions, setSelectedConditions] = useState<string[]>([]);
   const [selectedInsurer, setSelectedInsurer] = useState("");
 
+  const formCardRef = useRef<HTMLDivElement>(null);
+  // Scroll the bottom of the form card into view after a selection
+  function scrollToContinue() {
+    setTimeout(() => {
+      if (formCardRef.current) {
+        const rect = formCardRef.current.getBoundingClientRect();
+        const bottomOfCard = window.scrollY + rect.bottom;
+        const targetScroll = bottomOfCard - window.innerHeight + 40;
+        if (targetScroll > window.scrollY) {
+          window.scrollTo({ top: targetScroll, behavior: "smooth" });
+        }
+      }
+    }, 150);
+  }
+
+  // Auto-scroll to center of form card when step changes
+  useEffect(() => {
+    if (formCardRef.current) {
+      const rect = formCardRef.current.getBoundingClientRect();
+      const scrollTarget = window.scrollY + rect.top - window.innerHeight / 2 + rect.height / 2;
+      window.scrollTo({ top: Math.max(0, scrollTarget), behavior: "smooth" });
+    }
+  }, [step]);
+
   const bmi = (() => {
     const ft = parseInt(heightFt);
     const inches = parseInt(heightIn) || 0;
@@ -100,13 +124,14 @@ export default function EligibilityPage() {
       setSelectedConditions(
         selectedConditions.includes(condition) ? [] : [condition]
       );
-      return;
+    } else {
+      setSelectedConditions((prev) =>
+        prev.includes(condition)
+          ? prev.filter((c) => c !== condition)
+          : [...prev.filter((c) => c !== "None of the above"), condition]
+      );
     }
-    setSelectedConditions((prev) =>
-      prev.includes(condition)
-        ? prev.filter((c) => c !== condition)
-        : [...prev.filter((c) => c !== "None of the above"), condition]
-    );
+    scrollToContinue();
   }
 
   const canProceedStep1 = heightFt && weight && bmi > 0;
@@ -221,7 +246,7 @@ export default function EligibilityPage() {
           </div>
 
           {/* ── Doppelrand Form Card ── */}
-          <div className="p-2 rounded-[2rem] bg-navy/[0.02] shadow-[inset_0_0_0_1px_rgba(27,42,74,0.04)]">
+          <div ref={formCardRef} className="p-2 rounded-[2rem] bg-navy/[0.02] shadow-[inset_0_0_0_1px_rgba(27,42,74,0.04)]">
             <div className="bg-white rounded-[calc(2rem-0.5rem)] p-8 md:p-12 shadow-[0_1px_3px_rgba(27,42,74,0.03),0_12px_40px_rgba(27,42,74,0.05)]">
               <div key={step} className="animate-step-enter">
                 {/* ──────── Step 1: BMI Calculator ──────── */}
@@ -433,7 +458,7 @@ export default function EligibilityPage() {
                         return (
                           <button
                             key={insurer}
-                            onClick={() => setSelectedInsurer(insurer)}
+                            onClick={() => { setSelectedInsurer(insurer); scrollToContinue(); }}
                             className={`group w-full text-left px-6 py-5 rounded-2xl border text-sm transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${
                               selected
                                 ? "border-gold/40 bg-gold/[0.06] shadow-[0_0_0_1px_rgba(201,169,110,0.15),0_4px_16px_rgba(201,169,110,0.08)] text-soft-black"

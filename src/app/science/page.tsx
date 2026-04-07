@@ -22,30 +22,34 @@ function ArrowIcon({ className = "text-current" }: { className?: string }) {
 const timeline = [
   {
     num: "01",
+    year: "2014",
     name: "Liraglutide (Saxenda)",
     badge: "GLP-1",
-    desc: "The first GLP-1 approved for weight management. Clinical trials showed ~8% average body weight loss. A breakthrough that proved hormonal therapy could meaningfully treat obesity.",
+    desc: "The first GLP-1 receptor agonist approved for chronic weight management. It proved a radical idea: that obesity could be treated with hormonal therapy, not just willpower. Clinical trials showed ~8% average body weight loss — modest by today\u2019s standards, but a paradigm shift in medicine.",
     pct: 8,
   },
   {
     num: "02",
+    year: "2021",
     name: "Semaglutide (Wegovy)",
     badge: "GLP-1",
-    desc: "A GLP-1 receptor agonist that changed the landscape. Clinical trials demonstrated ~15% average body weight loss. Available as a weekly injection or daily oral pill, it became the gold standard for medical weight management.",
+    desc: "Building on Liraglutide\u2019s foundation with a longer-acting molecular structure, Semaglutide changed everything. The STEP trials demonstrated ~15% body weight loss — results that rivaled bariatric surgery. Weekly dosing and an oral option made it the new gold standard.",
     pct: 15,
   },
   {
     num: "03",
+    year: "2023",
     name: "Tirzepatide (Zepbound)",
     badge: "Dual",
-    desc: "A dual GIP/GLP-1 receptor agonist. Clinical trials showed up to 22.5% body weight loss — the most effective weight loss medication approved to date.",
+    desc: "The next leap: targeting two hormonal pathways simultaneously. By activating both GLP-1 and GIP receptors, Tirzepatide achieved up to 22.5% body weight loss in the SURMOUNT trials — the most effective FDA-approved weight loss medication to date.",
     pct: 22.5,
   },
   {
     num: "04",
+    year: "2025+",
     name: "Retatrutide & Beyond",
     badge: "Triple",
-    desc: "Triple agonists targeting GLP-1, GIP, and glucagon receptors are in late-stage trials showing up to 24% weight loss. The future of obesity medicine is accelerating.",
+    desc: "The frontier: triple agonists targeting GLP-1, GIP, and glucagon receptors simultaneously. Phase II trials showed up to 24% weight loss at 48 weeks, with Phase III underway. The trajectory is clear — each generation more effective than the last.",
     pct: 24,
   },
 ];
@@ -57,22 +61,34 @@ const chartData = [
   { label: "Retatrutide", pct: 24, note: "in trials" },
 ];
 
-const beyondCards = [
+const papers = [
   {
-    title: "Body composition",
-    desc: "New protocols focus on preserving lean muscle mass during weight loss — not just reducing a number on the scale. The goal is a healthier body, not just a smaller one.",
+    title: "STEP 1 Trial — Semaglutide 2.4 mg",
+    journal: "New England Journal of Medicine",
+    year: "2021",
+    finding: "14.9% mean body weight reduction over 68 weeks vs. 2.4% with placebo in adults with obesity.",
+    doi: "10.1056/NEJMoa2032183",
   },
   {
-    title: "Cardiovascular health",
-    desc: "GLP-1 medications have demonstrated significant cardiovascular benefits, including reduced risk of major cardiac events — benefits that extend well beyond weight loss alone.",
+    title: "SURMOUNT-1 Trial — Tirzepatide",
+    journal: "New England Journal of Medicine",
+    year: "2022",
+    finding: "Up to 22.5% body weight reduction at highest dose over 72 weeks — the largest weight loss seen with any anti-obesity medication.",
+    doi: "10.1056/NEJMoa2206038",
   },
   {
-    title: "Metabolic markers",
-    desc: "Patients consistently see improvements in A1C, blood pressure, and lipid panels. These medications treat the metabolic dysfunction at the root of obesity.",
+    title: "SELECT Trial — Cardiovascular Outcomes",
+    journal: "New England Journal of Medicine",
+    year: "2023",
+    finding: "Semaglutide reduced major adverse cardiovascular events by 20% in patients with obesity and established cardiovascular disease.",
+    doi: "10.1056/NEJMoa2307563",
   },
   {
-    title: "Whole-person optimization",
-    desc: "The future of weight management isn\u2019t about a single metric. It\u2019s about optimizing energy, mobility, longevity, and quality of life — the whole person.",
+    title: "Phase II Retatrutide Trial",
+    journal: "New England Journal of Medicine",
+    year: "2023",
+    finding: "Triple agonist targeting GLP-1, GIP, and glucagon receptors demonstrated up to 24.2% weight reduction at 48 weeks.",
+    doi: "10.1056/NEJMoa2301972",
   },
 ];
 
@@ -82,8 +98,12 @@ export default function SciencePage() {
   return (
     <>
       {/* ── Hero — navy ── */}
-      <section className="bg-navy pt-20">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6 pt-14 pb-14 md:pt-28 md:pb-28">
+      <section className="relative pt-20 overflow-hidden" style={{ background: "linear-gradient(180deg, #2B3F66 0%, #1B2A4A 100%)" }}>
+        <div className="absolute inset-0 opacity-[0.08]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/headers/science-header.jpg" alt="" className="w-full h-full object-cover" aria-hidden="true" />
+        </div>
+        <div className="relative max-w-[1200px] mx-auto px-5 md:px-6 pt-14 pb-14 md:pt-28 md:pb-28">
           <ScrollReveal>
             <div className="text-center max-w-3xl mx-auto">
               <p
@@ -142,7 +162,8 @@ export default function SciencePage() {
                           <span className="inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.12em] bg-sage/10 text-sage px-2.5 py-1 rounded-full">
                             {step.badge}
                           </span>
-                          <span className="text-[13px] text-gold font-semibold">{step.pct}% avg loss</span>
+                          <span className="text-[12px] text-light font-medium">{step.year}</span>
+                          <span className="text-[13px] text-gold font-semibold ml-auto">{step.pct}% avg loss</span>
                         </div>
                         <h3 className="font-serif text-[20px] tracking-[-0.01em] text-navy leading-tight">
                           {step.name}
@@ -228,45 +249,42 @@ export default function SciencePage() {
         </div>
       </section>
 
-      {/* ── Beyond the Scale — cream with Doppelrand ── */}
+      {/* ── Published Evidence — cream ── */}
       <section className="py-14 md:py-28 bg-cream">
         <div className="max-w-[1200px] mx-auto px-5 md:px-6">
           <ScrollReveal>
             <div className="text-center mb-14">
               <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-3">
-                The future of wellness
+                Peer-Reviewed Research
               </p>
               <h2 className="font-serif text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.1] tracking-[-0.02em] text-navy">
-                Beyond the{" "}<em className="text-gold">scale</em>
+                The evidence behind the{" "}<em className="text-gold">medications</em>
               </h2>
               <p className="mt-4 text-[16px] text-body leading-[1.7] max-w-2xl mx-auto">
-                The field of medical weight management is evolving beyond pounds
-                lost. Today&apos;s treatments are about optimizing the whole
-                person — body, metabolism, and long-term health.
+                Every medication we prescribe is backed by landmark clinical trials
+                published in the world&apos;s leading medical journals.
               </p>
             </div>
           </ScrollReveal>
 
           <ScrollReveal delay={200} stagger={100}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {beyondCards.map((card) => (
-                <div key={card.title} className="doppelrand doppelrand-light">
+              {papers.map((paper) => (
+                <div key={paper.doi} className="doppelrand doppelrand-light">
                   <div className="bg-white rounded-[18px] p-7 border border-[rgba(27,42,74,0.04)] card-hover h-full">
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-full bg-sage/12 flex items-center justify-center shrink-0 mt-0.5">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#7BAE8E" />
-                        </svg>
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-serif text-[20px] text-navy tracking-[-0.01em] leading-tight">
-                          {card.title}
-                        </h3>
-                        <p className="text-[15px] text-body leading-[1.65] mt-3">
-                          {card.desc}
-                        </p>
-                      </div>
+                    <div className="flex items-center gap-2.5 mb-3">
+                      <span className="text-[11px] font-semibold text-sage italic">{paper.journal}</span>
+                      <span className="text-[11px] text-light">({paper.year})</span>
                     </div>
+                    <h3 className="font-serif text-[18px] text-navy tracking-[-0.01em] leading-tight">
+                      {paper.title}
+                    </h3>
+                    <p className="text-[15px] text-body leading-[1.65] mt-3">
+                      {paper.finding}
+                    </p>
+                    <p className="mt-4 text-[12px] text-light font-mono">
+                      DOI: {paper.doi}
+                    </p>
                   </div>
                 </div>
               ))}
