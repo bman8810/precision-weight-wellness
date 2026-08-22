@@ -52,7 +52,7 @@ function BookingFlowInner() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [modality, setModality] = useState<"in_person" | "remote">("in_person");
-  const [preferredAt, setPreferredAt] = useState("");
+  const [preferredWindow, setPreferredWindow] = useState("anytime");
   const [error, setError] = useState("");
   const [done, setDone] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -74,7 +74,7 @@ function BookingFlowInner() {
           password,
           tier: selectedPackage.key,
           modality,
-          preferredAt: preferredAt || undefined,
+          preferredWindow: preferredWindow || undefined,
         }),
       });
       setDone(true);
@@ -243,14 +243,19 @@ function BookingFlowInner() {
                 </select>
               </label>
               <label className="block text-[13px] text-navy">
-                Preferred time (optional)
-                <input
-                  type="datetime-local"
-                  data-testid="lead-preferred"
-                  value={preferredAt}
-                  onChange={(e) => setPreferredAt(e.target.value)}
+                Roughly when works? (optional)
+                <select
+                  data-testid="lead-window"
+                  value={preferredWindow}
+                  onChange={(e) => setPreferredWindow(e.target.value)}
                   className={`${field} mt-1`}
-                />
+                >
+                  <option value="anytime">Anytime — we’ll propose times</option>
+                  <option value="mornings">Mornings</option>
+                  <option value="afternoons">Afternoons</option>
+                  <option value="this_week">This week</option>
+                  <option value="next_week">Next week</option>
+                </select>
               </label>
               {error && (
                 <p className="text-red-700 text-sm" role="alert">

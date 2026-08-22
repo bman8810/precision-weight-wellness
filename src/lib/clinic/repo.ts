@@ -232,14 +232,38 @@ export async function createLead(input: {
   phone?: string;
   tier: Tier;
   modality: VisitModality;
-  preferredAt?: string;
+  preferredWindow?: string;
   password: string;
   notes?: string;
 }): Promise<{ patient: Patient; visit: Visit; user: User }> {
+  const windowNote = input.preferredWindow
+    ? `Preferred window: ${input.preferredWindow}`
+    : null;
+  const note = [input.notes, windowNote].filter(Boolean).join(" · ") || null;
+  const starts = nextUnscheduledPlaceholder();
+
   const existing = await findUserByEmail(input.email);
-  if (existing) {
-    throw new Error("email already registered");
+  if (existing?.patient_id) {
+    const patient = await getPatient(existing.patient_id);
+    if (!patient) throw new Error("patient missing");
+    await setMembership({
+      patientId: patient.id,
+      tier: input.tier,
+      status: "lead",
+    });
+    const visit = await createVisit({
+      patientId: patient.id,
+      startsAt: starts,
+      modality: input.modality,
+      status: "requested",
+      notes: note,
+    });
+    return { patient, visit, user: existing };
   }
+  if (existing) {
+    throw new Error("This email is already in use. Try patient login.");
+  }
+
   const patient = await createPatient({
     name: input.name,
     email: input.email,
@@ -257,17 +281,22 @@ export async function createLead(input: {
     tier: input.tier,
     status: "lead",
   });
-  const starts = input.preferredAt
-    ? new Date(input.preferredAt).toISOString()
-    : new Date(Date.now() + 7 * 86400000).toISOString();
   const visit = await createVisit({
     patientId: patient.id,
     startsAt: starts,
     modality: input.modality,
     status: "requested",
-    notes: input.notes ?? null,
+    notes: note,
   });
   return { patient, visit, user };
+}
+
+function nextUnscheduledPlaceholder(): string {
+  const d = new Date();
+  const daysUntilMon = (8 - d.getDay()) % 7 || 7;
+  d.setDate(d.getDate() + daysUntilMon);
+  d.setHours(12, 0, 0, 0);
+  return d.toISOString();
 }
 
 export async function addVital(input: {

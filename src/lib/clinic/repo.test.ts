@@ -53,6 +53,28 @@ describe("clinic repo", () => {
     expect(v.weight_lb).toBe(180);
   });
 
+  it("adds another requested visit when the email already exists", async () => {
+    const first = await createLead({
+      name: "Dup",
+      email: "dup@example.com",
+      tier: "essential",
+      modality: "in_person",
+      password: "secret1",
+      preferredWindow: "mornings",
+    });
+    const second = await createLead({
+      name: "Dup",
+      email: "dup@example.com",
+      tier: "premium",
+      modality: "remote",
+      password: "ignored",
+      preferredWindow: "next_week",
+    });
+    expect(second.patient.id).toBe(first.patient.id);
+    expect(second.visit.id).not.toBe(first.visit.id);
+    expect(second.visit.notes).toContain("next_week");
+  });
+
   it("creates a book lead as membership lead + requested visit + portal user", async () => {
     const { patient, visit, user } = await createLead({
       name: "Casey Lead",

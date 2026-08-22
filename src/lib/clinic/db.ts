@@ -17,9 +17,13 @@ declare global {
   var __pwwClinicReady: Promise<SqlClient> | undefined;
 }
 
-function schemaSql(): string {
+function schemaStatements(): string[] {
   const file = path.join(process.cwd(), "db", "schema.sql");
-  return readFileSync(file, "utf8");
+  return readFileSync(file, "utf8")
+    .replace(/--[^\n]*/g, "")
+    .split(/;\s*\n/)
+    .map((s) => s.trim())
+    .filter(Boolean);
 }
 
 function hostedUrl(): string | undefined {
@@ -29,6 +33,21 @@ function hostedUrl(): string | undefined {
     process.env.NEON_DATABASE_URL ||
     undefined
   );
+}
+
+async function applySchema(client: SqlClient): Promise<void> {
+  try {
+    const { rows } = await client.query<{ n: string }>(
+      `select tablename as n from pg_tables where schemaname = 'public' and tablename = 'users'`
+    );
+    if (rows.length > 0) return;
+  } catch {
+    // empty database
+  }
+  for (const part of schemaStatements()) {
+    const sql = part.endsWith(";") ? part : `${part};`;
+    await client.exec(sql);
+  }
 }
 
 async function createPglite(): Promise<SqlClient> {
@@ -58,7 +77,8 @@ async function createNeon(): Promise<SqlClient> {
   const sql = neon(url);
   return {
     async query<T>(text: string, params: unknown[] = []) {
-      const rows = (await sql.query(text, params)) as T[];
+      const raw = await sql.query(text, params);
+      const rows = (Array.isArray(raw) ? raw : (raw as { rows?: T[] }).rows ?? []) as T[];
       return { rows };
     },
     async exec(text: string) {
@@ -71,10 +91,15 @@ export async function getSql(): Promise<SqlClient> {
   if (globalThis.__pwwClinicSql) return globalThis.__pwwClinicSql;
   if (!globalThis.__pwwClinicReady) {
     globalThis.__pwwClinicReady = (async () => {
-      const client = hostedUrl() ? await createNeon() : await createPglite();
-      await client.exec(schemaSql());
-      globalThis.__pwwClinicSql = client;
-      return client;
+      try {
+        const client = hostedUrl() ? await createNeon() : await createPglite();
+        await applySchema(client);
+        globalThis.__pwwClinicSql = client;
+        return client;
+      } catch (err) {
+        globalThis.__pwwClinicReady = undefined;
+        throw err;
+      }
     })();
   }
   return globalThis.__pwwClinicReady;

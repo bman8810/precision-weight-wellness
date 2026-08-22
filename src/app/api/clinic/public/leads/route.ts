@@ -18,6 +18,7 @@ export async function POST(request: Request) {
     tier?: string;
     modality?: string;
     preferredAt?: string;
+    preferredWindow?: string;
     password?: string;
     notes?: string;
   };
@@ -46,7 +47,7 @@ export async function POST(request: Request) {
       phone: body.phone?.trim() || undefined,
       tier,
       modality,
-      preferredAt: body.preferredAt || undefined,
+      preferredWindow: body.preferredWindow || undefined,
       password,
       notes: body.notes,
     });
