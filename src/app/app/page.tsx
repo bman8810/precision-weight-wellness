@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import ClinicNav from "@/components/clinic/ClinicNav";
 import { StatusPill } from "@/components/clinic/StatusPill";
 import { clinicFetch } from "@/lib/clinic/client";
-import { formatModality, formatWhen } from "@/lib/clinic/format";
+import { formatDay, formatModality } from "@/lib/clinic/format";
 import type {
   CheckIn,
   Membership,
@@ -90,7 +90,7 @@ export default function PatientHomePage() {
               className="font-serif text-2xl text-navy"
             >
               {nextVisit
-                ? `${formatWhen(nextVisit.starts_at)} · ${formatModality(nextVisit.modality)}`
+                ? `${formatDay(nextVisit.starts_at)} · ${formatModality(nextVisit.modality)}`
                 : "None scheduled yet"}
             </p>
             {nextVisit && (

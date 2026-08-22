@@ -5,7 +5,7 @@ import Link from "next/link";
 import ClinicNav from "@/components/clinic/ClinicNav";
 import { StatusPill } from "@/components/clinic/StatusPill";
 import { clinicFetch } from "@/lib/clinic/client";
-import { formatWhen } from "@/lib/clinic/format";
+import { formatDay } from "@/lib/clinic/format";
 import type { RosterRow } from "@/lib/clinic/types";
 
 export default function StaffRosterPage() {
@@ -49,9 +49,8 @@ export default function StaffRosterPage() {
             {error}
           </p>
         )}
-        <div className="doppelrand doppelrand-light">
-          <div className="overflow-x-auto bg-white rounded-[18px] border border-[rgba(27,42,74,0.04)]">
-            <table className="w-full text-left text-[14px]">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-[14px]">
               <thead className="text-[11px] uppercase tracking-[0.12em] text-light border-b border-navy/5">
                 <tr>
                   <th className="px-5 py-3">Patient</th>
@@ -89,7 +88,7 @@ export default function StaffRosterPage() {
                       {p.last_weight_lb != null ? `${p.last_weight_lb} lb` : "—"}
                     </td>
                     <td className="px-5 py-4 text-body">
-                      {formatWhen(p.next_visit)}
+                      {formatDay(p.next_visit)}
                     </td>
                   </tr>
                 ))}
@@ -102,7 +101,6 @@ export default function StaffRosterPage() {
                 )}
               </tbody>
             </table>
-          </div>
         </div>
       </div>
     </div>
