@@ -56,7 +56,7 @@ export default function HipaaPage() {
 
             <h2>Electronic Health Records</h2>
             <p>
-              We use an electronic health records system (Healthie) to store and manage your health information. This system meets HIPAA security requirements including encryption, access controls, and audit logging.
+              We store program data (membership, vitals, check-ins, and dosing protocol) in the Precision Weight + Wellness clinic system. Legal medical records, e-prescribing, and laboratory results are hosted in ModMed EMA at Liora Dermatology & Aesthetics. Both systems use encryption, access controls, and audit logging.
             </p>
 
             <h2>Contact Information</h2>

@@ -127,14 +127,12 @@ export default function ContactPage() {
                     <Link href="/eligibility" className="text-[15px] text-gold font-medium hover:text-gold-light transition-colors duration-300">
                       Check your eligibility &rsaquo;
                     </Link>
-                    <a
-                      href="https://secure.gethealthie.com/go/precisionww"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Link
+                      href="/app/login"
                       className="text-[15px] text-gold font-medium hover:text-gold-light transition-colors duration-300"
                     >
                       Patient portal &rsaquo;
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

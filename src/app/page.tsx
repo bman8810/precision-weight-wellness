@@ -58,7 +58,7 @@ export default function Home() {
             style={{ animationDelay: "0.35s" }}
           >
             A clinical-grade program using FDA-approved weight loss medications,
-            led by board-certified physicians — built around you, not a subscription model.
+            led by board-certified physicians — a physician-led membership, not a faceless pill mill.
           </p>
           <div
             className="animate-fade-up mt-8 flex flex-col sm:flex-row gap-3"

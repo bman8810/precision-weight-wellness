@@ -43,7 +43,7 @@ const tiers = [
     quarterlySavings: "Save $58",
     period: "per month",
     image: "/images/packages/package-essential.jpg",
-    offeringId: "244715",
+    key: "essential",
     includes: null,
     features: [
       "Initial consultation included",
@@ -63,7 +63,7 @@ const tiers = [
     quarterlySavings: "Save $108",
     period: "per month",
     image: "/images/packages/package-premium.jpg",
-    offeringId: "244716",
+    key: "premium",
     includes: "Everything in Essential, plus:",
     features: [
       "2 follow-up visits per month",
@@ -81,7 +81,7 @@ const tiers = [
     quarterlySavings: "Save $178",
     period: "per month",
     image: "/images/packages/package-concierge.jpg",
-    offeringId: "244717",
+    key: "concierge",
     includes: "Everything in Premium, plus:",
     features: [
       "Unlimited virtual check-ins",

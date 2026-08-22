@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import SiteChrome from "@/components/SiteChrome";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -103,9 +102,7 @@ export default function RootLayout({
             }),
           }}
         />
-        <Header />
-        <main id="main-content">{children}</main>
-        <Footer />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );

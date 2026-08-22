@@ -479,10 +479,10 @@ export default function WhyUsPage() {
                 <em className="text-gold">design</em>
               </h2>
               <p className="mt-5 text-[16px] text-body leading-[1.7] max-w-2xl mx-auto">
-                Precision Weight + Wellness is a boutique medical practice, not a
-                volume-based subscription service. We intentionally keep our
-                patient panel small so that Dr. Rhee can give every patient the
-                attention they deserve.
+                Precision Weight + Wellness is a boutique, physician-led
+                membership — not a high-volume pill mill. We keep the panel
+                small so Dr. Rhee can give every patient the attention they
+                deserve.
               </p>
             </div>
           </ScrollReveal>

@@ -86,10 +86,8 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
-            <a
-              href="https://secure.gethealthie.com/go/precisionww"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/app/login"
               className={`text-[13px] tracking-[-0.01em] transition-colors duration-500 ${
                 transparent
                   ? "text-white/70 hover:text-white"
@@ -98,7 +96,7 @@ export default function Header() {
               style={{ transitionTimingFunction: "cubic-bezier(0.32, 0.72, 0, 1)" }}
             >
               Patient Login
-            </a>
+            </Link>
             <Link
               href="/book"
               className={`!text-[13px] !py-2 !px-5 !min-h-0 inline-flex items-center justify-center font-medium rounded-full transition-all duration-500 active:scale-[0.98] ${
@@ -137,14 +135,12 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
-            <a
-              href="https://secure.gethealthie.com/go/precisionww"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/app/login"
               className="block text-[15px] py-1 text-gold font-medium"
             >
               Patient Login
-            </a>
+            </Link>
             <Link href="/book" className="block text-center btn-primary mt-4 w-full text-[15px]">
               Book Now
             </Link>

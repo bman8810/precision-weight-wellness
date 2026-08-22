@@ -119,6 +119,20 @@ export default function EligibilityPage() {
 
   const insurerInfo = selectedInsurer ? insurers[selectedInsurer] : null;
 
+  useEffect(() => {
+    if (step !== 5 || bmi <= 0) return;
+    fetch("/api/clinic/public/eligibility", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        bmi,
+        conditions: selectedConditions,
+        insurer: selectedInsurer,
+        qualifies: qualifiesByBMI,
+      }),
+    }).catch(() => undefined);
+  }, [step]);
+
   function toggleCondition(condition: string) {
     if (condition === "None of the above") {
       setSelectedConditions(

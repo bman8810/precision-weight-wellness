@@ -2,45 +2,42 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-
-const HEALTHIE_DIETITIAN_ID = "14666692";
-const HEALTHIE_COLOR = "c7a96f";
+import { clinicFetch } from "@/lib/clinic/client";
 
 const packages = [
   {
-    key: "essential",
+    key: "essential" as const,
     name: "Essential",
     price: "$199",
     period: "/mo",
     image: "/images/packages/package-essential.jpg",
-    offeringId: "244715",
     description: "Monthly check-in, medication management, and baseline labs.",
   },
   {
-    key: "premium",
+    key: "premium" as const,
     name: "Premium",
     price: "$349",
     period: "/mo",
     image: "/images/packages/package-premium.jpg",
-    offeringId: "244716",
     description:
       "Twice-monthly visits, B12 injections, and nutritional counseling.",
   },
   {
-    key: "concierge",
+    key: "concierge" as const,
     name: "Concierge",
     price: "$599",
     period: "/mo",
     image: "/images/packages/package-concierge.jpg",
-    offeringId: "244717",
     description:
       "Unlimited check-ins, priority scheduling, and direct access to Dr. Rhee.",
   },
 ];
 
-const RETURNING_EMBED_URL = `https://secure.gethealthie.com/appointments/embed_appt?dietitian_id=${HEALTHIE_DIETITIAN_ID}&provider_ids=%5B${HEALTHIE_DIETITIAN_ID}%5D&appt_type_ids=%5B520046,520047%5D&primary_color=${HEALTHIE_COLOR}`;
+const field =
+  "w-full px-4 py-3 bg-cream border border-navy/10 rounded-xl text-[15px] text-navy focus:outline-none focus:border-gold";
 
 function BookingFlowInner() {
   const searchParams = useSearchParams();
@@ -50,13 +47,47 @@ function BookingFlowInner() {
   const [selectedTier, setSelectedTier] = useState<string | null>(
     tierParam && packages.some((p) => p.key === tierParam) ? tierParam : null
   );
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [modality, setModality] = useState<"in_person" | "remote">("in_person");
+  const [preferredAt, setPreferredAt] = useState("");
+  const [error, setError] = useState("");
+  const [done, setDone] = useState(false);
+  const [busy, setBusy] = useState(false);
 
   const selectedPackage = packages.find((p) => p.key === selectedTier);
+
+  async function submitLead(e: React.FormEvent) {
+    e.preventDefault();
+    if (!selectedPackage) return;
+    setError("");
+    setBusy(true);
+    try {
+      await clinicFetch("/api/clinic/public/leads", {
+        method: "POST",
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          password,
+          tier: selectedPackage.key,
+          modality,
+          preferredAt: preferredAt || undefined,
+        }),
+      });
+      setDone(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not submit");
+    } finally {
+      setBusy(false);
+    }
+  }
 
   return (
     <section className="py-14 md:py-28 bg-cream">
       <div className="max-w-[1100px] mx-auto px-5 md:px-6">
-        {/* Mode Toggle — pill switcher */}
         <div className="flex justify-center mb-14">
           <div className="doppelrand doppelrand-light inline-block">
             <div className="inline-flex rounded-full bg-white p-1 border border-[rgba(27,42,74,0.04)]">
@@ -64,13 +95,11 @@ function BookingFlowInner() {
                 onClick={() => {
                   setMode("new");
                   setSelectedTier(null);
+                  setDone(false);
                 }}
-                className={`px-7 py-2.5 rounded-full text-[14px] font-medium transition-all duration-500 active:scale-[0.98] ${
-                  mode === "new"
-                    ? "bg-navy text-white shadow-[0_4px_12px_rgba(27,42,74,0.15)]"
-                    : "text-body hover:text-navy"
+                className={`px-7 py-2.5 rounded-full text-[14px] font-medium ${
+                  mode === "new" ? "bg-navy text-white" : "text-body"
                 }`}
-                style={{ transitionTimingFunction: "cubic-bezier(0.32, 0.72, 0, 1)" }}
               >
                 New Patient
               </button>
@@ -79,12 +108,9 @@ function BookingFlowInner() {
                   setMode("returning");
                   setSelectedTier(null);
                 }}
-                className={`px-7 py-2.5 rounded-full text-[14px] font-medium transition-all duration-500 active:scale-[0.98] ${
-                  mode === "returning"
-                    ? "bg-navy text-white shadow-[0_4px_12px_rgba(27,42,74,0.15)]"
-                    : "text-body hover:text-navy"
+                className={`px-7 py-2.5 rounded-full text-[14px] font-medium ${
+                  mode === "returning" ? "bg-navy text-white" : "text-body"
                 }`}
-                style={{ transitionTimingFunction: "cubic-bezier(0.32, 0.72, 0, 1)" }}
               >
                 Returning Patient
               </button>
@@ -92,7 +118,6 @@ function BookingFlowInner() {
           </div>
         </div>
 
-        {/* New Patient — Plan Selection */}
         {mode === "new" && !selectedTier && (
           <>
             <div className="text-center mb-12">
@@ -102,47 +127,36 @@ function BookingFlowInner() {
               <h2 className="font-serif text-[clamp(1.75rem,3.5vw,2.5rem)] tracking-[-0.02em] text-navy">
                 Select your <em className="text-gold">plan</em>
               </h2>
-              <p className="mt-3 text-[15px] text-body leading-[1.65]">
-                Choose a membership to get started with your initial consultation.
-              </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {packages.map((pkg) => (
                 <button
                   key={pkg.key}
+                  data-testid={`tier-${pkg.key}`}
                   onClick={() => setSelectedTier(pkg.key)}
                   className="group text-left doppelrand doppelrand-light"
                 >
-                  <div className="flex flex-col rounded-[18px] overflow-hidden bg-white border border-[rgba(27,42,74,0.04)] card-hover h-full">
+                  <div className="flex flex-col rounded-[18px] overflow-hidden bg-white border border-[rgba(27,42,74,0.04)] h-full">
                     <div className="relative h-44 overflow-hidden">
                       <Image
                         src={pkg.image}
                         alt={`${pkg.name} package`}
                         fill
                         sizes="(max-width: 768px) 100vw, 33vw"
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        style={{ transitionTimingFunction: "cubic-bezier(0.32, 0.72, 0, 1)" }}
+                        className="object-cover"
                       />
                     </div>
-                    <div className="p-6 flex flex-col flex-1">
+                    <div className="p-6">
                       <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-2">
                         {pkg.name}
                       </p>
-                      <p className="font-serif text-[28px] tracking-[-0.02em] text-navy leading-[1]">
+                      <p className="font-serif text-[28px] text-navy">
                         {pkg.price}
                         <span className="text-[14px] font-sans text-light ml-1">
                           {pkg.period}
                         </span>
                       </p>
-                      <p className="mt-3 text-[14px] text-body leading-[1.6] flex-1">
-                        {pkg.description}
-                      </p>
-                      <span className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-medium text-gold group-hover:text-gold-light transition-colors duration-500">
-                        Select plan
-                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="transition-transform duration-500 group-hover:translate-x-1" style={{ transitionTimingFunction: "cubic-bezier(0.32, 0.72, 0, 1)" }}>
-                          <path d="M3.5 8h9M8.5 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      </span>
+                      <p className="mt-3 text-[14px] text-body">{pkg.description}</p>
                     </div>
                   </div>
                 </button>
@@ -151,72 +165,146 @@ function BookingFlowInner() {
           </>
         )}
 
-        {/* New Patient — Healthie Enrollment Embed */}
-        {mode === "new" && selectedTier && selectedPackage && (
+        {mode === "new" && selectedTier && selectedPackage && !done && (
           <>
             <div className="text-center mb-10">
               <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-3">
                 Step 2
               </p>
-              <h2 className="font-serif text-[clamp(1.75rem,3.5vw,2.5rem)] tracking-[-0.02em] text-navy">
-                Complete your <em className="text-gold">enrollment</em>
+              <h2 className="font-serif text-[clamp(1.75rem,3.5vw,2.5rem)] text-navy">
+                Request your <em className="text-gold">visit</em>
               </h2>
-              <p className="mt-3 text-[15px] text-body leading-[1.65]">
-                {selectedPackage.name} plan &mdash; {selectedPackage.price}
+              <p className="mt-3 text-[15px] text-body">
+                {selectedPackage.name} — {selectedPackage.price}
                 {selectedPackage.period}
               </p>
               <button
                 onClick={() => setSelectedTier(null)}
-                className="mt-3 text-[14px] text-gold hover:text-gold-light font-medium transition-colors duration-500"
-                style={{ transitionTimingFunction: "cubic-bezier(0.32, 0.72, 0, 1)" }}
+                className="mt-3 text-[14px] text-gold"
               >
-                &larr; Choose a different plan
+                ← Choose a different plan
               </button>
             </div>
-            <div className="doppelrand doppelrand-light">
-              <div className="rounded-[18px] overflow-hidden bg-white border border-[rgba(27,42,74,0.04)]">
-                <iframe
-                  src={`https://secure.gethealthie.com/appointments/embed_appt?offering_id=${selectedPackage.offeringId}&dietitian_id=${HEALTHIE_DIETITIAN_ID}&primary_color=${HEALTHIE_COLOR}`}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    minHeight: "900px",
-                    border: "0px",
-                  }}
-                  title={`Enroll in ${selectedPackage.name} plan and book your consultation`}
+            <form
+              onSubmit={submitLead}
+              className="max-w-lg mx-auto bg-white rounded-2xl border border-navy/5 p-8 space-y-4"
+              data-testid="lead-form"
+            >
+              <input
+                name="name"
+                data-testid="lead-name"
+                required
+                placeholder="Full name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className={field}
+              />
+              <input
+                name="email"
+                type="email"
+                data-testid="lead-email"
+                required
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={field}
+              />
+              <input
+                name="phone"
+                data-testid="lead-phone"
+                placeholder="Phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className={field}
+              />
+              <input
+                name="password"
+                type="password"
+                data-testid="lead-password"
+                required
+                minLength={6}
+                placeholder="Portal password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className={field}
+              />
+              <label className="block text-[13px] text-navy">
+                Visit type
+                <select
+                  data-testid="lead-modality"
+                  value={modality}
+                  onChange={(e) =>
+                    setModality(e.target.value as "in_person" | "remote")
+                  }
+                  className={`${field} mt-1`}
+                >
+                  <option value="in_person">In person</option>
+                  <option value="remote">Remote</option>
+                </select>
+              </label>
+              <label className="block text-[13px] text-navy">
+                Preferred time (optional)
+                <input
+                  type="datetime-local"
+                  data-testid="lead-preferred"
+                  value={preferredAt}
+                  onChange={(e) => setPreferredAt(e.target.value)}
+                  className={`${field} mt-1`}
                 />
-              </div>
-            </div>
+              </label>
+              {error && (
+                <p className="text-red-700 text-sm" role="alert">
+                  {error}
+                </p>
+              )}
+              <button
+                type="submit"
+                data-testid="lead-submit"
+                disabled={busy}
+                className="btn-primary w-full"
+              >
+                {busy ? "Submitting…" : "Request visit"}
+              </button>
+            </form>
           </>
         )}
 
-        {/* Returning Patient — redirect to Healthie patient portal */}
+        {mode === "new" && done && (
+          <div
+            className="max-w-lg mx-auto text-center bg-white rounded-2xl border border-navy/5 p-10"
+            data-testid="lead-success"
+          >
+            <h2 className="font-serif text-2xl text-navy mb-3">
+              We’ll confirm your visit
+            </h2>
+            <p className="text-[15px] text-body mb-6">
+              The care team has your request. Log in to the patient portal to
+              see your membership and upcoming visit.
+            </p>
+            <Link href="/app/login" className="btn-primary">
+              Go to patient login
+            </Link>
+          </div>
+        )}
+
         {mode === "returning" && (
-          <>
-            <div className="text-center mb-10">
-              <h2 className="font-serif text-[clamp(1.75rem,3.5vw,2.5rem)] tracking-[-0.02em] text-navy">
-                Welcome back
-              </h2>
-              <p className="mt-3 text-[15px] text-body leading-[1.65] max-w-md mx-auto">
-                Log in to your patient portal to schedule follow-ups, view your
-                plan, and message Dr. Rhee.
-              </p>
-            </div>
-            <div className="flex justify-center">
-              <a
-                href="https://secure.gethealthie.com/go/precisionww"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-              >
+          <div className="text-center">
+            <h2 className="font-serif text-[clamp(1.75rem,3.5vw,2.5rem)] text-navy">
+              Welcome back
+            </h2>
+            <p className="mt-3 text-[15px] text-body max-w-md mx-auto">
+              Log in to schedule follow-ups, log weight, and see your protocol.
+            </p>
+            <div className="flex justify-center mt-8">
+              <Link href="/app/login" className="btn-primary">
                 Go to Patient Portal
-              </a>
+              </Link>
             </div>
-          </>
+          </div>
         )}
 
         <p className="mt-8 text-center text-[12px] text-light">
-          Scheduling and payments processed securely
+          Scheduling through Precision W+W clinic — not a third-party portal
         </p>
       </div>
     </section>
