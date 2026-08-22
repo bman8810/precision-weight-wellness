@@ -38,6 +38,7 @@ test("clinic replaces Healthie end to end", async ({ page }) => {
   await page.getByTestId("protocol-save").click();
   await expect(page.getByTestId("protocol-current")).toContainText("0.25");
 
+  await page.getByTestId("visit-add").click();
   await page.getByTestId("visit-modality").selectOption("remote");
   await page.getByTestId("visit-video").fill("https://zoom.us/j/123");
   await page.getByTestId("visit-save").click();
