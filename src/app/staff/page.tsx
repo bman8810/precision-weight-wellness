@@ -41,16 +41,9 @@ export default function StaffRosterPage() {
     <div className="min-h-dvh bg-cream pb-16">
       <ClinicNav area="staff" name={name} />
       <div className="max-w-5xl mx-auto px-5 pt-10">
-        <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-3">
-          Care team
-        </p>
-        <h1 className="font-serif text-[clamp(2rem,4vw,2.75rem)] tracking-[-0.02em] text-navy mb-2">
+        <h1 className="font-serif text-[clamp(2rem,4vw,2.75rem)] tracking-[-0.02em] text-navy mb-8">
           Patient <em className="text-gold">roster</em>
         </h1>
-        <p className="text-[15px] text-body mb-8 max-w-xl">
-          Who needs a visit, a dose decision, or a follow-up — scannable in a
-          glance.
-        </p>
         {error && (
           <p className="text-red-700 text-sm mb-4" role="alert">
             {error}
@@ -103,7 +96,7 @@ export default function StaffRosterPage() {
                 {patients.length === 0 && (
                   <tr>
                     <td colSpan={5} className="px-5 py-10 text-center text-light">
-                      No patients yet. New requests land here from /book.
+                      No patients yet.
                     </td>
                   </tr>
                 )}

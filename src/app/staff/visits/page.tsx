@@ -27,9 +27,6 @@ export default function StaffVisitsPage() {
     <div className="min-h-dvh bg-cream pb-16">
       <ClinicNav area="staff" name={name} />
       <div className="max-w-5xl mx-auto px-5 pt-10">
-        <p className="text-gold text-[10.5px] font-semibold uppercase tracking-[0.14em] mb-3">
-          Schedule
-        </p>
         <h1 className="font-serif text-[clamp(2rem,4vw,2.75rem)] tracking-[-0.02em] text-navy mb-8">
           Upcoming <em className="text-gold">visits</em>
         </h1>

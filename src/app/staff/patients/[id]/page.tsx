@@ -386,10 +386,6 @@ export default function StaffPatientPage() {
           <div className="doppelrand doppelrand-light">
             <section className="bg-white rounded-[18px] p-6 md:p-8 space-y-3">
               <h2 className="font-serif text-xl text-navy">EMA chart</h2>
-              <p className="text-[13px] text-body">
-                Same Liora tenant. Staff REST when we wire it — paste an id for
-                now.
-              </p>
               <label className="text-[13px] text-navy block">
                 EMA patient id
                 <div className="flex gap-3 mt-1">
