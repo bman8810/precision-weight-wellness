@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Precision W+W — Get started</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1F2C4C; --navy-2:#2C3D63; --navy-soft:#5A6784;
+  --cream:#F7F5F0; --card:#FFFFFF; --shell:#EDEFF1;
+  --gold:#BFA163; --gold-dk:#9C8348; --gold-bg:#F5F0E4;
+  --green:#1E3B33; --green-bg:#E7EFEA;
+  --ink:#1F2C4C; --muted:#67717F; --line:#E4E6E9; --line-2:#EFF0F2;
+  --rose:#A8443C; --rose-bg:#F7EAE8;
+  --r:16px; --rs:10px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cream);color:var(--ink);
+  font-family:"Poppins",system-ui,sans-serif;font-size:15px;line-height:1.6;font-weight:300}
+h1,h2,h3,.serif{font-family:"Playfair Display",Georgia,serif;font-weight:500;letter-spacing:-.01em}
+button{font:inherit}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;padding:14px 20px;background:var(--cream)}
+.nav-in{max-width:1180px;margin:0 auto;background:var(--shell);border-radius:999px;
+  padding:11px 12px 11px 26px;display:flex;align-items:center;gap:26px}
+.logo{font-family:"Playfair Display",serif;font-size:20px;font-weight:500}
+.logo i{font-style:normal;color:var(--gold)}
+.nav-links{display:flex;gap:22px;margin-left:auto;font-size:14px;color:var(--navy);font-weight:400}
+.nav-links a{text-decoration:none;color:inherit;opacity:.85}
+.nav-links a:hover{opacity:1}
+.nav-cta{background:var(--navy);color:#fff;border:0;border-radius:999px;padding:11px 24px;
+  font-size:14px;font-weight:400;cursor:pointer}
+@media(max-width:860px){.nav-links{display:none}.nav-in{padding-left:20px}}
+
+/* progress */
+.prog-wrap{max-width:1180px;margin:22px auto 0;padding:0 20px}
+.prog{display:flex;gap:5px}
+.prog i{flex:1;height:3px;border-radius:2px;background:#E2E0DA;transition:background .35s}
+.prog i.done{background:var(--gold)}
+.prog i.now{background:var(--navy)}
+.prog-l{display:flex;justify-content:space-between;margin-top:9px;font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:400}
+
+/* stage */
+.stage{max-width:1180px;margin:0 auto;padding:40px 20px 90px;min-height:70vh}
+.step{display:none;animation:in .45s cubic-bezier(.2,.7,.3,1)}
+.step.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-dk);
+  text-align:center;margin:0 0 14px;font-weight:500}
+.head{font-size:clamp(30px,5vw,50px);line-height:1.08;text-align:center;margin:0 0 12px}
+.head em{font-style:italic;color:var(--gold)}
+.sub{text-align:center;color:var(--muted);max-width:52ch;margin:0 auto 40px;font-size:15px}
+.narrow{max-width:560px;margin:0 auto}
+.wide{max-width:1000px;margin:0 auto}
+
+/* controls */
+.field{margin-bottom:18px}
+label.lab{display:block;font-size:13px;font-weight:500;margin-bottom:7px;color:var(--navy)}
+.hint{font-size:12.5px;color:var(--muted);margin-top:6px}
+input[type=text],input[type=email],input[type=tel],input[type=number],select{
+  width:100%;padding:15px 17px;border:1.5px solid var(--line);border-radius:var(--rs);
+  background:var(--card);font:inherit;font-size:15px;color:var(--ink)}
+input:focus,select:focus{outline:0;border-color:var(--navy)}
+.row{display:flex;gap:12px}
+.row>*{flex:1}
+
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:center;gap:13px;padding:16px 18px;border:1.5px solid var(--line);
+  border-radius:var(--rs);background:var(--card);cursor:pointer;text-align:left;width:100%;
+  transition:border-color .16s,background .16s}
+.opt:hover{border-color:var(--navy-soft)}
+.opt.sel{border-color:var(--navy);background:#F8F9FB}
+.opt:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+.box{width:21px;height:21px;border:1.5px solid #C9CDD4;border-radius:6px;flex:none;
+  display:grid;place-items:center;background:#fff}
+.opt.sel .box{background:var(--navy);border-color:var(--navy)}
+.opt.sel .box::after{content:"";width:10px;height:6px;border-left:2px solid #fff;
+  border-bottom:2px solid #fff;transform:rotate(-45deg) translate(1px,-2px)}
+.round{border-radius:50%}
+.opt.sel .round::after{border:0;width:8px;height:8px;background:#fff;border-radius:50%;transform:none}
+.opt b{font-weight:500;font-size:15px}
+.opt small{display:block;color:var(--muted);font-size:12.5px;margin-top:2px;font-weight:300}
+
+.btn{background:var(--navy);color:#fff;border:0;border-radius:999px;padding:16px 34px;
+  font-size:15px;font-weight:400;cursor:pointer;transition:background .16s}
+.btn:hover{background:var(--navy-2)}
+.btn:disabled{background:#C3C7CE;cursor:not-allowed}
+.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.btn.wide-b{width:100%}
+.btn.ghost{background:transparent;color:var(--navy);border:1.5px solid var(--line)}
+.btn.ghost:hover{background:#fff;border-color:var(--navy-soft)}
+.acts{display:flex;gap:12px;align-items:center;margin-top:30px}
+.back{background:none;border:0;color:var(--muted);cursor:pointer;font-size:14px;padding:8px 4px}
+.back:hover{color:var(--navy)}
+.foot-note{text-align:center;font-size:12.5px;color:var(--muted);margin-top:26px}
+
+/* bmi readout */
+.bmi{background:var(--gold-bg);border-radius:var(--rs);padding:16px 20px;margin-top:6px;
+  display:flex;align-items:baseline;gap:12px}
+.bmi b{font-family:"Playfair Display",serif;font-size:30px;font-weight:500;color:var(--navy)}
+.bmi span{font-size:13px;color:var(--gold-dk)}
+
+/* result */
+.verdict{background:var(--card);border-radius:var(--r);padding:38px;text-align:center;
+  box-shadow:0 1px 3px rgba(31,44,76,.05),0 20px 50px -35px rgba(31,44,76,.3)}
+.seal{width:58px;height:58px;border-radius:50%;background:var(--green-bg);color:var(--green);
+  display:grid;place-items:center;margin:0 auto 20px;font-size:26px}
+.verdict h3{font-size:27px;margin:0 0 12px}
+.verdict p{color:var(--muted);margin:0 auto;max-width:44ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:24px}
+.chip{background:var(--green-bg);color:var(--green);padding:7px 14px;border-radius:999px;font-size:12.5px}
+
+/* plans */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:900px){.plans{grid-template-columns:1fr;max-width:440px;margin:0 auto}}
+.plan{background:var(--card);border-radius:var(--r);overflow:hidden;cursor:pointer;text-align:left;
+  border:2px solid transparent;padding:0;display:flex;flex-direction:column;position:relative;
+  box-shadow:0 1px 3px rgba(31,44,76,.05);transition:transform .18s,box-shadow .18s,border-color .18s}
+.plan:hover{transform:translateY(-3px);box-shadow:0 14px 34px -20px rgba(31,44,76,.35)}
+.plan.sel{border-color:var(--navy)}
+.plan:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.plan-img{height:150px;background-size:cover;background-position:center}
+.p1{background:linear-gradient(135deg,#EFE9DC,#DCD3C0)}
+.p2{background:linear-gradient(135deg,#D9C7A8,#B99B6E)}
+.p3{background:linear-gradient(135deg,#EDE6DC,#CFC0AC)}
+.plan-b{padding:22px;flex:1;display:flex;flex-direction:column}
+.plan-n{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dk);
+  font-weight:500;margin-bottom:12px}
+.price{font-family:"Playfair Display",serif;font-size:38px;font-weight:500;line-height:1}
+.price sup{font-size:19px;top:-14px;position:relative;font-weight:400}
+.price span{font-size:14px;font-family:"Poppins",sans-serif;color:var(--muted);font-weight:300}
+.med-line{margin-top:12px;padding-top:12px;border-top:1px solid var(--line-2);
+  font-size:12.5px;color:var(--muted);line-height:1.5}
+.med-line b{color:var(--navy);font-weight:500}
+.plan-d{margin:14px 0 0;color:var(--muted);font-size:13.5px;flex:1}
+.rec{position:absolute;top:14px;right:14px;background:var(--navy);color:#fff;
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border-radius:999px}
+
+/* cards */
+.card{background:var(--card);border-radius:var(--r);padding:26px;box-shadow:0 1px 3px rgba(31,44,76,.05)}
+.card+.card{margin-top:14px}
+.card h4{margin:0 0 4px;font-size:18px}
+.card .cap{font-size:13px;color:var(--muted);margin:0 0 18px}
+.handoff{border:1.5px dashed var(--gold);background:var(--gold-bg);border-radius:var(--rs);
+  padding:18px 20px;display:flex;gap:15px;align-items:flex-start}
+.handoff b{display:block;font-weight:500;margin-bottom:3px;font-size:14.5px}
+.handoff p{margin:0;font-size:13px;color:var(--gold-dk);line-height:1.55}
+.hicon{font-size:20px;line-height:1}
+
+/* summary */
+.sum{background:var(--card);border-radius:var(--r);padding:24px}
+.sline{display:flex;justify-content:space-between;padding:11px 0;font-size:14.5px;border-bottom:1px solid var(--line-2)}
+.sline:last-of-type{border:0}
+.sline span:first-child{color:var(--muted)}
+.sline.tot{border-top:1.5px solid var(--navy);margin-top:8px;padding-top:15px;font-size:17px;font-weight:500}
+.sline.info{background:var(--gold-bg);margin:12px -24px -24px;padding:15px 24px;border:0;
+  border-radius:0 0 var(--r) var(--r);font-size:13px;color:var(--gold-dk);display:block;line-height:1.55}
+.sline.info b{color:var(--navy);font-weight:500}
+.grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:22px;align-items:start}
+@media(max-width:860px){.grid2{grid-template-columns:1fr}}
+
+/* slots */
+.days{display:flex;gap:9px;overflow-x:auto;padding-bottom:6px;margin-bottom:20px}
+.day{min-width:76px;padding:13px 8px;border:1.5px solid var(--line);border-radius:var(--rs);
+  background:var(--card);text-align:center;cursor:pointer;flex:none}
+.day.sel{border-color:var(--navy);background:var(--navy);color:#fff}
+.day b{display:block;font-size:19px;font-family:"Playfair Display",serif;font-weight:500}
+.day small{font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:9px}
+.slot{padding:13px;border:1.5px solid var(--line);border-radius:var(--rs);background:var(--card);
+  cursor:pointer;font-size:14px;text-align:center}
+.slot:hover{border-color:var(--navy-soft)}
+.slot.sel{border-color:var(--navy);background:var(--navy);color:#fff}
+.soonest{display:inline-block;background:var(--green-bg);color:var(--green);font-size:11px;
+  padding:4px 10px;border-radius:999px;margin-bottom:14px;letter-spacing:.08em;text-transform:uppercase}
+
+/* timeline */
+.tl{position:relative;padding-left:34px}
+.tl::before{content:"";position:absolute;left:9px;top:8px;bottom:14px;width:2px;background:var(--line)}
+.tl-i{position:relative;padding-bottom:26px}
+.tl-i::before{content:"";position:absolute;left:-31px;top:5px;width:20px;height:20px;border-radius:50%;
+  background:var(--card);border:2px solid var(--line)}
+.tl-i.done::before{background:var(--green);border-color:var(--green)}
+.tl-i.done::after{content:"";position:absolute;left:-25px;top:11px;width:8px;height:4px;
+  border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg)}
+.tl-d{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dk);font-weight:500}
+.tl-t{font-size:16px;font-weight:500;margin:3px 0 3px}
+.tl-s{font-size:13.5px;color:var(--muted)}
+
+/* team */
+.team{display:flex;gap:14px;margin-top:22px}
+.mem{display:flex;gap:12px;align-items:center;background:var(--card);border-radius:var(--rs);padding:13px 16px;flex:1}
+.av{width:42px;height:42px;border-radius:50%;background:var(--navy);color:#fff;display:grid;
+  place-items:center;font-family:"Playfair Display",serif;font-size:16px;flex:none}
+.mem b{display:block;font-size:14px;font-weight:500}
+.mem small{color:var(--muted);font-size:12px}
+
+.pill-toggle{display:flex;background:var(--card);border-radius:999px;padding:5px;
+  width:fit-content;margin:0 auto 40px;box-shadow:0 1px 3px rgba(31,44,76,.06)}
+.pill-toggle button{border:0;background:none;padding:12px 28px;border-radius:999px;
+  cursor:pointer;font-size:14.5px;color:var(--muted)}
+.pill-toggle button.on{background:var(--navy);color:#fff}
+
+.wait{background:var(--card);border-radius:var(--r);padding:34px;text-align:center}
+footer.pg{background:var(--green);color:#DCE5DF;padding:34px 20px;text-align:center;font-size:13px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="nav-in">
+  <span class="logo">Precision <i>W+W</i></span>
+  <div class="nav-links"><a href="#">About</a><a href="#">How It Works</a><a href="#">Science</a>
+    <a href="#">Pricing</a><a href="#">Blog</a><a href="#">Patient Login</a></div>
+  <button class="nav-cta">Book Now</button>
+</div></nav>
+
+<div class="prog-wrap">
+  <div class="prog" id="prog"></div>
+  <div class="prog-l"><span>Qualify</span><span>Choose</span><span>Enroll</span><span>Begin</span></div>
+</div>
+
+<div class="stage">
+
+<!-- 1 STATE -->
+<section class="step on" data-s="0">
+  <p class="eyebrow">Step 1 of 8</p>
+  <h1 class="head">Where do you <em>live?</em></h1>
+  <p class="sub">Our physicians are licensed in specific states. This takes one tap and tells us who can care for you.</p>
+  <div class="narrow">
+    <div class="field">
+      <label class="lab" for="state">State of residence</label>
+      <select id="state">
+        <option value="">Select your state</option>
+        <option value="CT">Connecticut</option><option value="NY">New York</option>
+        <option value="NJ">New Jersey</option><option value="MI">Michigan</option>
+        <option value="X">Texas</option><option value="X2">California</option>
+      </select>
+      <p class="hint">If we're not open in your state yet, we'll tell you now — not after you've paid.</p>
+    </div>
+    <button class="btn wide-b" id="b0" disabled>Continue</button>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section class="step" data-s="w">
+  <p class="eyebrow">Not yet available</p>
+  <h1 class="head">We're not in <em>your state</em> yet</h1>
+  <div class="narrow">
+    <div class="wait">
+      <p style="margin:0 0 22px;color:var(--muted)">We're expanding through 2026. Leave your email and you'll be first to know when Dr. Rhee is licensed where you live.</p>
+      <div class="field"><input type="email" placeholder="you@email.com"></div>
+      <button class="btn wide-b">Join the waitlist</button>
+    </div>
+    <div class="acts"><button class="back" data-go="0">← Choose a different state</button></div>
+  </div>
+</section>
+
+<!-- 2 QUIZ A -->
+<section class="step" data-s="1">
+  <p class="eyebrow">Step 2 of 8</p>
+  <h1 class="head">Tell us about <em>you</em></h1>
+  <p class="sub">Five questions. No account needed yet, and nothing is charged.</p>
+  <div class="narrow">
+    <div class="field">
+      <label class="lab">Height</label>
+      <div class="row">
+        <select id="ft"><option value="">Feet</option><option>4</option><option selected>5</option><option>6</option></select>
+        <select id="in"><option value="">Inches</option>
+          <option>0</option><option>1</option><option>2</option><option>3</option><option>4</option>
+          <option selected>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option></select>
+      </div>
+    </div>
+    <div class="field">
+      <label class="lab" for="wt">Current weight</label>
+      <input type="number" id="wt" placeholder="Pounds" value="214">
+    </div>
+    <div class="bmi"><b id="bmiN">34.5</b><span id="bmiL">Body mass index — within range for medical weight management</span></div>
+    <div class="field" style="margin-top:24px">
+      <label class="lab" for="goal">Goal weight <span style="color:var(--muted);font-weight:300">(optional)</span></label>
+      <input type="number" id="goal" placeholder="Pounds">
+    </div>
+    <div class="acts"><button class="btn" data-go="2">Continue</button><button class="back" data-go="0">← Back</button></div>
+  </div>
+</section>
+
+<!-- 3 QUIZ B -->
+<section class="step" data-s="2">
+  <p class="eyebrow">Step 3 of 8</p>
+  <h1 class="head">Any of <em>these?</em></h1>
+  <p class="sub">Select all that apply. These often mean insurance covers more, and they change which plan we'd recommend.</p>
+  <div class="narrow">
+    <div class="opts" id="conds">
+      <button class="opt"><span class="box"></span><span><b>Type 2 diabetes or prediabetes</b></span></button>
+      <button class="opt"><span class="box"></span><span><b>High blood pressure</b></span></button>
+      <button class="opt"><span class="box"></span><span><b>Sleep apnea</b></span></button>
+      <button class="opt"><span class="box"></span><span><b>High cholesterol</b></span></button>
+      <button class="opt"><span class="box"></span><span><b>PCOS</b></span></button>
+      <button class="opt"><span class="box"></span><span><b>None of these</b></span></button>
+    </div>
+    <div class="acts"><button class="btn" data-go="3">Continue</button><button class="back" data-go="1">← Back</button></div>
+  </div>
+</section>
+
+<!-- 4 SAFETY -->
+<section class="step" data-s="3">
+  <p class="eyebrow">Step 4 of 8</p>
+  <h1 class="head">A few <em>safety</em> questions</h1>
+  <p class="sub">These medications aren't right for everyone. Answer honestly — we'd rather find out now.</p>
+  <div class="narrow">
+    <div class="opts">
+      <button class="opt"><span class="box"></span><span><b>Pregnant, breastfeeding, or planning pregnancy</b></span></button>
+      <button class="opt"><span class="box"></span><span><b>Personal or family history of medullary thyroid cancer or MEN2</b><small>A specific inherited thyroid condition</small></span></button>
+      <button class="opt"><span class="box"></span><span><b>History of pancreatitis</b></span></button>
+      <button class="opt"><span class="box"></span><span><b>Current or past eating disorder</b></span></button>
+      <button class="opt sel"><span class="box"></span><span><b>None of these apply to me</b></span></button>
+    </div>
+    <div class="acts"><button class="btn" data-go="4">Continue</button><button class="back" data-go="2">← Back</button></div>
+  </div>
+</section>
+
+<!-- 5 PRIOR GLP1 -->
+<section class="step" data-s="4">
+  <p class="eyebrow">Step 5 of 8</p>
+  <h1 class="head">Have you taken these <em>before?</em></h1>
+  <p class="sub">If you've been on a GLP-1 previously, we start you where you left off instead of back at the beginning.</p>
+  <div class="narrow">
+    <div class="opts" id="prior">
+      <button class="opt"><span class="box round"></span><span><b>Never taken one</b></span></button>
+      <button class="opt"><span class="box round"></span><span><b>Taking one now</b><small>Semaglutide, tirzepatide, or similar</small></span></button>
+      <button class="opt"><span class="box round"></span><span><b>Took one in the past, stopped</b></span></button>
+    </div>
+    <div class="acts"><button class="btn" data-go="5">See my results</button><button class="back" data-go="3">← Back</button></div>
+  </div>
+</section>
+
+<!-- 6 VERDICT -->
+<section class="step" data-s="5">
+  <p class="eyebrow">Your results</p>
+  <h1 class="head">You're a <em>candidate</em></h1>
+  <div class="narrow">
+    <div class="verdict">
+      <div class="seal">✓</div>
+      <h3 class="serif">Dr. Rhee can treat you</h3>
+      <p>Based on your BMI of 34.5 and the conditions you shared, you qualify for medical weight management with us. Your first visit will confirm the details and set your starting dose.</p>
+      <div class="chips"><span class="chip">BMI in range</span><span class="chip">No contraindications</span><span class="chip">Licensed in Connecticut</span></div>
+    </div>
+    <div class="acts"><button class="btn wide-b" data-go="6">Choose your plan →</button></div>
+    <p class="foot-note">Nothing is charged until you choose a plan.</p>
+  </div>
+</section>
+
+<!-- 7 PLANS -->
+<section class="step" data-s="6">
+  <div class="pill-toggle"><button class="on">New Patient</button><button>Returning Patient</button></div>
+  <p class="eyebrow">Step 6 of 8</p>
+  <h1 class="head">Select your <em>plan</em></h1>
+  <p class="sub">Program fees below cover your care. Medication is billed separately by the pharmacy — the estimated range is shown on each plan.</p>
+  <div class="wide">
+    <div class="plans" id="plans">
+      <button class="plan"><div class="plan-img p1"></div><div class="plan-b">
+        <div class="plan-n">Essential</div>
+        <div class="price"><sup>$</sup>199 <span>/mo</span></div>
+        <p class="plan-d">Monthly check-in, medication management, and baseline labs.</p>
+        <div class="med-line">Medication billed separately<br><b>Est. $199–$399/mo</b> depending on drug and dose</div>
+      </div></button>
+      <button class="plan sel"><span class="rec">Recommended</span><div class="plan-img p2"></div><div class="plan-b">
+        <div class="plan-n">Premium</div>
+        <div class="price"><sup>$</sup>349 <span>/mo</span></div>
+        <p class="plan-d">Twice-monthly visits, B12 injections, and nutritional counseling.</p>
+        <div class="med-line">Medication billed separately<br><b>Est. $199–$399/mo</b> depending on drug and dose</div>
+      </div></button>
+      <button class="plan"><div class="plan-img p3"></div><div class="plan-b">
+        <div class="plan-n">Concierge</div>
+        <div class="price"><sup>$</sup>599 <span>/mo</span></div>
+        <p class="plan-d">Unlimited check-ins, priority scheduling, and direct access to Dr. Rhee.</p>
+        <div class="med-line">Medication billed separately<br><b>Est. $199–$399/mo</b> depending on drug and dose</div>
+      </div></button>
+    </div>
+    <p class="foot-note" style="margin-top:20px">Because you shared a diagnosis of high blood pressure, we've recommended Premium — twice-monthly visits help us titrate safely.</p>
+    <div class="narrow"><div class="acts"><button class="btn wide-b" data-go="7">Continue with Premium</button></div>
+    <p class="foot-note">Pause anytime. Cancel anytime. No contract, no cancellation fee.</p></div>
+  </div>
+</section>
+
+<!-- 8 ACCOUNT + LIGHT INTAKE -->
+<section class="step" data-s="7">
+  <p class="eyebrow">Step 7 of 8</p>
+  <h1 class="head">Create your <em>account</em></h1>
+  <p class="sub">Two minutes. Your full medical history is completed with our team, not in a form.</p>
+  <div class="narrow">
+    <div class="card">
+      <h4 class="serif">Your details</h4>
+      <p class="cap">We'll use this to set up your chart and send appointment reminders.</p>
+      <div class="row"><div class="field"><label class="lab">First name</label><input type="text" value="Sarah"></div>
+        <div class="field"><label class="lab">Last name</label><input type="text" value="Mitchell"></div></div>
+      <div class="field"><label class="lab">Date of birth</label><input type="text" placeholder="MM / DD / YYYY" value="04 / 18 / 1985"></div>
+      <div class="field"><label class="lab">Email</label><input type="email" value="sarah.mitchell@email.com"></div>
+      <div class="field"><label class="lab">Mobile</label><input type="tel" value="(860) 555-0142">
+        <p class="hint">Used for appointment reminders and refill updates.</p></div>
+    </div>
+
+    <div class="card">
+      <h4 class="serif">Current medications and allergies</h4>
+      <p class="cap">Just what you're taking now. We'll go through everything else together.</p>
+      <div class="field"><label class="lab">Medications you take regularly</label>
+        <input type="text" placeholder="Lisinopril 10mg, vitamin D…"></div>
+      <div class="field" style="margin-bottom:0"><label class="lab">Drug allergies</label>
+        <input type="text" placeholder="None, or list them"></div>
+    </div>
+
+    <div class="card">
+      <h4 class="serif">Consents and full history</h4>
+      <p class="cap">Handled in our secure intake app.</p>
+      <div class="handoff">
+        <span class="hicon">↗</span>
+        <div><b>Continue in the Precision intake app</b>
+          <p>Telehealth consent, privacy notice, financial agreement, and your medical history. Takes about four minutes and saves as you go — you can finish it on your phone before your visit.</p></div>
+      </div>
+      <button class="btn ghost wide-b" style="margin-top:16px">Open intake app →</button>
+      <p class="foot-note" style="margin-top:12px">Anything left blank, we'll complete together in your first visit.</p>
+    </div>
+
+    <div class="acts"><button class="btn wide-b" data-go="8">Continue to payment</button></div>
+  </div>
+</section>
+
+<!-- 9 CHECKOUT -->
+<section class="step" data-s="8">
+  <p class="eyebrow">Step 8 of 8</p>
+  <h1 class="head">Confirm and <em>pay</em></h1>
+  <p class="sub">Nothing here is new — every number was shown when you chose your plan.</p>
+  <div class="wide grid2">
+    <div>
+      <div class="card">
+        <h4 class="serif">Payment method</h4>
+        <p class="cap">HSA and FSA cards accepted.</p>
+        <div style="display:flex;gap:10px;margin-bottom:18px">
+          <button class="btn ghost" style="flex:1;padding:14px"> Pay</button>
+          <button class="btn ghost" style="flex:1;padding:14px">G Pay</button>
+        </div>
+        <div class="field"><label class="lab">Card number</label><input type="text" placeholder="1234 1234 1234 1234"></div>
+        <div class="row"><div class="field"><label class="lab">Expiry</label><input type="text" placeholder="MM / YY"></div>
+          <div class="field"><label class="lab">CVC</label><input type="text" placeholder="123"></div></div>
+        <div class="field" style="margin-bottom:0"><label class="lab">Billing ZIP</label><input type="text" value="06776"></div>
+      </div>
+    </div>
+    <div>
+      <div class="sum">
+        <div class="sline"><span>Premium plan</span><span>$349.00 / mo</span></div>
+        <div class="sline"><span>Initial consultation</span><span>$0.00</span></div>
+        <div class="sline"><span>Baseline lab panel</span><span>$89.00</span></div>
+        <div class="sline tot"><span>Due today</span><span>$438.00</span></div>
+        <div class="sline info"><b>Medication is not included.</b> Once Dr. Rhee prescribes, the pharmacy bills you directly — typically <b>$199–$399/month</b>. You'll see the exact price before anything ships.</div>
+      </div>
+      <button class="btn wide-b" style="margin-top:16px" data-go="9">Pay $438.00 and continue</button>
+      <p class="foot-note">Renews at $349/mo on the 22nd. Pause or cancel anytime from your portal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 10 BOOK -->
+<section class="step" data-s="9">
+  <p class="eyebrow">You're enrolled</p>
+  <h1 class="head">Book your <em>first visit</em></h1>
+  <p class="sub">Let's get this on the calendar now — patients who start within a week do meaningfully better.</p>
+  <div class="narrow">
+    <div class="card">
+      <span class="soonest">Soonest available</span>
+      <div class="days" id="days">
+        <button class="day sel"><small>Mon</small><b>25</b></button>
+        <button class="day"><small>Tue</small><b>26</b></button>
+        <button class="day"><small>Wed</small><b>27</b></button>
+        <button class="day"><small>Thu</small><b>28</b></button>
+        <button class="day"><small>Fri</small><b>29</b></button>
+      </div>
+      <div class="slots" id="slots">
+        <button class="slot">8:30 am</button><button class="slot sel">9:15 am</button>
+        <button class="slot">10:00 am</button><button class="slot">11:30 am</button>
+        <button class="slot">1:00 pm</button><button class="slot">2:45 pm</button>
+      </div>
+      <p class="hint" style="margin-top:16px">45 minutes by video with Dr. Rhee · Eastern time</p>
+    </div>
+    <div class="acts"><button class="btn wide-b" data-go="10">Confirm Monday, Aug 25 at 9:15 am</button></div>
+  </div>
+</section>
+
+<!-- 11 CONFIRM -->
+<section class="step" data-s="10">
+  <p class="eyebrow">All set</p>
+  <h1 class="head">Here's what happens <em>next</em></h1>
+  <p class="sub">We've emailed this to you as well. Nothing else is needed from you today.</p>
+  <div class="narrow">
+    <div class="card">
+      <div class="tl">
+        <div class="tl-i done"><div class="tl-d">Today</div><div class="tl-t">You're enrolled</div>
+          <div class="tl-s">Premium plan active. Portal access is ready now.</div></div>
+        <div class="tl-i"><div class="tl-d">By Friday, Aug 22</div><div class="tl-t">Get your baseline labs drawn</div>
+          <div class="tl-s">Quest Diagnostics, 12 Bridge St, New Milford — no appointment needed. Fast for 8 hours beforehand. Your order is already sent; bring photo ID.</div></div>
+        <div class="tl-i"><div class="tl-d">Monday, Aug 25 · 9:15 am</div><div class="tl-t">First visit with Dr. Rhee</div>
+          <div class="tl-s">45 minutes by video. She'll review your labs, complete your history, and decide your starting medication and dose.</div></div>
+        <div class="tl-i"><div class="tl-d">Within 2 business days after</div><div class="tl-t">Your prescription is sent</div>
+          <div class="tl-s">You'll see the exact pharmacy price in your portal and approve it before anything ships.</div></div>
+        <div class="tl-i"><div class="tl-d">Roughly Sept 1</div><div class="tl-t">First shipment arrives</div>
+          <div class="tl-s">With injection instructions and a walkthrough video.</div></div>
+      </div>
+    </div>
+    <div class="team">
+      <div class="mem"><div class="av">LR</div><div><b>Dr. Libby Rhee</b><small>Your physician</small></div></div>
+      <div class="mem"><div class="av" style="background:var(--gold)">JM</div><div><b>Jenny M.</b><small>Care coordinator</small></div></div>
+    </div>
+    <div class="acts"><button class="btn wide-b">Open my portal →</button></div>
+    <p class="foot-note">Questions before Monday? Message us in the portal — we reply within one business day.</p>
+  </div>
+</section>
+
+</div>
+
+<footer class="pg">Precision Weight + Wellness · New Milford, Connecticut</footer>
+
+<script>
+const steps=[...document.querySelectorAll('.step')];
+const PH=[0,0,0,0,0,1,1,2,2,3,3]; // step -> progress phase
+const prog=document.getElementById('prog');
+for(let i=0;i<4;i++)prog.appendChild(document.createElement('i'));
+const bars=[...prog.children];
+
+function go(k){
+  steps.forEach(s=>s.classList.toggle('on',s.dataset.s===String(k)));
+  const p=PH[k]??0;
+  bars.forEach((b,i)=>{b.className=i<p?'done':i===p?'now':''});
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+go(0);
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+
+// state gate
+const st=document.getElementById('state'),b0=document.getElementById('b0');
+st.onchange=()=>{b0.disabled=!st.value};
+b0.onclick=()=>go(st.value.startsWith('X')?'w':1);
+
+// bmi
+const ft=document.getElementById('ft'),inch=document.getElementById('in'),wt=document.getElementById('wt');
+function bmi(){
+  const h=(+ft.value||0)*12+(+inch.value||0), w=+wt.value||0;
+  if(!h||!w)return;
+  const v=(703*w/(h*h));
+  document.getElementById('bmiN').textContent=v.toFixed(1);
+  document.getElementById('bmiL').textContent = v>=27
+    ? 'Body mass index — within range for medical weight management'
+    : 'Body mass index — we\u2019ll review eligibility with you';
+}
+[ft,inch,wt].forEach(e=>e.oninput=e.onchange=bmi);bmi();
+
+// multi-select
+document.querySelectorAll('#conds .opt').forEach((o,i,all)=>o.onclick=()=>{
+  if(i===all.length-1){all.forEach(x=>x.classList.remove('sel'));o.classList.add('sel');}
+  else{all[all.length-1].classList.remove('sel');o.classList.toggle('sel');}
+});
+document.querySelectorAll('.step[data-s="3"] .opt').forEach((o,i,all)=>o.onclick=()=>{
+  if(i===all.length-1){all.forEach(x=>x.classList.remove('sel'));o.classList.add('sel');}
+  else{all[all.length-1].classList.remove('sel');o.classList.toggle('sel');}
+});
+// single-select
+function single(sel){const all=[...document.querySelectorAll(sel)];
+  all.forEach(o=>o.onclick=()=>{all.forEach(x=>x.classList.remove('sel'));o.classList.add('sel')});}
+single('#prior .opt');single('#plans .plan');single('#days .day');single('#slots .slot');
+</script>
+</body>
+</html>

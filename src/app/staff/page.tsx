@@ -3,104 +3,62 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import ClinicNav from "@/components/clinic/ClinicNav";
-import { StatusPill } from "@/components/clinic/StatusPill";
 import { clinicFetch } from "@/lib/clinic/client";
 import { formatDay } from "@/lib/clinic/format";
-import type { RosterRow } from "@/lib/clinic/types";
 
-export default function StaffRosterPage() {
+type DayItem = {
+  visit: { id: string; starts_at: string; status: string; notes: string | null; patient_id: string };
+  patient: { id: string; name: string; email: string | null } | null;
+  brief: string;
+  flags: string[];
+};
+
+export default function StaffTodayPage() {
   const [name, setName] = useState("");
-  const [patients, setPatients] = useState<RosterRow[]>([]);
+  const [day, setDay] = useState<DayItem[]>([]);
+  const [stats, setStats] = useState<{ activeMembers: number; checkInsThisWeek: number; openLeads: number } | null>(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        const me = await clinicFetch<{ user: { name: string } }>(
-          "/api/clinic/me"
-        );
-        const roster = await clinicFetch<{ patients: RosterRow[] }>(
-          "/api/clinic/patients"
-        );
-        if (cancelled) return;
-        setName(me.user.name);
-        setPatients(roster.patients);
-      } catch (err) {
-        if (!cancelled) {
-          setError(err instanceof Error ? err.message : "Failed to load");
-        }
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
+    clinicFetch<{ day: DayItem[]; stats: typeof stats; name: string }>("/api/clinic/staff/today")
+      .then((r) => {
+        setDay(r.day);
+        setStats(r.stats);
+        setName(r.name);
+      })
+      .catch((err) => setError(err instanceof Error ? err.message : "load failed"));
   }, []);
 
   return (
-    <div className="min-h-dvh bg-cream pb-16">
+    <div className="min-h-dvh bg-white pb-16">
       <ClinicNav area="staff" name={name} />
       <div className="max-w-5xl mx-auto px-5 pt-10">
-        <h1 className="font-serif text-[clamp(2rem,4vw,2.75rem)] tracking-[-0.02em] text-navy mb-8">
-          Patient <em className="text-gold">roster</em>
-        </h1>
-        {error && (
-          <p className="text-red-700 text-sm mb-4" role="alert">
-            {error}
+        <p className="text-[10px] uppercase tracking-[0.18em] text-[#66707E] border-b border-navy pb-2 mb-6">
+          Today
+        </p>
+        <h1 className="font-serif text-4xl text-navy mb-8">Schedule</h1>
+        {error && <p className="text-[#A8443C]">{error}</p>}
+        {stats && (
+          <p className="font-mono text-sm mb-8">
+            {stats.activeMembers} active · {stats.checkInsThisWeek} check-ins this week · {stats.openLeads} leads
           </p>
         )}
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-[14px]">
-              <thead className="text-[11px] uppercase tracking-[0.12em] text-light border-b border-navy/5">
-                <tr>
-                  <th className="px-5 py-3">Patient</th>
-                  <th className="px-5 py-3">Status</th>
-                  <th className="px-5 py-3">Dose</th>
-                  <th className="px-5 py-3">Weight</th>
-                  <th className="px-5 py-3">Next visit</th>
-                </tr>
-              </thead>
-              <tbody>
-                {patients.map((p) => (
-                  <tr key={p.id} className="border-t border-navy/5">
-                    <td className="px-5 py-4">
-                      <Link
-                        href={`/staff/patients/${p.id}`}
-                        className="text-navy font-medium hover:text-gold"
-                        data-testid={`patient-${p.email ?? p.id}`}
-                      >
-                        {p.name}
-                      </Link>
-                      <p className="text-[12px] text-light mt-0.5">{p.email}</p>
-                    </td>
-                    <td className="px-5 py-4">
-                      <StatusPill value={p.membership_status} />
-                      {p.tier && (
-                        <p className="text-[12px] text-light mt-1 capitalize">
-                          {p.tier}
-                        </p>
-                      )}
-                    </td>
-                    <td className="px-5 py-4 text-navy">
-                      {p.current_dose ?? "—"}
-                    </td>
-                    <td className="px-5 py-4 text-body tabular-nums">
-                      {p.last_weight_lb != null ? `${p.last_weight_lb} lb` : "—"}
-                    </td>
-                    <td className="px-5 py-4 text-body">
-                      {formatDay(p.next_visit)}
-                    </td>
-                  </tr>
-                ))}
-                {patients.length === 0 && (
-                  <tr>
-                    <td colSpan={5} className="px-5 py-10 text-center text-light">
-                      No patients yet.
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
+        <div className="space-y-6">
+          {day.map((item) => (
+            <article key={item.visit.id} className="border-b border-[#E4E6EA] pb-5">
+              <Link href={`/staff/patients/${item.visit.patient_id}`} className="font-serif text-2xl text-navy">
+                {item.patient?.name ?? "Patient"}
+              </Link>
+              <p className="text-sm text-[#66707E]">
+                {formatDay(item.visit.starts_at)} · {item.visit.status}
+              </p>
+              <p className="mt-2">{item.brief}</p>
+              {item.flags.length > 0 && (
+                <p className="text-[#A8443C] text-sm mt-1">{item.flags.join(" · ")}</p>
+              )}
+            </article>
+          ))}
+          {day.length === 0 && <p className="text-[#66707E]">No pending visits.</p>}
         </div>
       </div>
     </div>

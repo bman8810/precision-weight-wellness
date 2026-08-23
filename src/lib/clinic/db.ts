@@ -1,6 +1,7 @@
 import { mkdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { PGlite } from "@electric-sql/pglite";
+import { migrateClinic } from "./migrate";
 
 export type QueryResult<T = Record<string, unknown>> = { rows: T[] };
 
@@ -94,6 +95,7 @@ export async function getSql(): Promise<SqlClient> {
       try {
         const client = hostedUrl() ? await createNeon() : await createPglite();
         await applySchema(client);
+        await migrateClinic(client);
         globalThis.__pwwClinicSql = client;
         return client;
       } catch (err) {

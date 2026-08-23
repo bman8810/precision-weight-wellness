@@ -7,7 +7,8 @@ import {
   notFound,
   requireSession,
 } from "@/lib/clinic/http";
-import { addCheckIn, getPatient } from "@/lib/clinic/repo";
+import { addCheckInV2 } from "@/lib/clinic/ops";
+import { addVital, getPatient } from "@/lib/clinic/repo";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -23,41 +24,42 @@ export async function POST(
   const patient = await getPatient(id);
   if (!patient) return notFound("patient not found");
   let body: {
-    week_of?: string;
     weekOf?: string;
-    feeling?: number | null;
-    meds_taken?: string | null;
-    medsTaken?: string | null;
-    side_effects?: string | null;
-    sideEffects?: string | null;
-    diet?: number | null;
-    exercise_days?: number | null;
-    sleep?: number | null;
-    energy?: number | null;
-    challenge?: string | null;
-    went_well?: string | null;
-    questions?: string | null;
+    weightLb?: number;
+    nausea?: string;
+    constipation?: string;
+    fatigue?: string;
+    injectionSite?: string;
+    adherence?: string;
+    hunger?: number;
+    note?: string;
   };
   try {
     body = await request.json();
   } catch {
     return badRequest("invalid json");
   }
-  const weekOf =
-    body.weekOf || body.week_of || new Date().toISOString().slice(0, 10);
-  const checkIn = await addCheckIn({
-    patient_id: id,
-    week_of: weekOf,
-    feeling: body.feeling ?? null,
-    meds_taken: body.medsTaken ?? body.meds_taken ?? null,
-    side_effects: body.sideEffects ?? body.side_effects ?? null,
-    diet: body.diet ?? null,
-    exercise_days: body.exercise_days ?? null,
-    sleep: body.sleep ?? null,
-    energy: body.energy ?? null,
-    challenge: body.challenge ?? null,
-    went_well: body.went_well ?? null,
-    questions: body.questions ?? null,
-  });
-  return json({ checkIn }, 201);
+  if (body.weightLb) {
+    await addVital({
+      patientId: id,
+      source: "patient",
+      weightLb: body.weightLb,
+    });
+  }
+  if (body.nausea && body.adherence != null && body.hunger != null) {
+    const result = await addCheckInV2({
+      patientId: id,
+      weekOf: body.weekOf || new Date().toISOString().slice(0, 10),
+      weightLb: body.weightLb,
+      nausea: body.nausea,
+      constipation: body.constipation || "none",
+      fatigue: body.fatigue || "none",
+      injectionSite: body.injectionSite || "none",
+      adherence: body.adherence,
+      hunger: Number(body.hunger),
+      note: body.note,
+    });
+    return json(result, 201);
+  }
+  return badRequest("check-in fields required");
 }

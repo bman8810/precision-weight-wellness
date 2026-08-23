@@ -1,6 +1,6 @@
 # PW+W clinic runbook
 
-Staff/doctor portal at `/staff`, patient portal at `/app`. Marketing stays on `/`.
+Staff/doctor portal at `/staff` (Today), roster at `/staff/patients`, patient portal at `/app`. Purchase at `/start` (`/book` redirects).
 
 ## Local
 

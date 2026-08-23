@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Precision W+W — My portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..600;1,400..500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1F2C4C;--navy-2:#2C3D63;--navy-soft:#5A6784;
+  --cream:#F7F5F0;--card:#FFF;--gold:#BFA163;--gold-dk:#9C8348;--gold-bg:#F5F0E4;
+  --green:#1E3B33;--green-bg:#E7EFEA;--rose:#A8443C;--rose-bg:#F8ECEA;
+  --ink:#1F2C4C;--muted:#67717F;--muted-2:#9AA2AE;--line:#E6E7EA;--line-2:#F1F2F4;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cream);color:var(--ink);
+  font-family:"Poppins",system-ui,sans-serif;font-size:15px;line-height:1.55;font-weight:300}
+.serif{font-family:"Playfair Display",Georgia,serif;font-weight:500;letter-spacing:-.01em}
+button{font:inherit;cursor:pointer}
+a{color:var(--gold-dk)}
+
+.app{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+
+/* ---------- sidebar ---------- */
+.side{background:var(--navy);color:#fff;padding:26px 16px 20px;position:sticky;top:0;height:100vh;
+  display:flex;flex-direction:column}
+.brand{font-family:"Playfair Display",serif;font-size:21px;padding:0 10px 22px;
+  border-bottom:1px solid rgba(255,255,255,.12)}
+.brand i{font-style:normal;color:var(--gold)}
+.nav{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px;
+  color:rgba(255,255,255,.72);background:none;border:0;width:100%;text-align:left;font-size:14px;
+  margin-top:3px;transition:background .15s,color .15s}
+.nav:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav.on{background:rgba(191,161,99,.2);color:#fff}
+.nav:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.nav i{font-style:normal;width:18px;font-size:15px;text-align:center}
+.nav .ct{margin-left:auto;background:var(--gold);color:var(--navy);font-size:11px;min-width:20px;
+  height:20px;border-radius:999px;display:grid;place-items:center;padding:0 6px;font-weight:500}
+.navsec{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.36);
+  padding:22px 12px 6px}
+.me{margin-top:auto;display:flex;gap:11px;align-items:center;padding:14px 10px 0;
+  border-top:1px solid rgba(255,255,255,.12);font-size:13.5px}
+.me .av{width:36px;height:36px;border-radius:50%;background:var(--gold);color:var(--navy);
+  display:grid;place-items:center;font-family:"Playfair Display",serif;font-size:14px}
+.me small{display:block;color:rgba(255,255,255,.45);font-size:11.5px}
+
+/* ---------- main ---------- */
+.main{padding:30px 38px 70px;min-width:0;max-width:1320px}
+.view{display:none}.view.on{display:block;animation:f .3s ease}
+@keyframes f{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hd{display:flex;align-items:flex-end;gap:18px;margin-bottom:24px;flex-wrap:wrap}
+.hd h1{font-family:"Playfair Display",serif;font-size:32px;font-weight:500;margin:0;line-height:1.1}
+.hd h1 em{font-style:italic;color:var(--gold)}
+.hd p{margin:5px 0 0;color:var(--muted);font-size:13.5px}
+.hd .r{margin-left:auto;display:flex;gap:9px}
+
+.btn{background:var(--navy);color:#fff;border:0;border-radius:999px;padding:11px 22px;font-size:14px}
+.btn:hover{background:var(--navy-2)}
+.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.btn.g{background:#fff;color:var(--navy);border:1px solid var(--line)}
+.btn.g:hover{border-color:var(--navy-soft)}
+.btn.gold{background:var(--gold);color:var(--navy);font-weight:500}
+.btn.sm{padding:8px 16px;font-size:13px}
+.btn.full{width:100%}
+
+.card{background:var(--card);border-radius:18px;padding:24px;margin-bottom:18px;
+  box-shadow:0 1px 2px rgba(31,44,76,.05)}
+.card-h{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.card-h h3{font-size:11px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted);
+  margin:0;font-weight:500}
+.card-h .r{margin-left:auto;font-size:13px;color:var(--gold-dk);text-decoration:none;background:none;border:0;padding:0}
+
+.cols{display:grid;grid-template-columns:1.7fr 1fr;gap:18px;align-items:start}
+.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+
+/* hero action */
+.act{background:var(--navy);color:#fff;border-radius:18px;padding:30px 34px;margin-bottom:18px;
+  position:relative;overflow:hidden;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.act::after{content:"";position:absolute;right:-60px;top:-70px;width:250px;height:250px;
+  border-radius:50%;background:rgba(191,161,99,.13)}
+.act>div{position:relative;flex:1;min-width:250px}
+.act-l{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.act h2{font-family:"Playfair Display",serif;font-size:27px;font-weight:500;margin:9px 0 6px}
+.act p{margin:0;font-size:14px;color:rgba(255,255,255,.68);max-width:46ch}
+.act .cta{position:relative;display:flex;gap:10px;flex-wrap:wrap}
+.act .cta .btn.g{background:transparent;color:#fff;border-color:rgba(255,255,255,.3)}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:18px}
+.stat{background:var(--card);border-radius:18px;padding:22px 24px;box-shadow:0 1px 2px rgba(31,44,76,.05)}
+.stat-l{font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.stat-v{font-family:"Playfair Display",serif;font-size:34px;font-weight:500;margin-top:9px;line-height:1}
+.stat-v span{font-size:16px;font-family:"Poppins";color:var(--muted);font-weight:300}
+.stat-s{font-size:12.5px;color:var(--muted);margin-top:6px}
+.stat-s.up{color:var(--green)}
+
+/* chart */
+.chart-top{display:flex;align-items:flex-end;gap:16px;margin-bottom:4px;flex-wrap:wrap}
+.big{font-family:"Playfair Display",serif;font-size:44px;font-weight:500;line-height:1}
+.big span{font-size:17px;font-family:"Poppins";color:var(--muted);font-weight:300}
+.delta{background:var(--green-bg);color:var(--green);padding:6px 13px;border-radius:999px;
+  font-size:13px;margin-bottom:8px}
+svg.chart{width:100%;display:block;margin-top:16px}
+.axis{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin-top:8px}
+.range{display:flex;gap:5px}
+.range button{padding:5px 13px;border:1px solid var(--line);border-radius:999px;background:#fff;
+  font-size:12px;color:var(--muted)}
+.range button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* dose */
+.dose{display:flex;align-items:center;gap:16px}
+.dose-b{width:62px;height:62px;border-radius:16px;background:var(--gold-bg);color:var(--gold-dk);
+  display:grid;place-items:center;flex:none;font-family:"Playfair Display",serif;font-size:20px}
+.dose b{display:block;font-weight:500;font-size:17px}
+.dose small{color:var(--muted);font-size:13px}
+.ladder{display:flex;gap:6px;margin-top:20px}
+.rung{flex:1;text-align:center}
+.rung i{display:block;height:6px;border-radius:3px;background:var(--line-2);margin-bottom:8px}
+.rung.done i{background:var(--gold)}
+.rung.now i{background:var(--navy)}
+.rung small{font-size:11px;color:var(--muted)}
+.rung.now small{color:var(--navy);font-weight:500}
+
+/* tasks */
+.task{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line-2)}
+.task:last-child{border:0;padding-bottom:0}
+.task:first-of-type{padding-top:0}
+.tick{width:22px;height:22px;border-radius:7px;border:1.5px solid #CDD1D8;flex:none;
+  display:grid;place-items:center;background:#fff}
+.task.done .tick{background:var(--green);border-color:var(--green)}
+.task.done .tick::after{content:"";width:10px;height:5px;border-left:2px solid #fff;
+  border-bottom:2px solid #fff;transform:rotate(-45deg) translateY(-1px)}
+.task b{display:block;font-size:14.5px;font-weight:400}
+.task.done b{color:var(--muted);text-decoration:line-through}
+.task small{color:var(--muted);font-size:12.5px}
+.due{margin-left:auto;font-size:11.5px;padding:5px 11px;border-radius:999px;background:var(--rose-bg);
+  color:var(--rose);flex:none}
+.due.soft{background:var(--gold-bg);color:var(--gold-dk)}
+
+/* appt */
+.appt{display:flex;gap:16px;align-items:center}
+.cal{width:60px;border-radius:14px;overflow:hidden;text-align:center;flex:none;border:1px solid var(--line)}
+.cal div:first-child{background:var(--navy);color:#fff;font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;padding:4px}
+.cal div:last-child{font-family:"Playfair Display",serif;font-size:24px;padding:7px 0;background:#fff}
+
+/* rows */
+.row-l{display:flex;align-items:center;gap:15px;padding:15px 0;border-bottom:1px solid var(--line-2);
+  width:100%;background:none;border-left:0;border-right:0;border-top:0;text-align:left}
+.row-l:last-child{border-bottom:0}
+.row-l:hover .arrow{color:var(--navy)}
+.ico{width:42px;height:42px;border-radius:13px;background:var(--gold-bg);color:var(--gold-dk);
+  display:grid;place-items:center;flex:none;font-size:16px}
+.ico.gr{background:var(--green-bg);color:var(--green)}
+.ico.rs{background:var(--rose-bg);color:var(--rose)}
+.row-l b{display:block;font-size:15px;font-weight:400}
+.row-l small{color:var(--muted);font-size:12.5px}
+.arrow{margin-left:auto;color:var(--muted-2);font-size:17px}
+.badge{margin-left:auto;background:var(--rose);color:#fff;font-size:11.5px;min-width:22px;height:22px;
+  border-radius:999px;display:grid;place-items:center;padding:0 7px}
+
+/* refill tracker */
+.track{display:flex;margin:20px 0 6px}
+.tk{flex:1;text-align:center;position:relative}
+.tk::before{content:"";position:absolute;top:10px;left:-50%;width:100%;height:2px;background:var(--line)}
+.tk:first-child::before{display:none}
+.tk.done::before{background:var(--green)}
+.tk i{position:relative;display:block;width:22px;height:22px;border-radius:50%;background:#fff;
+  border:2px solid var(--line);margin:0 auto 9px}
+.tk.done i{background:var(--green);border-color:var(--green)}
+.tk.now i{border-color:var(--navy);background:var(--navy);box-shadow:0 0 0 5px rgba(31,44,76,.11)}
+.tk small{font-size:11px;color:var(--muted);display:block}
+.tk.now small{color:var(--navy);font-weight:500}
+
+/* labs */
+.lab-r{display:flex;align-items:center;gap:16px;padding:15px 0;border-bottom:1px solid var(--line-2)}
+.lab-r:last-child{border:0}
+.lab-n{flex:1}
+.lab-n b{font-size:15px;font-weight:400;display:block}
+.lab-n small{color:var(--muted);font-size:12px}
+.lab-v{font-family:"Playfair Display",serif;font-size:21px;width:96px;text-align:right}
+.lab-sp{width:88px}
+.lab-sp svg{width:88px;height:24px;display:block}
+.flag{font-size:11px;padding:4px 10px;border-radius:999px;background:var(--green-bg);
+  color:var(--green);width:84px;text-align:center}
+.flag.hi{background:var(--rose-bg);color:var(--rose)}
+.flag.mid{background:var(--gold-bg);color:var(--gold-dk)}
+
+/* messages */
+.msg-wrap{display:grid;grid-template-columns:300px 1fr;gap:0;background:var(--card);
+  border-radius:18px;overflow:hidden;box-shadow:0 1px 2px rgba(31,44,76,.05);min-height:560px}
+.threads{border-right:1px solid var(--line-2);overflow-y:auto}
+.th{padding:17px 20px;border-bottom:1px solid var(--line-2);width:100%;background:none;border-left:0;
+  border-right:0;border-top:0;text-align:left}
+.th:hover{background:#FAFBFC}
+.th.on{background:var(--gold-bg)}
+.th-t{display:flex;align-items:baseline;gap:8px}
+.th-t b{font-size:14.5px;font-weight:500}
+.th-t span{margin-left:auto;font-size:11px;color:var(--muted)}
+.th p{margin:5px 0 0;font-size:12.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.th .lbl{display:inline-block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--line-2);color:var(--muted);padding:2px 7px;border-radius:999px;margin-top:7px}
+.conv{display:flex;flex-direction:column}
+.conv-h{padding:17px 24px;border-bottom:1px solid var(--line-2);display:flex;align-items:center;gap:12px}
+.conv-h b{font-size:15.5px;font-weight:500}
+.conv-h small{color:var(--muted);font-size:12.5px;display:block}
+.sla{margin-left:auto;font-size:11.5px;background:var(--green-bg);color:var(--green);
+  padding:5px 12px;border-radius:999px}
+.conv-b{flex:1;padding:24px;display:flex;flex-direction:column;gap:16px;overflow-y:auto}
+.bub{max-width:74%;padding:14px 18px;border-radius:18px;font-size:14px;line-height:1.55}
+.bub.them{background:var(--cream);border-bottom-left-radius:6px}
+.bub.me{background:var(--navy);color:#fff;align-self:flex-end;border-bottom-right-radius:6px}
+.bub .who{font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.6;margin-bottom:6px}
+.conv-f{padding:18px 24px;border-top:1px solid var(--line-2);display:flex;gap:10px}
+.conv-f input{flex:1;border:1px solid var(--line);border-radius:999px;padding:12px 18px;font:inherit;font-size:14px}
+.conv-f input:focus{outline:0;border-color:var(--navy)}
+
+/* check-in */
+.checkin{max-width:640px;margin:0 auto}
+.wsteps{display:flex;gap:5px;margin-bottom:26px}
+.wsteps i{flex:1;height:4px;border-radius:2px;background:#E3E1DB}
+.wsteps i.on{background:var(--gold)}
+.q-n{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dk);
+  text-align:center;margin-bottom:12px}
+.weigh{text-align:center;padding:14px 0}
+.weigh input{border:0;font-family:"Playfair Display",serif;font-size:64px;font-weight:500;
+  width:210px;text-align:center;color:var(--navy);background:none}
+.weigh input:focus{outline:0}
+.weigh .u{font-size:18px;color:var(--muted)}
+.weigh p{margin:14px 0 0;font-size:13.5px;color:var(--green)}
+.sym{padding:16px 0;border-bottom:1px solid var(--line-2);display:grid;
+  grid-template-columns:1fr auto;gap:16px;align-items:center}
+.sym:last-child{border:0;padding-bottom:0}
+.sym b{font-size:15px;font-weight:400}
+.grade{display:flex;gap:7px}
+.grade button{padding:10px 16px;border:1.5px solid var(--line);border-radius:10px;
+  background:#fff;font-size:13px;color:var(--muted)}
+.grade button.sel{border-color:var(--navy);background:var(--navy);color:#fff}
+.grade button.sev.sel{border-color:var(--rose);background:var(--rose)}
+.scale{display:flex;gap:8px}
+.scale button{flex:1;padding:16px 0;border:1.5px solid var(--line);border-radius:12px;background:#fff;
+  font-size:15px;color:var(--muted)}
+.scale button.sel{border-color:var(--navy);background:var(--navy);color:#fff}
+.scale-l{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:10px}
+textarea{width:100%;border:1.5px solid var(--line);border-radius:14px;padding:15px;font:inherit;
+  font-size:14.5px;resize:vertical;background:#fff}
+textarea:focus{outline:0;border-color:var(--navy)}
+
+/* billing */
+.plan-card{background:var(--navy);color:#fff;border-radius:18px;padding:28px}
+.plan-card .t{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.plan-card .p{font-family:"Playfair Display",serif;font-size:42px;font-weight:500;margin:10px 0 2px}
+.plan-card .p span{font-size:16px;font-family:"Poppins";color:rgba(255,255,255,.6);font-weight:300}
+.plan-card .n{font-size:13px;color:rgba(255,255,255,.65)}
+.plan-card .sep{height:1px;background:rgba(255,255,255,.14);margin:20px 0}
+.plan-card .l{display:flex;justify-content:space-between;font-size:13.5px;padding:6px 0}
+.plan-card .l span:first-child{color:rgba(255,255,255,.6)}
+.inv{display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--line-2)}
+.inv:last-child{border:0}
+.inv b{flex:1;font-weight:400;font-size:14.5px}
+.inv .amt{font-family:"Playfair Display",serif;font-size:17px}
+.pause-note{background:var(--gold-bg);border-radius:14px;padding:18px 20px;font-size:13.5px;
+  color:var(--gold-dk);line-height:1.6;margin-top:4px}
+.pause-note b{color:var(--navy);font-weight:500}
+
+/* visits */
+.vis{display:flex;gap:18px;padding:18px 0;border-bottom:1px solid var(--line-2);align-items:flex-start}
+.vis:last-child{border:0}
+.vis-d{width:78px;flex:none;font-size:13px;color:var(--muted)}
+.vis-d b{display:block;font-family:"Playfair Display",serif;font-size:19px;color:var(--ink);font-weight:500}
+.vis-c b{font-size:15px;font-weight:500;display:block}
+.vis-c p{margin:5px 0 0;font-size:13.5px;color:var(--muted);max-width:62ch}
+
+@media(max-width:1180px){
+  .stats{grid-template-columns:1fr 1fr}
+  .cols{grid-template-columns:1fr}
+  .cols3{grid-template-columns:1fr}
+}
+@media(max-width:920px){
+  .app{grid-template-columns:1fr}
+  .side{position:sticky;top:0;height:auto;flex-direction:row;flex-wrap:wrap;gap:4px;
+    padding:14px 16px;z-index:40;align-items:center}
+  .brand{width:100%;border:0;padding:0 0 12px}
+  .navsec{display:none}
+  .nav{width:auto;margin:0;padding:9px 13px;font-size:13px}
+  .nav .ct{margin-left:6px}
+  .me{display:none}
+  .main{padding:22px 18px 60px}
+  .cols2{grid-template-columns:1fr}
+  .msg-wrap{grid-template-columns:1fr}
+  .threads{border-right:0;border-bottom:1px solid var(--line-2);max-height:220px}
+}
+@media(max-width:560px){
+  .stats{grid-template-columns:1fr}
+  .hd h1{font-size:26px}
+  .act{padding:24px}
+  .sym{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+
+<aside class="side">
+  <div class="brand">Precision <i>W+W</i></div>
+  <button class="nav on" data-v="home"><i>⌂</i>Home</button>
+  <button class="nav" data-v="check"><i>✎</i>Weekly check-in<span class="ct">Due</span></button>
+  <button class="nav" data-v="prog"><i>◗</i>My progress</button>
+  <div class="navsec">Care</div>
+  <button class="nav" data-v="med"><i>◈</i>Medication</button>
+  <button class="nav" data-v="labs"><i>◉</i>Lab results</button>
+  <button class="nav" data-v="visits"><i>◷</i>Visits</button>
+  <button class="nav" data-v="msg"><i>✉</i>Messages<span class="ct">2</span></button>
+  <div class="navsec">Account</div>
+  <button class="nav" data-v="bill"><i>▤</i>Billing</button>
+  <button class="nav" data-v="acct"><i>⚙</i>Settings</button>
+  <div class="me"><span class="av">SM</span><div>Sarah Mitchell<small>Premium · week 12</small></div></div>
+</aside>
+
+<main class="main">
+
+<!-- ============ HOME ============ -->
+<section class="view on" data-v="home">
+  <div class="hd"><div><h1>Good morning, <em>Sarah</em></h1>
+    <p>Week 12 of your program · Premium plan · Dr. Libby Rhee</p></div>
+    <div class="r"><button class="btn g" data-go="msg">Message the clinic</button>
+      <button class="btn" data-go="visits">Book a visit</button></div></div>
+
+  <div class="act">
+    <div><div class="act-l">Due today</div>
+      <h2>Your weekly check-in</h2>
+      <p>About a minute. Your weight and how you're feeling tell Dr. Rhee whether your current dose is working — it's what she reads before your next visit.</p></div>
+    <div class="cta"><button class="btn gold" data-go="check">Start check-in</button>
+      <button class="btn g">Remind me tonight</button></div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-l">Current weight</div><div class="stat-v">186.6<span> lb</span></div>
+      <div class="stat-s up">↓ 1.8 lb this week</div></div>
+    <div class="stat"><div class="stat-l">Total lost</div><div class="stat-v">27.4<span> lb</span></div>
+      <div class="stat-s">12.8% of starting weight</div></div>
+    <div class="stat"><div class="stat-l">To your goal</div><div class="stat-v">18.6<span> lb</span></div>
+      <div class="stat-s">On pace for February</div></div>
+    <div class="stat"><div class="stat-l">Check-ins done</div><div class="stat-v">11<span> of 12</span></div>
+      <div class="stat-s">Nice consistency</div></div>
+  </div>
+
+  <div class="cols">
+    <div>
+      <div class="card">
+        <div class="card-h"><h3>Weight over time</h3>
+          <div class="range r"><button>4 wk</button><button class="on">12 wk</button><button>All</button></div></div>
+        <div class="chart-top"><div class="big">186.6 <span>lb</span></div>
+          <div class="delta">↓ 27.4 lb since June 1</div></div>
+        <svg class="chart" viewBox="0 0 760 260" preserveAspectRatio="none" role="img" aria-label="Weight trend over twelve weeks">
+          <defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#BFA163" stop-opacity=".24"/>
+            <stop offset="1" stop-color="#BFA163" stop-opacity="0"/></linearGradient></defs>
+          <line x1="0" y1="60" x2="760" y2="60" stroke="#F1F2F4"/>
+          <line x1="0" y1="120" x2="760" y2="120" stroke="#F1F2F4"/>
+          <line x1="0" y1="180" x2="760" y2="180" stroke="#F1F2F4"/>
+          <line x1="0" y1="228" x2="760" y2="228" stroke="#1E3B33" stroke-dasharray="4 5" opacity=".4"/>
+          <path d="M0,26 L63,34 L126,48 L190,62 L253,68 L316,90 L380,106 L443,122 L506,130 L570,156 L633,172 L696,186 L760,198 L760,260 L0,260 Z" fill="url(#ga)"/>
+          <path d="M0,26 L63,34 L126,48 L190,62 L253,68 L316,90 L380,106 L443,122 L506,130 L570,156 L633,172 L696,186 L760,198"
+            fill="none" stroke="#BFA163" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="253" cy="68" r="6" fill="#fff" stroke="#1F2C4C" stroke-width="2.5"/>
+          <circle cx="506" cy="130" r="6" fill="#fff" stroke="#1F2C4C" stroke-width="2.5"/>
+          <circle cx="760" cy="198" r="8" fill="#1F2C4C" stroke="#fff" stroke-width="3"/>
+          <text x="6" y="222" font-size="12" fill="#1E3B33" font-family="Poppins">goal 168 lb</text>
+        </svg>
+        <div class="axis"><span>Jun 1</span><span>Jun 22</span><span>Jul 13</span><span>Aug 3</span><span>Today</span></div>
+        <p style="font-size:12.5px;color:var(--muted);margin:14px 0 0">Outlined circles mark dose increases — 5 mg on July 3 and 7.5 mg on August 4.</p>
+      </div>
+
+      <div class="cols2">
+        <div class="card" style="margin:0">
+          <div class="card-h"><h3>Your medication</h3><button class="r" data-go="med">Details →</button></div>
+          <div class="dose"><div class="dose-b">7.5</div>
+            <div><b>Tirzepatide 7.5 mg</b><small>Week 3 at this dose</small></div></div>
+          <div class="ladder">
+            <div class="rung done"><i></i><small>2.5</small></div><div class="rung done"><i></i><small>5.0</small></div>
+            <div class="rung now"><i></i><small>7.5</small></div><div class="rung"><i></i><small>10</small></div>
+            <div class="rung"><i></i><small>12.5</small></div></div>
+          <p style="font-size:12.5px;color:var(--muted);margin:16px 0 0">Next dose review at your September 8 visit.</p>
+        </div>
+
+        <div class="card" style="margin:0">
+          <div class="card-h"><h3>This month's refill</h3><button class="r" data-go="med">Track →</button></div>
+          <div class="track">
+            <div class="tk done"><i></i><small>Requested</small></div>
+            <div class="tk done"><i></i><small>Approved</small></div>
+            <div class="tk now"><i></i><small>Pharmacy</small></div>
+            <div class="tk"><i></i><small>Shipped</small></div>
+            <div class="tk"><i></i><small>Delivered</small></div>
+          </div>
+          <p style="font-size:12.5px;color:var(--muted);margin:18px 0 0">Ships Aug 25, arriving around Aug 27. You have 9 days of medication left.</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card-h"><h3>Next visit</h3></div>
+        <div class="appt"><div class="cal"><div>Sep</div><div>08</div></div>
+          <div><b style="font-weight:500;font-size:16px">Follow-up with Dr. Rhee</b>
+            <div style="color:var(--muted);font-size:13px">Monday 2:30 pm · 20 min by video</div></div></div>
+        <div style="display:flex;gap:9px;margin-top:18px">
+          <button class="btn g sm" style="flex:1">Reschedule</button>
+          <button class="btn sm" style="flex:1">Add to calendar</button></div>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h3>To do</h3></div>
+        <div class="task done"><span class="tick"></span><div><b>Sign updated privacy notice</b><small>Completed Aug 14</small></div></div>
+        <div class="task"><span class="tick"></span><div><b>Weekly check-in</b><small>About a minute</small></div><span class="due">Today</span></div>
+        <div class="task"><span class="tick"></span><div><b>3-month lab panel</b><small>Quest, New Milford · fasting</small></div><span class="due soft">By Sep 5</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h3>Recent</h3></div>
+        <button class="row-l" data-go="msg"><span class="ico">✉</span>
+          <div><b>Dr. Rhee replied</b><small>About your nausea question · yesterday</small></div><span class="badge">2</span></button>
+        <button class="row-l" data-go="labs"><span class="ico gr">◉</span>
+          <div><b>Lab results ready</b><small>6-week panel · Aug 8</small></div><span class="arrow">›</span></button>
+        <button class="row-l" data-go="visits"><span class="ico">▤</span>
+          <div><b>Visit summary</b><small>August 4 with Dr. Rhee</small></div><span class="arrow">›</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHECK-IN ============ -->
+<section class="view" data-v="check">
+  <div class="checkin">
+    <div class="wsteps"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+    <div class="q-n">Question 2 of 5</div>
+    <div class="hd" style="display:block;text-align:center;margin-bottom:22px">
+      <h1>How's your <em>weight</em> this week?</h1>
+      <p style="max-width:44ch;margin:8px auto 0">Weigh in the morning, before eating, on the same day each week.</p></div>
+
+    <div class="card">
+      <div class="weigh"><input type="number" value="186.6"><span class="u">lb</span>
+        <p>↓ 1.8 lb since last week</p></div>
+      <button class="btn g full" style="margin-top:8px">Pull from my Withings scale instead</button>
+    </div>
+
+    <div class="card">
+      <div class="card-h"><h3>Any side effects this week?</h3></div>
+      <div class="sym"><b>Nausea</b><div class="grade" data-g>
+        <button class="sel">None</button><button>Mild</button><button>Moderate</button><button class="sev">Severe</button></div></div>
+      <div class="sym"><b>Constipation</b><div class="grade" data-g>
+        <button>None</button><button class="sel">Mild</button><button>Moderate</button><button class="sev">Severe</button></div></div>
+      <div class="sym"><b>Fatigue</b><div class="grade" data-g>
+        <button class="sel">None</button><button>Mild</button><button>Moderate</button><button class="sev">Severe</button></div></div>
+      <div class="sym"><b>Injection site reaction</b><div class="grade" data-g>
+        <button class="sel">None</button><button>Mild</button><button>Moderate</button><button class="sev">Severe</button></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-h"><h3>Did you take every dose?</h3></div>
+      <div class="grade" data-g style="gap:9px">
+        <button class="sel" style="flex:1">Yes, all of them</button>
+        <button style="flex:1">Missed one</button>
+        <button style="flex:1">Missed more than one</button></div>
+    </div>
+
+    <div class="card">
+      <div class="card-h"><h3>Hunger between meals</h3></div>
+      <div class="scale" data-g><button>1</button><button>2</button><button class="sel">3</button>
+        <button>4</button><button>5</button></div>
+      <div class="scale-l"><span>Never hungry</span><span>Constantly hungry</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-h"><h3>Anything you want Dr. Rhee to know?</h3></div>
+      <textarea rows="3" placeholder="Optional"></textarea>
+    </div>
+
+    <button class="btn gold full" data-go="home" style="padding:15px">Submit check-in</button>
+    <button class="btn g full" data-go="home" style="margin-top:10px;background:none;border:0;color:var(--muted)">Finish later</button>
+  </div>
+</section>
+
+<!-- ============ PROGRESS ============ -->
+<section class="view" data-v="prog">
+  <div class="hd"><div><h1>Your <em>progress</em></h1><p>Twelve weeks in · started June 1 at 214 lb</p></div>
+    <div class="r"><button class="btn g">Download summary</button></div></div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-l">Starting</div><div class="stat-v">214.0<span> lb</span></div><div class="stat-s">June 1</div></div>
+    <div class="stat"><div class="stat-l">Today</div><div class="stat-v">186.6<span> lb</span></div><div class="stat-s">August 22</div></div>
+    <div class="stat"><div class="stat-l">Percent lost</div><div class="stat-v">12.8<span>%</span></div><div class="stat-s up">Above average for week 12</div></div>
+    <div class="stat"><div class="stat-l">Waist</div><div class="stat-v">36<span> in</span></div><div class="stat-s up">↓ 4.5 in</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>Full history</h3>
+      <div class="range r"><button>Weight</button><button class="on">Weight + dose</button><button>Percent</button></div></div>
+    <svg class="chart" viewBox="0 0 760 300" preserveAspectRatio="none">
+      <defs><linearGradient id="gb" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#BFA163" stop-opacity=".22"/>
+        <stop offset="1" stop-color="#BFA163" stop-opacity="0"/></linearGradient></defs>
+      <line x1="0" y1="70" x2="760" y2="70" stroke="#F1F2F4"/>
+      <line x1="0" y1="140" x2="760" y2="140" stroke="#F1F2F4"/>
+      <line x1="0" y1="210" x2="760" y2="210" stroke="#F1F2F4"/>
+      <line x1="0" y1="266" x2="760" y2="266" stroke="#1E3B33" stroke-dasharray="4 5" opacity=".4"/>
+      <path d="M0,30 L63,40 L126,56 L190,72 L253,80 L316,105 L380,124 L443,142 L506,152 L570,182 L633,200 L696,216 L760,230 L760,300 L0,300 Z" fill="url(#gb)"/>
+      <path d="M0,30 L63,40 L126,56 L190,72 L253,80 L316,105 L380,124 L443,142 L506,152 L570,182 L633,200 L696,216 L760,230"
+        fill="none" stroke="#BFA163" stroke-width="3" stroke-linejoin="round"/>
+      <line x1="253" y1="0" x2="253" y2="300" stroke="#1F2C4C" stroke-width="1" opacity=".18" stroke-dasharray="3 4"/>
+      <line x1="506" y1="0" x2="506" y2="300" stroke="#1F2C4C" stroke-width="1" opacity=".18" stroke-dasharray="3 4"/>
+      <circle cx="253" cy="80" r="6" fill="#fff" stroke="#1F2C4C" stroke-width="2.5"/>
+      <circle cx="506" cy="152" r="6" fill="#fff" stroke="#1F2C4C" stroke-width="2.5"/>
+      <circle cx="760" cy="230" r="8" fill="#1F2C4C" stroke="#fff" stroke-width="3"/>
+      <text x="260" y="20" font-size="12" fill="#1F2C4C" font-family="Poppins">5 mg</text>
+      <text x="513" y="20" font-size="12" fill="#1F2C4C" font-family="Poppins">7.5 mg</text>
+      <text x="6" y="260" font-size="12" fill="#1E3B33" font-family="Poppins">goal 168 lb</text>
+    </svg>
+    <div class="axis"><span>Jun 1</span><span>Jun 22</span><span>Jul 13</span><span>Aug 3</span><span>Aug 22</span></div>
+  </div>
+
+  <div class="cols2">
+    <div class="card" style="margin:0">
+      <div class="card-h"><h3>Milestones</h3></div>
+      <div class="task done"><span class="tick"></span><div><b>First 10 lb</b><small>June 28</small></div></div>
+      <div class="task done"><span class="tick"></span><div><b>5% of body weight</b><small>July 12 — the point where health markers start shifting</small></div></div>
+      <div class="task done"><span class="tick"></span><div><b>10% of body weight</b><small>August 15</small></div></div>
+      <div class="task"><span class="tick"></span><div><b>15% of body weight</b><small>Projected late October</small></div></div>
+      <div class="task"><span class="tick"></span><div><b>Goal weight, 168 lb</b><small>Projected February</small></div></div>
+    </div>
+
+    <div class="card" style="margin:0">
+      <div class="card-h"><h3>Beyond the scale</h3></div>
+      <div class="lab-r"><div class="lab-n"><b>Blood pressure</b><small>Was 142/90 in June</small></div>
+        <span class="lab-v">118/76</span><span class="flag">Improved</span></div>
+      <div class="lab-r"><div class="lab-n"><b>A1c</b><small>Was 5.8% in June</small></div>
+        <span class="lab-v">5.4%</span><span class="flag">Normal</span></div>
+      <div class="lab-r"><div class="lab-n"><b>Lisinopril</b><small>Blood pressure medication</small></div>
+        <span class="lab-v">Stopped</span><span class="flag">Aug 4</span></div>
+      <div class="lab-r"><div class="lab-n"><b>Resting heart rate</b><small>From your scale</small></div>
+        <span class="lab-v">66 bpm</span><span class="flag">↓ 9</span></div>
+      <p style="font-size:12.5px;color:var(--muted);margin:16px 0 0">When the scale stalls, this is the page to look at. These often keep improving.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MEDICATION ============ -->
+<section class="view" data-v="med">
+  <div class="hd"><div><h1>Your <em>medication</em></h1><p>Tirzepatide 7.5 mg · weekly injection</p></div>
+    <div class="r"><button class="btn g" data-go="msg">Report a problem</button></div></div>
+
+  <div class="cols">
+    <div>
+      <div class="card">
+        <div class="card-h"><h3>Current prescription</h3></div>
+        <div class="dose"><div class="dose-b">7.5</div>
+          <div><b>Tirzepatide 7.5 mg</b><small>Once weekly · week 3 at this dose · prescribed Aug 4</small></div></div>
+        <div class="ladder">
+          <div class="rung done"><i></i><small>2.5 mg</small></div><div class="rung done"><i></i><small>5 mg</small></div>
+          <div class="rung now"><i></i><small>7.5 mg</small></div><div class="rung"><i></i><small>10 mg</small></div>
+          <div class="rung"><i></i><small>12.5 mg</small></div></div>
+        <p style="font-size:13px;color:var(--muted);margin:20px 0 0">Dr. Rhee will review moving to 10 mg at your September 8 visit. That decision depends on how you're tolerating this dose and how your weight is trending — both of which come from your weekly check-ins.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h3>This month's refill</h3><span class="r" style="color:var(--muted)">Empower Pharmacy</span></div>
+        <div class="track">
+          <div class="tk done"><i></i><small>Requested<br>Aug 18</small></div>
+          <div class="tk done"><i></i><small>Approved<br>Aug 19</small></div>
+          <div class="tk now"><i></i><small>At pharmacy<br>Aug 21</small></div>
+          <div class="tk"><i></i><small>Shipped<br>est. Aug 25</small></div>
+          <div class="tk"><i></i><small>Delivered<br>est. Aug 27</small></div>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin:22px 0 0">You have 9 days of medication left. If your shipment hasn't arrived by August 28, message us and we'll chase it.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h3>Guides</h3></div>
+        <button class="row-l"><span class="ico">▶</span><div><b>How to inject</b><small>2 minute video</small></div><span class="arrow">›</span></button>
+        <button class="row-l"><span class="ico">◎</span><div><b>Rotating injection sites</b><small>Diagram and schedule</small></div><span class="arrow">›</span></button>
+        <button class="row-l"><span class="ico">✳</span><div><b>Managing nausea</b><small>What's normal, and when to call us</small></div><span class="arrow">›</span></button>
+        <button class="row-l"><span class="ico">✈</span><div><b>Traveling with your medication</b><small>Storage, cooling, TSA</small></div><span class="arrow">›</span></button>
+        <button class="row-l"><span class="ico">◔</span><div><b>If you miss a dose</b><small>What to do, and what not to do</small></div><span class="arrow">›</span></button>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card-h"><h3>Injection schedule</h3></div>
+        <div class="task done"><span class="tick"></span><div><b>Friday, Aug 15</b><small>Left abdomen</small></div></div>
+        <div class="task done"><span class="tick"></span><div><b>Friday, Aug 22</b><small>Right thigh</small></div></div>
+        <div class="task"><span class="tick"></span><div><b>Friday, Aug 29</b><small>Suggested: right abdomen</small></div><span class="due soft">Next</span></div>
+        <button class="btn g full" style="margin-top:18px">Change my injection day</button>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h3>Cost</h3></div>
+        <div style="display:flex;align-items:baseline;gap:8px">
+          <span style="font-family:'Playfair Display',serif;font-size:32px">$289</span>
+          <span style="color:var(--muted);font-size:13.5px">per month</span></div>
+        <p style="font-size:13px;color:var(--muted);margin:10px 0 0">Billed by Empower Pharmacy, separately from your $349 plan fee. The price changes when your dose changes — you'll always see it here before anything ships.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h3>Side effects reported</h3></div>
+        <div class="lab-r"><div class="lab-n"><b>Nausea</b><small>Last 4 weeks</small></div>
+          <span class="flag mid">Mild</span></div>
+        <div class="lab-r"><div class="lab-n"><b>Constipation</b><small>Last 4 weeks</small></div>
+          <span class="flag mid">Mild</span></div>
+        <div class="lab-r"><div class="lab-n"><b>Fatigue</b><small>Last 4 weeks</small></div>
+          <span class="flag">None</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LABS ============ -->
+<section class="view" data-v="labs">
+  <div class="hd"><div><h1>Lab <em>results</em></h1><p>Two panels on file · next due September 5</p></div>
+    <div class="r"><button class="btn g">Download requisition</button><button class="btn" data-go="msg">Ask about results</button></div></div>
+
+  <div class="card" style="background:var(--gold-bg)">
+    <div style="display:flex;gap:16px;align-items:flex-start">
+      <span class="ico" style="background:#fff">◉</span>
+      <div><b style="font-weight:500;font-size:16px;display:block;margin-bottom:5px">Your August 8 results, in plain language</b>
+        <p style="margin:0;font-size:14px;color:var(--gold-dk);max-width:70ch;line-height:1.6">Everything is in a healthy range, and several markers improved from your baseline. Your A1c dropped from 5.8 to 5.4, which moves you out of the prediabetes range. Cholesterol is better across the board. Nothing here needs any change to your plan — keep going.</p>
+        <p style="margin:10px 0 0;font-size:12.5px;color:var(--muted)">Reviewed and sent by Dr. Rhee on August 9.</p></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>August 8 · 6-week panel</h3><span class="r" style="color:var(--muted)">Quest Diagnostics</span></div>
+    <div class="lab-r"><div class="lab-n"><b>Hemoglobin A1c</b><small>Reference 4.0 – 5.6%</small></div>
+      <span class="lab-sp"><svg viewBox="0 0 88 24"><polyline points="0,6 44,12 88,18" fill="none" stroke="#1E3B33" stroke-width="2"/></svg></span>
+      <span class="lab-v">5.4%</span><span class="flag">Normal</span></div>
+    <div class="lab-r"><div class="lab-n"><b>Fasting glucose</b><small>Reference 70 – 99 mg/dL</small></div>
+      <span class="lab-sp"><svg viewBox="0 0 88 24"><polyline points="0,7 44,13 88,16" fill="none" stroke="#1E3B33" stroke-width="2"/></svg></span>
+      <span class="lab-v">88</span><span class="flag">Normal</span></div>
+    <div class="lab-r"><div class="lab-n"><b>Total cholesterol</b><small>Reference under 200 mg/dL</small></div>
+      <span class="lab-sp"><svg viewBox="0 0 88 24"><polyline points="0,5 44,11 88,17" fill="none" stroke="#1E3B33" stroke-width="2"/></svg></span>
+      <span class="lab-v">178</span><span class="flag">Normal</span></div>
+    <div class="lab-r"><div class="lab-n"><b>Triglycerides</b><small>Reference under 150 mg/dL</small></div>
+      <span class="lab-sp"><svg viewBox="0 0 88 24"><polyline points="0,4 44,10 88,18" fill="none" stroke="#1E3B33" stroke-width="2"/></svg></span>
+      <span class="lab-v">112</span><span class="flag">Normal</span></div>
+    <div class="lab-r"><div class="lab-n"><b>ALT (liver)</b><small>Reference 7 – 56 U/L</small></div>
+      <span class="lab-sp"><svg viewBox="0 0 88 24"><polyline points="0,14 44,12 88,13" fill="none" stroke="#67717F" stroke-width="2"/></svg></span>
+      <span class="lab-v">32</span><span class="flag">Normal</span></div>
+    <div class="lab-r"><div class="lab-n"><b>TSH (thyroid)</b><small>Reference 0.4 – 4.0 mIU/L</small></div>
+      <span class="lab-sp"><svg viewBox="0 0 88 24"><polyline points="0,12 44,13 88,12" fill="none" stroke="#67717F" stroke-width="2"/></svg></span>
+      <span class="lab-v">2.1</span><span class="flag">Normal</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>Coming up</h3></div>
+    <div class="task"><span class="tick"></span><div><b>3-month metabolic panel</b>
+      <small>Quest Diagnostics, 12 Bridge St, New Milford · fast 8 hours · no appointment needed</small></div>
+      <span class="due soft">By Sep 5</span></div>
+  </div>
+</section>
+
+<!-- ============ VISITS ============ -->
+<section class="view" data-v="visits">
+  <div class="hd"><div><h1>Your <em>visits</em></h1><p>Premium plan includes two visits a month</p></div>
+    <div class="r"><button class="btn">Book a visit</button></div></div>
+
+  <div class="cols">
+    <div>
+      <div class="card">
+        <div class="card-h"><h3>Upcoming</h3></div>
+        <div class="appt" style="margin-bottom:20px"><div class="cal"><div>Sep</div><div>08</div></div>
+          <div style="flex:1"><b style="font-weight:500;font-size:16px">Follow-up with Dr. Rhee</b>
+            <div style="color:var(--muted);font-size:13px">Monday 2:30 pm · 20 minutes by video</div></div>
+          <button class="btn g sm">Reschedule</button></div>
+        <div class="pause-note"><b>Before this visit:</b> log your weekly check-in and get your 3-month labs drawn by September 5. Both show up in your to-do list.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h3>Past visits</h3></div>
+        <div class="vis"><div class="vis-d"><b>Aug 4</b>Monday</div>
+          <div class="vis-c"><b>Follow-up · dose increase</b>
+            <p>Increased tirzepatide from 5 mg to 7.5 mg. Discontinued lisinopril given blood pressure improvement. Continue weekly check-ins; next labs at three months.</p></div></div>
+        <div class="vis"><div class="vis-d"><b>Jul 3</b>Thursday</div>
+          <div class="vis-c"><b>Follow-up · dose increase</b>
+            <p>Increased from 2.5 mg to 5 mg. Nausea mild and improving. Discussed protein intake and hydration.</p></div></div>
+        <div class="vis"><div class="vis-d"><b>Jun 14</b>Friday</div>
+          <div class="vis-c"><b>Two-week check</b>
+            <p>Tolerating 2.5 mg well. Reviewed injection technique. Weight down 4 lb.</p></div></div>
+        <div class="vis"><div class="vis-d"><b>Jun 1</b>Saturday</div>
+          <div class="vis-c"><b>Initial consultation</b>
+            <p>Started tirzepatide 2.5 mg weekly. Baseline weight 214 lb, BMI 34.5. Reviewed history, labs, and expectations.</p></div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card-h"><h3>Book a visit</h3></div>
+        <p style="font-size:13.5px;color:var(--muted);margin:0 0 16px">You have one visit remaining this month.</p>
+        <button class="row-l"><span class="ico">◷</span><div><b>Follow-up</b><small>20 min · next opening Aug 26</small></div><span class="arrow">›</span></button>
+        <button class="row-l"><span class="ico">✳</span><div><b>Side effect visit</b><small>15 min · usually same week</small></div><span class="arrow">›</span></button>
+        <button class="row-l"><span class="ico gr">◉</span><div><b>Nutrition session</b><small>30 min · included in Premium</small></div><span class="arrow">›</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MESSAGES ============ -->
+<section class="view" data-v="msg">
+  <div class="hd"><div><h1><em>Messages</em></h1><p>Clinical questions are answered within one business day</p></div>
+    <div class="r"><button class="btn">New message</button></div></div>
+
+  <div class="msg-wrap">
+    <div class="threads">
+      <button class="th on"><div class="th-t"><b>Dr. Libby Rhee</b><span>Yesterday</span></div>
+        <p>That level of nausea is expected at this stage…</p><span class="lbl">Clinical</span></button>
+      <button class="th"><div class="th-t"><b>Jenny M.</b><span>Aug 19</span></div>
+        <p>Your refill has been approved and sent to…</p><span class="lbl">Medication</span></button>
+      <button class="th"><div class="th-t"><b>Billing</b><span>Aug 12</span></div>
+        <p>Here's the itemized superbill you asked for…</p><span class="lbl">Billing</span></button>
+      <button class="th"><div class="th-t"><b>Dr. Libby Rhee</b><span>Aug 9</span></div>
+        <p>Your labs came back and everything looks…</p><span class="lbl">Results</span></button>
+    </div>
+
+    <div class="conv">
+      <div class="conv-h"><span class="ico" style="width:38px;height:38px;border-radius:50%;background:var(--navy);color:#fff;font-family:'Playfair Display',serif">LR</span>
+        <div><b>Dr. Libby Rhee</b><small>Your physician</small></div>
+        <span class="sla">Usually replies in under a day</span></div>
+
+      <div class="conv-b">
+        <div class="bub me"><div class="who">You · Aug 20</div>
+          I've had some nausea the last two weeks, mostly the day after my injection. It's not terrible but it's noticeable. Is this something I should worry about, or does it settle down?</div>
+
+        <div class="bub them"><div class="who">Dr. Rhee · Aug 21</div>
+          That level of nausea is expected at this stage — it usually shows up in the first few weeks after a dose increase and eases as your body adjusts. Since yours is mild and only lasting a day, I'd stay the course.<br><br>
+          Two things that help: eat smaller meals with more protein on injection day, and try moving your injection to the evening so you sleep through the worst of it.<br><br>
+          If it becomes moderate or starts lasting more than two days, message me and we'll consider holding at this dose instead of increasing in September.</div>
+
+        <div class="bub them"><div class="who">Dr. Rhee · Aug 21</div>
+          I've also added the nausea guide to your Medication page if you want the longer version.</div>
+      </div>
+
+      <div class="conv-f"><input type="text" placeholder="Write a reply…"><button class="btn">Send</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BILLING ============ -->
+<section class="view" data-v="bill">
+  <div class="hd"><div><h1><em>Billing</em></h1><p>Plan fees and medication are billed separately</p></div>
+    <div class="r"><button class="btn g">Update payment method</button></div></div>
+
+  <div class="cols">
+    <div>
+      <div class="card">
+        <div class="card-h"><h3>Payment history</h3><button class="r">Download all</button></div>
+        <div class="inv"><b>Premium plan · September</b><span style="color:var(--muted);font-size:13px">Upcoming Sep 22</span><span class="amt">$349.00</span></div>
+        <div class="inv"><b>Premium plan · August</b><span style="color:var(--muted);font-size:13px">Paid Aug 22</span><span class="amt">$349.00</span></div>
+        <div class="inv"><b>Premium plan · July</b><span style="color:var(--muted);font-size:13px">Paid Jul 22</span><span class="amt">$349.00</span></div>
+        <div class="inv"><b>6-week lab panel</b><span style="color:var(--muted);font-size:13px">Paid Aug 8</span><span class="amt">$89.00</span></div>
+        <div class="inv"><b>Premium plan · June</b><span style="color:var(--muted);font-size:13px">Paid Jun 22</span><span class="amt">$349.00</span></div>
+        <div class="inv"><b>Baseline lab panel</b><span style="color:var(--muted);font-size:13px">Paid Jun 1</span><span class="amt">$89.00</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h3>For your HSA or FSA</h3></div>
+        <button class="row-l"><span class="ico">▤</span><div><b>Itemized superbill · 2026 to date</b>
+          <small>With CPT and diagnosis codes for reimbursement</small></div><span class="arrow">↓</span></button>
+        <button class="row-l"><span class="ico">▤</span><div><b>Payment receipts</b>
+          <small>All charges, formatted for substantiation</small></div><span class="arrow">↓</span></button>
+      </div>
+    </div>
+
+    <div>
+      <div class="plan-card">
+        <div class="t">Current plan</div>
+        <div class="p">$349<span> /mo</span></div>
+        <div class="n">Premium · renews September 22</div>
+        <div class="sep"></div>
+        <div class="l"><span>Payment method</span><span>Visa ···· 4412</span></div>
+        <div class="l"><span>Member since</span><span>June 1, 2026</span></div>
+        <div class="l"><span>Visits this month</span><span>1 of 2 used</span></div>
+      </div>
+
+      <div class="card" style="margin-top:18px">
+        <div class="card-h"><h3>Medication</h3></div>
+        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px">
+          <span style="font-family:'Playfair Display',serif;font-size:28px">$289</span>
+          <span style="color:var(--muted);font-size:13px">per month</span></div>
+        <p style="font-size:13px;color:var(--muted);margin:0">Billed directly by Empower Pharmacy. Not included in your plan fee. The amount changes when your dose changes.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h3>Need a break?</h3></div>
+        <div class="pause-note"><b>You can pause instead of cancelling.</b> Traveling, hitting a plateau, or just need a month off? Pausing keeps your history, your provider, and your pricing — and you can restart with one click.</div>
+        <button class="btn g full" style="margin-top:14px">Pause my plan</button>
+        <button class="btn full" style="margin-top:9px;background:none;color:var(--muted);border:0">Change or cancel plan</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SETTINGS ============ -->
+<section class="view" data-v="acct">
+  <div class="hd"><div><h1><em>Settings</em></h1><p>Your details, devices, and preferences</p></div></div>
+
+  <div class="cols2">
+    <div>
+      <div class="card">
+        <div class="card-h"><h3>Personal details</h3><button class="r">Edit</button></div>
+        <div class="lab-r"><div class="lab-n"><b>Sarah Mitchell</b><small>Born April 18, 1985</small></div></div>
+        <div class="lab-r"><div class="lab-n"><b>sarah.mitchell@email.com</b><small>Email</small></div></div>
+        <div class="lab-r"><div class="lab-n"><b>(860) 555-0142</b><small>Mobile</small></div></div>
+        <div class="lab-r"><div class="lab-n"><b>New Milford, CT 06776</b><small>Home address</small></div></div>
+        <p style="font-size:12.5px;color:var(--muted);margin:16px 0 0">If you move to another state, tell us — it affects which providers can see you.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h3>Connected devices</h3></div>
+        <button class="row-l"><span class="ico gr">◐</span><div><b>Withings Body+ scale</b>
+          <small>Last synced this morning</small></div><span class="flag" style="width:auto">Connected</span></button>
+        <button class="row-l"><span class="ico">◔</span><div><b>Apple Health</b>
+          <small>Steps and activity</small></div><span class="arrow">Connect</span></button>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card-h"><h3>Pharmacy</h3><button class="r">Change</button></div>
+        <div class="lab-r"><div class="lab-n"><b>Empower Pharmacy</b><small>Compounding partner · ships to your home</small></div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h3>Notifications</h3></div>
+        <div class="lab-r"><div class="lab-n"><b>Check-in reminders</b><small>Friday mornings</small></div><span class="flag">Text</span></div>
+        <div class="lab-r"><div class="lab-n"><b>Appointment reminders</b><small>24 hours and 1 hour before</small></div><span class="flag">Text + email</span></div>
+        <div class="lab-r"><div class="lab-n"><b>Refill updates</b><small>When your shipment moves</small></div><span class="flag">Text</span></div>
+        <div class="lab-r"><div class="lab-n"><b>Lab results</b><small>As soon as they're released</small></div><span class="flag">Email</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h3>Documents</h3></div>
+        <button class="row-l"><span class="ico">▤</span><div><b>Signed consents</b><small>4 documents</small></div><span class="arrow">›</span></button>
+        <button class="row-l"><span class="ico">▤</span><div><b>Lab requisitions</b><small>2 documents</small></div><span class="arrow">›</span></button>
+        <button class="row-l"><span class="ico">▤</span><div><b>Request my records</b><small>Full chart export</small></div><span class="arrow">›</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+function go(v){
+  document.querySelectorAll('.view').forEach(x=>x.classList.toggle('on',x.dataset.v===v));
+  document.querySelectorAll('.nav').forEach(n=>n.classList.toggle('on',n.dataset.v===v));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.nav').forEach(n=>n.onclick=()=>go(n.dataset.v));
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=e=>{e.preventDefault();go(b.dataset.go)});
+document.querySelectorAll('[data-g]').forEach(g=>{
+  const all=[...g.querySelectorAll('button')];
+  all.forEach(b=>b.onclick=()=>{all.forEach(x=>x.classList.remove('sel'));b.classList.add('sel')});
+});
+document.querySelectorAll('.range,.threads').forEach(g=>{
+  const all=[...g.querySelectorAll('button')];
+  all.forEach(b=>b.onclick=()=>{all.forEach(x=>x.classList.remove('on'));b.classList.add('on')});
+});
+</script>
+</body>
+</html>

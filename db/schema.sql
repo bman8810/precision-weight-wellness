@@ -100,3 +100,58 @@ create table if not exists audit_events (
   payload jsonb,
   created_at timestamptz not null default now()
 );
+
+create table if not exists leads (
+  id text primary key,
+  email text,
+  stage text not null,
+  payload jsonb,
+  patient_id text,
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists tasks (
+  id text primary key,
+  kind text not null,
+  priority int not null default 0,
+  status text not null default 'open',
+  patient_id text,
+  title text not null,
+  body text,
+  due_at timestamptz,
+  created_at timestamptz not null default now()
+);
+
+create table if not exists lab_panels (
+  id text primary key,
+  patient_id text not null,
+  collected_on date not null,
+  status text not null default 'resulted',
+  notes text
+);
+
+create table if not exists lab_results (
+  id text primary key,
+  panel_id text not null,
+  analyte text not null,
+  value numeric,
+  unit text,
+  ref_low numeric,
+  ref_high numeric,
+  flag text
+);
+
+create table if not exists visit_notes (
+  id text primary key,
+  visit_id text not null,
+  body text not null,
+  prefill_sources jsonb,
+  signed_at timestamptz,
+  signed_by text
+);
+
+create table if not exists clinic_config (
+  key text primary key,
+  value jsonb not null,
+  updated_at timestamptz not null default now()
+);

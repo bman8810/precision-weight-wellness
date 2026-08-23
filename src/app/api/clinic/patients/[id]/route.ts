@@ -1,3 +1,4 @@
+import { seedLabPanel, listPatientLabs } from "@/lib/clinic/ops";
 import { emaConfigured } from "@/lib/clinic/ema";
 import {
   canAccessPatient,
@@ -39,6 +40,10 @@ export async function GET(
       listCheckIns(id),
       session.role === "patient" ? Promise.resolve([]) : listAudit(id),
     ]);
+  if (session.role !== "patient") {
+    await seedLabPanel(id);
+  }
+  const labs = await listPatientLabs(id);
   return json({
     patient,
     membership,
@@ -47,6 +52,7 @@ export async function GET(
     visits,
     checkIns,
     audit,
+    labs,
     emaConfigured: emaConfigured(),
   });
 }

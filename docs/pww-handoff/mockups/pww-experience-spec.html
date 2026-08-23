@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PW+W — Purchase flow, patient portal, provider portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E9EDF1;--surface:#FFF;--surface-2:#F5F7F9;
+  --ink:#0F1C26;--ink-2:#54666F;--ink-3:#8496A0;
+  --line:#D2DAE1;--line-2:#E3E9EE;
+  --screen:#1E3A5F;--system:#0D7268;--gate:#946400;--risk:#9B2C6F;
+  --screen-bg:#E4E9F0;--system-bg:#E2F0ED;--gate-bg:#F5EDD9;--risk-bg:#F6E5EF;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:15px;line-height:1.5}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 90px}
+
+.mast{padding:40px 0 18px}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-2);margin:0 0 12px}
+h1{font-family:"Archivo",sans-serif;font-variation-settings:'wdth' 118,'wght' 760;
+  font-size:clamp(26px,4.4vw,44px);line-height:1;letter-spacing:-.02em;margin:0 0 14px;text-transform:uppercase}
+.thesis{max-width:64ch;color:var(--ink-2);margin:0;font-size:15px}
+
+.tabs{display:flex;border-bottom:1.5px solid var(--ink);margin-top:24px;overflow-x:auto}
+.tab{font-family:"Archivo",sans-serif;font-variation-settings:'wdth' 112,'wght' 680;
+  font-size:13px;letter-spacing:.05em;text-transform:uppercase;background:none;border:0;
+  padding:11px 16px;cursor:pointer;color:var(--ink-3);border-bottom:3px solid transparent;
+  margin-bottom:-1.5px;white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--ink);border-bottom-color:var(--ink)}
+.panel{display:none;padding-top:26px}
+.panel.on{display:block}
+
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:24px;
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:9px;height:9px;border-radius:50%;flex:none}
+
+.phase{font-family:"Archivo",sans-serif;font-variation-settings:'wdth' 116,'wght' 720;
+  font-size:15px;letter-spacing:.05em;text-transform:uppercase;margin:34px 0 12px;
+  padding-bottom:7px;border-bottom:1.5px solid var(--ink)}
+.phase:first-of-type{margin-top:0}
+.phase-note{font-family:"IBM Plex Sans",sans-serif;font-variation-settings:normal;
+  font-weight:400;font-size:13px;text-transform:none;letter-spacing:0;color:var(--ink-3);
+  display:block;margin-top:5px}
+
+.step{background:var(--surface);border:1px solid var(--line);border-left:4px solid;margin-bottom:9px}
+.step.screen{border-left-color:var(--screen)}
+.step.system{border-left-color:var(--system)}
+.step.gate{border-left-color:var(--gate)}
+.step-hd{display:grid;grid-template-columns:38px 1fr auto;gap:12px;align-items:center;
+  padding:13px 15px;cursor:pointer;width:100%;background:none;border:0;font:inherit;
+  color:inherit;text-align:left}
+.step-hd:hover{background:var(--surface-2)}
+.step-hd:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
+.num{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.step-t{font-size:15px;font-weight:600;letter-spacing:-.005em}
+.step-t em{display:block;font-style:normal;font-weight:400;font-size:12.5px;color:var(--ink-2);margin-top:2px}
+.kind{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.09em;
+  text-transform:uppercase;padding:3px 7px;border-radius:2px;white-space:nowrap}
+.screen .kind{background:var(--screen-bg);color:var(--screen)}
+.system .kind{background:var(--system-bg);color:var(--system)}
+.gate .kind{background:var(--gate-bg);color:var(--gate)}
+.body{display:none;padding:0 15px 16px 55px;border-top:1px solid var(--line-2);margin-top:-1px}
+.step.open .body{display:block}
+.blk{margin-top:14px}
+.blk-l{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+.blk ul{margin:0;padding-left:17px}
+.blk li{font-size:13.5px;color:var(--ink-2);margin-bottom:4px;line-height:1.45}
+.blk li b{color:var(--ink);font-weight:600}
+.fires li{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--system)}
+.note{background:var(--risk-bg);border-left:3px solid var(--risk);padding:10px 13px;
+  margin-top:14px;font-size:13.5px;color:#6E1F4E}
+.note b{color:var(--risk)}
+
+/* portal sections */
+.sect{background:var(--surface);border:1px solid var(--line);margin-bottom:12px}
+.sect-hd{padding:14px 16px;border-bottom:1.5px solid var(--ink);display:flex;align-items:baseline;gap:10px}
+.sect-hd h4{font-family:"Archivo",sans-serif;font-variation-settings:'wdth' 114,'wght' 720;
+  font-size:15px;margin:0}
+.sect-hd span{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--ink-3);margin-left:auto}
+.sect-bd{padding:14px 16px}
+.job{font-size:13.5px;color:var(--ink-2);margin:0 0 14px;max-width:70ch}
+.job b{color:var(--ink)}
+.els{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:8px}
+.el{border:1px solid var(--line-2);border-left:3px solid var(--screen);border-radius:2px;
+  padding:9px 11px;background:var(--surface-2)}
+.el.hero{border-left-color:var(--risk);background:var(--risk-bg)}
+.el b{display:block;font-size:12.5px;font-weight:600;line-height:1.3;margin-bottom:3px}
+.el span{display:block;font-size:12px;color:var(--ink-2);line-height:1.4}
+
+footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);
+  font-size:12.5px;color:var(--ink-3);max-width:76ch}
+@media (max-width:640px){
+  .wrap{padding:0 15px 70px}
+  .step-hd{grid-template-columns:30px 1fr;gap:9px}
+  .kind{grid-column:2;justify-self:start;margin-top:5px}
+  .body{padding-left:15px}
+  .els{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <p class="eyebrow">precisionww.com · experience specification</p>
+  <h1>Three surfaces</h1>
+  <p class="thesis">The purchase flow, the patient portal, and the provider console — screen by screen, with what the patient sees, what fires behind it, and where the design decisions are load-bearing. Tap any step to open it.</p>
+</header>
+
+<div class="tabs">
+  <button class="tab on" data-p="buy">Purchase flow</button>
+  <button class="tab" data-p="pt">Patient portal</button>
+  <button class="tab" data-p="rx">Provider &amp; admin</button>
+</div>
+
+<!-- ===================== PURCHASE ===================== -->
+<div class="panel on" id="buy">
+  <div class="legend">
+    <span><i class="dot" style="background:#1E3A5F"></i>Patient screen</span>
+    <span><i class="dot" style="background:#0D7268"></i>System event</span>
+    <span><i class="dot" style="background:#946400"></i>Gate / branch</span>
+    <span><i class="dot" style="background:#9B2C6F"></i>Design note</span>
+  </div>
+  <div id="flow"></div>
+</div>
+
+<!-- ===================== PATIENT ===================== -->
+<div class="panel" id="pt">
+  <p class="thesis" style="margin-bottom:22px">Mobile-first, single-thumb. The patient opens this between visits, usually for under ninety seconds. Everything competes with that constraint.</p>
+  <div id="ptsec"></div>
+</div>
+
+<!-- ===================== PROVIDER ===================== -->
+<div class="panel" id="rx">
+  <p class="thesis" style="margin-bottom:22px">Three distinct jobs, three distinct surfaces. Dr. Rhee decides and documents. The MA clears queues. You read the business. Collapsing these into one screen is how EHRs become unusable.</p>
+  <div id="rxsec"></div>
+</div>
+
+<footer id="foot"></footer>
+</div>
+
+<script>
+/* ---------------- purchase flow ---------------- */
+const FLOW=[
+["A. Qualify","Before any price is shown. This is also the highest-converting content on the site — “am I a candidate” is the question they arrived with.",[
+ ["screen","Where do you live?","State selector, first question, no account required",
+  ["Single dropdown, full-screen, no form fatigue","Licensed states proceed; others land on a waitlist page with an email capture and an honest “we expect to open in X”","Sets the licensure filter for every provider shown from here forward"],
+  ["Create Lead record with state + UTM source","Fire waitlist workflow if unlicensed"],
+  "Do not bury this at checkout. Discovering you cannot be treated after entering a card is the worst possible experience and generates chargebacks."],
+ ["screen","Eligibility quiz","Height, weight, goals, and clinical screening in 8–10 taps",
+  ["Height and weight → live BMI calculation shown back to them","Comorbidities: type 2 diabetes, hypertension, sleep apnea, PCOS, prediabetes","Hard contraindication screen: pregnancy or trying, personal or family history of medullary thyroid carcinoma or MEN2, prior pancreatitis, active eating disorder","Prior GLP-1 exposure — which drug, what dose, when stopped. This drives starting dose and must be captured before the first visit","Primary goal and target weight"],
+  ["Persist answers to Lead","Compute eligibility: qualified / needs clinical review / not a candidate"],
+  "Prior GLP-1 exposure is the field most intake forms miss. Restarting someone at 0.25mg who was previously at 2.4mg wastes two months of their program and their money."],
+ ["gate","Eligibility branch","Three outcomes, three destinations",
+  ["<b>Qualified</b> → straight to plan selection with a recommended tier","<b>Needs review</b> → book a consult first, pay later. Removes the risk from their side","<b>Not a candidate</b> → honest explanation plus referred alternatives. These people talk about you either way"],
+  ["Tag Lead with eligibility outcome","Route to appropriate next screen"],
+  "The “needs review” path is worth building properly. It is a large share of your addressable patients and the competitors send them away."]
+]],
+
+["B. Choose","Where the current page starts. It should start here, not at the top.",[
+ ["screen","Plan selection","The three cards — but now informed by the quiz",
+  ["Recommended tier marked based on quiz answers: comorbidities and higher BMI point to Premium","<b>Program fee and estimated medication cost shown as separate lines on every card</b>","Expandable “what’s included” with visit cadence, lab schedule, and messaging response time","Annual option at a discount, presented as a toggle not a fourth card"],
+  ["Attach selected tier to Lead"],
+  "Medication cost is the single biggest source of refunds and one-star reviews in this category. A $349 program fee sitting next to an unmentioned $500 pharmacy bill reads as a bait and switch even when it isn’t. Say the number, give a range, name who bills it."],
+ ["screen","Plan detail and comparison","Optional expansion before committing",
+  ["Side-by-side of all three on shared attributes","Explicit statement of what is <i>not</i> included","Pause and cancellation policy stated plainly, before purchase"],
+  [],
+  "Publishing the cancellation policy pre-purchase lowers conversion slightly and raises retention and trust considerably. Worth the trade."]
+]],
+
+["C. Onboard","Account and clinical intake. The longest stretch, and where abandonment concentrates.",[
+ ["screen","Create account","Email and mobile, magic link or password",
+  ["Progress indicator showing how many steps remain","Explicit “your progress saves automatically”"],
+  ["Create Patient record, link to Lead","Start abandoned-checkout timer"],
+  "Capture email at the quiz, not here. Everything from that point is recoverable by a nudge sequence; anything before it is gone."],
+ ["screen","Medical intake","Full history, save-and-resume, roughly five minutes",
+  ["Conditions, current medications, allergies, surgical history","Weight history: highest adult weight, prior attempts, what worked and what didn’t","PHQ-2 and GAD-2","Pregnancy and contraception status where applicable","Preferred pharmacy, or opt into the compounding partner"],
+  ["Write intake to structured clinical record","Queue pre-visit summary generation"],
+  "Break into short screens with one topic each. A single long form on mobile is the highest-abandonment object you will ship."],
+ ["screen","Consents","Stacked, individually acknowledged",
+  ["Telehealth consent, versioned by state","Financial responsibility, including the medication cost disclosure again","Privacy notice acknowledgement","SMS opt-in as a separate explicit checkbox, never pre-ticked","Medication-specific consent covering GLP-1 risks and side effects"],
+  ["Store each signed consent with version and timestamp"],
+  "Separate acknowledgements, not one blanket checkbox. If a dispute ever arises, which specific document was agreed to is the question that matters."],
+ ["screen","Identity verification","Photo ID and selfie",
+  ["Handled by the verification vendor inline, not a redirect","Skippable with a “complete before your first visit” flag if it’s blocking conversion"],
+  ["Store verification result against the patient"],
+  ""]
+]],
+
+["D. Pay","Short, boring, no surprises.",[
+ ["screen","Checkout","Stripe, with the full cost picture visible",
+  ["Line items: program fee, any one-time initial consult, baseline lab fee","Estimated medication cost restated as a non-charged informational line","Apple Pay and Google Pay prominent — meaningful lift on mobile","HSA and FSA cards accepted, stated on the page"],
+  ["Create Stripe customer and subscription","Charge one-time items","Set program start date"],
+  "No new information should appear at checkout. Every number here should already have been seen at plan selection."],
+ ["system","Provisioning","Everything that fires on successful payment",
+  ["Patient activated, program state set to onboarding","Care team assigned by state licensure and capacity","Portal access enabled"],
+  ["Create Account and Coverage records","Assign care team","Generate baseline lab order","Enrol in onboarding workflow"],
+  ""]
+]],
+
+["E. Activate","The part most builds get wrong. Do not end the session at a receipt.",[
+ ["screen","Book your first visit","Immediately, in the same session, before the confirmation page",
+  ["Real availability, filtered to licensed and assigned providers","Soonest slot surfaced first — speed to first visit is the strongest retention predictor you have","Timezone shown explicitly"],
+  ["Create Appointment","Fire reminder cascade","Set prep task deadlines"],
+  "<b>Never email a scheduling link.</b> Twenty to thirty percent never come back. Booking is part of checkout, not after it."],
+ ["screen","Baseline labs","Where to go and what to bring",
+  ["Nearest draw sites by zip","Requisition available as PDF and pushed to the portal","Fasting instructions if applicable","Explicit deadline relative to the booked visit"],
+  ["Send lab order to the lab partner","Create patient task with due date"],
+  ""],
+ ["screen","Confirmation and what happens next","A timeline, not a receipt",
+  ["Dated sequence: labs by this date, first visit on this date, prescription typically within X days of the visit, first shipment around Y","Portal download or web app link","Named care team with photos"],
+  ["Send welcome email and SMS","Enrol in pre-visit education sequence"],
+  "Anxiety about “what happens now” drives the first week of support tickets. A dated timeline removes most of them."],
+ ["system","Pre-visit sequence","The gap between purchase and first visit",
+  ["Lab reminder at T-3 days if not drawn","Appointment reminders at 24h and 1h with a confirm link","Short education content: what to expect, how visits work","Escalation to staff if labs are still outstanding at T-1"],
+  ["Scheduled workflow with branch on lab completion","Create staff task on escalation"],
+  ""]
+]],
+
+["F. Recover","Every drop-off point needs a path back.",[
+ ["system","Abandonment recovery","Branch on where they stopped",
+  ["Quiz completed, no plan → email with their eligibility result and recommendation","Plan selected, no payment → 24h and 72h nudges, then a call task for staff","Payment made, not booked → SMS within one hour, then a staff call. This cohort has already paid and must not be lost","Not eligible → waitlist or referral list, with permission to follow up"],
+  ["Branching workflow on lead state","Create staff task on high-value drop-offs"],
+  "Paid-but-unbooked is the highest-priority queue in the whole system. Someone should be phoning them the same day."]
+]],
+
+["G. Returning","The second toggle on the current page. Keep it short.",[
+ ["screen","Returning patient path","Login, then straight to the thing they came for",
+  ["Book a follow-up against their existing plan cadence","Join a group session if their tier includes it","Reactivate a paused or lapsed plan, with prior history intact"],
+  ["Authenticate","Load program state and available appointment types"],
+  "Reactivation should be one tap. A lapsed patient returning is your cheapest acquisition and the flow usually treats them like a stranger."]
+]]
+];
+
+/* ---------------- patient portal ---------------- */
+const PT=[
+["Home","The 90-second surface",
+ "The default screen. Its <b>only</b> job is to answer “what do I need to do right now” and show that the program is working. Everything else is one tap away.",
+ [["hero","Next action card","The single most important thing right now — log your weight, results are ready, book your follow-up, refill due. One action, one button."],
+  ["","Weight trajectory","Chart with start, current, goal line, and %TBWL. This is the emotional core of the product."],
+  ["","Current medication","Drug, dose, weeks at this dose, next titration date."],
+  ["","Next appointment","Date, provider, join button when live."],
+  ["","Open tasks","Short checklist: labs due, check-in open, form unsigned."],
+  ["","Message badge","Unread count with expected response window."]]],
+
+["Weekly check-in","The actual care model",
+ "Between-visit contact is where the program is delivered. Target <b>60 seconds on a phone</b>, push-notified, one question per screen.",
+ [["hero","Weight entry","Manual, or auto-pulled from a connected scale. Never make them open another app."],
+  ["","Side effects","Tap-graded — none, mild, moderate, severe — by symptom. Severe routes straight to clinical triage."],
+  ["","Adherence","Did you take every dose? Missed doses without judgement, with a reason picker."],
+  ["","Hunger and satiety","Simple scale. The clinical signal for whether the dose is working."],
+  ["","Free note","Optional, one line. Where the real information often is."],
+  ["","Streak and progress","Light reinforcement on completion. Do not gamify weight itself."]]],
+
+["Progress","Proof it's working",
+ "Where patients go when motivation dips. Give them more than one measure, because weight stalls and everything else keeps improving.",
+ [["","Weight over time","Zoomable, with visit and dose-change markers overlaid."],
+  ["","%TBWL and milestones","Percent lost, and the clinically meaningful thresholds crossed."],
+  ["","Measurements","Waist and body composition where captured."],
+  ["","Non-scale wins","Lab improvements, medications reduced, energy and sleep. Essential during plateaus."],
+  ["","Progress photos","Optional, private by default, never required."]]],
+
+["Medication","Dose, supply, and reassurance",
+ "The highest-anxiety area of the product. Most support volume lands here.",
+ [["hero","Current dose and schedule","What you are on, the titration ladder ahead, and the date of the next step."],
+  ["","Refill status","Requested, in review, at pharmacy, shipped, delivered — with tracking. Visible status kills most “where is my medication” tickets."],
+  ["","Injection guidance","Short video, site rotation diagram, storage and travel instructions."],
+  ["","Side effect management","What is normal, what to do about it, and the line at which to contact the clinic."],
+  ["","Report a problem","One tap to a triaged clinical message, pre-tagged as a medication issue."]]],
+
+["Labs","Results in plain language",
+ "Results release immediately by default. Assume the patient reads them before anyone explains them, and write for that.",
+ [["","Results with interpretation","Plain-language summary alongside the numbers, not just a flagged table."],
+  ["","Trends","Each marker over time — A1c, lipids, liver enzymes — with direction of travel."],
+  ["","Upcoming orders","What is due, where to go, requisition download."],
+  ["","Questions about results","Direct link into a message thread pre-attached to that result."]]],
+
+["Visits","Scheduling and history",
+ "",
+ [["","Book and reschedule","Real availability within their plan cadence and licensure."],
+  ["","Join video","One tap, no separate app, device check beforehand."],
+  ["","Visit summaries","What was decided, what changed, what to do before next time."],
+  ["","Prep checklist","Weight logged, labs drawn, questions noted."]]],
+
+["Messages","Async clinical contact",
+ "",
+ [["","Threads by topic","Clinical, billing, and scheduling separated so triage works."],
+  ["","Expected response time","Stated per thread type. Setting the expectation prevents the follow-up message."],
+  ["","Attachments","Photos of injection sites, rashes, outside records."]]],
+
+["Billing","No surprises, self-serve",
+ "Every avoidable support call in this section is a design failure.",
+ [["","Plan and next charge","Tier, amount, date. Program fee and medication billed separately and labelled as such."],
+  ["hero","Pause","Self-serve, with a duration picker. <b>Offer this before cancel, always.</b> Travel and plateaus cause most cancellations and a pause saves them."],
+  ["","Invoices and superbills","Downloadable, itemised, HSA and FSA ready."],
+  ["","Payment method","Update card, retry a failed payment."],
+  ["","Change plan","Upgrade and downgrade with proration shown before confirming."]]],
+
+["Account","Everything else",
+ "",
+ [["","Profile and address","Address changes matter — they can change which providers are licensed to treat them."],
+  ["","Pharmacy preference","Retail or compounding partner."],
+  ["","Connected devices","Scale and health app links."],
+  ["","Notifications","Channel and frequency, with a real off switch."],
+  ["","Documents","Signed consents, requisitions, records request."]]]
+];
+
+/* ---------------- provider ---------------- */
+const RX=[
+["Clinical — Day view","Dr. Rhee's landing screen",
+ "Opens to today. The goal is walking into each visit already knowing the picture.",
+ [["hero","Schedule with pre-visit briefs","Each appointment expands to an AI-drafted summary: since last visit, weight change, side effects reported, adherence, missed doses, open questions. Read in fifteen seconds."],
+  ["","Prep flags","Labs missing, check-in not completed, consent unsigned — visible before the visit starts."],
+  ["","Result inbox count","Unreviewed labs with age. Anything past threshold turns red."],
+  ["","Message queue","Clinical threads awaiting her specifically, with SLA clock."],
+  ["","Co-sign queue","NP and PA notes pending signature, once you add clinicians."]]],
+
+["Clinical — Patient chart","Where generic EHRs fail this specialty",
+ "The chart header must be weight-management shaped. Everything needed for the titration decision belongs in one band at the top, before any scrolling.",
+ [["hero","Vitals band","Weight sparkline · %TBWL · current drug, dose, weeks at dose · next titration decision · side effect grade trend · adherence · last labs with flags. The entire clinical picture in one strip."],
+  ["","Program timeline","Stage, visit history, dose changes, lab dates — one horizontal axis."],
+  ["","Check-in history","Every weekly submission, scannable, with outliers marked."],
+  ["","Note editor","Template by visit type, prefilled from check-in and intake data. She edits rather than types."],
+  ["","Orders","Labs and prescriptions from inside the chart, not a separate module."],
+  ["","Messages in context","Thread visible beside the chart, not on another screen."],
+  ["","Protocol position","Where they are on the titration ladder and what the protocol suggests next — advisory, never automatic."]]],
+
+["Clinical — Result review","The highest-severity queue",
+ "A missed abnormal is the worst failure mode in the system. Design accordingly.",
+ [["","Prioritised inbox","Critical first, then abnormal, then routine. Sorted by age within each."],
+  ["","Drafted patient explanation","Agent-written plain-language summary for her to edit and send. Never auto-sent."],
+  ["","One-tap actions","Acknowledge, notify patient, order follow-up, escalate."],
+  ["","Escalation timer","Unreviewed past threshold alerts and reassigns."]]],
+
+["Ops — Work queue","The MA's entire day",
+ "One screen, filterable, everything that needs a human. This is the surface staff live in and it deserves more design attention than it usually gets.",
+ [["hero","Unified task queue","Refills due, PA submissions, lab follow-up, no-show recovery, failed payments, unsigned consents, paid-but-unbooked. Owner, age, priority, bulk action."],
+  ["","Paid but not booked","Its own pinned filter. Highest-value queue in the business."],
+  ["","At-risk patients","Refill gaps, missed check-ins, plateau duration, payment failures. Outreach before churn."],
+  ["","Refill pipeline","Kanban by status, grouped by pharmacy."],
+  ["","Message triage","Unassigned threads, routed by topic, with SLA breach highlighted."],
+  ["","Schedule management","Fill gaps, work the waitlist, handle cancellations."]]],
+
+["Ops — Patient roster","Panel management",
+ "",
+ [["","Filterable list","By program stage, tier, provider, state, risk flag, payment status."],
+  ["","Bulk actions","Message a cohort, order standing panels, trigger outreach."],
+  ["","Saved views","“Titration week 4”, “No check-in 14 days”, “Payment failed”."]]],
+
+["Admin — Business","Your screen",
+ "Weekly reading, not daily. Built on the analytics schema, not live FHIR queries.",
+ [["","Revenue","MRR by tier, new versus churned, one-time revenue, refunds."],
+  ["hero","Outcome cohorts","%TBWL at 3, 6, 12 months by tier and starting BMI. The metric that differentiates the practice and that Healthie will never give you."],
+  ["","Retention curves","By cohort and tier, with the churn cliff visible."],
+  ["","Funnel","Quiz starts → qualified → plan selected → paid → first visit attended. Drop-off at each step."],
+  ["","Capacity","Panel size, utilisation, booking lead time by state."],
+  ["","Agent activity","Actions taken, approvals pending, approval versus override rate."]]],
+
+["Admin — Configuration","Change policy without a deploy",
+ "If Libby has to ask an engineer to change a cancellation window, the build has failed.",
+ [["","Plans and pricing","Tier definitions, inclusions, prices, promotional codes."],
+  ["","Scheduling rules","Appointment types, durations, buffers, lead time, cancellation windows."],
+  ["","Protocol definitions","Titration ladders, escalation criteria, standing lab panels."],
+  ["","Templates","Note templates, message macros, patient-facing content."],
+  ["","Care team","Providers, licensure by state, capacity caps, coverage rules."]]]
+];
+
+/* ---------------- render ---------------- */
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',p.id===t.dataset.p));
+  window.scrollTo({top:0});
+});
+
+const KIND={screen:'Screen',system:'System',gate:'Gate'};
+let n=0;
+const flow=document.getElementById('flow');
+FLOW.forEach(([ph,note,steps])=>{
+  const h=document.createElement('h3');h.className='phase';
+  h.innerHTML=ph+(note?`<span class="phase-note">${note}</span>`:'');
+  flow.appendChild(h);
+  steps.forEach(([kind,title,sub,bullets,fires,dnote])=>{
+    n++;
+    const d=document.createElement('div');d.className='step '+kind;
+    d.innerHTML=`<button class="step-hd" aria-expanded="false">
+        <span class="num">${String(n).padStart(2,'0')}</span>
+        <span class="step-t">${title}<em>${sub}</em></span>
+        <span class="kind">${KIND[kind]}</span></button>
+      <div class="body">
+        <div class="blk"><div class="blk-l">What's on it</div><ul>${bullets.map(b=>`<li>${b}</li>`).join('')}</ul></div>
+        ${fires.length?`<div class="blk fires"><div class="blk-l">Fires</div><ul>${fires.map(f=>`<li>${f}</li>`).join('')}</ul></div>`:''}
+        ${dnote?`<div class="note">${dnote}</div>`:''}
+      </div>`;
+    const b=d.querySelector('.step-hd');
+    b.onclick=()=>{const o=d.classList.toggle('open');b.setAttribute('aria-expanded',o);};
+    flow.appendChild(d);
+  });
+});
+
+function sections(data,mount){
+  const m=document.getElementById(mount);
+  data.forEach(([t,sub,job,els])=>{
+    const s=document.createElement('div');s.className='sect';
+    s.innerHTML=`<div class="sect-hd"><h4>${t}</h4><span>${sub}</span></div>
+      <div class="sect-bd">${job?`<p class="job">${job}</p>`:''}
+        <div class="els">${els.map(([c,b,d])=>
+          `<div class="el ${c}"><b>${b}</b><span>${d}</span></div>`).join('')}</div></div>`;
+    m.appendChild(s);
+  });
+}
+sections(PT,'ptsec');
+sections(RX,'rxsec');
+
+document.getElementById('foot').textContent=
+  `${n} steps in the purchase flow, ${PT.length} patient portal sections, ${RX.length} provider surfaces. Highlighted elements are the ones worth building first — each is either the primary job of its screen or the fix for a known failure mode.`;
+</script>
+</body>
+</html>

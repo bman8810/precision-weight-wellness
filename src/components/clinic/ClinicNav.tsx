@@ -37,10 +37,32 @@ export default function ClinicNav({
             {area === "staff" && (
               <>
                 <Link href="/staff" className="text-body hover:text-navy">
+                  Today
+                </Link>
+                <Link href="/staff/patients" className="text-body hover:text-navy">
                   Roster
                 </Link>
-                <Link href="/staff/visits" className="text-body hover:text-navy">
-                  Visits
+                <Link href="/staff/queue" className="text-body hover:text-navy">
+                  Queue
+                </Link>
+                <Link href="/staff/inbox" className="text-body hover:text-navy">
+                  Labs
+                </Link>
+                <Link href="/staff/config" className="text-body hover:text-navy">
+                  Config
+                </Link>
+              </>
+            )}
+            {area === "patient" && (
+              <>
+                <Link href="/app" className="text-body hover:text-navy">
+                  Home
+                </Link>
+                <Link href="/app/check-in" className="text-body hover:text-navy">
+                  Check-in
+                </Link>
+                <Link href="/app/billing" className="text-body hover:text-navy">
+                  Billing
                 </Link>
               </>
             )}

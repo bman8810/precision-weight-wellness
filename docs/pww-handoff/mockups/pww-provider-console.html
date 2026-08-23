@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Precision W+W — Clinical console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400..600&family=Poppins:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1F2C4C;--navy-2:#2C3D63;--navy-soft:#5A6784;
+  --sheet:#FFFFFF;--tint:#FAFAF8;
+  --gold:#BFA163;--gold-dk:#9C8348;--gold-bg:#F5F0E4;
+  --green:#1E3B33;--green-bg:#E7EFEA;--rose:#A8443C;--rose-bg:#F8ECEA;
+  --amber:#946400;--amber-bg:#F6EFDC;
+  --ink:#1F2C4C;--muted:#66707E;--muted-2:#99A1AD;
+  --rule:#E4E6EA;--rule-2:#F0F1F3;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--sheet);color:var(--ink);
+  font-family:"Poppins",system-ui,sans-serif;font-size:14px;line-height:1.5;font-weight:300}
+button{font:inherit;cursor:pointer}
+
+.app{display:grid;grid-template-columns:230px 1fr;min-height:100vh}
+
+.side{background:var(--navy);color:#fff;padding:22px 14px 18px;position:sticky;top:0;height:100vh;
+  display:flex;flex-direction:column}
+.brand{font-family:"Playfair Display",serif;font-size:19px;padding:0 10px 20px;
+  border-bottom:1px solid rgba(255,255,255,.13)}
+.brand i{font-style:normal;color:var(--gold)}
+.nsec{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.36);
+  padding:20px 10px 7px}
+.nav{display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:8px;
+  color:rgba(255,255,255,.74);background:none;border:0;width:100%;text-align:left;font-size:13.5px}
+.nav:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav.on{background:rgba(191,161,99,.2);color:#fff}
+.nav:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.nav i{font-style:normal;width:16px;font-size:14px;text-align:center}
+.nav .ct{margin-left:auto;background:var(--rose);color:#fff;font-size:10.5px;min-width:19px;height:19px;
+  border-radius:999px;display:grid;place-items:center;padding:0 5px}
+.me{margin-top:auto;display:flex;gap:10px;align-items:center;padding:13px 10px 0;
+  border-top:1px solid rgba(255,255,255,.13);font-size:13px}
+.me .av{width:32px;height:32px;border-radius:50%;background:var(--gold);color:var(--navy);
+  display:grid;place-items:center;font-family:"Playfair Display",serif;font-size:13px}
+.me small{display:block;color:rgba(255,255,255,.45);font-size:11px}
+
+.main{min-width:0}
+.view{display:none}.view.on{display:block}
+.pad{padding:0 34px}
+.pad-b{padding-bottom:56px}
+
+.phead{padding:26px 34px 18px;border-bottom:1px solid var(--rule);display:flex;
+  align-items:flex-end;gap:16px;flex-wrap:wrap}
+.phead h1{font-family:"Playfair Display",serif;font-size:28px;font-weight:500;margin:0;line-height:1.1}
+.phead p{margin:4px 0 0;color:var(--muted);font-size:13px}
+.phead .r{margin-left:auto;display:flex;gap:8px}
+
+.btn{background:var(--navy);color:#fff;border:0;border-radius:7px;padding:9px 16px;font-size:13px}
+.btn:hover{background:var(--navy-2)}
+.btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.btn.g{background:none;color:var(--navy);border:1px solid var(--rule)}
+.btn.g:hover{border-color:var(--navy-soft)}
+.btn.gold{background:var(--gold);color:var(--navy);font-weight:500}
+.btn.sm{padding:6px 13px;font-size:12.5px}
+.btn.q{background:none;border:0;color:var(--muted);padding:6px 2px;text-decoration:underline;
+  text-decoration-color:var(--rule);text-underline-offset:4px}
+.btn.q:hover{color:var(--navy)}
+
+.figs{display:flex;flex-wrap:wrap;border-bottom:1px solid var(--rule);padding-left:34px}
+.fig{padding:18px 30px 18px 0;margin-right:30px;border-right:1px solid var(--rule-2);min-width:112px}
+.fig:last-child{border-right:0}
+.fig-v{font-family:"Playfair Display",serif;font-size:26px;font-weight:500;line-height:1}
+.fig-l{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+.fig.hot .fig-v{color:var(--rose)}
+
+.sec{padding:26px 0 0}
+.sec-l{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+  font-weight:500;display:flex;align-items:baseline;gap:12px;padding-bottom:9px;
+  border-bottom:1px solid var(--ink)}
+.sec-l .r{margin-left:auto;font-size:11.5px;letter-spacing:0;text-transform:none;
+  color:var(--muted-2);font-weight:300;background:none;border:0;padding:0}
+.sec-l .r:hover{color:var(--navy)}
+
+.split{display:grid;grid-template-columns:1fr 340px}
+.split>*:first-child{padding-right:32px;border-right:1px solid var(--rule)}
+.split>*:last-child{padding-left:32px}
+@media(max-width:1120px){.split{grid-template-columns:1fr}
+  .split>*:first-child{padding-right:0;border-right:0}
+  .split>*:last-child{padding-left:0}}
+
+.appt{display:grid;grid-template-columns:78px 1fr 16px;gap:16px;padding:16px 0;
+  border-bottom:1px solid var(--rule-2);align-items:start;width:100%;background:none;border-left:0;
+  border-right:0;border-top:0;text-align:left}
+.appt:hover{background:var(--tint)}
+.appt.now{box-shadow:inset 3px 0 0 var(--gold);padding-left:14px;grid-template-columns:64px 1fr 16px}
+.tm{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--navy);padding-top:1px}
+.tm small{display:block;color:var(--muted-2);font-size:10.5px;margin-top:3px}
+.who b{font-size:15.5px;font-weight:500}
+.who .meta{font-size:12.5px;color:var(--muted);margin-top:2px}
+.brief{margin-top:10px;font-size:13px;color:#4A5568;line-height:1.6;max-width:78ch;
+  padding-left:13px;border-left:2px solid var(--gold)}
+.brief b{color:var(--navy);font-weight:500}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
+.tag{font-size:10.5px;padding:3px 9px;border-radius:3px;background:var(--rule-2);color:var(--muted)}
+.tag.ok{background:var(--green-bg);color:var(--green)}
+.tag.warn{background:var(--amber-bg);color:var(--amber)}
+.tag.bad{background:var(--rose-bg);color:var(--rose)}
+
+.row{display:grid;grid-template-columns:24px 1fr auto auto;gap:14px;padding:13px 0;
+  border-bottom:1px solid var(--rule-2);align-items:center;width:100%;background:none;
+  border-left:0;border-right:0;border-top:0;text-align:left}
+.row:last-of-type{border-bottom:0}
+.row:hover{background:var(--tint)}
+.mark{width:6px;height:6px;border-radius:50%;background:var(--gold);justify-self:center}
+.mark.rs{background:var(--rose)} .mark.gr{background:var(--green)} .mark.nl{background:var(--rule)}
+.row b{font-weight:400;font-size:13.5px;display:block}
+.row small{color:var(--muted);font-size:12px}
+.age{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted-2)}
+.age.hot{color:var(--rose)}
+.go{color:var(--muted-2);font-size:15px}
+
+.band{background:var(--navy);color:#fff;padding:22px 34px;display:grid;
+  grid-template-columns:auto 1fr;gap:30px;align-items:center}
+@media(max-width:960px){.band{grid-template-columns:1fr;gap:20px}}
+.band-id b{font-family:"Playfair Display",serif;font-size:26px;font-weight:500;display:block}
+.band-id small{color:rgba(255,255,255,.55);font-size:12.5px}
+.band-id .chips{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.band-id .chips span{font-size:10.5px;padding:3px 9px;border-radius:3px;background:rgba(255,255,255,.13)}
+.vitals{display:flex;flex-wrap:wrap}
+.v{padding:0 20px;border-right:1px solid rgba(255,255,255,.16);min-width:100px}
+.v:first-child{padding-left:0} .v:last-child{border-right:0}
+.v-l{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.v-v{font-family:"Playfair Display",serif;font-size:20px;font-weight:500;margin-top:6px;line-height:1.1}
+.v-s{font-size:10.5px;color:rgba(255,255,255,.52);margin-top:3px}
+.v.hot .v-v{color:#E8A9A1} .v.good .v-v{color:#A8CDB8}
+.v svg{width:84px;height:24px;margin-top:6px;display:block}
+
+.decide{padding:18px 34px 18px 31px;border-left:3px solid var(--gold);background:var(--gold-bg);
+  display:flex;gap:18px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--rule)}
+.decide b{font-weight:500;font-size:14.5px;display:block}
+.decide p{margin:4px 0 0;font-size:12.5px;color:var(--gold-dk);max-width:68ch;line-height:1.55}
+.decide .acts{margin-left:auto;display:flex;gap:8px}
+
+.tmpl{display:flex;gap:7px;flex-wrap:wrap;margin:18px 0 6px}
+.tmpl button{padding:6px 14px;border:1px solid var(--rule);border-radius:999px;background:none;
+  font-size:12.5px;color:var(--muted)}
+.tmpl button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.nf{margin-top:22px}
+.nf-l{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:8px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pre{font-size:11px;letter-spacing:0;text-transform:none;color:var(--green);
+  background:var(--green-bg);padding:3px 9px;border-radius:3px;font-weight:400}
+.nf textarea{width:100%;border:0;border-left:2px solid var(--rule);background:var(--tint);
+  padding:14px 16px;font:inherit;font-size:14px;line-height:1.7;resize:vertical;color:var(--ink)}
+.nf textarea:focus{outline:0;border-left-color:var(--navy);background:#fff;
+  box-shadow:inset 0 0 0 1px var(--rule)}
+.note-acts{display:flex;gap:9px;margin-top:24px;padding-top:20px;border-top:1px solid var(--rule);
+  flex-wrap:wrap;align-items:center}
+
+.evt{display:grid;grid-template-columns:54px 8px 1fr;gap:12px;padding:12px 0;
+  border-bottom:1px solid var(--rule-2);align-items:start}
+.evt:last-child{border:0}
+.evt .d{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted-2);padding-top:3px}
+.evt .dt{width:7px;height:7px;border-radius:50%;background:var(--gold);margin-top:7px}
+.evt .dt.n{background:var(--rule)}
+.evt b{font-weight:500;display:block;font-size:13.5px}
+.evt small{color:var(--muted);font-size:12px}
+
+.kv{display:flex;justify-content:space-between;gap:16px;padding:10px 0;
+  border-bottom:1px solid var(--rule-2);font-size:13.5px}
+.kv:last-of-type{border:0}
+.kv span{color:var(--muted)}
+.kv b{font-weight:500}
+.kv b.up{color:var(--green)} .kv b.dn{color:var(--rose)}
+
+.filters{display:flex;gap:7px;flex-wrap:wrap;padding:18px 34px;border-bottom:1px solid var(--rule)}
+.filters button{padding:7px 15px;border:1px solid var(--rule);border-radius:999px;background:none;
+  font-size:12.5px;color:var(--muted)}
+.filters button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.filters button .n{opacity:.55;margin-left:6px}
+
+.alert{padding:16px 34px 16px 31px;border-left:3px solid var(--rose);background:var(--rose-bg);
+  display:flex;gap:16px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--rule)}
+.alert b{font-weight:500;color:var(--rose);font-size:14px}
+.alert p{margin:3px 0 0;font-size:12.5px;color:#8A3A33}
+.alert button{margin-left:auto}
+
+/* inbox rows — cross-patient triage */
+.inbox{width:100%;border-collapse:collapse}
+.inbox tr{border-bottom:1px solid var(--rule-2);cursor:pointer}
+.inbox tr:last-child{border-bottom:0}
+.inbox tr:hover td{background:var(--tint)}
+.inbox td{padding:14px 0 14px 16px;vertical-align:middle}
+.inbox td:first-child{padding-left:0;width:24px}
+.ib-who b{font-weight:500;font-size:14.5px;display:block}
+.ib-who small{color:var(--muted);font-size:12.5px}
+.ib-val{text-align:right;font-family:"IBM Plex Mono",monospace;font-size:16px;font-weight:500;width:76px}
+.ib-val.hi{color:var(--rose)} .ib-val.lo{color:var(--amber)} .ib-val.ok{color:var(--ink)}
+.ib-val span{display:block;font-size:11px;font-weight:400;color:var(--muted-2);margin-top:3px}
+.ib-spk{width:88px}
+.ib-spk svg{width:88px;height:24px;display:block;margin-left:auto}
+.ib-age{text-align:right;font-family:"IBM Plex Mono",monospace;font-size:11.5px;
+  color:var(--muted-2);width:56px}
+.ib-age.hot{color:var(--rose)}
+.ib-go{text-align:right;color:var(--muted-2);font-size:15px;width:18px}
+@media(max-width:760px){.ib-spk{display:none}}
+
+.back-l{background:none;border:0;color:var(--muted);font-size:12.5px;padding:0 0 8px;
+  display:inline-flex;align-items:center;gap:6px}
+.back-l:hover{color:var(--navy)}
+
+/* segmented control */
+.seg{display:flex;gap:0;border:1px solid var(--rule);border-radius:7px;overflow:hidden;width:fit-content}
+.seg button{padding:7px 16px;background:none;border:0;border-right:1px solid var(--rule);
+  font-size:12.5px;color:var(--muted)}
+.seg button:last-child{border-right:0}
+.seg button.on{background:var(--navy);color:#fff}
+
+/* delta table — current vs prior */
+.delta-t{width:100%;border-collapse:collapse;margin-top:4px}
+.delta-t th{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);
+  font-weight:500;text-align:right;padding:9px 0 9px 14px;border-bottom:1px solid var(--rule)}
+.delta-t th:first-child{text-align:left;padding-left:0}
+.delta-t td{padding:11px 0 11px 14px;border-bottom:1px solid var(--rule-2);text-align:right;
+  font-family:"IBM Plex Mono",monospace;font-size:13px}
+.delta-t td:first-child{text-align:left;padding-left:0;font-family:"Poppins",sans-serif;font-size:13.5px}
+.delta-t tr:last-child td{border-bottom:0}
+.an b{font-weight:400;display:block}
+.an small{color:var(--muted-2);font-size:11px;font-family:"IBM Plex Mono",monospace}
+.cur{font-weight:500;font-size:15px!important}
+.cur.hi{color:var(--rose)} .cur.lo{color:var(--amber)} .cur.ok{color:var(--ink)}
+.prior{color:var(--muted-2)}
+.dlt{font-size:12px!important}
+.dlt.up{color:var(--rose)} .dlt.dn{color:var(--green)} .dlt.flat{color:var(--muted-2)}
+.spk{width:82px;padding-left:16px!important}
+.spk svg{width:82px;height:22px;display:block;margin-left:auto}
+
+/* flowsheet */
+.flow-wrap{overflow-x:auto;margin-top:4px}
+.flow{width:100%;border-collapse:collapse;min-width:640px}
+.flow th{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);
+  font-weight:500;padding:10px 0 10px 16px;border-bottom:1px solid var(--rule);text-align:right;
+  white-space:nowrap}
+.flow th:first-child{text-align:left;padding-left:0;width:210px}
+.flow th.now{color:var(--navy);border-bottom-color:var(--navy)}
+.flow td{padding:10px 0 10px 16px;border-bottom:1px solid var(--rule-2);text-align:right;
+  font-family:"IBM Plex Mono",monospace;font-size:13px;white-space:nowrap}
+.flow td:first-child{text-align:left;padding-left:0;font-family:"Poppins",sans-serif;font-size:13.5px}
+.flow tr:last-child td{border-bottom:0}
+.flow tr:hover td{background:var(--tint)}
+.flow tr.watch td:first-child{box-shadow:inset 3px 0 0 var(--rose);padding-left:11px}
+.flow td.now{font-weight:500;background:var(--tint)}
+.flow tr:hover td.now{background:#F4F5F2}
+.v-hi{color:var(--rose)} .v-lo{color:var(--amber)} .v-na{color:var(--rule)}
+.flow .sub{color:var(--muted-2);font-size:11px;font-family:"IBM Plex Mono",monospace;display:block}
+.flow tfoot td{border-bottom:0;padding-top:14px;font-family:"Poppins",sans-serif;font-size:12px;
+  color:var(--muted);text-align:left}
+
+/* inline trend inside the panel table */
+.delta-t tbody tr[data-an]{cursor:pointer}
+.delta-t tbody tr[data-an]:hover td{background:var(--tint)}
+.delta-t tbody tr[data-an].sel td{background:var(--tint)}
+.delta-t tbody tr[data-an].sel td:first-child{box-shadow:inset 3px 0 0 var(--navy);padding-left:11px}
+.trendrow td{padding:0 0 26px!important;background:var(--tint)!important;border-bottom:1px solid var(--rule-2)!important}
+.tr-in{padding:16px 18px 4px}
+.tr-hd{display:flex;align-items:baseline;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.tr-hd b{font-size:14px;font-weight:500}
+.tr-hd span{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted)}
+.tr-hd em{margin-left:auto;font-style:normal;font-size:12px;color:var(--muted)}
+.tr-in svg{width:100%;height:150px;display:block}
+.tr-ax{display:flex;justify-content:space-between;font-size:11px;color:var(--muted-2);margin-top:7px}
+.tr-note{font-size:12.5px;color:var(--muted);margin:12px 0 0;line-height:1.55;max-width:74ch}
+
+/* trend detail */
+.trend{margin-top:18px}
+.trend svg{width:100%;height:170px;display:block}
+.trend-l{display:flex;justify-content:space-between;font-size:11px;color:var(--muted-2);margin-top:6px}
+.pick{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 6px}
+.pick button{padding:5px 12px;border:1px solid var(--rule);border-radius:999px;background:none;
+  font-size:12px;color:var(--muted)}
+.pick button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+.bars{display:flex;align-items:flex-end;gap:14px;height:150px;padding-top:14px}
+.bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:8px;height:100%}
+.bar i{width:100%;background:var(--navy);display:block}
+.bar i.g{background:var(--gold)}
+.bar small{font-size:10.5px;color:var(--muted)}
+.bar b{font-size:11.5px;font-weight:500}
+
+.caption{font-size:12.5px;color:var(--muted);margin:14px 0 0;max-width:70ch;line-height:1.6}
+
+@media(max-width:860px){
+  .app{grid-template-columns:1fr}
+  .side{position:static;height:auto;flex-direction:row;flex-wrap:wrap;gap:4px;padding:13px 16px;align-items:center}
+  .brand{width:100%;border:0;padding-bottom:11px}
+  .nsec{display:none}.nav{width:auto;padding:8px 12px}.me{display:none}
+  .pad,.phead,.band,.filters{padding-left:18px;padding-right:18px}
+  .figs{padding-left:18px}
+  .decide,.alert{padding-left:15px;padding-right:18px}
+  .fig{padding-right:20px;margin-right:20px;min-width:94px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+
+<aside class="side">
+  <div class="brand">Precision <i>W+W</i></div>
+  <div class="nsec">Clinical</div>
+  <button class="nav on" data-v="today"><i>◷</i>Today</button>
+  <button class="nav" data-v="chart"><i>▤</i>Patient chart</button>
+  <button class="nav" data-v="results"><i>◈</i>Results<span class="ct">4</span></button>
+  <div class="nsec">Operations</div>
+  <button class="nav" data-v="queue"><i>≡</i>Work queue<span class="ct">17</span></button>
+  <button class="nav" data-v="roster"><i>◍</i>Roster</button>
+  <div class="nsec">Practice</div>
+  <button class="nav" data-v="biz"><i>◗</i>Insights</button>
+  <button class="nav" data-v="config"><i>⚙</i>Configuration</button>
+  <div class="me"><span class="av">LR</span><div>Dr. Libby Rhee<small>Physician</small></div></div>
+</aside>
+
+<main class="main">
+
+<!-- TODAY -->
+<section class="view on" data-v="today">
+  <div class="phead"><div><h1>Friday, August 22</h1><p>Seven visits · two need labs before they start</p></div>
+    <div class="r"><button class="btn g">Block time</button><button class="btn">Start 9:15 visit</button></div></div>
+
+  <div class="figs">
+    <div class="fig"><div class="fig-v">7</div><div class="fig-l">Visits today</div></div>
+    <div class="fig hot"><div class="fig-v">4</div><div class="fig-l">Unreviewed labs</div></div>
+    <div class="fig"><div class="fig-v">6</div><div class="fig-l">Messages</div></div>
+    <div class="fig"><div class="fig-v">2</div><div class="fig-l">Notes to sign</div></div>
+    <div class="fig hot"><div class="fig-v">3</div><div class="fig-l">Paid, unbooked</div></div>
+  </div>
+
+  <div class="pad pad-b">
+    <div class="split">
+      <div>
+        <div class="sec"><div class="sec-l">Schedule <button class="r">Briefs drafted 6:00 am</button></div>
+
+          <button class="appt now">
+            <div class="tm">9:15a<small>45 min</small></div>
+            <div class="who"><b>Sarah Mitchell</b><div class="meta">New patient · Premium · Connecticut</div>
+              <div class="brief"><b>First visit.</b> BMI 34.5, hypertension on lisinopril 10 mg. No prior GLP-1. Baseline labs drawn Aug 20 — A1c 5.8, everything else normal. Intake complete. <b>Decision: starting agent and dose.</b></div>
+              <div class="tags"><span class="tag ok">Labs in</span><span class="tag ok">Intake done</span><span class="tag ok">Consents signed</span></div></div>
+            <span class="go">›</span></button>
+
+          <button class="appt">
+            <div class="tm">10:00a<small>20 min</small></div>
+            <div class="who"><b>Marcus Webb</b><div class="meta">Follow-up · week 8 · Essential</div>
+              <div class="brief">Down 14.2 lb, 6.1% of body weight. Tirzepatide 5 mg, four weeks at dose, tolerating well. Check-ins complete eight of eight. <b>Decision: titrate to 7.5 mg.</b></div>
+              <div class="tags"><span class="tag ok">On track</span><span class="tag">No side effects</span></div></div>
+            <span class="go">›</span></button>
+
+          <button class="appt">
+            <div class="tm">10:30a<small>20 min</small></div>
+            <div class="who"><b>Diane Alvarez</b><div class="meta">Follow-up · week 16 · Premium</div>
+              <div class="brief">Weight flat three weeks at 191 lb. Reported <b>moderate nausea</b> twice and missed two doses. Eleven-day refill gap in July. <b>Decision: adherence first, then whether to hold at 7.5 mg.</b></div>
+              <div class="tags"><span class="tag warn">Plateau 3 wk</span><span class="tag warn">2 missed doses</span><span class="tag bad">Refill gap</span></div></div>
+            <span class="go">›</span></button>
+
+          <button class="appt">
+            <div class="tm">11:15a<small>20 min</small></div>
+            <div class="who"><b>Robert Kim</b><div class="meta">Follow-up · week 24 · Concierge</div>
+              <div class="brief">Down 41 lb, 16.8%. A1c 5.2 from 6.4. Off metformin since June. <b>Decision: maintenance planning.</b></div>
+              <div class="tags"><span class="tag ok">Goal reached</span><span class="tag ok">Med discontinued</span></div></div>
+            <span class="go">›</span></button>
+
+          <button class="appt">
+            <div class="tm">1:30p<small>45 min</small></div>
+            <div class="who"><b>Priya Raman</b><div class="meta">New patient · Essential · New York</div>
+              <div class="brief"><b>Labs not drawn.</b> Ordered Aug 12, no result. Jenny called Aug 20 — patient says she'll go today. <b>Decision: proceed without labs or reschedule.</b></div>
+              <div class="tags"><span class="tag bad">Labs missing</span><span class="tag warn">Intake 60%</span></div></div>
+            <span class="go">›</span></button>
+
+          <button class="appt">
+            <div class="tm">2:15p<small>20 min</small></div>
+            <div class="who"><b>Anna Cole</b><div class="meta">Side effect visit · week 6 · Premium</div>
+              <div class="brief">Reported <b>severe nausea</b> yesterday, added same day. Semaglutide 1 mg, two weeks at dose. <b>Decision: de-escalate or supportive management.</b></div>
+              <div class="tags"><span class="tag bad">Severe symptom</span><span class="tag">Added today</span></div></div>
+            <span class="go">›</span></button>
+        </div>
+      </div>
+
+      <div>
+        <div class="sec"><div class="sec-l">Needs you</div>
+          <button class="row"><span class="mark rs"></span><div><b>Critical — A1c 9.2</b><small>Thomas Ryan · resulted 41 minutes ago</small></div><span class="age hot">41m</span><span class="go">›</span></button>
+          <button class="row"><span class="mark"></span><div><b>Abnormal — ALT 78</b><small>Diane Alvarez · resulted yesterday</small></div><span class="age">1d</span><span class="go">›</span></button>
+          <button class="row"><span class="mark"></span><div><b>Dose increase approval</b><small>Marcus Webb · agent drafted</small></div><span class="age">3h</span><span class="go">›</span></button>
+          <button class="row"><span class="mark rs"></span><div><b>Side effect report</b><small>Anna Cole · severe nausea</small></div><span class="age hot">2h</span><span class="go">›</span></button>
+          <button class="row"><span class="mark nl"></span><div><b>Note awaiting signature</b><small>Robert Kim · August 4 visit</small></div><span class="age">18d</span><span class="go">›</span></button>
+        </div>
+
+        <div class="sec"><div class="sec-l">Panel <span class="r">142 active</span></div>
+          <div class="kv"><span>Onboarding</span><b>11</b></div>
+          <div class="kv"><span>Titration</span><b>48</b></div>
+          <div class="kv"><span>Maintenance</span><b>67</b></div>
+          <div class="kv"><span>At risk</span><b class="dn">9</b></div>
+          <div class="kv"><span>Paused</span><b>7</b></div>
+          <div class="kv"><span>Capacity used</span><b>79%</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHART -->
+<section class="view" data-v="chart">
+  <div class="phead"><div><h1>Diane Alvarez</h1><p>48 · Premium · week 16 · Litchfield, Connecticut</p></div>
+    <div class="r"><button class="btn g">Message</button><button class="btn g">Order labs</button><button class="btn">Start visit</button></div></div>
+
+  <div class="band">
+    <div class="band-id">
+      <b>191.2 lb</b><small>Started 226 lb · June 12</small>
+      <div class="chips"><span>Premium</span><span>Week 16</span><span>CT licensed</span></div>
+    </div>
+    <div class="vitals">
+      <div class="v"><div class="v-l">Total loss</div><div class="v-v">34.8</div><div class="v-s">15.4% TBWL</div></div>
+      <div class="v hot"><div class="v-l">Last 3 wk</div><div class="v-v">0.4</div><div class="v-s">plateau</div></div>
+      <div class="v"><div class="v-l">Trend</div>
+        <svg viewBox="0 0 84 24" preserveAspectRatio="none"><polyline points="0,3 13,6 26,10 39,14 52,17 65,18 78,18 84,19"
+          fill="none" stroke="#BFA163" stroke-width="2" stroke-linejoin="round"/></svg></div>
+      <div class="v"><div class="v-l">Dose</div><div class="v-v">7.5</div><div class="v-s">tirzepatide · wk 6</div></div>
+      <div class="v hot"><div class="v-l">Adherence</div><div class="v-v">82%</div><div class="v-s">2 missed</div></div>
+      <div class="v hot"><div class="v-l">Symptoms</div><div class="v-v">Mod</div><div class="v-s">nausea, rising</div></div>
+      <div class="v"><div class="v-l">Check-ins</div><div class="v-v">14/16</div><div class="v-s">last Aug 19</div></div>
+      <div class="v hot"><div class="v-l">Last labs</div><div class="v-v">1 flag</div><div class="v-s">ALT 78 · Aug 21</div></div>
+    </div>
+  </div>
+
+  <div class="decide">
+    <div><b>Protocol suggests holding at 7.5 mg</b>
+      <p>Plateau alongside moderate nausea and 82% adherence points to tolerance rather than dose ceiling. Protocol recommends addressing adherence and rechecking in four weeks before escalating. Isolated ALT elevation warrants a repeat panel.</p></div>
+    <div class="acts"><button class="btn g sm">Override</button><button class="btn gold sm">Accept and document</button></div>
+  </div>
+
+  <div class="pad pad-b">
+    <div class="split">
+      <div>
+        <div class="sec"><div class="sec-l">Visit note <span class="r">Follow-up · titration</span></div>
+          <div class="tmpl"><button class="on">Titration follow-up</button><button>Plateau visit</button>
+            <button>Maintenance</button><button>Side effect</button></div>
+
+          <div class="nf"><div class="nf-l">Subjective <span class="pre">Prefilled from check-ins Aug 5, 12, 19</span></div>
+            <textarea rows="5">Patient reports moderate nausea persisting three weeks, worst on days 1–2 post-injection. Missed doses Aug 6 and Aug 13 — states she "didn't want to feel sick before work." Appetite suppression still present. Weight stable at 191 for three weeks. Denies vomiting or abdominal pain.</textarea></div>
+
+          <div class="nf"><div class="nf-l">Objective <span class="pre">Auto-pulled: weight, BP, labs</span></div>
+            <textarea rows="3">Wt 191.2 lb (↓34.8 from baseline, 15.4% TBWL). BP 124/78. ALT 78 (ref 7–56), otherwise CMP within normal limits. A1c 5.5.</textarea></div>
+
+          <div class="nf"><div class="nf-l">Assessment and plan</div>
+            <textarea rows="7">Plateau attributable to dosing gaps rather than dose ceiling. Hold tirzepatide 7.5 mg.
+
+Nausea management: ondansetron PRN, dietary timing, move injection to Friday evening from Monday morning.
+
+Repeat LFTs in four weeks given isolated ALT elevation.
+
+Follow-up four weeks. Escalate to 10 mg only if adherence exceeds 90% and weight remains flat.</textarea></div>
+
+          <div class="note-acts"><button class="btn g">Save draft</button><button class="btn">Sign and close</button>
+            <button class="btn q">Add addendum later</button></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sec"><div class="sec-l">Program timeline</div>
+          <div class="evt"><span class="d">Aug 21</span><span class="dt"></span><div><b>Labs resulted</b><small>ALT 78 flagged</small></div></div>
+          <div class="evt"><span class="d">Aug 19</span><span class="dt"></span><div><b>Check-in</b><small>191.4 lb · nausea moderate</small></div></div>
+          <div class="evt"><span class="d">Aug 13</span><span class="dt n"></span><div><b>Dose missed</b><small>Reported at check-in</small></div></div>
+          <div class="evt"><span class="d">Aug 06</span><span class="dt n"></span><div><b>Dose missed</b><small>Reported at check-in</small></div></div>
+          <div class="evt"><span class="d">Jul 11</span><span class="dt"></span><div><b>Titrated to 7.5 mg</b><small>Visit with Dr. Rhee</small></div></div>
+          <div class="evt"><span class="d">Jul 02</span><span class="dt n"></span><div><b>Refill gap begins</b><small>11 days · pharmacy delay</small></div></div>
+          <div class="evt"><span class="d">Jun 12</span><span class="dt"></span><div><b>Program start</b><small>226 lb · BMI 38.2</small></div></div>
+        </div>
+
+        <div class="sec"><div class="sec-l">Check-in history <span class="r">14 of 16</span></div>
+          <div class="kv"><span>Aug 19</span><b>191.4 · nausea mod</b></div>
+          <div class="kv"><span>Aug 12</span><b>191.0 · nausea mod</b></div>
+          <div class="kv"><span>Aug 05</span><b>191.8 · nausea mild</b></div>
+          <div class="kv"><span>Jul 29</span><b class="up">190.6 · none</b></div>
+          <div class="kv"><span>Jul 22</span><b class="up">193.2 · none</b></div>
+          <div class="kv"><span>Jul 15</span><b class="up">195.8 · none</b></div>
+        </div>
+
+        <div class="sec"><div class="sec-l">Medications</div>
+          <div class="kv"><span>Tirzepatide</span><b>7.5 mg weekly</b></div>
+          <div class="kv"><span>Levothyroxine</span><b>75 mcg daily</b></div>
+          <div class="kv"><span>Atorvastatin</span><b>20 mg daily</b></div>
+          <div class="kv"><span>Allergies</span><b>Sulfa</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS INBOX -->
+<section class="view" data-v="results">
+  <div class="phead"><div><h1>Lab results</h1><p>Four need review across the panel · one critical</p></div>
+    <div class="r">
+      <div class="seg"><button class="on">Needs review<span style="opacity:.6;margin-left:6px">4</span></button>
+        <button>Reviewed</button><button>All results</button></div>
+    </div></div>
+
+  <div class="pad pad-b">
+    <div class="sec"><div class="sec-l">Critical <span class="r">Acknowledge within 1 hour</span></div>
+      <table class="inbox"><tbody>
+        <tr data-open><td><span class="mark rs"></span></td>
+          <td class="ib-who"><b>Thomas Ryan</b><small>Hemoglobin A1c · was 7.8 in May, 6.9 in February</small></td>
+          <td class="ib-val hi">9.2<span>ref &lt;5.7</span></td>
+          <td class="ib-spk"><svg viewBox="0 0 88 24"><polyline points="0,18 44,12 88,3" fill="none" stroke="#A8443C" stroke-width="2"/></svg></td>
+          <td class="ib-age hot">41m</td><td class="ib-go">›</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="sec"><div class="sec-l">Abnormal</div>
+      <table class="inbox"><tbody>
+        <tr data-open><td><span class="mark"></span></td>
+          <td class="ib-who"><b>Diane Alvarez</b><small>ALT · fourth consecutive rise, 34 at baseline</small></td>
+          <td class="ib-val hi">78<span>ref 7–56</span></td>
+          <td class="ib-spk"><svg viewBox="0 0 88 24"><polyline points="0,19 29,16 59,10 88,3" fill="none" stroke="#A8443C" stroke-width="2"/></svg></td>
+          <td class="ib-age">1d</td><td class="ib-go">›</td></tr>
+        <tr data-open><td><span class="mark"></span></td>
+          <td class="ib-who"><b>Nina Patel</b><small>TSH · first elevation, 2.4 and 2.6 prior</small></td>
+          <td class="ib-val lo">6.1<span>ref 0.4–4.0</span></td>
+          <td class="ib-spk"><svg viewBox="0 0 88 24"><polyline points="0,16 44,15 88,5" fill="none" stroke="#946400" stroke-width="2"/></svg></td>
+          <td class="ib-age">2d</td><td class="ib-go">›</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="sec"><div class="sec-l">Routine</div>
+      <table class="inbox"><tbody>
+        <tr data-open><td><span class="mark gr"></span></td>
+          <td class="ib-who"><b>Marcus Webb</b><small>3-month panel · all in range, A1c 5.3 from 5.9</small></td>
+          <td class="ib-val ok">—<span>12 analytes</span></td>
+          <td class="ib-spk"><svg viewBox="0 0 88 24"><polyline points="0,5 44,12 88,18" fill="none" stroke="#1E3B33" stroke-width="2"/></svg></td>
+          <td class="ib-age">3h</td><td class="ib-go">›</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="sec"><div class="sec-l">Reviewed this week <span class="r">Acknowledged · no action pending</span></div>
+      <table class="inbox"><tbody>
+        <tr data-open><td><span class="mark nl"></span></td>
+          <td class="ib-who"><b>Robert Kim</b><small>6-month panel · A1c 5.2 from 6.4 · sent to patient Aug 19</small></td>
+          <td class="ib-val ok">5.2<span>ref &lt;5.7</span></td>
+          <td class="ib-spk"><svg viewBox="0 0 88 24"><polyline points="0,3 44,11 88,19" fill="none" stroke="#1E3B33" stroke-width="2"/></svg></td>
+          <td class="ib-age">3d</td><td class="ib-go">›</td></tr>
+        <tr data-open><td><span class="mark nl"></span></td>
+          <td class="ib-who"><b>Emily Vance</b><small>Repeat lipids · LDL 108 from 141 · sent to patient Aug 18</small></td>
+          <td class="ib-val lo">108<span>ref &lt;100</span></td>
+          <td class="ib-spk"><svg viewBox="0 0 88 24"><polyline points="0,4 44,12 88,17" fill="none" stroke="#1E3B33" stroke-width="2"/></svg></td>
+          <td class="ib-age">4d</td><td class="ib-go">›</td></tr>
+      </tbody></table>
+      <p class="caption">Reviewed results stay searchable here for 90 days, then live only on the patient chart.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RESULT DETAIL — patient scoped -->
+<section class="view" data-v="labdetail">
+  <div class="phead"><div>
+      <button class="back-l" data-back>‹ All results</button>
+      <h1>Diane Alvarez</h1><p>Lab history · 48 · Premium · week 16 · four panels since June 12</p></div>
+    <div class="r"><button class="btn g">Open chart</button><button class="btn g">Order labs</button>
+      <button class="btn">Acknowledge</button></div></div>
+
+  <div class="pad pad-b">
+    <div class="split">
+      <div>
+        <div class="sec"><div class="sec-l">Latest panel <span class="r">Aug 21 against Jul 24 · select a row for its trend</span></div>
+          <table class="delta-t">
+            <thead><tr><th>Analyte</th><th>Aug 21</th><th>Prior</th><th>Change</th><th class="spk">Since June</th></tr></thead>
+            <tbody>
+              <tr data-an="alt"><td class="an"><b>ALT</b><small>7–56 U/L</small></td>
+                <td class="cur hi">78</td><td class="prior">58</td><td class="dlt up">+20</td>
+                <td class="spk"><svg viewBox="0 0 82 22"><polyline points="0,17 27,15 55,9 82,2" fill="none" stroke="#A8443C" stroke-width="2"/></svg></td></tr>
+              <tr data-an="ast"><td class="an"><b>AST</b><small>10–40 U/L</small></td>
+                <td class="cur hi">44</td><td class="prior">36</td><td class="dlt up">+8</td>
+                <td class="spk"><svg viewBox="0 0 82 22"><polyline points="0,16 27,15 55,10 82,4" fill="none" stroke="#A8443C" stroke-width="2"/></svg></td></tr>
+              <tr data-an="a1c"><td class="an"><b>Hemoglobin A1c</b><small>4.0–5.6 %</small></td>
+                <td class="cur ok">5.5</td><td class="prior">5.6</td><td class="dlt dn">−0.1</td>
+                <td class="spk"><svg viewBox="0 0 82 22"><polyline points="0,3 27,8 55,12 82,14" fill="none" stroke="#1E3B33" stroke-width="2"/></svg></td></tr>
+              <tr data-an="glu"><td class="an"><b>Fasting glucose</b><small>70–99 mg/dL</small></td>
+                <td class="cur ok">92</td><td class="prior">94</td><td class="dlt dn">−2</td>
+                <td class="spk"><svg viewBox="0 0 82 22"><polyline points="0,3 27,10 55,13 82,15" fill="none" stroke="#1E3B33" stroke-width="2"/></svg></td></tr>
+              <tr data-an="ldl"><td class="an"><b>LDL cholesterol</b><small>&lt;100 mg/dL</small></td>
+                <td class="cur lo">119</td><td class="prior">126</td><td class="dlt dn">−7</td>
+                <td class="spk"><svg viewBox="0 0 82 22"><polyline points="0,3 27,8 55,13 82,16" fill="none" stroke="#1E3B33" stroke-width="2"/></svg></td></tr>
+              <tr data-an="tri"><td class="an"><b>Triglycerides</b><small>&lt;150 mg/dL</small></td>
+                <td class="cur ok">132</td><td class="prior">148</td><td class="dlt dn">−16</td>
+                <td class="spk"><svg viewBox="0 0 82 22"><polyline points="0,2 27,8 55,14 82,18" fill="none" stroke="#1E3B33" stroke-width="2"/></svg></td></tr>
+              <tr data-an="tsh"><td class="an"><b>TSH</b><small>0.4–4.0 mIU/L</small></td>
+                <td class="cur ok">2.7</td><td class="prior">2.5</td><td class="dlt flat">+0.2</td>
+                <td class="spk"><svg viewBox="0 0 82 22"><polyline points="0,12 27,10 55,11 82,9" fill="none" stroke="#99A1AD" stroke-width="2"/></svg></td></tr>
+              <tr data-an="lip"><td class="an"><b>Lipase</b><small>13–60 U/L</small></td>
+                <td class="cur ok">40</td><td class="prior">41</td><td class="dlt flat">−1</td>
+                <td class="spk"><svg viewBox="0 0 82 22"><polyline points="0,14 27,10 55,9 82,10" fill="none" stroke="#99A1AD" stroke-width="2"/></svg></td></tr>
+            </tbody>
+          </table>
+          <p class="caption">Two flags this panel, both trending the same direction. Everything metabolic is improving as expected.</p>
+        </div>
+
+        <div class="sec"><div class="sec-l">Full history <span class="r">Four panels · most recent first</span></div>
+          <div class="flow-wrap">
+          <table class="flow">
+            <thead><tr><th>Analyte</th><th class="now">Aug 21</th><th>Jul 24</th><th>Jul 03</th><th>Jun 12</th><th>Reference</th></tr></thead>
+            <tbody>
+              <tr class="watch"><td>ALT <span class="sub">liver</span></td>
+                <td class="now v-hi">78</td><td class="v-hi">58</td><td>41</td><td>34</td><td class="prior">7–56</td></tr>
+              <tr class="watch"><td>AST <span class="sub">liver</span></td>
+                <td class="now v-hi">44</td><td>36</td><td>30</td><td>28</td><td class="prior">10–40</td></tr>
+              <tr><td>Hemoglobin A1c</td>
+                <td class="now">5.5</td><td>5.6</td><td>5.8</td><td class="v-hi">6.1</td><td class="prior">4.0–5.6</td></tr>
+              <tr><td>Fasting glucose</td>
+                <td class="now">92</td><td>94</td><td>99</td><td class="v-hi">108</td><td class="prior">70–99</td></tr>
+              <tr><td>Total cholesterol</td>
+                <td class="now">188</td><td>196</td><td>210</td><td class="v-hi">224</td><td class="prior">&lt;200</td></tr>
+              <tr><td>LDL</td>
+                <td class="now v-lo">119</td><td class="v-lo">126</td><td class="v-hi">138</td><td class="v-hi">148</td><td class="prior">&lt;100</td></tr>
+              <tr><td>HDL</td>
+                <td class="now">51</td><td>49</td><td>46</td><td class="v-lo">44</td><td class="prior">&gt;50</td></tr>
+              <tr><td>Triglycerides</td>
+                <td class="now">132</td><td>148</td><td class="v-hi">172</td><td class="v-hi">198</td><td class="prior">&lt;150</td></tr>
+              <tr><td>TSH</td>
+                <td class="now">2.7</td><td>2.5</td><td>2.6</td><td>2.4</td><td class="prior">0.4–4.0</td></tr>
+              <tr><td>Creatinine</td>
+                <td class="now">0.9</td><td>0.9</td><td>0.8</td><td>0.8</td><td class="prior">0.6–1.1</td></tr>
+              <tr><td>eGFR</td>
+                <td class="now">86</td><td>85</td><td>88</td><td>88</td><td class="prior">&gt;60</td></tr>
+              <tr><td>Lipase</td>
+                <td class="now">40</td><td>41</td><td>38</td><td>32</td><td class="prior">13–60</td></tr>
+              <tr><td>Vitamin D</td>
+                <td class="now">31</td><td>28</td><td class="v-na">—</td><td class="v-lo">22</td><td class="prior">30–100</td></tr>
+              <tr><td>Weight <span class="sub">same day</span></td>
+                <td class="now">191.2</td><td>195.8</td><td>206.4</td><td>226.0</td><td class="prior">lb</td></tr>
+            </tbody>
+            <tfoot><tr><td colspan="6">Red rail marks an analyte on watch. Out-of-range values are coloured, borderline in amber.</td></tr></tfoot>
+          </table>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sec"><div class="sec-l">Context</div>
+          <div class="kv"><span>Weight change, same period</span><b>−34.8 lb</b></div>
+          <div class="kv"><span>Rate of loss</span><b class="dn">2.1 lb / week</b></div>
+          <div class="kv"><span>Current medication</span><b>Tirzepatide 7.5 mg</b></div>
+          <div class="kv"><span>Other hepatotoxic meds</span><b>Atorvastatin 20 mg</b></div>
+          <div class="kv"><span>Alcohol, last recorded</span><b>2–3 drinks / week</b></div>
+        </div>
+
+        <div class="sec"><div class="sec-l">Drafted explanation <span class="r">Not sent</span></div>
+          <div class="nf" style="margin-top:14px"><div class="nf-l"><span class="pre">Agent draft · needs your approval</span></div>
+            <textarea rows="8">Your labs came back and the metabolic picture keeps improving — A1c, cholesterol, and triglycerides are all better than they were in June.
+
+One liver enzyme, ALT, has been climbing at each draw and is now above the normal range. This can happen with rapid weight loss, but I want to look at it more closely rather than wait. I'd like to repeat it in four weeks and hold your dose steady until then.
+
+Nothing to change on your end. We'll talk it through at your visit.</textarea>
+            <div class="note-acts"><button class="btn g">Edit</button><button class="btn">Approve and send</button></div></div>
+        </div>
+
+        <div class="sec"><div class="sec-l">Actions</div>
+          <button class="row"><span class="mark"></span><div><b>Acknowledge</b><small>Marks reviewed, no patient message</small></div><span class="go">›</span></button>
+          <button class="row"><span class="mark"></span><div><b>Order repeat LFTs</b><small>Four weeks · Sep 18</small></div><span class="go">›</span></button>
+          <button class="row"><span class="mark"></span><div><b>Flag ALT for watch</b><small>Pins to chart header and future panels</small></div><span class="go">›</span></button>
+          <button class="row"><span class="mark rs"></span><div><b>Escalate</b><small>Hepatology referral</small></div><span class="go">›</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUEUE -->
+<section class="view" data-v="queue">
+  <div class="phead"><div><h1>Work queue</h1><p>Seventeen open · three past SLA</p></div>
+    <div class="r"><button class="btn g">Assign selected</button><button class="btn">New task</button></div></div>
+
+  <div class="alert">
+    <div><b>Three patients have paid but haven't booked</b>
+      <p>Enrolled two to five days ago with no appointment. Call today — this is the highest-value queue in the practice.</p></div>
+    <button class="btn sm" style="background:var(--rose)">Open list</button>
+  </div>
+
+  <div class="filters">
+    <button class="on">All<span class="n">17</span></button><button>Refills<span class="n">5</span></button>
+    <button>Prior auth<span class="n">3</span></button><button>Labs<span class="n">4</span></button>
+    <button>Billing<span class="n">2</span></button><button>Scheduling<span class="n">3</span></button>
+  </div>
+
+  <div class="pad pad-b">
+    <div class="sec"><div class="sec-l">Open tasks <span class="r">Sorted by age</span></div>
+      <button class="row"><span class="mark rs"></span><div><b>Payment failed — Premium plan</b><small>Karen Doyle · card declined twice · two retries left</small></div><span class="age hot">4d</span><span class="go">›</span></button>
+      <button class="row"><span class="mark rs"></span><div><b>Paid, no appointment booked</b><small>Michael Torres · enrolled Aug 18</small></div><span class="age hot">4d</span><span class="go">›</span></button>
+      <button class="row"><span class="mark rs"></span><div><b>Labs ordered, not drawn</b><small>Priya Raman · visit today at 1:30</small></div><span class="age hot">10d</span><span class="go">›</span></button>
+      <button class="row"><span class="mark"></span><div><b>Refill due in three days</b><small>Diane Alvarez · Empower · needs dose confirmation</small></div><span class="age">1d</span><span class="go">›</span></button>
+      <button class="row"><span class="mark"></span><div><b>Prior authorisation — Zepbound</b><small>Nina Patel · Aetna · agent drafted, awaiting review</small></div><span class="age">2d</span><span class="go">›</span></button>
+      <button class="row"><span class="mark"></span><div><b>Pharmacy transfer request</b><small>James Foley · moving to Hallandale</small></div><span class="age">1d</span><span class="go">›</span></button>
+      <button class="row"><span class="mark nl"></span><div><b>Message unassigned — billing</b><small>Tom Baxter · asking about superbill</small></div><span class="age">6h</span><span class="go">›</span></button>
+      <button class="row"><span class="mark nl"></span><div><b>No-show recovery</b><small>Alicia Grant · missed Aug 20 · one outreach sent</small></div><span class="age">2d</span><span class="go">›</span></button>
+      <button class="row"><span class="mark"></span><div><b>Refund pending approval</b><small>Sonia Reyes · partial month · needs second signature</small></div><span class="age">3d</span><span class="go">›</span></button>
+    </div>
+
+    <div class="sec"><div class="sec-l">At risk of churn <span class="r">9 patients</span></div>
+      <button class="row"><span class="mark rs"></span><div><b>No refill in 47 days</b><small>Gregory Nash · last dose estimated July 6</small></div><span class="age hot">47d</span><span class="go">›</span></button>
+      <button class="row"><span class="mark rs"></span><div><b>No check-in for 21 days</b><small>Emily Vance · was weekly through July</small></div><span class="age hot">21d</span><span class="go">›</span></button>
+      <button class="row"><span class="mark"></span><div><b>Plateau six weeks, no visit booked</b><small>Daniel Cho · last visit July 8</small></div><span class="age">6w</span><span class="go">›</span></button>
+      <button class="row"><span class="mark"></span><div><b>Two payment failures</b><small>Karen Doyle · plan lapses Aug 26</small></div><span class="age">4d</span><span class="go">›</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ROSTER -->
+<section class="view" data-v="roster">
+  <div class="phead"><div><h1>Patient roster</h1><p>142 active · seven paused</p></div>
+    <div class="r"><button class="btn g">Export</button><button class="btn">Message cohort</button></div></div>
+
+  <div class="filters">
+    <button class="on">All active<span class="n">142</span></button><button>Onboarding<span class="n">11</span></button>
+    <button>Titration<span class="n">48</span></button><button>Maintenance<span class="n">67</span></button>
+    <button>At risk<span class="n">9</span></button><button>Paused<span class="n">7</span></button>
+  </div>
+
+  <div class="pad pad-b">
+    <div class="sec"><div class="sec-l">Patients <span class="r">Next visit</span></div>
+      <button class="row"><span class="mark gr"></span><div><b>Robert Kim</b><small>Concierge · week 24 · 16.8% TBWL · maintenance</small></div><span class="age">Sep 8</span><span class="go">›</span></button>
+      <button class="row"><span class="mark"></span><div><b>Diane Alvarez</b><small>Premium · week 16 · 15.4% TBWL · plateau, adherence</small></div><span class="age hot">Today</span><span class="go">›</span></button>
+      <button class="row"><span class="mark gr"></span><div><b>Marcus Webb</b><small>Essential · week 8 · 6.1% TBWL · titrating</small></div><span class="age">Today</span><span class="go">›</span></button>
+      <button class="row"><span class="mark nl"></span><div><b>Sarah Mitchell</b><small>Premium · week 0 · first visit today</small></div><span class="age">Today</span><span class="go">›</span></button>
+      <button class="row"><span class="mark rs"></span><div><b>Gregory Nash</b><small>Essential · week 14 · no refill 47 days · at risk</small></div><span class="age hot">Overdue</span><span class="go">›</span></button>
+      <button class="row"><span class="mark"></span><div><b>Anna Cole</b><small>Premium · week 6 · severe nausea reported</small></div><span class="age">Today</span><span class="go">›</span></button>
+      <button class="row"><span class="mark gr"></span><div><b>Thomas Ryan</b><small>Concierge · week 11 · 8.4% TBWL · A1c critical</small></div><span class="age hot">Sep 2</span><span class="go">›</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- INSIGHTS -->
+<section class="view" data-v="biz">
+  <div class="phead"><div><h1>Practice insights</h1><p>August 2026 · month to date</p></div>
+    <div class="r"><button class="btn g">Last month</button><button class="btn g">Export</button></div></div>
+
+  <div class="figs">
+    <div class="fig"><div class="fig-v">$52.4k</div><div class="fig-l">MRR</div></div>
+    <div class="fig"><div class="fig-v">142</div><div class="fig-l">Active patients</div></div>
+    <div class="fig"><div class="fig-v">$368</div><div class="fig-l">Revenue / patient</div></div>
+    <div class="fig"><div class="fig-v">4.2%</div><div class="fig-l">Monthly churn</div></div>
+    <div class="fig"><div class="fig-v">11.8%</div><div class="fig-l">Mean 6-mo TBWL</div></div>
+  </div>
+
+  <div class="pad pad-b">
+    <div class="split">
+      <div>
+        <div class="sec"><div class="sec-l">Weight loss by cohort <span class="r">% total body weight at six months</span></div>
+          <div class="bars">
+            <div class="bar"><b>9.1%</b><i style="height:52%"></i><small>Essential</small></div>
+            <div class="bar"><b>12.4%</b><i class="g" style="height:71%"></i><small>Premium</small></div>
+            <div class="bar"><b>14.6%</b><i class="g" style="height:84%"></i><small>Concierge</small></div>
+            <div class="bar"><b>10.2%</b><i style="height:58%"></i><small>BMI 27–32</small></div>
+            <div class="bar"><b>13.8%</b><i style="height:79%"></i><small>BMI 33+</small></div>
+          </div>
+          <p class="caption">Higher-touch tiers show meaningfully better outcomes. This is the strongest argument for Premium in the sales conversation, and the number no off-the-shelf platform will give you.</p>
+        </div>
+
+        <div class="sec"><div class="sec-l">Revenue by tier</div>
+          <div class="kv"><span>Essential · 51 patients</span><b>$10,149</b></div>
+          <div class="kv"><span>Premium · 68 patients</span><b>$23,732</b></div>
+          <div class="kv"><span>Concierge · 23 patients</span><b>$13,777</b></div>
+          <div class="kv"><span>One-time — labs and fees</span><b>$4,780</b></div>
+          <div class="kv"><span>Refunds and write-offs</span><b class="dn">−$1,120</b></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sec"><div class="sec-l">Funnel <span class="r">Last 30 days</span></div>
+          <div class="kv"><span>Quiz started</span><b>412</b></div>
+          <div class="kv"><span>Qualified</span><b>287 · 70%</b></div>
+          <div class="kv"><span>Plan selected</span><b class="dn">134 · 47%</b></div>
+          <div class="kv"><span>Paid</span><b>89 · 66%</b></div>
+          <div class="kv"><span>Booked first visit</span><b class="up">86 · 97%</b></div>
+          <div class="kv"><span>Attended</span><b>81 · 94%</b></div>
+          <p class="caption">The drop from qualified to plan selected is the one worth working. Test where medication cost appears on the plan cards.</p>
+        </div>
+
+        <div class="sec"><div class="sec-l">Agent activity <span class="r">Last 30 days</span></div>
+          <div class="kv"><span>Pre-visit briefs drafted</span><b>168</b></div>
+          <div class="kv"><span>Prior auths assembled</span><b>22</b></div>
+          <div class="kv"><span>Lab explanations drafted</span><b>91</b></div>
+          <div class="kv"><span>Approved without edit</span><b class="up">78%</b></div>
+          <div class="kv"><span>Overridden</span><b>9%</b></div>
+          <div class="kv"><span>Pending your review</span><b>6</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONFIG -->
+<section class="view" data-v="config">
+  <div class="phead"><div><h1>Configuration</h1><p>Change policy without an engineer</p></div></div>
+
+  <div class="pad pad-b">
+    <div class="split">
+      <div>
+        <div class="sec"><div class="sec-l">Plans and pricing <button class="r">Edit</button></div>
+          <div class="kv"><span>Essential</span><b>$199 / month</b></div>
+          <div class="kv"><span>Premium</span><b>$349 / month</b></div>
+          <div class="kv"><span>Concierge</span><b>$599 / month</b></div>
+          <div class="kv"><span>Baseline lab panel</span><b>$89 one-time</b></div>
+          <div class="kv"><span>Annual discount</span><b>Two months free</b></div>
+        </div>
+
+        <div class="sec"><div class="sec-l">Titration protocol <span class="r">Tirzepatide</span></div>
+          <div class="kv"><span>Starting dose</span><b>2.5 mg</b></div>
+          <div class="kv"><span>Minimum weeks at dose</span><b>4</b></div>
+          <div class="kv"><span>Hold if side effects</span><b>Moderate or above</b></div>
+          <div class="kv"><span>Hold if adherence below</span><b>90%</b></div>
+          <div class="kv"><span>Maximum dose</span><b>15 mg</b></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sec"><div class="sec-l">Scheduling rules <button class="r">Edit</button></div>
+          <div class="kv"><span>New patient visit</span><b>45 min</b></div>
+          <div class="kv"><span>Follow-up</span><b>20 min</b></div>
+          <div class="kv"><span>Cancellation window</span><b>24 hours</b></div>
+          <div class="kv"><span>Late cancel fee</span><b>$50</b></div>
+          <div class="kv"><span>Booking lead time</span><b>2 hours minimum</b></div>
+        </div>
+
+        <div class="sec"><div class="sec-l">Care team <button class="r">Manage</button></div>
+          <div class="kv"><span>Dr. Libby Rhee</span><b>CT, NY, NJ, MI</b></div>
+          <div class="kv"><span>Panel cap</span><b>180 patients</b></div>
+          <div class="kv"><span>Jenny M.</span><b>Coordinator · ops queue</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+document.querySelectorAll('.nav').forEach(n=>n.onclick=()=>{
+  document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('on',x===n));
+  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.dataset.v===n.dataset.v));
+  window.scrollTo({top:0});
+});
+function show(v,navKey){
+  document.querySelectorAll('.view').forEach(x=>x.classList.toggle('on',x.dataset.v===v));
+  document.querySelectorAll('.nav').forEach(n=>n.classList.toggle('on',n.dataset.v===(navKey||v)));
+  window.scrollTo({top:0});
+}
+document.querySelectorAll('.appt').forEach(r=>r.onclick=()=>show('chart'));
+document.querySelectorAll('[data-open]').forEach(r=>r.onclick=()=>show('labdetail','results'));
+document.querySelectorAll('[data-back]').forEach(b=>b.onclick=()=>show('results'));
+document.querySelectorAll('.view[data-v="today"] .row, .view[data-v="queue"] .row, .view[data-v="roster"] .row')
+  .forEach(r=>r.onclick=()=>show('chart'));
+document.querySelectorAll('.filters,.tmpl,.seg,.pick').forEach(g=>{
+  const all=[...g.querySelectorAll('button')];
+  all.forEach(b=>b.onclick=()=>{all.forEach(x=>x.classList.remove('on'));b.classList.add('on')});
+});
+
+/* ---- inline analyte trend inside Latest panel ---- */
+const AN={
+ alt:{n:'ALT',u:'U/L',lo:7,hi:56,v:[34,41,58,78],
+   note:'Above range and rising at every draw. Crossed the upper limit between July and August, alongside 2.1 lb per week of loss and atorvastatin on board.'},
+ ast:{n:'AST',u:'U/L',lo:10,hi:40,v:[28,30,36,44],
+   note:'Following ALT upward, crossing the limit at this draw. The two moving together supports a hepatic picture rather than lab error.'},
+ a1c:{n:'Hemoglobin A1c',u:'%',lo:4.0,hi:5.6,v:[6.1,5.8,5.6,5.5],
+   note:'Started above range and has fallen at every draw. Now comfortably normal — out of the prediabetes band since July.'},
+ glu:{n:'Fasting glucose',u:'mg/dL',lo:70,hi:99,v:[108,99,94,92],
+   note:'Normalised by the second draw and holding. Tracks the A1c improvement as expected.'},
+ ldl:{n:'LDL cholesterol',u:'mg/dL',lo:0,hi:100,v:[148,138,126,119],
+   note:'Falling steadily but still above target. On atorvastatin 20 mg — worth revisiting the dose at the next visit.'},
+ tri:{n:'Triglycerides',u:'mg/dL',lo:0,hi:150,v:[198,172,148,132],
+   note:'Back into range as of July and continuing down. One of the fastest responders to weight loss.'},
+ tsh:{n:'TSH',u:'mIU/L',lo:0.4,hi:4.0,v:[2.4,2.6,2.5,2.7],
+   note:'Stable across all four draws with no meaningful drift. On levothyroxine 75 mcg — no dose change indicated.'},
+ lip:{n:'Lipase',u:'U/L',lo:13,hi:60,v:[32,38,41,40],
+   note:'Rose modestly early then plateaued, well within range. Worth watching on a GLP-1 but not actionable here.'}
+};
+const DATES=['Jun 12','Jul 03','Jul 24','Aug 21'];
+
+function trendSVG(k){
+  const a=AN[k],W=560,H=150,PL=8,PR=8,PT=22,PB=14;
+  const all=a.v.concat([a.lo,a.hi]);
+  let min=Math.min(...all),max=Math.max(...all);
+  const pad=(max-min)*0.18||1; min-=pad; max+=pad;
+  const y=v=>PT+(H-PT-PB)*(1-(v-min)/(max-min));
+  const x=i=>PL+(W-PL-PR)*(i/(a.v.length-1));
+  const yhi=y(a.hi), ylo=y(a.lo);
+  const last=a.v[a.v.length-1];
+  const bad=last>a.hi||last<a.lo;
+  const stroke=bad?'#A8443C':'#1E3B33';
+  const pts=a.v.map((v,i)=>x(i)+','+y(v)).join(' ');
+  let dots=a.v.map((v,i)=>{
+    const r=(i===a.v.length-1)?5.5:4, f=(i===a.v.length-1)?stroke:'#fff';
+    return `<circle cx="${x(i)}" cy="${y(v)}" r="${r}" fill="${f}" stroke="${(i===a.v.length-1)?'#fff':stroke}" stroke-width="2.2"/>`;
+  }).join('');
+  let labels=a.v.map((v,i)=>
+    `<text x="${x(i)}" y="${y(v)-12}" font-size="10.5" fill="${(i===a.v.length-1)?stroke:'#99A1AD'}"
+      font-family="IBM Plex Mono" text-anchor="middle">${v}</text>`).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="${a.n} across four draws">
+    <rect x="0" y="${yhi}" width="${W}" height="${Math.max(0,ylo-yhi)}" fill="#E7EFEA" opacity=".5"/>
+    <line x1="0" y1="${yhi}" x2="${W}" y2="${yhi}" stroke="#1E3B33" stroke-dasharray="3 4" opacity=".45"/>
+    <text x="3" y="${yhi-5}" font-size="9.5" fill="#1E3B33" font-family="Poppins">upper ${a.hi}</text>
+    <polyline points="${pts}" fill="none" stroke="${stroke}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+    ${dots}${labels}</svg>`;
+}
+
+function openTrend(row){
+  const tb=row.parentNode, k=row.dataset.an, a=AN[k];
+  const wasSel=row.classList.contains('sel');
+  tb.querySelectorAll('.trendrow').forEach(r=>r.remove());
+  tb.querySelectorAll('tr[data-an]').forEach(r=>r.classList.remove('sel'));
+  if(wasSel) return;
+  row.classList.add('sel');
+  const tr=document.createElement('tr');
+  tr.className='trendrow';
+  tr.innerHTML=`<td colspan="5"><div class="tr-in">
+      <div class="tr-hd"><b>${a.n}</b><span>reference ${a.lo}–${a.hi} ${a.u}</span>
+        <em>Four draws · Jun 12 to Aug 21</em></div>
+      ${trendSVG(k)}
+      <div class="tr-ax">${DATES.map(d=>`<span>${d}</span>`).join('')}</div>
+      <p class="tr-note">${a.note}</p></div></td>`;
+  row.after(tr);
+}
+document.querySelectorAll('.delta-t tr[data-an]').forEach(r=>r.onclick=()=>openTrend(r));
+const first=document.querySelector('.delta-t tr[data-an]');
+if(first) openTrend(first);
+</script>
+</body>
+</html>

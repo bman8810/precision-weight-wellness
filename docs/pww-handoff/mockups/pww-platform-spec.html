@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PW+W Platform Spec — features & architecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E9EDF1; --surface:#FFF; --surface-2:#F5F7F9;
+  --ink:#0F1C26; --ink-2:#54666F; --ink-3:#8496A0;
+  --line:#D2DAE1; --line-2:#E3E9EE;
+  --free:#0D7268; --partial:#946400; --build:#9B2C6F; --buy:#39479B;
+  --free-bg:#E2F0ED; --partial-bg:#F5EDD9; --build-bg:#F6E5EF; --buy-bg:#E5E8F6;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:15px;line-height:1.5}
+.wrap{max-width:1400px;margin:0 auto;padding:0 20px 90px}
+
+.mast{padding:40px 0 20px}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-2);margin:0 0 12px}
+h1{font-family:"Archivo",sans-serif;font-variation-settings:'wdth' 118,'wght' 760;
+  font-size:clamp(26px,4.4vw,44px);line-height:1;letter-spacing:-.02em;margin:0 0 14px;text-transform:uppercase}
+.thesis{max-width:62ch;color:var(--ink-2);margin:0;font-size:15px}
+
+/* tabs */
+.tabs{display:flex;gap:0;border-bottom:1.5px solid var(--ink);margin-top:26px}
+.tab{font-family:"Archivo",sans-serif;font-variation-settings:'wdth' 112,'wght' 680;
+  font-size:13px;letter-spacing:.06em;text-transform:uppercase;
+  background:none;border:0;padding:11px 18px;cursor:pointer;color:var(--ink-3);
+  border-bottom:3px solid transparent;margin-bottom:-1.5px}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--ink);border-bottom-color:var(--ink)}
+.tab:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
+.panel{display:none}
+.panel.on{display:block}
+
+/* controls */
+.controls{position:sticky;top:0;z-index:20;background:var(--paper);
+  padding:14px 0 11px;border-bottom:1px solid var(--line)}
+.ctrl-line{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctrl-line+.ctrl-line{margin-top:9px}
+.search{flex:1 1 220px;min-width:180px;padding:8px 11px;border:1px solid var(--line);
+  border-radius:3px;background:var(--surface);font:inherit;font-size:14px;color:var(--ink)}
+.search:focus{outline:2px solid var(--ink);outline-offset:-1px}
+select{padding:8px 10px;border:1px solid var(--line);border-radius:3px;background:var(--surface);
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.06em;
+  text-transform:uppercase;padding:6px 9px;border:1px solid var(--line);border-radius:2px;
+  background:var(--surface);color:var(--ink-2);cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+.chip:hover{border-color:var(--ink-3);color:var(--ink)}
+.dot{width:8px;height:8px;border-radius:50%;flex:none}
+.chip.on{color:#fff;border-color:transparent}
+.chip.on .dot{background:rgba(255,255,255,.85)!important}
+.chip.on[data-s=medplum]{background:var(--free)} .chip.on[data-s=partial]{background:var(--partial)}
+.chip.on[data-s=build]{background:var(--build)} .chip.on[data-s=buy]{background:var(--buy)}
+.ctrl-label{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-3)}
+.reset{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.06em;
+  text-transform:uppercase;background:none;border:0;border-bottom:1px solid var(--ink-3);
+  color:var(--ink-2);cursor:pointer;padding:2px 0}
+.reset:hover{color:var(--ink);border-color:var(--ink)}
+.count{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-2);margin-left:auto}
+
+/* table */
+.tbl{width:100%;border-collapse:collapse;background:var(--surface);
+  border:1px solid var(--line);border-top:0;margin-top:0}
+.tbl thead th{position:sticky;top:88px;z-index:10;background:var(--ink);color:#fff;
+  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  text-align:left;padding:9px 12px;font-weight:500}
+.tbl td{padding:13px 12px;border-bottom:1px solid var(--line-2);vertical-align:top;font-size:13.5px}
+.tbl tbody tr:hover{background:var(--surface-2)}
+.c-cat{width:106px} .c-sub{width:112px} .c-feat{width:186px} .c-desc{min-width:280px}
+.c-vend{width:150px} .c-cost{width:74px} .c-eff{width:62px}
+.cat-cell{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink-2)}
+.sub-cell{font-size:12px;color:var(--ink-2)}
+.feat-cell{font-weight:600;letter-spacing:-.005em;position:relative;padding-left:14px!important}
+.feat-cell::before{content:"";position:absolute;left:0;top:13px;bottom:13px;width:3px;border-radius:2px}
+.s-medplum .feat-cell::before{background:var(--free)} .s-partial .feat-cell::before{background:var(--partial)}
+.s-build .feat-cell::before{background:var(--build)} .s-buy .feat-cell::before{background:var(--buy)}
+.tag{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.09em;text-transform:uppercase;
+  padding:2px 5px;border-radius:2px;display:inline-block;margin-top:5px;font-weight:500}
+.s-medplum .tag{background:var(--free-bg);color:var(--free)} .s-partial .tag{background:var(--partial-bg);color:var(--partial)}
+.s-build .tag{background:var(--build-bg);color:var(--build)} .s-buy .tag{background:var(--buy-bg);color:var(--buy)}
+.desc-cell ul{margin:0;padding-left:16px}
+.desc-cell li{margin-bottom:4px;color:var(--ink-2);line-height:1.42;font-size:13px}
+.desc-cell li:last-child{margin-bottom:0}
+.vend-cell{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink);line-height:1.4}
+.pill{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;
+  padding:3px 7px;border-radius:2px;border:1px solid var(--line);color:var(--ink-2);white-space:nowrap}
+.pill.Free{background:#E2F0ED;color:#0D7268;border-color:transparent}
+.pill.Paid{background:#EFE7F0;color:#7A3080;border-color:transparent}
+.pill.Mixed{background:#EDEFF2;color:#4A5C66;border-color:transparent}
+.eff{font-family:"Archivo",sans-serif;font-variation-settings:'wdth' 110,'wght' 720;
+  font-size:15px;letter-spacing:.02em}
+.eff.L{color:#0D7268} .eff.M{color:#946400} .eff.H{color:#9B2C6F}
+
+.mcards{display:none}
+.empty{padding:40px 18px;text-align:center;color:var(--ink-2);background:var(--surface);border:1px solid var(--line)}
+.empty b{display:block;color:var(--ink);margin-bottom:5px}
+
+/* ---------- architecture ---------- */
+.arch{padding-top:26px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:26px;
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+
+.spine{background:var(--surface);border:1px solid var(--line);padding:20px;margin-bottom:34px}
+.spine-title{font-family:"Archivo",sans-serif;font-variation-settings:'wdth' 115,'wght' 700;
+  font-size:14px;letter-spacing:.05em;text-transform:uppercase;margin:0 0 4px}
+.spine-note{font-size:12.5px;color:var(--ink-3);margin:0 0 20px}
+.tier{display:grid;grid-template-columns:118px 1fr;gap:14px;align-items:stretch;
+  padding:12px 0;border-top:1px solid var(--line-2)}
+.tier:first-of-type{border-top:0}
+.tier-l{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-3);padding-top:8px}
+.tier-boxes{display:flex;flex-wrap:wrap;gap:8px}
+.tbox{border:1px solid var(--line);border-radius:3px;padding:9px 12px;background:var(--surface-2);min-width:130px}
+.tbox b{display:block;font-size:13px;font-weight:600;letter-spacing:-.005em}
+.tbox span{display:block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--ink-3);margin-top:3px}
+.tbox.medplum{border-left:3px solid var(--free)} .tbox.build{border-left:3px solid var(--build)}
+.tbox.buy{border-left:3px solid var(--buy)} .tbox.partial{border-left:3px solid var(--partial)}
+.flowline{text-align:center;font-family:"IBM Plex Mono",monospace;font-size:16px;color:var(--ink-3);line-height:1;padding:2px 0}
+
+.capgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
+.cap{background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column}
+.cap-head{padding:12px 14px;border-bottom:1.5px solid var(--ink);display:flex;align-items:baseline;gap:8px}
+.cap-head h4{font-family:"Archivo",sans-serif;font-variation-settings:'wdth' 114,'wght' 720;
+  font-size:14px;margin:0;letter-spacing:-.005em}
+.cap-head span{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--ink-3);margin-left:auto}
+.cap-body{padding:10px 14px 14px}
+.subgroup{margin-top:12px}
+.subgroup:first-child{margin-top:2px}
+.sub-l{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:7px}
+.fboxes{display:flex;flex-wrap:wrap;gap:6px}
+.fbox{border:1px solid var(--line-2);border-radius:3px;padding:6px 9px;background:var(--surface-2);
+  border-left-width:3px;border-left-style:solid;max-width:100%}
+.fbox.medplum{border-left-color:var(--free)} .fbox.partial{border-left-color:var(--partial)}
+.fbox.build{border-left-color:var(--build)} .fbox.buy{border-left-color:var(--buy)}
+.fbox b{display:block;font-size:11.5px;font-weight:600;line-height:1.3}
+.fbox span{display:block;font-family:"IBM Plex Mono",monospace;font-size:9.5px;color:var(--ink-3);margin-top:2px}
+
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);
+  font-size:12.5px;color:var(--ink-3);max-width:78ch}
+
+@media (max-width:1000px){
+  .tbl{display:none}
+  .mcards{display:block;background:var(--surface);border:1px solid var(--line);border-top:0}
+  .mcard{padding:14px;border-bottom:1px solid var(--line-2);border-left:3px solid}
+  .mcard.s-medplum{border-left-color:var(--free)} .mcard.s-partial{border-left-color:var(--partial)}
+  .mcard.s-build{border-left-color:var(--build)} .mcard.s-buy{border-left-color:var(--buy)}
+  .mcard h5{margin:0 0 3px;font-size:14.5px}
+  .mpath{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+  .mcard ul{margin:0 0 10px;padding-left:16px}
+  .mcard li{font-size:13px;color:var(--ink-2);margin-bottom:3px}
+  .mmeta{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .mmeta .vend-cell{width:100%}
+  .tier{grid-template-columns:1fr;gap:6px}
+  .tbl thead th{top:0}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <p class="eyebrow">Precision Weight + Wellness · Healthie replacement · Medplum substrate</p>
+  <h1>Platform spec</h1>
+  <p class="thesis">Every capability, what it is, who supplies it, and what it costs to stand up. Colour marks the source: teal is included with Medplum, ochre means the FHIR resource exists but the capability doesn't, magenta is yours to build, indigo is a vendor.</p>
+</header>
+
+<div class="tabs" role="tablist">
+  <button class="tab on" role="tab" data-panel="features">Feature table</button>
+  <button class="tab" role="tab" data-panel="arch">Architecture</button>
+</div>
+
+<!-- ================= FEATURES ================= -->
+<div class="panel on" id="features">
+  <div class="controls">
+    <div class="ctrl-line">
+      <input class="search" id="q" type="search" placeholder="Search features, vendors, descriptions…" aria-label="Search">
+      <select id="catSel" aria-label="Filter by category"><option value="">All categories</option></select>
+      <select id="costSel" aria-label="Filter by cost">
+        <option value="">Free & paid</option><option>Free</option><option>Paid</option><option>Mixed</option>
+      </select>
+      <select id="effSel" aria-label="Filter by effort">
+        <option value="">All effort</option><option value="L">Low effort</option>
+        <option value="M">Medium effort</option><option value="H">High effort</option>
+      </select>
+      <button class="reset" id="reset">Clear</button>
+    </div>
+    <div class="ctrl-line">
+      <span class="ctrl-label">Source</span>
+      <div class="chips" id="schips"></div>
+      <span class="count" id="count"></span>
+    </div>
+  </div>
+
+  <table class="tbl">
+    <thead><tr>
+      <th class="c-cat">Category</th><th class="c-sub">Sub-category</th><th class="c-feat">Feature</th>
+      <th class="c-desc">Description</th><th class="c-vend">Vendor / tool / OSS</th>
+      <th class="c-cost">Cost</th><th class="c-eff">Effort</th>
+    </tr></thead>
+    <tbody id="tbody"></tbody>
+  </table>
+  <div class="mcards" id="mcards"></div>
+</div>
+
+<!-- ================= ARCHITECTURE ================= -->
+<div class="panel arch" id="arch">
+  <div class="legend">
+    <span><i class="dot" style="background:#0D7268"></i>Medplum</span>
+    <span><i class="dot" style="background:#946400"></i>Partial</span>
+    <span><i class="dot" style="background:#9B2C6F"></i>Build</span>
+    <span><i class="dot" style="background:#39479B"></i>Buy</span>
+  </div>
+
+  <div class="spine">
+    <h3 class="spine-title">Runtime topology</h3>
+    <p class="spine-note">Medplum Cloud holds PHI and is the system of record. Vercel Postgres holds the non-clinical app domain and the analytics schema. Nothing writes clinical data outside Medplum.</p>
+
+    <div class="tier"><div class="tier-l">Clients</div><div class="tier-boxes">
+      <div class="tbox build"><b>Patient portal</b><span>Next.js · Vercel</span></div>
+      <div class="tbox build"><b>Clinical console</b><span>Next.js · Medplum React</span></div>
+      <div class="tbox build"><b>Staff work queue</b><span>Next.js</span></div>
+      <div class="tbox buy"><b>Admin console</b><span>Medplum app</span></div>
+    </div></div>
+    <div class="flowline">↕</div>
+
+    <div class="tier"><div class="tier-l">Services</div><div class="tier-boxes">
+      <div class="tbox build"><b>Scheduling engine</b><span>Python · FastAPI</span></div>
+      <div class="tbox build"><b>Billing service</b><span>Python · Stripe SDK</span></div>
+      <div class="tbox build"><b>Protocol engine</b><span>Python · Hatchet</span></div>
+      <div class="tbox build"><b>MCP server</b><span>Python · MCP SDK</span></div>
+      <div class="tbox build"><b>Lab & Rx router</b><span>Python</span></div>
+    </div></div>
+    <div class="flowline">↕</div>
+
+    <div class="tier"><div class="tier-l">Orchestration</div><div class="tier-boxes">
+      <div class="tbox buy"><b>Hatchet</b><span>durable workflows · Postgres-backed</span></div>
+      <div class="tbox medplum"><b>Medplum Bots</b><span>single-shot TS triggers</span></div>
+      <div class="tbox medplum"><b>FHIR Subscriptions</b><span>event fan-out</span></div>
+    </div></div>
+    <div class="flowline">↕</div>
+
+    <div class="tier"><div class="tier-l">Data</div><div class="tier-boxes">
+      <div class="tbox medplum"><b>Medplum Cloud</b><span>FHIR R4 · PHI · audit · Binary</span></div>
+      <div class="tbox build"><b>Vercel Postgres</b><span>schema: app — tiers, leads, config</span></div>
+      <div class="tbox build"><b>Vercel Postgres</b><span>schema: analytics — dbt models</span></div>
+    </div></div>
+    <div class="flowline">↕</div>
+
+    <div class="tier"><div class="tier-l">External</div><div class="tier-boxes">
+      <div class="tbox buy"><b>Stripe</b><span>money system of record</span></div>
+      <div class="tbox buy"><b>DoseSpot</b><span>e-Rx · EPCS</span></div>
+      <div class="tbox buy"><b>Health Gorilla</b><span>labs</span></div>
+      <div class="tbox buy"><b>Twilio · SendGrid</b><span>SMS · email</span></div>
+      <div class="tbox buy"><b>Zoom / Daily</b><span>video visits</span></div>
+      <div class="tbox buy"><b>CoverMyMeds · Stedi</b><span>prior auth · eligibility</span></div>
+    </div></div>
+  </div>
+
+  <div class="capgrid" id="capgrid"></div>
+</div>
+
+<footer id="foot"></footer>
+</div>
+
+<script>
+const S={medplum:{l:'Medplum',c:'#0D7268'},partial:{l:'Partial',c:'#946400'},
+         build:{l:'Build',c:'#9B2C6F'},buy:{l:'Buy',c:'#39479B'}};
+
+// [category, subcategory, feature, [bullets], vendor, cost, effort, source]
+const R=[
+["Platform","Core","FHIR datastore & search",["R4 resources over REST and GraphQL with a real search layer","Replaces the entire clinical data model you would otherwise own"],"Medplum","Mixed","L","medplum"],
+["Platform","Core","Terminology service",["LOINC, SNOMED and RxNorm lookup with ValueSet expansion","Avoids standing up your own code server"],"Medplum","Free","L","medplum"],
+["Platform","Core","Sidecar app database",["Non-clinical domain: tiers, pricing, protocol config, leads","Keep out of FHIR — Basic-plus-extensions searches badly"],"Vercel Postgres (Neon)","Mixed","M","build"],
+["Platform","Core","Object storage",["Documents, lab PDFs, signed consents, scribe audio","Medplum Binary handles this natively with access control"],"Medplum / S3","Mixed","L","medplum"],
+["Platform","Identity & access","OAuth2 / OIDC / SMART",["Patient, staff and machine auth with SMART scopes","Matters the day a third-party clinical app connects"],"Medplum","Free","L","medplum"],
+["Platform","Identity & access","MFA, SCIM, session policy",["Configuration rather than code","Required for any credible security review"],"Medplum","Free","L","medplum"],
+["Platform","Identity & access","Row & field-level RBAC",["Engine included; one policy per role is your work","Patient, MA, NP, physician, and one per agent"],"Medplum AccessPolicy","Free","M","medplum"],
+["Platform","Identity & access","Break-glass access",["Policy override plus loud alerting and mandatory reason","Assemble from the primitives — not shipped as a feature"],"Medplum + custom","Free","L","partial"],
+["Platform","Identity & access","Audit log",["Every read and write, human or agent, immutably","The foundation of the agent safety story"],"Medplum AuditEvent","Free","L","medplum"],
+["Platform","Identity & access","Audit review UI",["A screen a compliance reviewer can actually use","The log exists; the interface does not"],"React","Free","L","build"],
+["Platform","Hosting","Cloud vs self-host",["Start on Medplum Cloud for the BAA and SOC 2","Apache 2.0 keeps self-host as an exit, not an obligation"],"Medplum Cloud","Paid","M","buy"],
+["Platform","Hosting","BAA coverage map",["Every vendor listed here needs one, tracked with renewal dates","Vercel signs only on Enterprise — resolve before PHI lands there"],"—","Free","L","build"],
+
+["Scheduling","Availability","Availability engine",["Generates bookable slots from provider hours, blackouts and visit type","Medplum stores Slot; nothing produces them. Largest single line item"],"Python · FastAPI","Free","H","build"],
+["Scheduling","Availability","Licensure gating",["Patient state of residence at visit time gates who can be booked","Belongs in the availability query, not a policy document"],"Python","Free","M","build"],
+["Scheduling","Availability","Timezone & DST handling",["Correct across provider, patient and server zones","Unglamorous, and the worst bug you will ship if skipped"],"pendulum / Temporal API","Free","L","build"],
+["Scheduling","Availability","Panel & capacity caps",["Provider panel size limits and per-location capacity","Feeds the multi-location model"],"Python","Free","L","build"],
+["Scheduling","Booking","Appointment types & rules",["Duration, modality, buffer, lead time, cancellation window","Make it data so policy changes without a deploy"],"Python + rules DSL","Free","M","build"],
+["Scheduling","Booking","Patient booking flow",["Self-service scheduling with real-time availability","Your front door — where conversion is won or lost"],"Next.js","Free","M","build"],
+["Scheduling","Booking","Double-book prevention",["Two patients, one slot, same second","Solve at the database with advisory locks, not in app logic"],"Postgres","Free","L","build"],
+["Scheduling","Booking","Visit prep gating",["Labs within 7 days, weight logged, fasting confirmed","Block or warn at time of booking"],"Python","Free","L","build"],
+["Scheduling","Lifecycle","Reminder cascade",["Multi-channel with confirm and reschedule deep links","Directly moves no-show rate"],"Twilio + SendGrid","Paid","M","build"],
+["Scheduling","Lifecycle","Waitlist & auto-fill",["Offers cancelled slots to the waitlist automatically","Recovers revenue from late cancels — high return"],"Python + Twilio","Paid","M","build"],
+["Scheduling","Lifecycle","No-show enforcement",["Fires the fee and flags the pattern without staff involvement","Policy is worthless unless the charge is automatic"],"Python + Stripe","Paid","L","build"],
+["Scheduling","Lifecycle","Video visits",["Waiting room, in-visit chat, recording controls","Commodity — choose on BAA terms and UX, not features"],"Zoom / Daily / Twilio","Paid","L","buy"],
+
+["Payments","Billing","Subscription tiers",["JLW, Essential, Premium, Concierge as Stripe products","Stripe is system of record for money; mirror only status into FHIR"],"Stripe Billing","Paid","M","buy"],
+["Payments","Billing","Pause, proration, tier change",["Mid-cycle upgrades, downgrades and holds","Pauses are not an edge case in weight loss — travel and plateaus"],"Stripe + Python","Paid","M","build"],
+["Payments","Billing","Card on file & dunning",["Retry ladders and recovery emails out of the box","Meaningful recovered revenue for near-zero effort"],"Stripe Billing","Paid","L","buy"],
+["Payments","Billing","One-time charges",["Labs, med fills, extra visits, no-show fees","Maps to ChargeItem for clinical context"],"Stripe","Paid","L","buy"],
+["Payments","Billing","Package credits",["Twelve-visit blocks with balance tracking and expiry","Not a Stripe primitive — lives in your app schema"],"Postgres + Stripe","Mixed","M","build"],
+["Payments","Patient financial","Superbills & receipts",["Itemised CPT and ICD so cash-pay patients self-submit","Real perceived value at this price point"],"Python + WeasyPrint","Free","M","build"],
+["Payments","Patient financial","HSA / FSA documentation",["Receipts formatted for substantiation requests","Removes a recurring support burden"],"Python","Free","L","build"],
+["Payments","Patient financial","Access gating on payment",["Failed payment, grace window, then defined consequences","Encode the rule once rather than deciding case by case"],"Python","Free","L","build"],
+["Payments","Revenue ops","Refund & write-off approvals",["Two-person rule on anything reducing revenue","Small control, prevents a whole class of problem"],"React + Stripe","Free","L","build"],
+["Payments","Revenue ops","Revenue by service line",["Splits recognised revenue across programmes and locations","Do not try to derive this from Stripe's own reports"],"dbt + Postgres","Free","M","build"],
+
+["Intake","Forms","Dynamic intake builder",["Questionnaire authoring with a React renderer","Genuinely strong out of the box — one of Medplum's best pieces"],"Medplum","Free","L","medplum"],
+["Intake","Forms","Conditional branching",["enableWhen covers simple cases only","Complex clinical branching needs a layer on top"],"Medplum + custom","Free","L","partial"],
+["Intake","Consent","E-signature",["Signed artifact with a real audit trail, not a rendered image","Required for consents and financial responsibility"],"Dropbox Sign / Anvil","Paid","L","buy"],
+["Intake","Consent","State telehealth consent",["Language varies by state and changes over time","Version it and record which version was signed"],"Python + templates","Free","L","build"],
+["Intake","Consent","Consent gating",["Blocks booking when consent is missing or stale for the patient's state","Consent stores the artifact; the gate is yours"],"Python","Free","L","build"],
+["Intake","Identity","ID verification",["Photo ID plus selfie match at onboarding","Needed for EPCS anyway, so it pays for itself"],"Persona / Stripe Identity","Paid","L","buy"],
+["Intake","Identity","Proxy & minor access",["RelatedPerson plus scoped access policy","Only relevant if an adolescent programme opens"],"Medplum + custom","Free","L","partial"],
+
+["Clinical","Documentation","Note templates by visit type",["Initial consult, titration follow-up, plateau, maintenance","Each carries different required fields and different logic"],"React + Python","Free","M","build"],
+["Clinical","Documentation","Amendments & version history",["Full resource history on everything, no extra work","One of the clearest wins from the FHIR substrate"],"Medplum","Free","L","medplum"],
+["Clinical","Documentation","Co-sign & supervision",["NP and PA notes route to the supervising physician","Needed the moment a second clinician joins"],"Python","Free","L","build"],
+["Clinical","Documentation","Chart lock",["Signed note becomes immutable; edits become addenda","Small feature, large compliance value"],"Python","Free","L","build"],
+["Clinical","Documentation","Ambient scribe",["Transcribes the visit and drafts the note into the template","High return, low regulatory risk, strong early win"],"Deepgram + LLM","Paid","M","buy"],
+["Clinical","Data capture","Discrete clinical capture",["Weight, BMI, waist, body comp, BP, dose, side-effect grade, adherence","Capture as coded Observations — everything downstream depends on it"],"React + LOINC","Free","M","build"],
+["Clinical","Data capture","Patient-generated data",["Connected scales, Apple Health, step counts, food logs","Weight trajectory should stream in, not be typed at a visit"],"Metriport / Terra","Paid","M","buy"],
+["Clinical","Data capture","Trend & trajectory charts",["Weight curve against programme milestones and goal","Show it to the patient — it is the retention hook"],"Recharts","Free","M","build"],
+["Clinical","Console","Clinical console UI",["Chart review, orders, notes, messaging in one surface","Where Libby lives all day. Medplum ships primitives, not this"],"Next.js + Medplum React","Free","H","build"],
+
+["Prescribing","e-Rx","e-Prescribing integration",["Non-controlled scripts to retail and mail-order pharmacy","Both major vendors have documented Medplum paths"],"DoseSpot / Photon","Paid","H","buy"],
+["Prescribing","e-Rx","EPCS certification",["Identity proofing and DEA-grade two-factor for controlled scripts","Phentermine is CIV so this is mandatory. Months of paperwork — start in phase 1"],"DoseSpot + IDP","Paid","H","buy"],
+["Prescribing","Protocol","Titration ladders as data",["Dose schedule, escalation criteria, hold and de-escalate rules","Encoding this is what makes protocol agents possible later"],"Python","Free","M","build"],
+["Prescribing","Protocol","Shortage substitution rules",["Defined fallback ladder when supply fails","Supply has been unstable for three years running"],"Python","Free","L","build"],
+["Prescribing","Fulfilment","Compounding pharmacy routing",["Per-pharmacy formulary, turnaround and transport method","Some API, some portal, some fax. Model pharmacy as a routing target"],"Python","Free","M","build"],
+["Prescribing","Fulfilment","Refill orchestration",["Proactive refill windows with pharmacy follow-up","Highest-leverage automation in the practice"],"Python + Hatchet","Free","M","build"],
+["Prescribing","Fulfilment","Adherence tracking",["Days-supply and refill gap monitoring","No refill in 45 days is a churn signal before a clinical one"],"Python","Free","M","build"],
+
+["Labs","Ordering","Lab ordering & requisitions",["Compendium mapping, AOE questions, requisition or e-order","Rupa is the fast path for cash-pay; Health Gorilla the durable one"],"Health Gorilla / Rupa","Paid","H","buy"],
+["Labs","Ordering","Standing panels by protocol",["Baseline, 3-month and annual panels fire on milestones","Ordered by the system rather than remembered by a person"],"Python + Hatchet","Free","M","build"],
+["Labs","Ordering","HL7v2 connectivity",["On-prem interface engine for direct lab and device feeds","Note the naming collision — Medplum Agent is not an AI agent"],"Medplum Agent","Free","L","medplum"],
+["Labs","Results","Result ingest to Observations",["Inbound results mapped to LOINC-coded discrete values","Mapping each lab's local codes is ongoing, not one-time"],"Medplum + mapping","Free","M","partial"],
+["Labs","Results","Reference range & delta flags",["Abnormal against range and against the patient's own trend","The second one is where the clinical value sits"],"Python","Free","L","build"],
+["Labs","Results","Provider result inbox",["Acknowledge, act, notify — with an escalation timer","A missed abnormal is your highest-severity failure mode"],"React","Free","M","build"],
+["Labs","Release","Cures Act release rules",["Immediate patient release by default with narrow exceptions","Information blocking penalties are real; retrofitting is painful"],"Python","Free","L","build"],
+
+["Engagement","Messaging","Threaded async messaging",["Threads, read state, attachments, participant management","Communication is storage only — threading and UX are yours"],"Medplum + React","Free","M","partial"],
+["Engagement","Messaging","Triage routing & SLA clocks",["Side-effect reports and billing questions route differently","Clock them separately with escalation on breach"],"Python","Free","M","build"],
+["Engagement","Messaging","Message to task to note",["An async dose change becomes documentation automatically","Closes the biggest documentation gap in async care"],"Python","Free","L","build"],
+["Engagement","Channels","SMS bridge & TCPA consent",["Consent capture, STOP handling, full logging","A compliance surface, not a convenience feature"],"Twilio","Paid","M","buy"],
+["Engagement","Channels","Transactional email",["Receipts, reminders, portal notices","Commodity — pick on deliverability and BAA"],"SendGrid / SES","Paid","L","buy"],
+["Engagement","Channels","Push notifications",["Only worth it if a native app ships","Otherwise SMS carries the load"],"Expo / Firebase","Mixed","L","buy"],
+["Engagement","Programmes","Structured async check-ins",["Scheduled questionnaires between monthly visits","This is the actual care model — structured beats free text"],"React + Python","Free","M","build"],
+
+["Coverage","Eligibility","Eligibility check (270/271)",["Real-time benefit verification before the patient commits","Relevant even in cash-pay when branded therapy is on the table"],"Stedi / Candid","Paid","M","buy"],
+["Coverage","Eligibility","Formulary lookup",["Tier and restriction check per plan","Usually bundled with the e-Rx vendor"],"Surescripts via e-Rx","Paid","L","buy"],
+["Coverage","Prior auth","Prior authorisation submission",["Electronic PA with status tracking","Dominant admin cost for branded GLP-1s"],"CoverMyMeds","Paid","M","buy"],
+["Coverage","Prior auth","Appeals & denial tracking",["Denials are a workflow with deadlines, not an inbox","Missed appeal windows are pure lost revenue"],"Python","Free","M","build"],
+["Coverage","Prior auth","Copay card enrolment",["Manufacturer programme enrolment and renewal","Moves effective price more than anything you control"],"Python","Free","L","build"],
+
+["Workflow","Engine","Durable workflow engine",["Timers, retries, concurrency limits and run history","Postgres-backed and Python-first — no separate cluster to run"],"Hatchet (MIT)","Mixed","M","buy"],
+["Workflow","Engine","Event triggers",["Single-shot handlers on resource change — normalise, tag, create task","TypeScript and short-lived. Not a workflow engine"],"Medplum Bots","Free","L","medplum"],
+["Workflow","Engine","Event fan-out",["Native webhooks on any resource change","The nervous system connecting Medplum to your services"],"Medplum Subscriptions","Free","L","medplum"],
+["Workflow","Orchestration","Protocol state machines",["Onboarding, baseline labs, med start, titration, maintenance, offboarding","Entry criteria, timers and escape hatches for each stage"],"Python + Hatchet","Mixed","H","build"],
+["Workflow","Orchestration","Escalation & coverage",["What happens to the queue when someone is out","Prevents silent drops during holidays and leave"],"Python","Free","L","build"],
+["Workflow","Tasks","Task work queue UI",["Owner, due date, priority, filters, bulk action","Where the MA and coordinator spend the day"],"React + Medplum Task","Free","M","build"],
+
+["Agentic","Infrastructure","MCP server over FHIR",["Scoped tools over the same API humans use","Agent actions land in the same AuditEvent stream as staff actions"],"Python + MCP SDK","Free","M","build"],
+["Agentic","Infrastructure","Scoped service accounts",["One identity and one policy per agent","Free, and the foundation of the whole safety story"],"Medplum ClientApplication","Free","L","medplum"],
+["Agentic","Infrastructure","Run log & observability",["Every prompt, tool call and outcome, queryable","Needed the first time an output is questioned"],"Langfuse (OSS)","Mixed","M","build"],
+["Agentic","Safety","Approval queues",["Money, meds and chart writes route to a human","Auto-execute only reversible, low-stakes actions"],"React + Python","Free","M","build"],
+["Agentic","Safety","Eval harness & golden cases",["Regression suite of real cases with expected outputs","Build it before the agents, not after"],"Python + pytest","Free","M","build"],
+["Agentic","Agents","Intake summarisation",["Turns a 40-field intake into a six-line pre-visit brief","Low risk, immediate daily value — a good first agent"],"Python + Claude","Paid","L","build"],
+["Agentic","Agents","Lab triage drafting",["Drafts the patient explanation and flags abnormals","Clinician reviews and sends. Never auto-sends"],"Python + Claude","Paid","M","build"],
+["Agentic","Agents","Prior authorisation agent",["Assembles clinical justification and submits on approval","Highest dollar value per hour of build"],"Python + CoverMyMeds","Paid","M","build"],
+["Agentic","Agents","No-show recovery",["Reschedule outreach on missed and cancelled visits","Pays for itself in the first month"],"Python + Twilio","Paid","L","build"],
+
+["Analytics","Pipeline","ELT to warehouse",["Bulk export and subscription-fed CDC into Postgres","FHIR search has no joins and no aggregation — plan this day one"],"dbt + Postgres","Free","M","build"],
+["Analytics","Clinical outcomes","Outcome metrics (%TBWL)",["Percent total body weight loss at 3, 6 and 12 months","The number the whole practice is judged on"],"dbt + Python","Free","M","build"],
+["Analytics","Clinical outcomes","Cohort retention curves",["By tier, starting BMI and provider","Healthie will never give you this — a large part of why you are leaving"],"dbt + Recharts","Free","M","build"],
+["Analytics","Business","Churn prediction signals",["Refill gaps, missed check-ins, plateau duration","Actionable weeks before the cancellation lands"],"Python + sklearn","Free","M","build"],
+["Analytics","Business","Provider panel performance",["Volume, outcomes and retention per clinician","Build it, then be deliberate about who sees it"],"dbt","Free","L","build"],
+["Analytics","Business","Operational dashboards",["Self-serve queries over the analytics schema","Do not hand-build charts for questions that change weekly"],"Metabase / Superset","Mixed","L","buy"],
+
+["Growth","Funnel","Lead capture & attribution",["Source tracking from first touch through to first payment","A lead is not a Patient until they are — keep it in the app schema"],"Next.js + Postgres","Free","M","build"],
+["Growth","Funnel","Consult to conversion",["Qualification, scheduling and conversion tracking","Your logic is protocol-specific — the argument for owning it"],"Python + React","Free","M","build"],
+["Growth","Retention","Nurture sequences",["Automated follow-up for non-converters and lapsed patients","Commodity — buy it and wire it to funnel events"],"Customer.io / Loops","Paid","L","buy"],
+["Growth","Retention","Referral tracking",["Patient and physician referral sources attributed to revenue","Cheapest acquisition channel you have"],"Postgres","Free","L","build"],
+
+["Compliance","Records","Records export on request",["Bulk FHIR covers the 30-day Cures Act clock","Included — no build required"],"Medplum bulk export","Free","L","medplum"],
+["Compliance","Records","Document storage & OCR",["Storage is free; making a faxed record searchable is not","Outside records arrive as images more often than not"],"Medplum + Textract","Paid","M","partial"],
+["Compliance","Records","e-Fax",["Still unavoidable for records requests and some pharmacies","Accept it early rather than discovering it at go-live"],"Documo / Phaxio","Paid","L","buy"],
+["Compliance","Records","Release of information",["Who requested what, authorised by whom, sent when","Auditable trail on every disclosure"],"Python","Free","L","build"],
+["Compliance","Governance","Retention & destruction",["Connecticut retention minimums encoded as a job","A policy document nobody runs is not a control"],"Python","Free","L","build"],
+["Compliance","Governance","Incident response plan",["Written, tested, with named roles and timelines","Required, and genuinely useful the day something breaks"],"—","Free","L","build"],
+
+["Migration","Migration","Healthie data extraction",["Charts, documents, appointments and Stripe customer IDs","Verify completeness before committing — this decides viability"],"Python + Healthie GraphQL","Free","H","build"],
+["Migration","Migration","Chart & document migration",["Historical weights and labs land as coded Observations","Otherwise every trend chart starts empty on day one"],"Python","Free","H","build"],
+["Migration","Migration","Stripe customer mapping",["Reconcile live subscriptions without double-charging","One-shot, high-blast-radius — test against a clone"],"Python + Stripe","Free","M","build"],
+["Migration","Cutover","Dual-run period",["Both systems live, staff working in the new one","Never hard-cutover a practice actively seeing patients"],"—","Free","M","build"],
+["Migration","Cutover","Staff training & cutover",["The real test: does the team prefer it?","If not, nothing else on this page matters"],"—","Free","M","build"],
+["Migration","Operations","Observability & on-call",["Error tracking, uptime, alerting, a named responder","You are the vendor now. Someone gets paged at 7am"],"Sentry + Grafana","Mixed","M","buy"]
+];
+
+const items=R.map(r=>({cat:r[0],sub:r[1],feat:r[2],desc:r[3],vend:r[4],cost:r[5],eff:r[6],src:r[7]}));
+const cats=[...new Set(items.map(i=>i.cat))];
+
+const st={q:'',cat:'',cost:'',eff:'',src:new Set()};
+
+// tabs
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',p.id===t.dataset.panel));
+  window.scrollTo({top:0,behavior:'instant'});
+});
+
+// controls
+const catSel=document.getElementById('catSel');
+cats.forEach(c=>{const o=document.createElement('option');o.textContent=c;catSel.appendChild(o);});
+catSel.onchange=e=>{st.cat=e.target.value;draw();};
+document.getElementById('costSel').onchange=e=>{st.cost=e.target.value;draw();};
+document.getElementById('effSel').onchange=e=>{st.eff=e.target.value;draw();};
+document.getElementById('q').oninput=e=>{st.q=e.target.value.toLowerCase();draw();};
+const sc=document.getElementById('schips');
+Object.entries(S).forEach(([k,v])=>{
+  const b=document.createElement('button');b.className='chip';b.dataset.s=k;b.type='button';
+  b.innerHTML=`<span class="dot" style="background:${v.c}"></span>${v.l}`;
+  b.onclick=()=>{st.src.has(k)?st.src.delete(k):st.src.add(k);draw();};
+  sc.appendChild(b);
+});
+document.getElementById('reset').onclick=()=>{
+  st.q='';st.cat='';st.cost='';st.eff='';st.src.clear();
+  document.getElementById('q').value='';catSel.value='';
+  document.getElementById('costSel').value='';document.getElementById('effSel').value='';draw();
+};
+
+function ok(i){
+  if(st.cat&&i.cat!==st.cat)return false;
+  if(st.cost&&i.cost!==st.cost)return false;
+  if(st.eff&&i.eff!==st.eff)return false;
+  if(st.src.size&&!st.src.has(i.src))return false;
+  if(st.q){const h=(i.cat+' '+i.sub+' '+i.feat+' '+i.vend+' '+i.desc.join(' ')).toLowerCase();
+    if(!h.includes(st.q))return false;}
+  return true;
+}
+
+function draw(){
+  document.querySelectorAll('#schips .chip').forEach(c=>c.classList.toggle('on',st.src.has(c.dataset.s)));
+  const sh=items.filter(ok);
+  const tb=document.getElementById('tbody'), mc=document.getElementById('mcards');
+  tb.innerHTML='';mc.innerHTML='';
+  document.getElementById('count').textContent=
+    `${sh.length} of ${items.length} · ${sh.filter(i=>i.eff==='H').length} high effort · ${sh.filter(i=>i.cost==='Paid').length} paid`;
+
+  if(!sh.length){
+    tb.innerHTML=`<tr><td colspan="7" class="empty"><b>Nothing matches those filters.</b>Widen the search or clear a chip.</td></tr>`;
+    mc.innerHTML=`<div class="empty"><b>Nothing matches those filters.</b>Widen the search or clear a chip.</div>`;
+    return;
+  }
+  sh.forEach(i=>{
+    const bl=i.desc.map(d=>`<li>${d}</li>`).join('');
+    const tr=document.createElement('tr');
+    tr.className='s-'+i.src;
+    tr.innerHTML=`<td class="cat-cell">${i.cat}</td>
+      <td class="sub-cell">${i.sub}</td>
+      <td class="feat-cell">${i.feat}<span class="tag">${S[i.src].l}</span></td>
+      <td class="desc-cell"><ul>${bl}</ul></td>
+      <td class="vend-cell">${i.vend}</td>
+      <td><span class="pill ${i.cost}">${i.cost}</span></td>
+      <td><span class="eff ${i.eff}">${i.eff}</span></td>`;
+    tb.appendChild(tr);
+
+    const d=document.createElement('div');
+    d.className='mcard s-'+i.src;
+    d.innerHTML=`<h5>${i.feat}</h5>
+      <div class="mpath">${i.cat} › ${i.sub}</div>
+      <ul>${bl}</ul>
+      <div class="mmeta"><span class="vend-cell">${i.vend}</span>
+        <span class="tag">${S[i.src].l}</span>
+        <span class="pill ${i.cost}">${i.cost}</span>
+        <span class="eff ${i.eff}">Effort ${i.eff}</span></div>`;
+    mc.appendChild(d);
+  });
+}
+
+// architecture capability map
+function drawArch(){
+  const g=document.getElementById('capgrid');g.innerHTML='';
+  cats.forEach(c=>{
+    const rows=items.filter(i=>i.cat===c);
+    const subs=[...new Set(rows.map(i=>i.sub))];
+    const el=document.createElement('div');el.className='cap';
+    el.innerHTML=`<div class="cap-head"><h4>${c}</h4><span>${rows.length}</span></div>
+      <div class="cap-body">${subs.map(s=>`
+        <div class="subgroup"><div class="sub-l">${s}</div><div class="fboxes">${
+          rows.filter(i=>i.sub===s).map(i=>
+            `<div class="fbox ${i.src}"><b>${i.feat}</b><span>${i.vend}</span></div>`).join('')
+        }</div></div>`).join('')}</div>`;
+    g.appendChild(el);
+  });
+}
+
+document.getElementById('foot').textContent=
+  `${items.length} capabilities. Effort is L (≤1 week), M (1–2.5 weeks), H (3+ weeks) of senior engineering, excluding vendor lead time — which for EPCS and lab connectivity runs longer than the code. Cost marks the vendor line, not the build cost: Free means open source or included, Mixed means an open-source core with a paid managed tier.`;
+
+draw();drawArch();
+</script>
+</body>
+</html>

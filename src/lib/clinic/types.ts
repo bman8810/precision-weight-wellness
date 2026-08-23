@@ -78,6 +78,46 @@ export type CheckIn = {
   challenge: string | null;
   went_well: string | null;
   questions: string | null;
+  nausea?: string | null;
+  constipation?: string | null;
+  fatigue?: string | null;
+  injection_site?: string | null;
+  adherence?: string | null;
+  hunger?: number | null;
+  note?: string | null;
+};
+
+export type SymptomGrade = "none" | "mild" | "moderate" | "severe";
+
+export type ClinicTask = {
+  id: string;
+  kind: string;
+  priority: number;
+  status: string;
+  patient_id: string | null;
+  title: string;
+  body: string | null;
+  due_at: string | null;
+  created_at: string;
+};
+
+export type LabPanel = {
+  id: string;
+  patient_id: string;
+  collected_on: string;
+  status: string;
+  notes: string | null;
+};
+
+export type LabResult = {
+  id: string;
+  panel_id: string;
+  analyte: string;
+  value: number | null;
+  unit: string | null;
+  ref_low: number | null;
+  ref_high: number | null;
+  flag: string | null;
 };
 
 export type Visit = {
