@@ -215,7 +215,7 @@ export default function StartFlow() {
   }
 
   return (
-    <div className="max-w-[720px] mx-auto px-5 py-12">
+    <div className="max-w-[720px] mx-auto px-5 pt-28 pb-16 md:pt-32">
       <p className="text-[10px] uppercase tracking-[0.18em] text-[#66707E] border-b border-navy pb-2 mb-8">
         Start
       </p>
