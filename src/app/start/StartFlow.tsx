@@ -72,6 +72,7 @@ export default function StartFlow() {
   const [contra, setContra] = useState<string[]>([]);
   const [glp1, setGlp1] = useState<Glp1Exposure>("never");
   const [verdict, setVerdict] = useState<string>("");
+  const [insuranceOk, setInsuranceOk] = useState(false);
   const [tier, setTier] = useState<Tier>("premium");
   const [name, setName] = useState("");
   const [dob, setDob] = useState("");
@@ -96,7 +97,7 @@ export default function StartFlow() {
     setBusy(true);
     setError("");
     try {
-      const r = await clinicFetch<{ verdict: string }>(
+      const r = await clinicFetch<{ verdict: string; insuranceQualifies?: boolean }>(
         "/api/clinic/public/eligibility",
         {
           method: "POST",
@@ -112,6 +113,7 @@ export default function StartFlow() {
         }
       );
       setVerdict(r.verdict);
+      setInsuranceOk(Boolean(r.insuranceQualifies));
       if (r.verdict === "ineligible") setStep("ineligible");
       else if (r.verdict === "waitlist") setStep("waitlist");
       else setStep("verdict");
@@ -427,7 +429,15 @@ export default function StartFlow() {
           <h1 className="font-serif text-4xl text-navy mb-4">
             You&apos;re a candidate
           </h1>
-          <p className="mb-6">BMI {bmi}. Next, select your plan.</p>
+          <p className="mb-3">BMI {bmi}.</p>
+          {insuranceOk ? (
+            <p className="mb-6">You may also meet common insurance BMI criteria. Next, select your plan.</p>
+          ) : (
+            <p className="mb-6" data-testid="start-not-insurance">
+              Not a candidate for insurance at this BMI. The program is cash-pay.
+              Next, select your plan.
+            </p>
+          )}
           <button className={btn} onClick={() => setStep("plan")}>
             Choose your plan →
           </button>
