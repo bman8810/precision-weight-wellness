@@ -36,11 +36,11 @@ test("three surfaces: start → portal check-in → console queue", async ({ pag
   await page.getByTestId("lead-phone").fill("2125550199");
   await page.getByTestId("lead-password").fill(password);
   await page.getByTestId("lead-submit").click();
-  await expect(page.getByText(/Open intake/)).toBeVisible();
+  await expect(page.getByText(/Sign my forms|send your forms/i)).toBeVisible();
   await page.getByRole("button", { name: /Continue to payment/ }).click();
   await page.getByTestId("pay-demo").click();
   await page.locator('[data-testid^="slot-"]').first().click();
-  await page.getByRole("button", { name: /Request this window/ }).click();
+  await page.getByRole("button", { name: /^Continue$/ }).click();
   await expect(page.getByTestId("lead-success")).toBeVisible();
 
   await page.goto("/staff/login");

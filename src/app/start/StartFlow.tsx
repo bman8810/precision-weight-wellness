@@ -34,6 +34,23 @@ function Field({
   );
 }
 
+function formatSlotDay(ymd: string): string {
+  const [y, m, d] = ymd.split("-").map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  return dt.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  });
+}
+
+function windowLabel(window: string): string {
+  if (window === "morning") return "Morning";
+  if (window === "afternoon") return "Afternoon";
+  return "Anytime";
+}
+
 const PLANS: Array<{
   key: Tier;
   name: string;
@@ -589,19 +606,28 @@ export default function StartFlow() {
 
       {step === "intake" && (
         <>
-          <h1 className="font-serif text-4xl text-navy mb-4">Consents and history</h1>
-          <p className="mb-4">
-            Incomplete intake does not block purchase. It creates a pre-visit task.
+          <h1 className="font-serif text-4xl text-navy mb-4">
+            Sign your <em className="text-gold">forms</em>
+          </h1>
+          <p className="mb-6 text-[15px] leading-relaxed">
+            Review and sign when you can. You can keep going and finish later.
           </p>
           {packetUrl ? (
-            <a className="text-gold" href={packetUrl} target="_blank" rel="noreferrer">
-              Open intake app →
+            <a
+              className={`${btn} mb-4`}
+              href={packetUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Sign my forms
             </a>
           ) : (
-            <p className="mb-4">We&apos;ll send your intake forms. You can keep going.</p>
+            <p className="mb-6 text-[15px]">
+              We&apos;ll send your forms to the email on your account.
+            </p>
           )}
           <div>
-            <button className={`${btn} mt-6`} onClick={() => setStep("pay")}>
+            <button className={`${btn} mt-4`} onClick={() => setStep("pay")}>
               Continue to payment
             </button>
           </div>
@@ -622,31 +648,47 @@ export default function StartFlow() {
 
       {step === "book" && (
         <>
-          <h1 className="font-serif text-4xl text-navy mb-4">
-            Book your first visit
+          <h1 className="font-serif text-4xl text-navy mb-3">
+            Book your first <em className="text-gold">visit</em>
           </h1>
-          <p className="text-sm mb-4">
-            Windows only. Staff will confirm the live EMA slot — nothing is written
-            to the chart yet.
+          <p className="mb-8 text-[15px] leading-relaxed">
+            Pick a day and time of day. We&apos;ll confirm shortly.
           </p>
-          <div className="grid grid-cols-2 gap-2">
-            {slots.slice(0, 12).map((s) => (
-              <button
-                key={`${s.date}-${s.window}`}
-                data-testid={`slot-${s.date}-${s.window}`}
-                onClick={() => setPick(s)}
-                className={`text-left py-2 border-b ${
-                  pick?.date === s.date && pick.window === s.window
-                    ? "border-gold"
-                    : "border-[#E4E6EA]"
-                }`}
-              >
-                {s.date} · {s.window}
-              </button>
-            ))}
+          <div className="space-y-6">
+            {Array.from(new Map(slots.map((s) => [s.date, true])).keys())
+              .slice(0, 8)
+              .map((date) => (
+                <div key={date}>
+                  <p className="font-serif text-[20px] text-navy mb-3">
+                    {formatSlotDay(date)}
+                  </p>
+                  <div className="flex gap-3">
+                    {slots
+                      .filter((s) => s.date === date)
+                      .map((s) => {
+                        const on = pick?.date === s.date && pick.window === s.window;
+                        return (
+                          <button
+                            key={`${s.date}-${s.window}`}
+                            type="button"
+                            data-testid={`slot-${s.date}-${s.window}`}
+                            onClick={() => setPick(s)}
+                            className={`flex-1 min-h-12 rounded-full text-[14px] font-medium border ${
+                              on
+                                ? "bg-navy text-white border-navy"
+                                : "bg-white text-navy border-navy/15"
+                            }`}
+                          >
+                            {windowLabel(s.window)}
+                          </button>
+                        );
+                      })}
+                  </div>
+                </div>
+              ))}
           </div>
-          <button className={`${btn} mt-6`} disabled={!pick || busy} onClick={book}>
-            Request this window
+          <button className={`${btn} mt-8`} disabled={!pick || busy} onClick={book}>
+            Continue
           </button>
         </>
       )}
@@ -659,11 +701,11 @@ export default function StartFlow() {
           {verdict === "waitlist" ? (
             <p>You&apos;re on the waitlist.</p>
           ) : (
-            <ol className="list-decimal pl-5 space-y-2">
-              <li>Demo payment recorded. Membership is active.</li>
-              <li>First visit is pending staff review in EMA.</li>
-              <li>Baseline labs: fasting draw before the visit. Staff will order.</li>
-              <li>Finish intake if you have not already.</li>
+            <ol className="list-decimal pl-5 space-y-2 text-[15px] leading-relaxed">
+              <li>You&apos;re in. Your membership is active.</li>
+              <li>We&apos;ll confirm your first visit shortly.</li>
+              <li>Baseline labs come next — fasting draw before that visit.</li>
+              <li>Finish your forms if you haven&apos;t already.</li>
             </ol>
           )}
         </div>
