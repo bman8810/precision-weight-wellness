@@ -14,10 +14,7 @@ export async function createWeightPacket(input: {
   const base = process.env.INTAKE_BASE_URL || "https://liora-intake.vercel.app";
   const token = process.env.INTAKE_ADMIN_TOKEN;
   if (!token) {
-    return {
-      url: `${base.replace(/\/$/, "")}/admin`,
-      source: "stub",
-    };
+    return { url: "", source: "stub" };
   }
   const res = await fetch(`${base.replace(/\/$/, "")}/api/admin/create`, {
     method: "POST",
@@ -35,16 +32,21 @@ export async function createWeightPacket(input: {
     }),
   });
   if (!res.ok) {
-    return { url: `${base.replace(/\/$/, "")}/admin`, source: "stub" };
+    return { url: "", source: "stub" };
   }
   const data = (await res.json()) as {
     url?: string;
     token?: string;
+    packet?: { token?: string; id?: string };
     id?: string;
     packetId?: string;
   };
+  const tokenPath = data.packet?.token || data.token;
   const url =
-    data.url ||
-    (data.token ? `${base.replace(/\/$/, "")}/f/${data.token}` : `${base}/admin`);
-  return { url, packetId: data.packetId || data.id, source: "liora" };
+    data.url && data.url.includes("/f/")
+      ? data.url
+      : tokenPath
+        ? `${base.replace(/\/$/, "")}/f/${tokenPath}`
+        : "";
+  return { url, packetId: data.packetId || data.id || data.packet?.id, source: url ? "liora" : "stub" };
 }

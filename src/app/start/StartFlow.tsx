@@ -14,9 +14,25 @@ import type { DayWindow, OfferedSlot } from "@/lib/clinic/slots";
 import type { Tier } from "@/lib/clinic/types";
 
 const field =
-  "w-full bg-[#FAFAF8] border-0 border-l-[2px] border-navy/15 px-3 py-3 text-[15px] text-navy focus:outline-none focus:border-navy";
-const btn = "inline-flex items-center bg-navy text-white px-5 py-2.5 text-[14px]";
+  "w-full min-h-12 px-4 py-3 bg-cream border border-navy/10 rounded-xl text-[15px] text-navy placeholder:text-navy/35 focus:outline-none focus:border-gold";
+const labelCls = "block text-[13px] text-navy mb-1.5";
+const btn = "inline-flex items-center justify-center min-h-12 bg-navy text-white px-5 py-2.5 text-[14px] rounded-full font-medium";
 const ghost = "text-[14px] text-navy/60";
+
+function Field({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <label className="block mb-4">
+      <span className={labelCls}>{label}</span>
+      {children}
+    </label>
+  );
+}
 
 const PLANS: Array<{
   key: Tier;
@@ -490,17 +506,82 @@ export default function StartFlow() {
 
       {step === "account" && (
         <>
-          <h1 className="font-serif text-4xl text-navy mb-4">
+          <h1 className="font-serif text-4xl text-navy mb-6">
             Create your account
           </h1>
-          <input className={`${field} mb-2`} placeholder="Name" data-testid="lead-name" value={name} onChange={(e) => setName(e.target.value)} />
-          <input className={`${field} mb-2`} placeholder="DOB" value={dob} onChange={(e) => setDob(e.target.value)} />
-          <input className={`${field} mb-2`} placeholder="Email" data-testid="lead-email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <input className={`${field} mb-2`} placeholder="Mobile" data-testid="lead-phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
-          <input className={`${field} mb-2`} type="password" placeholder="Password" data-testid="lead-password" value={password} onChange={(e) => setPassword(e.target.value)} />
-          <input className={`${field} mb-2`} placeholder="Current medications" value={meds} onChange={(e) => setMeds(e.target.value)} />
-          <input className={`${field} mb-2`} placeholder="Drug allergies" value={allergies} onChange={(e) => setAllergies(e.target.value)} />
-          <button className={`${btn} mt-4`} data-testid="lead-submit" disabled={busy} onClick={createAccount}>
+          <Field label="Full name">
+            <input
+              className={field}
+              autoComplete="name"
+              name="name"
+              data-testid="lead-name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </Field>
+          <Field label="Date of birth">
+            <input
+              className={field}
+              type="date"
+              autoComplete="bday"
+              name="bday"
+              data-testid="lead-dob"
+              value={dob}
+              onChange={(e) => setDob(e.target.value)}
+            />
+          </Field>
+          <Field label="Email">
+            <input
+              className={field}
+              type="email"
+              inputMode="email"
+              autoComplete="email"
+              name="email"
+              data-testid="lead-email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </Field>
+          <Field label="Mobile">
+            <input
+              className={field}
+              type="tel"
+              inputMode="tel"
+              autoComplete="tel"
+              name="tel"
+              data-testid="lead-phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </Field>
+          <Field label="Password">
+            <input
+              className={field}
+              type="password"
+              autoComplete="new-password"
+              name="password"
+              data-testid="lead-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </Field>
+          <Field label="Current medications">
+            <input
+              className={field}
+              name="medications"
+              value={meds}
+              onChange={(e) => setMeds(e.target.value)}
+            />
+          </Field>
+          <Field label="Drug allergies">
+            <input
+              className={field}
+              name="allergies"
+              value={allergies}
+              onChange={(e) => setAllergies(e.target.value)}
+            />
+          </Field>
+          <button className={`${btn} mt-2`} data-testid="lead-submit" disabled={busy} onClick={createAccount}>
             Continue
           </button>
         </>
@@ -512,10 +593,12 @@ export default function StartFlow() {
           <p className="mb-4">
             Incomplete intake does not block purchase. It creates a pre-visit task.
           </p>
-          {packetUrl && (
+          {packetUrl ? (
             <a className="text-gold" href={packetUrl} target="_blank" rel="noreferrer">
               Open intake app →
             </a>
+          ) : (
+            <p className="mb-4">We&apos;ll send your intake forms. You can keep going.</p>
           )}
           <div>
             <button className={`${btn} mt-6`} onClick={() => setStep("pay")}>
